@@ -365,7 +365,23 @@ function resetWizard() {
     document.getElementById('wiz-step-1').classList.remove('hidden');
 }
 
-// --- 6. Impact Dashboard Admin Updates ---
+// --- 6. Impact Dashboard Interactive Tab Switcher & Admin Updates ---
+function switchDashTab(tabId, btnEl) {
+    const dashBtns = document.querySelectorAll('.dash-tab-btn');
+    const dashPanes = document.querySelectorAll('.dash-pane');
+
+    dashBtns.forEach(btn => btn.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+
+    dashPanes.forEach(pane => {
+        if (pane.id === `dash-tab-${tabId}`) {
+            pane.classList.add('active');
+        } else {
+            pane.classList.remove('active');
+        }
+    });
+}
+
 const metrics = {
     youth: 242,
     water: 85210,
@@ -385,11 +401,16 @@ function simulateAdminUpdate() {
     metrics.boats = inputBoats;
     metrics.jobs = inputJobs;
     
-    // Trigger animations for Main Dashboard View
+    // Trigger animations for Main Dashboard View Cards
     animateValue('dash-stat-youth', 0, metrics.youth, 1000);
     animateValue('dash-stat-water', 0, metrics.water, 1000);
     animateValue('dash-stat-boats', 0, metrics.boats, 1000);
     animateValue('dash-stat-jobs', 0, metrics.jobs, 1000);
+
+    // Trigger animations for Hero Card Inline Stats
+    animateValue('dash-hero-youth', 0, metrics.youth, 1000);
+    animateValue('dash-hero-water', 0, metrics.water, 1000);
+    animateValue('dash-hero-jobs', 0, metrics.jobs, 1000);
     
     // Trigger animations for Homepage Brief Stats Strip
     animateValue('brief-stat-youth', 0, metrics.youth, 1000);
@@ -401,15 +422,19 @@ function simulateAdminUpdate() {
     const estimatedCO2 = (metrics.youth * 0.05).toFixed(1);
     const estimatedCoast = (metrics.youth * 0.005).toFixed(2);
     
-    document.getElementById('dash-carbon').innerText = `${estimatedCO2} Tons`;
-    document.getElementById('dash-coastline').innerText = `${estimatedCoast} km`;
+    const carbonEl = document.getElementById('dash-carbon');
+    const coastEl = document.getElementById('dash-coastline');
+    if (carbonEl) carbonEl.innerText = `${estimatedCO2} Tons`;
+    if (coastEl) coastEl.innerText = `${estimatedCoast} km`;
     
     // Show success notification banner
     const alertBox = document.getElementById('sim-status-box');
-    alertBox.classList.remove('hidden');
-    setTimeout(() => {
-        alertBox.classList.add('hidden');
-    }, 4000);
+    if (alertBox) {
+        alertBox.classList.remove('hidden');
+        setTimeout(() => {
+            alertBox.classList.add('hidden');
+        }, 4000);
+    }
 }
 
 // --- 7. Eligibility Match Quiz ---
