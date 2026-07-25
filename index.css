@@ -339,8 +339,8 @@ p { color: rgba(17,45,51,0.85); font-size: 1.05rem; }
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.32;
-    filter: saturate(1.15) contrast(1.02);
+    opacity: 0.65;
+    filter: saturate(1.18) contrast(1.05);
     transition: transform 0.6s var(--ease-smooth);
 }
 
@@ -348,7 +348,7 @@ p { color: rgba(17,45,51,0.85); font-size: 1.05rem; }
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.8) 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.40) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.65) 100%);
     pointer-events: none;
 }
 
@@ -740,6 +740,146 @@ p { color: rgba(17,45,51,0.85); font-size: 1.05rem; }
 .apply-success-alert{background:rgba(5,150,105,0.08);border:1px solid var(--color-primary);padding:28px;border-radius:20px;text-align:center;animation:viewFadeIn 0.4s var(--ease-smooth);}
 .apply-success-alert h4{color:var(--color-primary);margin-bottom:12px;}
 .apply-success-alert p{font-size:1.05rem;}
+
+/* ============================================================
+   MEET THE TEAM
+   ============================================================ */
+.team-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+.team-filter-btn {
+    padding: 10px 22px;
+    background: transparent;
+    border: 1.5px solid rgba(5,150,105,0.22);
+    color: var(--color-text-muted);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+.team-filter-btn:hover, .team-filter-btn.active {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: scale(1.04);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 20px;
+}
+
+.team-card {
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(5, 150, 105, 0.16);
+    backdrop-filter: blur(16px);
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--color-primary);
+    box-shadow: 0 20px 45px rgba(11, 42, 47, 0.12), 0 0 30px rgba(5, 150, 105, 0.15);
+}
+
+.team-avatar-wrapper {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    padding: 4px;
+    background: var(--grad-primary);
+    box-shadow: 0 8px 24px rgba(5, 150, 105, 0.25);
+    transition: var(--transition);
+}
+
+.team-card:hover .team-avatar-wrapper {
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 0 12px 32px rgba(2, 132, 199, 0.35);
+}
+
+.team-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: var(--color-primary);
+}
+
+.team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-name {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-text-bright);
+    margin-bottom: 4px;
+}
+
+.team-role {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-teal);
+    background: rgba(13, 148, 136, 0.12);
+    padding: 4px 14px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(13, 148, 136, 0.25);
+}
+
+.team-bio {
+    font-size: 1.02rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex-grow: 1;
+}
+
+.team-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.team-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: rgba(5, 150, 105, 0.08);
+    padding: 3px 10px;
+    border-radius: 12px;
+}
 
 /* ============================================================
    FOOTER
