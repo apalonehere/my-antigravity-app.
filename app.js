@@ -118,29 +118,6 @@ function initNavigation() {
 }
 
 function switchView(viewId) {
-    if (viewId === 'team') {
-        // Show home view and scroll directly to team section
-        views.forEach(view => {
-            if (view.id === 'view-home') {
-                view.classList.add('active');
-            } else {
-                view.classList.remove('active');
-            }
-        });
-        navLinks.forEach(link => {
-            if (link.getAttribute('data-tab') === 'team') {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-        const teamSection = document.getElementById('home-team-section');
-        if (teamSection) {
-            teamSection.scrollIntoView({ behavior: 'smooth' });
-        }
-        return;
-    }
-
     views.forEach(view => {
         if (view.id === `view-${viewId}`) {
             view.classList.add('active');
