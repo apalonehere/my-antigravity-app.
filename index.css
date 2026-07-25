@@ -132,6 +132,49 @@
     background: rgba(16, 185, 129, 0.18) !important;
 }
 
+[data-theme="dark"] .tag-orange {
+    background: rgba(251, 146, 60, 0.22) !important;
+    color: #fb923c !important;
+    border-color: rgba(251, 146, 60, 0.45) !important;
+}
+
+[data-theme="dark"] .main-header {
+    background: rgba(6, 20, 18, 0.96);
+    border-bottom-color: rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="dark"] .home-programs {
+    background: linear-gradient(180deg, #061412 0%, #0c211d 100%);
+}
+
+[data-theme="dark"] .program-card,
+[data-theme="dark"] .pinelands-card,
+[data-theme="dark"] .team-card,
+[data-theme="dark"] .glass,
+[data-theme="dark"] .dash-metric-card,
+[data-theme="dark"] .dash-hero-card {
+    background: rgba(11, 35, 30, 0.94);
+    border-color: rgba(16, 185, 129, 0.28);
+}
+
+[data-theme="dark"] .main-footer {
+    background: #040e0d;
+}
+
+[data-theme="dark"] .hero-video-overlay {
+    background: linear-gradient(180deg, rgba(6,20,18,0.65) 0%, rgba(6,20,18,0.50) 50%, rgba(6,20,18,0.90) 100%);
+}
+
+[data-theme="dark"] .form-control {
+    background: rgba(16,185,129,0.1) !important;
+    border-color: rgba(16,185,129,0.35) !important;
+    color: #ffffff !important;
+}
+[data-theme="dark"] .form-control option {
+    background: #0c231d !important;
+    color: #ffffff !important;
+}
+
 /* Base reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
