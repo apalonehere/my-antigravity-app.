@@ -17,29 +17,36 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- Theme Switcher (Light / Dark Mode) ---
 function initTheme() {
     const savedTheme = localStorage.getItem('green-rising-theme');
-    const toggleBtn = document.getElementById('theme-toggle-btn');
-    
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        if (toggleBtn) toggleBtn.innerText = '☀️';
-    } else {
-        document.documentElement.removeAttribute('data-theme');
-        if (toggleBtn) toggleBtn.innerText = '🌙';
-    }
+    applyTheme(savedTheme === 'dark');
 }
 
 function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const toggleBtn = document.getElementById('theme-toggle-btn');
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    applyTheme(!isDark);
+}
+
+function applyTheme(isDark) {
+    const togglePills = document.querySelectorAll('.theme-toggle-pill');
+    const toggleBtns = document.querySelectorAll('.theme-toggle-btn');
     
-    if (currentTheme === 'dark') {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('green-rising-theme', 'light');
-        if (toggleBtn) toggleBtn.innerText = '🌙';
-    } else {
+    if (isDark) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('green-rising-theme', 'dark');
-        if (toggleBtn) toggleBtn.innerText = '☀️';
+        togglePills.forEach(pill => {
+            pill.innerHTML = '☀️ <span class="theme-text">Light Mode</span>';
+        });
+        toggleBtns.forEach(btn => {
+            btn.innerText = '☀️';
+        });
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('green-rising-theme', 'light');
+        togglePills.forEach(pill => {
+            pill.innerHTML = '🌙 <span class="theme-text">Dark Mode</span>';
+        });
+        toggleBtns.forEach(btn => {
+            btn.innerText = '🌙';
+        });
     }
 }
 
@@ -53,7 +60,6 @@ function initScrollReveal() {
         { selector: '.glass',                delay: false },
         { selector: '.pinelands-card',       delay: true },
         { selector: '.matrix-item',          delay: true },
-        { selector: '.team-card',            delay: true },
         { selector: '.wave-divider',         delay: false },
     ];
 
@@ -169,76 +175,80 @@ function initHashRouter() {
             }
         }
     };
+    
     window.addEventListener('hashchange', handleHash);
+    // Initial check on load
     handleHash();
 }
 
-// --- 2. Mobile Navigation Toggle ---
+// Mobile navigation hamburger toggle
 function initMobileMenu() {
-    const toggleBtn = document.getElementById('mobile-toggle-btn');
+    const mobileBtn = document.getElementById('mobile-toggle-btn');
     const mainNav = document.getElementById('main-navigation');
-
-    if (toggleBtn && mainNav) {
-        toggleBtn.addEventListener('click', () => {
+    
+    if (mobileBtn && mainNav) {
+        mobileBtn.addEventListener('click', () => {
             mainNav.classList.toggle('active');
+            mobileBtn.classList.toggle('open');
         });
-
-        // Close menu when clicking link
+        
+        // Close menu on click of nav link
         mainNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mainNav.classList.remove('active');
+                mobileBtn.classList.remove('open');
             });
         });
     }
 }
 
-// --- 3. Sub-Tab Switching (Programmes Detail View) ---
-function initProgrammeSubTabs() {
-    const subTabBtns = document.querySelectorAll('.sub-tab-btn');
-    const progPanes = document.querySelectorAll('.prog-detail-pane');
+// --- 2. Programmes Sub-Tabs Switching ---
+const subTabButtons = document.querySelectorAll('.sub-tab-btn');
+const programPanes = document.querySelectorAll('.prog-detail-pane');
 
-    subTabBtns.forEach(btn => {
+function initProgrammeSubTabs() {
+    subTabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const targetProg = btn.getAttribute('data-prog');
-
-            subTabBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            progPanes.forEach(pane => {
-                if (pane.id === `prog-${targetProg}`) {
-                    pane.classList.add('active');
-                } else {
-                    pane.classList.remove('active');
-                }
-            });
+            openProgram(targetProg);
         });
     });
 }
 
 function openProgram(progId) {
-    switchView('programmes');
-    window.location.hash = 'programmes';
+    subTabButtons.forEach(btn => {
+        if (btn.getAttribute('data-prog') === progId) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 
-    const subTabBtn = document.querySelector(`.sub-tab-btn[data-prog="${progId}"]`);
-    if (subTabBtn) {
-        subTabBtn.click();
-    }
+    programPanes.forEach(pane => {
+        if (pane.id === `prog-${progId}`) {
+            pane.classList.add('active');
+        } else {
+            pane.classList.remove('active');
+        }
+    });
+    
+    switchView('programmes');
 }
 
-// --- 4. Eco Village Zone Switching ---
+// --- 3. Eco Village Zonal Tab Switching ---
+const villageTabButtons = document.querySelectorAll('.village-tab-btn');
+const villageZones = document.querySelectorAll('.village-zone-pane');
+
 function initVillageTabs() {
-    const zoneBtns = document.querySelectorAll('.village-tab-btn');
-    const zonePanes = document.querySelectorAll('.village-zone-pane');
-
-    zoneBtns.forEach(btn => {
+    villageTabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const targetZone = btn.getAttribute('data-zone');
-
-            zoneBtns.forEach(b => b.classList.remove('active'));
+            const zoneId = btn.getAttribute('data-zone');
+            
+            villageTabButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            zonePanes.forEach(pane => {
-                if (pane.id === `zone-${targetZone}`) {
+            
+            villageZones.forEach(pane => {
+                if (pane.id === `zone-${zoneId}`) {
                     pane.classList.add('active');
                 } else {
                     pane.classList.remove('active');
@@ -248,30 +258,69 @@ function initVillageTabs() {
     });
 }
 
-// --- 5. Interactive Water Consumption Calculator ---
-function calculateWater() {
-    const residents = parseInt(document.getElementById('calc-residents').value) || 1;
-    const showerMins = parseInt(document.getElementById('calc-shower').value) || 5;
-    const hasLeaks = document.getElementById('calc-leaks').value === 'yes';
-
-    // Standard estimates: 2.1 gallons per shower min + base daily usage + leak offset
-    let dailyPerPerson = (showerMins * 2.1) + 25; // 25 gallons baseline (flushes, sinks)
-    let totalDaily = Math.round(dailyPerPerson * residents);
-
-    if (hasLeaks) {
-        totalDaily += 20; // 20 gal/day loss for typical drip/toilet leak
+// Accordion toggle helper (used in CYEN Skills section)
+function toggleAccordion(button) {
+    const activeHeader = button.parentElement.parentElement.querySelector('.accordion-header.active');
+    if (activeHeader && activeHeader !== button) {
+        activeHeader.classList.remove('active');
+        activeHeader.nextElementSibling.classList.remove('show');
     }
-
-    // Potential savings with Green Rising checklist (~30%)
-    const potentialSaved = Math.round(totalDaily * 0.30);
-
-    document.getElementById('water-use-val').innerText = totalDaily.toLocaleString();
-    document.getElementById('water-saved-val').innerText = potentialSaved.toLocaleString();
-
-    document.getElementById('calc-results-box').classList.remove('hidden');
+    
+    button.classList.toggle('active');
+    const content = button.nextElementSibling;
+    content.classList.toggle('show');
 }
 
-// --- 6. Pinelands Interactive Career Path Wizard ---
+// --- 4. Water Conservation Calculator Logic ---
+function calculateWater() {
+    const residents = parseInt(document.getElementById('calc-residents').value) || 1;
+    const showerLength = parseInt(document.getElementById('calc-shower').value) || 8;
+    const hasLeaks = document.getElementById('calc-leaks').value === 'yes';
+    
+    // Normal consumption formulas
+    const baseUse = residents * 50; // average gallons base per person
+    const showerUse = residents * showerLength * 2; // ~2 gallons/minute
+    const leakUse = hasLeaks ? 35 : 0; // average toilet/drip leak gallons
+    
+    const dailyTotal = baseUse + showerUse + leakUse;
+    
+    // Potential savings
+    let showerSavings = 0;
+    if (showerLength > 5) {
+        // Savings if shower reduced to 5 mins
+        showerSavings = residents * (showerLength - 5) * 2;
+    }
+    const leakSavings = hasLeaks ? 35 : 0;
+    const efficiencySavings = residents * 8; // efficient taps/shower heads
+    
+    const totalSaved = showerSavings + leakSavings + efficiencySavings;
+    
+    // Display results with animation
+    const resultsBox = document.getElementById('calc-results-box');
+    resultsBox.classList.remove('hidden');
+    
+    animateValue('water-use-val', 0, Math.round(dailyTotal), 800);
+    animateValue('water-saved-val', 0, Math.round(totalSaved), 800);
+}
+
+// Simple Count-up numerical animation
+function animateValue(id, start, end, duration) {
+    const obj = document.getElementById(id);
+    if (!obj) return;
+    
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// --- 5. Pinelands Career Path Wizard ---
 let wizardAnswers = {};
 
 function nextWizardStep(choice) {
@@ -283,17 +332,29 @@ function nextWizardStep(choice) {
 function finishWizard(choice) {
     wizardAnswers.step2 = choice;
     document.getElementById('wiz-step-2').classList.add('hidden');
-    document.getElementById('wiz-result').classList.remove('hidden');
-
-    if (choice === 'green' || wizardAnswers.step1 === 'outdoor') {
-        resultTitle.innerText = "Zone 3: Build the Future & Eco-Village";
-        resultDesc.innerText = "You show strong potential in sustainable infrastructure, disaster-resilient engineering, and marine conservation.";
-    } else if (choice === 'digital' || wizardAnswers.step1 === 'office') {
-        resultTitle.innerText = "Zone 4: Tech & Digital (Work Without Borders)";
-        resultDesc.innerText = "Your interests align with global remote work, digital branding, climate software monitoring, and technology careers.";
+    
+    const resultBox = document.getElementById('wiz-result');
+    const resultTitle = document.getElementById('wiz-result-title');
+    const resultDesc = document.getElementById('wiz-result-desc');
+    
+    resultBox.classList.remove('hidden');
+    
+    // Matching algorithm
+    if (wizardAnswers.step1 === 'outdoor' && wizardAnswers.step2 === 'green') {
+        resultTitle.innerText = "Zone 3: Build the Future & Zone 1";
+        resultDesc.innerText = "You are a natural fit for sustainability engineering, eco-village farming, or resilient boat construction. Your path aligns with climate mitigation!";
+    } else if (wizardAnswers.step1 === 'outdoor' && wizardAnswers.step2 === 'business') {
+        resultTitle.innerText = "Zone 6: Sports & Performance";
+        resultDesc.innerText = "Your interests lead toward coastal stewardship, sports leadership, ocean diving charters, or performance arts administration.";
+    } else if (wizardAnswers.step1 === 'office' && wizardAnswers.step2 === 'digital') {
+        resultTitle.innerText = "Zone 4: Tech & Digital";
+        resultDesc.innerText = "You align perfectly with high-growth digital arenas. Remote work, media design, software engineering, and global digital markets fit your path.";
+    } else if (wizardAnswers.step2 === 'digital') {
+        resultTitle.innerText = "Zone 4: Tech & Digital";
+        resultDesc.innerText = "Global tech connections, digital marketing, and remote services represent your fastest pathway to modern job creation.";
     } else {
-        resultTitle.innerText = "Zone 2: Entrepreneurship & Micro-Enterprise";
-        resultDesc.innerText = "You excel at innovation and business building. Our micro-grant and enterprise incubator paths fit your profile best.";
+        resultTitle.innerText = "Zone 2: Entrepreneurship & Emerging Markets";
+        resultDesc.innerText = "You show high potential for starting local businesses, managing creative industries, launching wellness services, or farming cooperatives.";
     }
 }
 
@@ -304,110 +365,137 @@ function resetWizard() {
     document.getElementById('wiz-step-1').classList.remove('hidden');
 }
 
-// --- 7. Interactive Quiz Logic ---
-function quizNext(stepNum) {
-    document.querySelectorAll('.quiz-step-pane').forEach(p => p.classList.add('hidden'));
-    document.getElementById(`q-step-${stepNum}`).classList.remove('hidden');
+// --- 6. Impact Dashboard Admin Updates ---
+const metrics = {
+    youth: 242,
+    water: 85210,
+    boats: 4,
+    jobs: 32
+};
+
+function simulateAdminUpdate() {
+    const inputYouth = parseInt(document.getElementById('admin-youth').value) || metrics.youth;
+    const inputWater = parseInt(document.getElementById('admin-water').value) || metrics.water;
+    const inputBoats = parseInt(document.getElementById('admin-boats').value) || metrics.boats;
+    const inputJobs = parseInt(document.getElementById('admin-jobs').value) || metrics.jobs;
+    
+    // Save to local state
+    metrics.youth = inputYouth;
+    metrics.water = inputWater;
+    metrics.boats = inputBoats;
+    metrics.jobs = inputJobs;
+    
+    // Trigger animations for Main Dashboard View
+    animateValue('dash-stat-youth', 0, metrics.youth, 1000);
+    animateValue('dash-stat-water', 0, metrics.water, 1000);
+    animateValue('dash-stat-boats', 0, metrics.boats, 1000);
+    animateValue('dash-stat-jobs', 0, metrics.jobs, 1000);
+    
+    // Trigger animations for Homepage Brief Stats Strip
+    animateValue('brief-stat-youth', 0, metrics.youth, 1000);
+    animateValue('brief-stat-water', 0, metrics.water, 1000);
+    animateValue('brief-stat-boats', 0, metrics.boats, 1000);
+    animateValue('brief-stat-jobs', 0, metrics.jobs, 1000);
+    
+    // Dynamically adjust carbon metrics based on youth trained
+    const estimatedCO2 = (metrics.youth * 0.05).toFixed(1);
+    const estimatedCoast = (metrics.youth * 0.005).toFixed(2);
+    
+    document.getElementById('dash-carbon').innerText = `${estimatedCO2} Tons`;
+    document.getElementById('dash-coastline').innerText = `${estimatedCoast} km`;
+    
+    // Show success notification banner
+    const alertBox = document.getElementById('sim-status-box');
+    alertBox.classList.remove('hidden');
+    setTimeout(() => {
+        alertBox.classList.add('hidden');
+    }, 4000);
+}
+
+// --- 7. Eligibility Match Quiz ---
+let quizAnswers = {};
+
+function quizNext(step) {
+    // Hide all steps
+    document.getElementById('q-step-1').classList.add('hidden');
+    document.getElementById('q-step-2').classList.add('hidden');
+    document.getElementById('q-step-3').classList.add('hidden');
+    document.getElementById('q-result').classList.add('hidden');
+    
+    // Show selected step
+    document.getElementById(`q-step-${step}`).classList.remove('hidden');
 }
 
 function processQuizResults() {
-    const ageGroup = document.querySelector('input[name="age-group"]:checked')?.value || 'youth';
-    const interest = document.querySelector('input[name="interest"]:checked')?.value || 'water';
-
-    document.querySelectorAll('.quiz-step-pane').forEach(p => p.classList.add('hidden'));
+    const ageVal = document.querySelector('input[name="age-group"]:checked').value;
+    const interestVal = document.querySelector('input[name="interest"]:checked').value;
+    const statusVal = document.querySelector('input[name="status"]:checked').value;
+    
     const resultPane = document.getElementById('q-result');
+    const matchedTitle = document.getElementById('matched-title');
+    const matchedDesc = document.getElementById('matched-description');
+    const quizCta = document.getElementById('quiz-cta');
+    
+    // Hide questions
+    document.getElementById('q-step-3').classList.add('hidden');
     resultPane.classList.remove('hidden');
-
-    const titleEl = document.getElementById('matched-title');
-    const descEl = document.getElementById('matched-description');
-    const ctaEl = document.getElementById('quiz-cta');
-
-    if (interest === 'marine' || ageGroup === 'youth') {
-        titleEl.innerText = "Youth of the Seas (YOTS) Boat Building";
-        descEl.innerText = "You are an ideal match for our 12-week maritime craft engineering cohort. Gain certified skills building resilient vessels.";
-        ctaEl.setAttribute('onclick', "openApplyForm('Youth of the Seas')");
-    } else if (interest === 'water') {
-        titleEl.innerText = "Water Conservation Community Action";
-        descEl.innerText = "You match our island water monitoring team! Help audit residential leakages and install rainwater harvesting tools.";
-        ctaEl.setAttribute('onclick', "openApplyForm('Water Conservation')");
-    } else if (interest === 'green') {
-        titleEl.innerText = "Eco Village & CYEN Skills";
-        descEl.innerText = "You qualify for our sustainable agriculture, hydroponics, and soil remediation training modules.";
-        ctaEl.setAttribute('onclick', "openApplyForm('Eco Village')");
+    
+    // Recommendation mapping
+    if (ageVal === 'kids') {
+        matchedTitle.innerText = "CYEN Skills - Eco-Explorers";
+        matchedDesc.innerText = "For ages 10-13, our CYEN partnership provides eco-exploration, recycling games, and climate literacy workshops. A fun, safe, hands-on path for young leaders.";
+        quizCta.setAttribute('onclick', "openApplyForm('cyen')");
+    } else if (interestVal === 'boats' && ageVal === 'youth') {
+        matchedTitle.innerText = "Youth of the Seas (YOTS) Boat Building";
+        matchedDesc.innerText = "Based on your interest in craftsmanship and marine sectors, you qualify for our 12-week Cohort intake. Build disaster-resilient vessels and learn engine repair.";
+        quizCta.setAttribute('onclick', "openApplyForm('yots')");
+    } else if (interestVal === 'water') {
+        matchedTitle.innerText = "Water Conservation Initiative";
+        matchedDesc.innerText = "Your interests fit our community-led water saving action. Participate in household checkups, monitoring systems, and local awareness campaigns.";
+        quizCta.setAttribute('onclick', "openApplyForm('water')");
+    } else if (interestVal === 'business') {
+        matchedTitle.innerText = "Eco Village: Earn & Grow Zonal Pathway";
+        matchedDesc.innerText = "You align with sustainable agri-business, crop marketing, and hydroponics. Learn how to launch your own food security micro-enterprise.";
+        quizCta.setAttribute('onclick', "openApplyForm('ecovillage')");
     } else {
-        titleEl.innerText = "Pinelands Career Pavilion";
-        descEl.innerText = "Explore our 6 vocational innovation zones spanning digital tech, micro-enterprise, and global scholarships.";
-        ctaEl.setAttribute('onclick', "openApplyForm('Pinelands Career Pavilion')");
+        matchedTitle.innerText = "Pinelands Pavilion: Career Discovery";
+        matchedDesc.innerText = "We recommend joining the Pinelands exploration days. Explore sports performance, global studies, remote digital skills, and wellness markets.";
+        quizCta.setAttribute('onclick', "openApplyForm('pinelands')");
     }
 }
 
 function resetQuiz() {
-    document.getElementById('q-result').classList.add('hidden');
-    document.querySelectorAll('.quiz-step-pane').forEach(p => p.classList.add('hidden'));
-    document.getElementById('q-step-1').classList.remove('hidden');
+    quizNext(1);
 }
 
-// --- 8. Public Impact Hub Admin Update Simulation ---
-function simulateAdminUpdate() {
-    const youthVal = document.getElementById('admin-youth').value;
-    const waterVal = parseInt(document.getElementById('admin-water').value).toLocaleString();
-    const boatsVal = document.getElementById('admin-boats').value;
-    const jobsVal = document.getElementById('admin-jobs').value;
-
-    // Update Dashboard values
-    document.getElementById('dash-stat-youth').innerText = youthVal;
-    document.getElementById('dash-stat-water').innerText = waterVal;
-    document.getElementById('dash-stat-boats').innerText = boatsVal;
-    document.getElementById('dash-stat-jobs').innerText = jobsVal;
-
-    // Update Home page brief values
-    document.getElementById('brief-stat-youth').innerText = youthVal;
-    document.getElementById('brief-stat-water').innerText = waterVal;
-    document.getElementById('brief-stat-boats').innerText = boatsVal;
-    document.getElementById('brief-stat-jobs').innerText = jobsVal;
-
-    const statusBox = document.getElementById('sim-status-box');
-    statusBox.classList.remove('hidden');
-    setTimeout(() => {
-        statusBox.classList.add('hidden');
-    }, 4000);
-}
-
-// --- 9. Application Form Logic ---
+// --- 8. Application Form Submission Simulation ---
 function openApplyForm(progName) {
     switchView('apply');
-    window.location.hash = 'apply';
-
-    const selectEl = document.getElementById('apply-prog');
-    if (selectEl && progName) {
-        for (let i = 0; i < selectEl.options.length; i++) {
-            if (selectEl.options[i].text.toLowerCase().includes(progName.toLowerCase())) {
-                selectEl.selectedIndex = i;
-                break;
-            }
-        }
+    const progSelect = document.getElementById('apply-prog');
+    
+    // Map string identifiers to selector values
+    if (progName === 'yots' || progName.includes('Seas')) {
+        progSelect.value = 'yots';
+    } else if (progName === 'cyen' || progName.includes('CYEN')) {
+        progSelect.value = 'cyen';
+    } else if (progName === 'water' || progName.includes('Water')) {
+        progSelect.value = 'water';
+    } else if (progName === 'ecovillage' || progName.includes('Village')) {
+        progSelect.value = 'ecovillage';
+    } else {
+        progSelect.value = 'pinelands';
     }
 }
 
 function handleApplySubmit() {
-    const fname = document.getElementById('apply-fname').value;
-    const lname = document.getElementById('apply-lname').value;
-    const email = document.getElementById('apply-email').value;
-    const phone = document.getElementById('apply-phone').value;
-    const age = document.getElementById('apply-age').value;
-    const progSelect = document.getElementById('apply-prog');
-    const programme = progSelect.options[progSelect.selectedIndex].text;
-    const district = document.getElementById('apply-district').value;
-
     const formData = {
-        timestamp: new Date().toISOString(),
-        firstName: fname,
-        lastName: lname,
-        email: email,
-        phone: phone,
-        age: age,
-        programme: programme,
-        district: district
+        firstName: document.getElementById('apply-fname').value,
+        lastName: document.getElementById('apply-lname').value,
+        email: document.getElementById('apply-email').value,
+        phone: document.getElementById('apply-phone').value,
+        age: parseInt(document.getElementById('apply-age').value),
+        programme: document.getElementById('apply-prog').value,
+        district: document.getElementById('apply-district').value
     };
 
     // If a Google Sheets URL is configured, send the data
