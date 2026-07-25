@@ -571,8 +571,13 @@ function resetApplyForm() {
 // --- Meet the Team Category Filter ---
 function filterTeam(category, btnElement) {
     const filterButtons = document.querySelectorAll('.team-filter-btn');
-    filterButtons.forEach(btn => btn.classList.remove('active'));
-    if (btnElement) btnElement.classList.add('active');
+    filterButtons.forEach(btn => {
+        if (btn.getAttribute('onclick')?.includes(`'${category}'`)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 
     const teamCards = document.querySelectorAll('.team-card');
     teamCards.forEach(card => {
