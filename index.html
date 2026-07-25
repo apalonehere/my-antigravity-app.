@@ -169,16 +169,19 @@
                         </div>
 
                         <!-- Program 5 -->
-                        <div class="program-card glass" onclick="openProgram('pinelands')">
+                        <div class="program-card glass border-orange-accent" onclick="openProgram('pinelands')">
                             <div class="card-icon fair-icon">
                                 <svg viewBox="0 0 24 24" width="40" height="40">
                                     <path fill="currentColor"
-                                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z" />
+                                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
                                 </svg>
                             </div>
-                            <h3>Pinelands Pavilion &amp; Workshops</h3>
-                            <p>Hands-on creative economy workshops, sports performance, digital media labs, and climate enterprise discovery.</p>
-                            <span class="card-link">Explore Initiative &rarr;</span>
+                            <div class="flex-between align-center mb-10">
+                                <h3>Pinelands Workshops</h3>
+                                <span class="tag-orange">Orange Economy &amp; Tech</span>
+                            </div>
+                            <p>A 6-zone dynamic career pavilion spanning creative industries, digital media, entrepreneurship, and performance careers.</p>
+                            <span class="card-link" style="color:var(--color-orange);">Explore Creative &amp; Tech Pavilion &rarr;</span>
                         </div>
                     </div>
                 </div>
@@ -191,66 +194,33 @@
                 </svg>
             </div>
 
-            <!-- Impact at a Glance Section -->
-            <section class="home-impact-section-wrapper">
-                <div class="home-impact-brief glass">
-                    <div class="text-center max-width-700 margin-auto">
-                        <span class="category-tag">Real-Time Metrics</span>
-                        <h2 class="section-title">Our Impact in Numbers</h2>
-                        <p>Measuring the real-world climate reduction and youth employment created by Green Rising Barbados.</p>
-                    </div>
-
-                    <div class="stats-strip">
-                        <div class="stat-item">
-                            <div class="stat-number" id="brief-stat-youth">242</div>
-                            <div class="stat-label">Youth Enrolled</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="brief-stat-water">85,210</div>
-                            <div class="stat-label">Gal Water Saved/Mo</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="brief-stat-boats">4</div>
-                            <div class="stat-label">Vessels Constructed</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="brief-stat-jobs">32</div>
-                            <div class="stat-label">Green Jobs Placed</div>
-                        </div>
-                    </div>
-
-                    <div class="text-center pt-20">
-                        <a href="#dashboard" class="btn btn-secondary" onclick="switchView('dashboard')">View Full Impact Hub</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Embedded Meet the Team Section on Home Screen -->
-            <section id="home-team-section" class="container pt-20">
-                <div class="flex-column text-center mb-20">
+            <!-- Meet the Team Section on Home Page -->
+            <section id="home-team-section" class="container mt-40">
+                <div class="flex-column text-center mb-30">
                     <span class="category-tag">Our People</span>
                     <h2>Meet the Leadership &amp; Mentors</h2>
                     <p class="lead">The dedicated team driving Barbados's youth-led climate engine and blue-green transition.</p>
                 </div>
 
-                <!-- Category Filter Buttons -->
+                <!-- Team Category Filter Buttons -->
                 <div class="team-filters">
                     <button class="team-filter-btn active" onclick="filterTeam('all', this)">All Members</button>
                     <button class="team-filter-btn" onclick="filterTeam('leadership', this)">Leadership</button>
                     <button class="team-filter-btn" onclick="filterTeam('coordinator', this)">Coordinators</button>
-                    <button class="team-filter-btn" onclick="filterTeam('mentor', this)">Mentors &amp; Advisors</button>
+                    <button class="team-filter-btn" onclick="filterTeam('mentor', this)">Technical Mentors</button>
+                    <button class="team-filter-btn" onclick="filterTeam('champion', this)">Youth Champions</button>
                 </div>
 
-                <!-- Team Grid (Same high-contrast styling as standalone view) -->
-                <div class="team-grid">
+                <!-- Team Grid Cards -->
+                <div class="team-grid" id="team-cards-container-home">
                     <!-- Member 1 -->
                     <div class="team-card glass" data-category="leadership">
                         <div class="team-avatar-wrapper">
-                            <div class="team-avatar">KC</div>
+                            <div class="team-avatar">SP</div>
                         </div>
-                        <div class="team-name">Krystle C.</div>
-                        <span class="team-role">Project Lead &amp; Strategy</span>
-                        <p class="team-bio">Spearheading national youth climate strategy and Future Barbados inter-ministry partnerships.</p>
+                        <div class="team-name">Stefanie P.</div>
+                        <span class="team-role">Executive Director &amp; Climate Lead</span>
+                        <p class="team-bio">Spearheading Future Barbados &amp; Green Rising strategic vision, youth empowerment frameworks, and inter-ministerial climate partnerships.</p>
                         <div class="team-tags">
                             <span class="team-tag">#Leadership</span>
                             <span class="team-tag">#ClimateStrategy</span>
@@ -265,7 +235,7 @@
                         </div>
                         <div class="team-name">Myrico S.</div>
                         <span class="team-role">Operations &amp; Cohort Coordinator</span>
-                        <p class="team-bio">Overseeing cohort intakes, YOTS boatbuilding logistics, and community field execution across parishes.</p>
+                        <p class="team-bio">Overseeing cohort intakes, YOTS boatbuilding logistics, and community field execution across parishes in Barbados.</p>
                         <div class="team-tags">
                             <span class="team-tag">#Operations</span>
                             <span class="team-tag">#YOTS</span>
