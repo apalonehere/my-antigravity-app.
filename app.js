@@ -100,10 +100,8 @@ function initRippleEffect() {
 }
 
 // --- 1. SPA Navigation & Router ---
-const views = document.querySelectorAll('.app-view');
-const navLinks = document.querySelectorAll('.nav-link');
-
 function initNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const tabId = link.getAttribute('data-tab');
@@ -118,6 +116,9 @@ function initNavigation() {
 }
 
 function switchView(viewId) {
+    const views = document.querySelectorAll('.app-view');
+    const navLinks = document.querySelectorAll('.nav-link');
+
     views.forEach(view => {
         if (view.id === `view-${viewId}`) {
             view.classList.add('active');
