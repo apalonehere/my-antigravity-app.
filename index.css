@@ -174,6 +174,30 @@
     color: #ffffff !important;
 }
 
+[data-theme="dark"] .team-tag {
+    background: rgba(16, 185, 129, 0.18) !important;
+    color: #34d399 !important;
+    border-color: rgba(16, 185, 129, 0.35) !important;
+}
+
+[data-theme="dark"] .team-filter-btn {
+    color: #c4f1e5 !important;
+    border-color: rgba(16, 185, 129, 0.35) !important;
+    background: rgba(11, 35, 30, 0.8) !important;
+}
+
+[data-theme="dark"] .team-filter-btn:hover,
+[data-theme="dark"] .team-filter-btn.active {
+    background: rgba(16, 185, 129, 0.28) !important;
+    color: #ffffff !important;
+    border-color: #10b981 !important;
+}
+
+[data-theme="dark"] .team-avatar {
+    background: #0b231e !important;
+    color: #34d399 !important;
+}
+
 *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 
