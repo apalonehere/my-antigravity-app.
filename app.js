@@ -299,20 +299,24 @@ function calculateWater() {
     const resultsBox = document.getElementById('calc-results-box');
     resultsBox.classList.remove('hidden');
     
-    animateValue('water-use-val', 0, Math.round(dailyTotal), 800);
-    animateValue('water-saved-val', 0, Math.round(totalSaved), 800);
+    animateValue('water-use-val', Math.round(dailyTotal), 800);
+    animateValue('water-saved-val', Math.round(totalSaved), 800);
 }
 
-// Simple Count-up numerical animation
-function animateValue(id, start, end, duration) {
+// Count-up numerical animation supporting current value transition
+function animateValue(id, end, duration = 1000) {
     const obj = document.getElementById(id);
     if (!obj) return;
+    
+    const rawCurrent = obj.innerText ? obj.innerText.replace(/[^0-9]/g, '') : '0';
+    const start = parseInt(rawCurrent) || 0;
     
     let startTimestamp = null;
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+        const currentVal = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = currentVal.toLocaleString();
         if (progress < 1) {
             window.requestAnimationFrame(step);
         }
@@ -401,31 +405,48 @@ function simulateAdminUpdate() {
     metrics.boats = inputBoats;
     metrics.jobs = inputJobs;
     
-    // Trigger animations for Main Dashboard View Cards
-    animateValue('dash-stat-youth', 0, metrics.youth, 1000);
-    animateValue('dash-stat-water', 0, metrics.water, 1000);
-    animateValue('dash-stat-boats', 0, metrics.boats, 1000);
-    animateValue('dash-stat-jobs', 0, metrics.jobs, 1000);
+    // Trigger count-up transitions for 4-Grid Dashboard Metric Cards
+    animateValue('dash-stat-youth', metrics.youth, 1000);
+    animateValue('dash-stat-water', metrics.water, 1000);
+    animateValue('dash-stat-boats', metrics.boats, 1000);
+    animateValue('dash-stat-jobs', metrics.jobs, 1000);
 
-    // Trigger animations for Hero Card Inline Stats
-    animateValue('dash-hero-youth', 0, metrics.youth, 1000);
-    animateValue('dash-hero-water', 0, metrics.water, 1000);
-    animateValue('dash-hero-jobs', 0, metrics.jobs, 1000);
+    // Trigger count-up transitions for Hero Card Inline Stats
+    animateValue('dash-hero-youth', metrics.youth, 1000);
+    animateValue('dash-hero-water', metrics.water, 1000);
+    animateValue('dash-hero-jobs', metrics.jobs, 1000);
     
-    // Trigger animations for Homepage Brief Stats Strip
-    animateValue('brief-stat-youth', 0, metrics.youth, 1000);
-    animateValue('brief-stat-water', 0, metrics.water, 1000);
-    animateValue('brief-stat-boats', 0, metrics.boats, 1000);
-    animateValue('brief-stat-jobs', 0, metrics.jobs, 1000);
+    // Trigger count-up transitions for Homepage Brief Stats Strip
+    animateValue('brief-stat-youth', metrics.youth, 1000);
+    animateValue('brief-stat-water', metrics.water, 1000);
+    animateValue('brief-stat-boats', metrics.boats, 1000);
+    animateValue('brief-stat-jobs', metrics.jobs, 1000);
     
-    // Dynamically adjust carbon metrics based on youth trained
+    // Dynamically calculate and update target percentage gauge
+    const targetPct = Math.min(Math.round((metrics.youth / 300) * 100), 100);
+    const ringValEl = document.getElementById('dash-ring-val');
+    const ringFillEl = document.getElementById('dash-ring-fill');
+    if (ringValEl) ringValEl.innerText = `${targetPct}%`;
+    if (ringFillEl) {
+        const offset = 264 - (264 * (targetPct / 100));
+        ringFillEl.style.strokeDashoffset = offset;
+    }
+
+    // Dynamically adjust environmental monitor indicators
     const estimatedCO2 = (metrics.youth * 0.05).toFixed(1);
     const estimatedCoast = (metrics.youth * 0.005).toFixed(2);
-    
+    const estimatedSoil = (metrics.youth * 0.035).toFixed(1);
+    const estimatedRain = Math.max(8, Math.round(metrics.youth * 0.065));
+
     const carbonEl = document.getElementById('dash-carbon');
     const coastEl = document.getElementById('dash-coastline');
+    const soilEl = document.getElementById('dash-soil');
+    const rainEl = document.getElementById('dash-rain');
+
     if (carbonEl) carbonEl.innerText = `${estimatedCO2} Tons`;
     if (coastEl) coastEl.innerText = `${estimatedCoast} km`;
+    if (soilEl) soilEl.innerText = `${estimatedSoil} Acres`;
+    if (rainEl) rainEl.innerText = `${estimatedRain} Systems`;
     
     // Show success notification banner
     const alertBox = document.getElementById('sim-status-box');
