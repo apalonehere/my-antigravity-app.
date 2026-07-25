@@ -20,8 +20,10 @@ function switchView(viewId) {
     views.forEach(view => {
         if (view.id === `view-${viewId}`) {
             view.classList.add('active');
+            view.style.display = 'block';
         } else {
             view.classList.remove('active');
+            view.style.display = 'none';
         }
     });
 
