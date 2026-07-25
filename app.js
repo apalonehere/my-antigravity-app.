@@ -4,6 +4,7 @@
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw7_Ferq7x7ULlFjHsOwSTihGYAU_qPqlPMzBKnEhT_J2hNxy5B70wNM3OqHiiEhyY5/exec'; 
 
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initNavigation();
     initMobileMenu();
     initProgrammeSubTabs();
@@ -12,6 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
     initRippleEffect();
 });
+
+// --- Theme Switcher (Light / Dark Mode) ---
+function initTheme() {
+    const savedTheme = localStorage.getItem('green-rising-theme');
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (toggleBtn) toggleBtn.innerText = '☀️';
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        if (toggleBtn) toggleBtn.innerText = '🌙';
+    }
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    
+    if (currentTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('green-rising-theme', 'light');
+        if (toggleBtn) toggleBtn.innerText = '🌙';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('green-rising-theme', 'dark');
+        if (toggleBtn) toggleBtn.innerText = '☀️';
+    }
+}
 
 // --- Organic/Fluid: Scroll-triggered reveal animations ---
 function initScrollReveal() {
@@ -254,9 +284,6 @@ function finishWizard(choice) {
     wizardAnswers.step2 = choice;
     document.getElementById('wiz-step-2').classList.add('hidden');
     document.getElementById('wiz-result').classList.remove('hidden');
-
-    const resultTitle = document.getElementById('wiz-result-title');
-    const resultDesc = document.getElementById('wiz-result-desc');
 
     if (choice === 'green' || wizardAnswers.step1 === 'outdoor') {
         resultTitle.innerText = "Zone 3: Build the Future & Eco-Village";

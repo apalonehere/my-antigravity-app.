@@ -45,6 +45,68 @@
     --transition-bounce: all 0.5s var(--ease-fluid);
 }
 
+/* ============================================================
+   DARK MODE OVERRIDES
+   ============================================================ */
+[data-theme="dark"] {
+    --color-bg-dark:       #061412;
+    --color-bg-mid:        #0c211d;
+    --color-bg-card:       #0b231e;
+
+    --color-primary:       #10b981;
+    --color-primary-light: rgba(16,185,129,0.18);
+
+    --color-teal:          #14b8a6;
+    --color-teal-light:    rgba(20,184,166,0.18);
+
+    --color-text-bright:   #f0fdfa;
+    --color-text-muted:    #a7f3d0;
+    --color-text-dim:      #6ee7b7;
+
+    --grad-hero:    linear-gradient(145deg, #071e19 0%, #082921 40%, #061e1b 100%);
+    --glass-bg:     rgba(11, 35, 30, 0.88);
+    --glass-border: rgba(16, 185, 129, 0.28);
+}
+
+[data-theme="dark"] p {
+    color: rgba(240, 253, 250, 0.88);
+}
+
+[data-theme="dark"] .main-header {
+    background: rgba(6, 20, 18, 0.94);
+    border-bottom-color: rgba(16, 185, 129, 0.22);
+}
+
+[data-theme="dark"] .nav-link {
+    color: rgba(240, 253, 250, 0.8);
+}
+
+[data-theme="dark"] .home-programs {
+    background: linear-gradient(180deg, #061412 0%, #0c211d 100%);
+}
+
+[data-theme="dark"] .program-card,
+[data-theme="dark"] .pinelands-card,
+[data-theme="dark"] .team-card,
+[data-theme="dark"] .glass {
+    background: rgba(11, 35, 30, 0.92);
+    border-color: rgba(16, 185, 129, 0.22);
+}
+
+[data-theme="dark"] .main-footer {
+    background: #040e0d;
+}
+
+[data-theme="dark"] .hero-video-overlay {
+    background: linear-gradient(180deg, rgba(6,20,18,0.55) 0%, rgba(6,20,18,0.40) 50%, rgba(6,20,18,0.85) 100%);
+}
+
+[data-theme="dark"] .form-control {
+    background: rgba(16,185,129,0.08);
+    border-color: rgba(16,185,129,0.3);
+    color: #f0fdfa;
+}
+
 *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 
@@ -699,24 +761,122 @@ p { color: rgba(17,45,51,0.85); font-size: 1.05rem; }
 .wiz-result-title{font-family:var(--font-display);font-size:2.1rem;font-weight:800;margin-top:12px;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
 /* ============================================================
-   IMPACT DASHBOARD
+   THEME TOGGLE BUTTON
    ============================================================ */
-.stats-card-detailed{padding:32px;border-color:rgba(2,132,199,0.22);}
-.large-stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:22px;}
-.large-stat-card{background:rgba(5,150,105,0.05);border:1px solid rgba(5,150,105,0.14);padding:22px;border-radius:18px;text-align:center;transition:var(--transition);}
-.large-stat-card:hover{transform:translateY(-2px);border-color:rgba(5,150,105,0.3);}
-.large-stat-card .num{font-family:var(--font-display);font-size:2.5rem;font-weight:800;background:var(--grad-green-teal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.large-stat-card .lbl{font-size:0.9rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:6px;}
-.climate-dash-widget{padding:30px;border-color:rgba(2,132,199,0.22);}
-.dash-progress-row{display:flex;flex-direction:column;gap:8px;}
-.dash-progress-row.mt-15{margin-top:20px;}
-.dash-progress-label{display:flex;justify-content:space-between;font-size:0.96rem;}
-.dash-progress-label strong{color:var(--color-teal);}
-.progress-bar-container{width:100%;height:9px;background:rgba(11,42,47,0.08);border-radius:10px;overflow:hidden;}
-.progress-bar-fill{height:100%;background:var(--grad-green-teal);border-radius:10px;transition:width 1.2s var(--ease-smooth);position:relative;overflow:hidden;}
-.progress-bar-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);animation:shimmer 2s infinite;}
-@keyframes shimmer{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
-.sim-status-alert{background:rgba(5,150,105,0.09);border:1px solid var(--color-primary);color:var(--color-text-bright);padding:16px;border-radius:14px;font-size:1rem;text-align:center;animation:viewFadeIn 0.3s var(--ease-smooth);}
+.theme-toggle-btn {
+    background: rgba(5,150,105,0.12);
+    border: 1.5px solid rgba(5,150,105,0.28);
+    color: var(--color-primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: var(--transition-bounce);
+    margin-left: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(5,150,105,0.15);
+}
+.theme-toggle-btn:hover {
+    transform: scale(1.12) rotate(15deg);
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+    box-shadow: 0 6px 20px rgba(5,150,105,0.25);
+}
+
+/* ============================================================
+   IMPACT DASHBOARD — CENTERED & BALANCED
+   ============================================================ */
+#view-dashboard .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#view-dashboard .grid-2col {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    gap: 32px;
+    align-items: center;
+}
+
+.stats-card-detailed {
+    padding: 36px 30px;
+    border-color: rgba(2,132,199,0.22);
+    text-align: center;
+}
+.stats-card-detailed h3 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.large-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+    justify-content: center;
+}
+
+.large-stat-card {
+    background: rgba(5,150,105,0.05);
+    border: 1px solid rgba(5,150,105,0.14);
+    padding: 24px 16px;
+    border-radius: 20px;
+    text-align: center;
+    transition: var(--transition);
+}
+.large-stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(5,150,105,0.35);
+    box-shadow: 0 8px 24px rgba(5,150,105,0.12);
+}
+.large-stat-card .num {
+    font-family: var(--font-display);
+    font-size: 2.7rem;
+    font-weight: 800;
+    background: var(--grad-green-teal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.large-stat-card .lbl {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+.climate-dash-widget {
+    padding: 32px;
+    border-color: rgba(2,132,199,0.22);
+    text-align: center;
+}
+.climate-dash-widget h3 {
+    text-align: center;
+    margin-bottom: 6px;
+}
+.climate-dash-widget p {
+    text-align: center;
+}
+
+.dash-progress-row { display:flex; flex-direction:column; gap:8px; text-align: left; }
+.dash-progress-row.mt-15 { margin-top:20px; }
+.dash-progress-label { display:flex; justify-content:space-between; font-size:0.96rem; }
+.dash-progress-label strong { color:var(--color-teal); }
+.progress-bar-container { width:100%; height:10px; background:rgba(11,42,47,0.08); border-radius:10px; overflow:hidden; }
+.progress-bar-fill { height:100%; background:var(--grad-green-teal); border-radius:10px; transition:width 1.2s var(--ease-smooth); position:relative; overflow:hidden; }
+.progress-bar-fill::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent); animation:shimmer 2s infinite; }
+@keyframes shimmer { 0%{transform:translateX(-100%);} 100%{transform:translateX(200%);} }
+.sim-status-alert { background:rgba(5,150,105,0.09); border:1px solid var(--color-primary); color:var(--color-text-bright); padding:16px; border-radius:14px; font-size:1rem; text-align:center; animation:viewFadeIn 0.3s var(--ease-smooth); }
 
 /* ============================================================
    QUIZ
