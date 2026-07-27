@@ -45,7 +45,7 @@ function initHashRouter() {
             if (['water', 'cyen', 'ecovillage', 'yots', 'pinelands'].includes(hash)) {
                 switchView('programmes');
                 openProgram(hash);
-            } else if (['home', 'programmes', 'team', 'dashboard', 'quiz', 'apply'].includes(hash)) {
+            } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
                 switchView(hash);
             }
         }

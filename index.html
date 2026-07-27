@@ -39,6 +39,7 @@
                         <li><a href="#programmes" class="nav-link" data-tab="programmes">Programmes</a></li>
                         <li><a href="#team" class="nav-link" data-tab="team">Team</a></li>
                         <li><a href="#dashboard" class="nav-link" data-tab="dashboard">Impact Hub</a></li>
+                        <li><a href="#resources" class="nav-link" data-tab="resources">Resources</a></li>
                         <li><a href="#quiz" class="nav-link" data-tab="quiz">Match Quiz</a></li>
                         <li><a href="#apply" class="btn btn-primary nav-apply-btn" id="quick-apply-btn">Apply Now</a></li>
                     </ul>
@@ -935,6 +936,59 @@
                     </div>
                 </div>
 
+        </section>
+
+        <!-- RESOURCES HUB VIEW -->
+        <section id="view-resources" class="app-view">
+            <div class="container max-width-1200">
+                <div class="flex-column text-center mb-30">
+                    <span class="category-tag">Knowledge &amp; Media Library</span>
+                    <h2>Green Rising Resources Hub</h2>
+                    <p class="lead">Explore articles, video demos, workshop guides, and community stories across Barbados's Blue, Green, and Orange Economies.</p>
+                </div>
+
+                <!-- Search & Filter Control Bar -->
+                <div class="resources-control-bar glass p-30 mb-30">
+                    <!-- Real-Time Search Bar -->
+                    <div class="resource-search-wrapper mb-20">
+                        <div class="search-input-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="resource-search-input" class="form-control resource-search-input" placeholder="Search by title, keyword, or platform (e.g. Water, YOTS, YouTube, Pinelands)...">
+                        </div>
+                        <span class="resource-count-badge" id="resource-count-badge">6 Resources Found</span>
+                    </div>
+
+                    <!-- Filter Rows -->
+                    <div class="resource-filter-rows">
+                        <!-- Top-Level Category Filter Pills -->
+                        <div class="filter-group">
+                            <label class="filter-label">Category:</label>
+                            <div class="resource-pill-group">
+                                <button class="resource-cat-btn active" data-category="all">All</button>
+                                <button class="resource-cat-btn" data-category="article">Articles</button>
+                                <button class="resource-cat-btn" data-category="video">Videos</button>
+                                <button class="resource-cat-btn" data-category="social">Social Media</button>
+                                <button class="resource-cat-btn" data-category="workshop">Workshops</button>
+                            </div>
+                        </div>
+
+                        <!-- Target Economy Sub-Tags -->
+                        <div class="filter-group mt-15">
+                            <label class="filter-label">Target Economy:</label>
+                            <div class="resource-pill-group">
+                                <button class="resource-econ-btn active" data-economy="all">All Economies</button>
+                                <button class="resource-econ-btn econ-pill-blue" data-economy="blue">Blue Economy</button>
+                                <button class="resource-econ-btn econ-pill-green" data-economy="green">Green Economy</button>
+                                <button class="resource-econ-btn econ-pill-orange" data-economy="orange">Orange Economy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Resource Cards Grid (3 col desktop, 2 col tablet, 1 col mobile) -->
+                <div class="resources-grid" id="resources-card-grid">
+                    <!-- Rendered dynamically by js/resources.js -->
+                </div>
             </div>
         </section>
 
@@ -1218,8 +1272,7 @@
                     </div>
 
                 </div>
-            </div>
-        </section>
+            </section>
 
     </main>
 
@@ -1254,6 +1307,7 @@
     <script src="js/quiz.js"></script>
     <script src="js/apply.js"></script>
     <script src="js/team.js"></script>
+    <script src="js/resources.js"></script>
     <script src="app.js"></script>
 </body>
 

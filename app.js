@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initProgrammeSubTabs();
     initVillageTabs();
+    if (typeof initResourcesHub === 'function') initResourcesHub();
     initHashRouter();
     initScrollReveal();
     initRippleEffect();
@@ -20,6 +21,7 @@ function initScrollReveal() {
         { selector: '.glass',                delay: false },
         { selector: '.pinelands-card',       delay: true },
         { selector: '.matrix-item',          delay: true },
+        { selector: '.resource-card',        delay: true },
         { selector: '.wave-divider',         delay: false },
     ];
 
