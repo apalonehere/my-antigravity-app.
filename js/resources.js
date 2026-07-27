@@ -1,7 +1,23 @@
 // Green Rising Barbados — Resources Hub Module
 
-// Empty dataset ready for live resource submissions
-const resourcesData = [];
+// Curated live resources dataset
+const resourcesData = [
+    {
+        id: 1,
+        title: "Eco Leaders Workshop",
+        category: "workshop",
+        economy: "green",
+        platform: "Instagram",
+        platformIcon: "📸",
+        readTime: "Instagram Reel • Watch",
+        date: "July 2026",
+        summary: "Featured Instagram reel recap of the Eco Leaders Workshop — empowering young Barbadian leaders in sustainability, environmental stewardship, and community climate action.",
+        imageBg: "linear-gradient(145deg, rgba(131,58,180,0.9) 0%, rgba(253,29,29,0.9) 50%, rgba(252,176,69,0.9) 100%)",
+        previewVisual: "▶",
+        link: "https://www.instagram.com/p/DZbEuNSD4ht/",
+        actionLabel: "Watch on Instagram"
+    }
+];
 
 let activeCategory = 'all';
 let activeEconomy = 'all';
@@ -75,13 +91,26 @@ function renderResources() {
     grid.innerHTML = filtered.map(item => {
         const econClass = item.economy === 'blue' ? 'badge-blue' : item.economy === 'green' ? 'badge-green' : 'badge-orange-tag';
         const econLabel = item.economy === 'blue' ? 'Blue Economy' : item.economy === 'green' ? 'Green Economy' : 'Orange Economy';
-        const actionLabel = item.category === 'video' ? 'Watch Video' : item.category === 'workshop' ? 'Explore Workshop' : item.category === 'social' ? 'View Post' : 'Read Article';
+        
+        const isExternal = item.link && item.link.startsWith('http');
+        const linkAttrs = isExternal 
+            ? 'target="_blank" rel="noopener"' 
+            : `onclick="switchView('${item.link.replace('#','')}')"`;
+
+        const defaultLabel = item.category === 'video' ? 'Watch Video' 
+            : item.category === 'workshop' ? 'Explore Workshop' 
+            : item.category === 'social' ? 'View Post' 
+            : 'Read Article';
+            
+        const actionLabel = item.actionLabel || defaultLabel;
+        const previewPlayBtn = item.previewVisual ? `<div class="resource-play-overlay"><span>${item.previewVisual}</span></div>` : '';
 
         return `
             <article class="resource-card glass">
                 <div class="resource-thumb" style="background: ${item.imageBg}">
                     <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
                     <span class="economy-badge ${econClass}">${econLabel}</span>
+                    ${previewPlayBtn}
                 </div>
                 <div class="resource-body">
                     <div class="resource-meta">
@@ -91,7 +120,7 @@ function renderResources() {
                     </div>
                     <h3 class="resource-title">${item.title}</h3>
                     <p class="resource-summary">${item.summary}</p>
-                    <a href="${item.link}" class="btn btn-secondary btn-sm resource-action-btn" onclick="switchView('${item.link.replace('#','')}')">
+                    <a href="${item.link}" ${linkAttrs} class="btn btn-secondary btn-sm resource-action-btn">
                         ${actionLabel} &rarr;
                     </a>
                 </div>
