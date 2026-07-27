@@ -12,7 +12,8 @@ const resourcesData = [
         readTime: "Instagram Reel • Watch",
         date: "July 2026",
         summary: "Featured Instagram reel recap of the Eco Leaders Workshop — empowering young Barbadian leaders in sustainability, environmental stewardship, and community climate action.",
-        imageBg: "linear-gradient(145deg, rgba(131,58,180,0.9) 0%, rgba(253,29,29,0.9) 50%, rgba(252,176,69,0.9) 100%)",
+        imageUrl: "Thumbnail.png", // Dedicated thumbnail picture file from project folder
+        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('Thumbnail.png') center/cover no-repeat",
         previewVisual: "▶",
         link: "https://www.instagram.com/p/DZbEuNSD4ht/",
         actionLabel: "Watch on Instagram"
@@ -105,9 +106,14 @@ function renderResources() {
         const actionLabel = item.actionLabel || defaultLabel;
         const previewPlayBtn = item.previewVisual ? `<div class="resource-play-overlay"><span>${item.previewVisual}</span></div>` : '';
 
+        // Dynamic thumbnail style: supports picture file path/URL or gradient fallback
+        const thumbStyle = item.imageUrl 
+            ? `background: linear-gradient(180deg, rgba(6, 20, 18, 0.35) 0%, rgba(6, 20, 18, 0.75) 100%), url('${item.imageUrl}') center/cover no-repeat;`
+            : `background: ${item.imageBg || 'linear-gradient(135deg, #059669 0%, #0d9488 100%)'};`;
+
         return `
             <article class="resource-card glass">
-                <div class="resource-thumb" style="background: ${item.imageBg}">
+                <div class="resource-thumb" style="${thumbStyle}">
                     <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
                     <span class="economy-badge ${econClass}">${econLabel}</span>
                     ${previewPlayBtn}
