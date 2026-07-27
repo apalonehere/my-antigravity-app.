@@ -7,7 +7,7 @@
     <meta name="description"
         content="Green Rising Barbados - Future Barbados Youth Climate Engine. Empowering youth through water conservation, CYEN skills, Eco Village, YOTS boat building, and Pinelands Creative Workshop.">
     <title>Green Rising Barbados | Future Barbados Youth Climate Engine</title>
-    <!-- Google Fonts: DM Sans, Outfit (Headings) and Inter (Body) -->
+    <!-- Google Fonts: Outfit (Headings) and Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -49,8 +49,8 @@
                     🌙 <span class="theme-text">Dark Mode</span>
                 </button>
 
-                <!-- Mobile Hamburger Toggle -->
-                <button class="mobile-toggle" id="mobile-toggle-btn" aria-label="Toggle Menu">
+                <!-- Mobile Hamburger Menu Toggle -->
+                <button class="mobile-toggle" aria-label="Toggle Navigation" id="mobile-toggle-btn">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -59,139 +59,171 @@
         </div>
     </header>
 
-    <!-- Floating Quick Apply Button -->
-    <a href="#apply" class="floating-apply-btn" onclick="openApplyForm('yots')">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+    <!-- Floating Action Button for Application (Mobile Friendly) -->
+    <a href="#apply" class="floating-apply-btn" id="floating-apply" title="Quick Register">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
         </svg>
-        <span>Apply Now</span>
+        <span>Quick Apply</span>
     </a>
 
-    <!-- MAIN SINGLE PAGE CONTENT -->
+    <!-- Main Content Container -->
     <main class="content-wrapper">
 
         <!-- 1. HOME VIEW -->
         <section id="view-home" class="app-view active">
             <!-- Hero Banner -->
-            <section class="hero-section text-center">
-                <!-- Full-Bleed Background Image with Gradient Overlay -->
+            <section class="hero-section">
+                <!-- Hero Background Image -->
                 <div class="hero-img-bg-container">
-                    <img src="hero-bg.jpg.JPG" alt="Green Rising Barbados Youth Action" class="hero-img-bg" onerror="this.style.display='none';">
-                    <div class="hero-video-overlay"></div>
+                    <img src="hero-bg.jpg.JPG" alt="Green Rising Hero" class="hero-img-bg" onerror="if(this.src.includes('.JPG')){ this.src='hero-bg.jpg'; } else if(this.src.includes('.jpg')){ this.src='hero-bg.png'; } else { this.style.display='none'; }">
                 </div>
+                <div class="hero-video-overlay"></div>
 
-                <!-- Animated Background Orbs -->
+                <!-- Organic floating orbs -->
                 <div class="hero-orb hero-orb-1"></div>
                 <div class="hero-orb hero-orb-2"></div>
                 <div class="hero-orb hero-orb-3"></div>
-
-                <div class="hero-content">
-                    <span class="ministry-badge">Future Barbados Initiative</span>
-                    <h1 class="hero-title">
-                        Empowering Youth to Lead Barbados’s <span class="gradient-text">Green &amp; Blue Future</span>
-                    </h1>
+                <div class="hero-content text-center">
+                    <div class="ministry-badge">
+                        Ministry of Industry, Innovation, Health Technology and Science (Barbados)
+                    </div>
+                    <h1 class="hero-title">Empowering youth to drive the <span class="gradient-text-blue">Blue-Green
+                            Economy</span></h1>
                     <p class="hero-description">
-                        Connecting young leaders with skills, sustainable employment, marine engineering, and community resilience projects across Barbados.
+                        Green Rising is Future Barbados's youth climate engine. We train, skill, and resource the next
+                        generation of Barbadians to tackle water scarcity, build eco-friendly marine vessels, and launch
+                        climate-smart enterprises.
                     </p>
                     <div class="hero-ctas">
-                        <a href="#programmes" class="btn btn-primary btn-lg" onclick="switchView('programmes')">Explore Programmes</a>
-                        <a href="#quiz" class="btn btn-secondary btn-lg" onclick="switchView('quiz')">Find Your Match</a>
+                        <a href="#quiz" class="btn btn-primary btn-lg" onclick="switchView('quiz')">Find Your
+                            Programme</a>
+                        <a href="#programmes" class="btn btn-secondary btn-lg"
+                            onclick="switchView('programmes')">Explore Focus Areas</a>
                     </div>
                 </div>
             </section>
 
-            <!-- Organic Transition Wave Divider -->
-            <div class="wave-divider">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-                    <path fill="var(--color-bg-dark)" d="M0,32L60,42.7C120,53,240,75,360,74.7C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path>
+            <!-- Wave divider: hero → programmes -->
+            <div class="wave-divider" aria-hidden="true">
+                <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#b2e0d6"
+                        opacity="0.5" />
+                    <path d="M0,55 C360,20 720,70 1080,30 C1260,10 1380,50 1440,55 L1440,80 L0,80 Z" fill="#a8d8ea"
+                        opacity="0.6" />
                 </svg>
             </div>
 
-            <!-- Five Core Focus Areas Section -->
-            <section class="home-programs">
-                <div class="container">
-                    <div class="text-center max-width-700 margin-auto mb-30">
-                        <h2 class="section-title">Our Five Core Action Pillars</h2>
-                        <p class="section-subtitle">Discover how Green Rising Barbados transforms climate passion into accredited training and jobs.</p>
+            <!-- Quick Program Overview Grid -->
+            <section class="home-programs container">
+                <h2 class="section-title text-center">Five Key Focus Areas</h2>
+                <p class="section-subtitle text-center">Click any card to explore curriculum, schedules, and pathways.
+                </p>
+
+                <div class="program-grid">
+                    <!-- Program 1 -->
+                    <div class="program-card glass" onclick="openProgram('water')">
+                        <div class="card-icon water-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M12,20A6,6 0 0,1 6,14C6,10 12,3.25 12,3.25C12,3.25 18,10 18,14A6,6 0 0,1 12,20M12,5.5C11,7.25 8.75,10.66 8,13.25A4,4 0 0,0 12,18A4,4 0 0,0 16,14C15.25,10.66 13,7.25 12,5.5Z" />
+                            </svg>
+                        </div>
+                        <h3>Water Conservation</h3>
+                        <p>Addressing island water scarcity with youth-led community monitoring, leak checks, and
+                            household conservation tools.</p>
+                        <span class="card-link">Explore Area &rarr;</span>
                     </div>
 
-                    <div class="program-grid">
-                        <!-- Program 1 -->
-                        <div class="program-card glass" onclick="openProgram('water')">
-                            <div class="card-icon water-icon">
-                                <svg viewBox="0 0 24 24" width="40" height="40">
-                                    <path fill="currentColor"
-                                        d="M12,20A6,6 0 0,1 6,14C6,10 12,3.25 12,3.25C12,3.25 18,10 18,14A6,6 0 0,1 12,20Z" />
-                                </svg>
-                            </div>
-                            <h3>Water Conservation</h3>
-                            <p>Addressing island water scarcity through household auditing, rainwater harvesting, and smart leak detection.</p>
-                            <span class="card-link">Explore Initiative &rarr;</span>
+                    <!-- Program 2 -->
+                    <div class="program-card glass" onclick="openProgram('cyen')">
+                        <div class="card-icon skills-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z" />
+                            </svg>
                         </div>
+                        <h3>CYEN Skills</h3>
+                        <p>Environmental advocacy and green-blue jobs training for youth aged 10-29. Connecting
+                            sustainability to modern careers.</p>
+                        <span class="card-link">Explore Area &rarr;</span>
+                    </div>
 
-                        <!-- Program 2 -->
-                        <div class="program-card glass" onclick="openProgram('cyen')">
-                            <div class="card-icon skills-icon">
-                                <svg viewBox="0 0 24 24" width="40" height="40">
-                                    <path fill="currentColor"
-                                        d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z" />
-                                </svg>
-                            </div>
-                            <h3>CYEN Skills Development</h3>
-                            <p>Practical training modules in environmental stewardship, renewable energy, and community project leadership.</p>
-                            <span class="card-link">Explore Initiative &rarr;</span>
+                    <!-- Program 3 -->
+                    <div class="program-card glass" onclick="openProgram('ecovillage')">
+                        <div class="card-icon village-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14,7.7 15.6,9.3 15.6,11.3C15.6,13.3 12,17.5 12,17.5C12,17.5 8.4,13.3 8.4,11.3C8.4,9.3 10,7.7 12,7.7Z" />
+                            </svg>
                         </div>
+                        <h3>Eco Village</h3>
+                        <p>Hands-on climate action and food sovereignty. Explore three distinct zones: Planet, People,
+                            and Earn & Grow.</p>
+                        <span class="card-link">Explore Area &rarr;</span>
+                    </div>
 
-                        <!-- Program 3 -->
-                        <div class="program-card glass" onclick="openProgram('ecovillage')">
-                            <div class="card-icon village-icon">
-                                <svg viewBox="0 0 24 24" width="40" height="40">
-                                    <path fill="currentColor"
-                                        d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
-                                </svg>
-                            </div>
-                            <h3>Eco Village: Earn &amp; Grow</h3>
-                            <p>Six zonal pathways bridging sustainable agriculture, hydroponics, and green enterprise micro-grants.</p>
-                            <span class="card-link">Explore Initiative &rarr;</span>
+                    <!-- Program 4 -->
+                    <div class="program-card glass" onclick="openProgram('yots')">
+                        <div class="card-icon sea-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M20,11H4V9H20M20,15H4V13H20M20,19H4V17H20M1.29,6.71L2.71,8.13L6.59,4.25L5.17,2.83M22.71,6.71L21.29,8.13L17.41,4.25L18.83,2.83Z" />
+                            </svg>
                         </div>
+                        <h3>Youth of the Seas (YOTS)</h3>
+                        <p>A specialized 10-youth cohort building disaster-resilient vessels and launching careers in
+                            the maritime blue economy.</p>
+                        <span class="card-link">Explore Area &rarr;</span>
+                    </div>
 
-                        <!-- Program 4 -->
-                        <div class="program-card glass" onclick="openProgram('yots')">
-                            <div class="card-icon sea-icon">
-                                <svg viewBox="0 0 24 24" width="40" height="40">
-                                    <path fill="currentColor"
-                                        d="M20,11H4V9H20M20,15H4V13H20M20,19H4V17H20M1.29,6.71L2.71,8.13L6.59,4.25L5.17,2.83M22.71,6.71L21.29,8.13L17.41,4.25L18.83,2.83L22.71,6.71Z" />
-                                </svg>
-                            </div>
-                            <h3>Youth of the Seas (YOTS)</h3>
-                            <p>12-week Cohort training in resilient wooden/composite boatbuilding, vessel repair, and maritime skills.</p>
-                            <span class="card-link">Explore Initiative &rarr;</span>
+                    <!-- Program 5 -->
+                    <div class="program-card glass border-orange-accent" onclick="openProgram('pinelands')">
+                        <div class="card-icon fair-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
+                            </svg>
                         </div>
-
-                        <!-- Program 5 -->
-                        <div class="program-card glass border-orange-accent" onclick="openProgram('pinelands')">
-                            <div class="card-icon fair-icon">
-                                <svg viewBox="0 0 24 24" width="40" height="40">
-                                    <path fill="currentColor"
-                                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
-                                </svg>
-                            </div>
-                            <div class="flex-between align-center mb-10">
-                                <h3>Pinelands Workshops</h3>
-                                <span class="tag-orange">Orange Economy &amp; Tech</span>
-                            </div>
-                            <p>A 6-zone dynamic career pavilion spanning creative industries, digital media, entrepreneurship, and performance careers.</p>
-                            <span class="card-link" style="color:var(--color-orange);">Explore Creative &amp; Tech Pavilion &rarr;</span>
+                        <div class="flex-between align-center mb-10">
+                            <h3>Pinelands Workshops</h3>
+                            <span class="tag-orange">Orange Economy &amp; Tech</span>
                         </div>
+                        <p>A 6-zone dynamic career pavilion spanning creative industries, digital media, entrepreneurship, and performance careers.</p>
+                        <span class="card-link" style="color:var(--color-orange);">Explore Creative &amp; Tech Pavilion &rarr;</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Organic Transition Wave Divider -->
-            <div class="wave-divider">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-                    <path fill="var(--color-bg-mid)" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
-                </svg>
+            <!-- Highlight Statistics Widget Section (Centered Impact Hub Visual) -->
+            <div class="home-impact-section-wrapper">
+                <section class="home-impact-brief glass">
+                    <div class="flex-column text-center">
+                        <h2>Our Impact in Numbers</h2>
+                        <p>Real-time outcomes tracked directly from our community programs across Barbados.</p>
+                    </div>
+                    <div class="stats-strip">
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-youth">242</div>
+                            <div class="stat-label">Youth Trained</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-water">85,210</div>
+                            <div class="stat-label">Gal Water Saved</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-boats">4</div>
+                            <div class="stat-label">Boats Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-jobs">32</div>
+                            <div class="stat-label">Jobs Created</div>
+                        </div>
+                    </div>
+                    <div class="text-center pt-20">
+                        <a href="#dashboard" class="btn btn-secondary" onclick="switchView('dashboard')">View Full Impact Hub</a>
+                    </div>
+                </section>
             </div>
 
             <!-- Meet the Team Section on Home Page -->
@@ -213,6 +245,7 @@
 
                 <!-- Team Grid Cards -->
                 <div class="team-grid" id="team-cards-container-home">
+
                     <!-- Member 1 -->
                     <div class="team-card glass" data-category="leadership">
                         <div class="team-avatar-wrapper">
@@ -257,542 +290,647 @@
                             <span class="team-tag">#Research</span>
                         </div>
                     </div>
+
+                    <!-- Member 4 -->
+                    <div class="team-card glass" data-category="champion">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">KL</div>
+                        </div>
+                        <div class="team-name">Kaelan Lorde</div>
+                        <span class="team-role">CYEN Youth Facilitator</span>
+                        <p class="team-bio">Facilitating youth environmental workshops, hydro-agronomy projects, and grassroots climate advocacy drives.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#CYEN</span>
+                            <span class="team-tag">#AgriTech</span>
+                            <span class="team-tag">#Advocacy</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 5 -->
+                    <div class="team-card glass" data-category="coordinator">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">TN</div>
+                        </div>
+                        <div class="team-name">Tia Nurse</div>
+                        <span class="team-role">Pinelands Workshop Manager</span>
+                        <p class="team-bio">Managing the 6-zone vocational career pavilion, connecting youth to tech, entrepreneurship, and global scholarships.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#Pinelands</span>
+                            <span class="team-tag">#CareerPavilion</span>
+                            <span class="team-tag">#Innovation</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 6 -->
+                    <div class="team-card glass" data-category="mentor">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">MB</div>
+                        </div>
+                        <div class="team-name">Marcus Bovell</div>
+                        <span class="team-role">Master Marine Craft Instructor</span>
+                        <p class="team-bio">Directing hands-on disaster-resilient boat construction, timber framing, and fiberglass engineering modules.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#BoatBuilding</span>
+                            <span class="team-tag">#Engineering</span>
+                            <span class="team-tag">#BlueEconomy</span>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </section>
 
-        <!-- 2. PROGRAMMES DETAILED VIEW -->
+        <!-- 2. PROGRAMMES DETAIL VIEW -->
         <section id="view-programmes" class="app-view">
             <div class="container">
-                <div class="text-center max-width-700 margin-auto mb-30">
-                    <span class="category-tag">Action Pillars</span>
-                    <h2>Comprehensive Action Pillars</h2>
-                    <p class="section-subtitle">Select any pillar below to explore curriculum details, impact calculators, and cohort schedules.</p>
-                </div>
-
-                <!-- Sub-Navigation Pill Tabs -->
+                <!-- Program Section Navigation Tab List -->
                 <div class="programme-sub-tabs">
                     <button class="sub-tab-btn active" data-prog="water">Water Conservation</button>
                     <button class="sub-tab-btn" data-prog="cyen">CYEN Skills</button>
                     <button class="sub-tab-btn" data-prog="ecovillage">Eco Village</button>
                     <button class="sub-tab-btn" data-prog="yots">YOTS Boat Building</button>
-                    <button class="sub-tab-btn" data-prog="pinelands">Pinelands Creative Workshop</button>
+                    <button class="sub-tab-btn" data-prog="pinelands">Pinelands Pavilion</button>
                 </div>
 
-                <!-- PANE 1: Water Conservation -->
-                <div class="prog-detail-pane active" id="prog-water">
+                <!-- SUB-VIEW: Water Conservation -->
+                <div id="prog-water" class="prog-detail-pane active">
                     <div class="grid-2col">
                         <div>
-                            <span class="category-tag">Pillar 01</span>
-                            <h3>Water Conservation &amp; Climate Resilience</h3>
-                            <p class="lead">Protecting Barbados’s freshwater supplies through youth-led household audits and rain harvesting.</p>
-                            <p>Barbados is ranked among the top 15 most water-scarce countries globally. This initiative mobilizes youth to install low-flow aerators, perform leak detection audits, and set up rain harvesting barrels.</p>
-                            <ul class="bullet-list">
-                                <li>Community water auditing certification</li>
-                                <li>Rainwater harvesting barrel distribution</li>
-                                <li>School rainwater monitoring systems</li>
-                            </ul>
-                            <div class="fact-box">
+                            <span class="category-tag">Focus Area 1</span>
+                            <h2>Water Conservation Initiative</h2>
+                            <p class="lead">Addressing climate-induced water scarcity across Barbados.</p>
+                            <p>Barbados is classified as a water-scarce nation. Our youth-led conservation initiative
+                                trains participants to identify water leakage, monitor community rainwater harvesting
+                                systems, and lead household conservation awareness drives.</p>
+
+                            <div class="fact-box mt-20">
                                 <h4>Did You Know?</h4>
-                                <p>Fixing a single leaking toilet flapper saves over 200 gallons of water daily in a Barbadian household!</p>
+                                <p>Barbados is in the top 15 most water-stressed countries in the world. Climate change
+                                    and rising temperatures are making rainfall patterns increasingly erratic.</p>
                             </div>
                         </div>
-
-                        <!-- Interactive Water Savings Calculator Widget -->
                         <div class="glass p-30">
-                            <h3>Household Water Savings Calculator</h3>
-                            <p class="small text-muted mb-20">Calculate how much water your household can save with simple upgrades.</p>
+                            <h3>Household Water-Use Calculator</h3>
+                            <p class="small text-muted mb-20">Calculate your household water consumption and see how
+                                much water the Green Rising youth action plan can save you.</p>
+
                             <form id="water-calc-form" onsubmit="event.preventDefault(); calculateWater();">
                                 <div class="form-group">
-                                    <label for="calc-residents">Household Residents</label>
-                                    <input type="number" id="calc-residents" class="form-control" value="3" min="1" max="15">
+                                    <label for="calc-residents">Number of members in household</label>
+                                    <input type="number" id="calc-residents" class="form-control" value="4" min="1">
                                 </div>
                                 <div class="form-group">
-                                    <label for="calc-shower">Average Shower Length (Minutes)</label>
-                                    <input type="number" id="calc-shower" class="form-control" value="10" min="2" max="30">
+                                    <label for="calc-shower">Average shower length (mins per person/day)</label>
+                                    <input type="number" id="calc-shower" class="form-control" value="8" min="1">
                                 </div>
                                 <div class="form-group">
-                                    <label for="calc-leaks">Suspected Leaks / Dripping Taps?</label>
+                                    <label for="calc-leaks">Do you currently suspect any leaks? (leaky taps,
+                                        toilets)</label>
                                     <select id="calc-leaks" class="form-control">
-                                        <option value="no">No Leaks</option>
-                                        <option value="yes" selected>Yes - Small Drips or Running Toilet</option>
+                                        <option value="no">No active leaks detected</option>
+                                        <option value="yes" selected>Yes, minor drip/running toilet</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100">Calculate Impact</button>
+                                <button type="submit" class="btn btn-primary w-100">Calculate Daily Water Usage</button>
                             </form>
 
-                            <div id="calc-results-box" class="calc-results hidden">
+                            <div class="calc-results hidden" id="calc-results-box">
                                 <div class="result-metric">
                                     <div class="result-number" id="water-use-val">0</div>
-                                    <div class="result-label">Est. Daily Gallons Used</div>
+                                    <div class="result-label">Gallons Consumed Daily</div>
                                 </div>
-                                <div class="result-metric">
-                                    <div class="result-number" id="water-saved-val">0</div>
-                                    <div class="result-label">Potential Daily Gallons Saved</div>
+                                <div class="result-comparison">
+                                    With Green Rising's conservation checklist, you could save <strong
+                                        class="text-accent" id="water-saved-val">0</strong> gallons daily!
                                 </div>
-                                <p class="result-comparison">That equals over <strong><span id="annual-saved-val">35,000</span> gallons saved per year</strong>!</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- PANE 2: CYEN Skills Development -->
-                <div class="prog-detail-pane" id="prog-cyen">
+                <!-- SUB-VIEW: CYEN Skills -->
+                <div id="prog-cyen" class="prog-detail-pane">
                     <div class="grid-2col">
                         <div>
-                            <span class="category-tag">Pillar 02</span>
-                            <h3>CYEN Environmental Skills Development</h3>
-                            <p class="lead">In partnership with the Caribbean Youth Environment Network (CYEN).</p>
-                            <p>Equipping Barbadian youth with practical environmental management skills, carbon footprint tracking, and advocacy tools needed for green sector careers.</p>
+                            <span class="category-tag">Focus Area 2</span>
+                            <h2>CYEN — Green & Blue Economy Skills</h2>
+                            <p class="lead">Building youth pathways in sustainable agriculture, renewable energy, and
+                                marine stewardship.</p>
+                            <p>Serving Barbadians aged 10-29, the Caribbean Youth Environment Network (CYEN) partnership
+                                focuses on practical environmental education, training cohorts in skills that directly
+                                support the island's transition to circular and green economies.</p>
 
+                            <h3>Curriculum Matrix</h3>
                             <div class="skills-matrix">
                                 <div class="matrix-item">
-                                    <h4>Solar &amp; Renewable Basics</h4>
-                                    <p>Introductory photovoltaics and energy auditing for homes.</p>
+                                    <h4>Sustainable Agriculture</h4>
+                                    <p>Hydroponics, home compost, soil remediation, and organic vegetable production.
+                                    </p>
                                 </div>
                                 <div class="matrix-item">
-                                    <h4>Waste Stream Upcycling</h4>
-                                    <p>Turning plastics and glass into commercial products.</p>
+                                    <h4>Marine Stewardship</h4>
+                                    <p>Coastal ecosystem mapping, coral monitoring, and ocean literacy.</p>
                                 </div>
                                 <div class="matrix-item">
-                                    <h4>Coastal Dune Ecology</h4>
-                                    <p>Re-vegetation and mangrove protection skills.</p>
+                                    <h4>Climate Advocacy</h4>
+                                    <p>Public speaking, organizing campaigns, and drafting climate policy
+                                        recommendations.</p>
                                 </div>
                                 <div class="matrix-item">
-                                    <h4>Green Project Mgmt</h4>
-                                    <p>Grant writing, budgeting, and sustainability metrics.</p>
+                                    <h4>Eco-Entrepreneurship</h4>
+                                    <p>Building eco-friendly small businesses, recycling supply chains, and green
+                                        branding.</p>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="glass p-30">
-                            <h3>Curriculum FAQs</h3>
-                            <div class="accordion">
-                                <div class="accordion-item">
-                                    <button class="accordion-header" onclick="toggleAccordion(this)">Who is eligible to join?</button>
-                                    <div class="accordion-content show">
-                                        <p>Barbadian youth aged 15-29 interested in green jobs, environmental science, or community action.</p>
+                        <div class="flex-column gap-20">
+                            <div class="glass p-30">
+                                <h3>Age-Segmented Pathways</h3>
+                                <div class="accordion">
+                                    <div class="accordion-item">
+                                        <button class="accordion-header active" onclick="toggleAccordion(this)">Ages
+                                            10-13: Eco-Explorers</button>
+                                        <div class="accordion-content show">
+                                            <p>Focuses on basic ecological literacy, environmental games, recycling
+                                                workshops, and outdoor exploration. Designed to foster early connection
+                                                to Barbadian nature.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <button class="accordion-header" onclick="toggleAccordion(this)">Is there a certificate provided?</button>
-                                    <div class="accordion-content">
-                                        <p>Yes! Participants receive an accredited Certificate of Completion endorsed by Future Barbados and CYEN.</p>
+                                    <div class="accordion-item">
+                                        <button class="accordion-header" onclick="toggleAccordion(this)">Ages 14-17:
+                                            Green Scholars</button>
+                                        <div class="accordion-content">
+                                            <p>Includes high school workshops, climate action campaigns, hands-on
+                                                community gardening projects, and certified introductory sustainability
+                                                courses.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <button class="accordion-header" onclick="toggleAccordion(this)">What is the duration?</button>
-                                    <div class="accordion-content">
-                                        <p>Modules run over 6 weeks with weekend hands-on workshops and field trips.</p>
+                                    <div class="accordion-item">
+                                        <button class="accordion-header" onclick="toggleAccordion(this)">Ages 18-29:
+                                            Blue-Green Fellows</button>
+                                        <div class="accordion-content">
+                                            <p>A career transition phase. Provides intensive vocational certifications,
+                                                internships with marine/environmental organisations, and start-up
+                                                micro-grants.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="testimonial-bubble glass mt-30">
-                                <p>"CYEN training gave me the exact skills I needed to land a job as a junior environmental officer."</p>
-                                <span class="testimonial-author">&mdash; Maya R., CYEN Alum</span>
+                            <div class="testimonial-bubble glass">
+                                <p>"Joining CYEN helped me map our local reef ecosystems in Oistins. I have now
+                                    transitioned into an internship with the Coastal Zone Management Unit!"</p>
+                                <span class="testimonial-author">— Kaelan L., Age 22, CYEN Graduate</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- PANE 3: Eco Village Earn & Grow -->
-                <div class="prog-detail-pane" id="prog-ecovillage">
-                    <span class="category-tag">Pillar 03</span>
-                    <h3>Eco Village: Earn &amp; Grow Zonal Pathways</h3>
-                    <p class="lead">A sustainable agricultural blueprint combining food security, micro-enterprises, and renewable energy.</p>
+                <!-- SUB-VIEW: Climate Dash & Eco Village -->
+                <div id="prog-ecovillage" class="prog-detail-pane">
+                    <span class="category-tag">Focus Area 3</span>
+                    <h2>Climate Dash & Eco Village</h2>
+                    <p class="lead">A unified physical and digital experience focusing on food security, learning, and
+                        environmental restoration.</p>
 
-                    <!-- Interactive Zonal Tabs -->
                     <div class="village-tabs-menu">
-                        <button class="village-tab-btn active" data-zone="1">Zone 1: Hydroponics</button>
-                        <button class="village-tab-btn" data-zone="2">Zone 2: Agri-Business</button>
-                        <button class="village-tab-btn" data-zone="3">Zone 3: Solar Microgrid</button>
-                        <button class="village-tab-btn" data-zone="4">Zone 4: Composting</button>
-                        <button class="village-tab-btn" data-zone="5">Zone 5: Seed Bank</button>
-                        <button class="village-tab-btn" data-zone="6">Zone 6: Farmer Market</button>
+                        <button class="village-tab-btn active" data-zone="planet">Planet & Greening Zone</button>
+                        <button class="village-tab-btn" data-zone="people">People & Learning Zone</button>
+                        <button class="village-tab-btn" data-zone="earn">Earn & Grow Zone</button>
                     </div>
 
-                    <!-- Zonal Panes -->
-                    <div class="village-zone-pane active" id="zone-1">
-                        <div class="grid-2col">
-                            <div>
-                                <h4>Zone 1: Climate-Smart Hydroponics</h4>
-                                <p>Vertical farming systems designed for high-yield produce using 90% less water than traditional soil farming.</p>
-                                <ul class="bullet-list">
-                                    <li>Nutrient film technique (NFT) setup</li>
-                                    <li>Solar-powered water circulation pumps</li>
-                                    <li>Year-round lettuce and herb production</li>
-                                </ul>
-                            </div>
-                            <div class="zone-illustration-box glass green-pulse">
-                                <div class="illustration-placeholder">Hydroponic Vertical Towers Demo</div>
+                    <div class="village-zones-container">
+                        <!-- Planet Zone -->
+                        <div id="zone-planet" class="village-zone-pane active">
+                            <div class="grid-2col">
+                                <div>
+                                    <h3>Planet & Greening Zone</h3>
+                                    <p>Focused on restoring the local environment. Here, youth plant indigenous trees,
+                                        install rainwater irrigation, and create organic soil layers to counter erosion.
+                                    </p>
+                                    <ul class="bullet-list">
+                                        <li>Community composting collection networks</li>
+                                        <li>Soil enhancement using local Sargassum seaweed extracts</li>
+                                        <li>Afforestation with local fruit and shade trees</li>
+                                    </ul>
+                                </div>
+                                <div class="zone-illustration-box glass">
+                                    <div class="illustration-placeholder green-pulse">
+                                        <span>Soil Remediation & Reforestation Hub</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="village-zone-pane" id="zone-2">
-                        <div class="grid-2col">
-                            <div>
-                                <h4>Zone 2: Youth Agri-Business Incubator</h4>
-                                <p>Helping young entrepreneurs launch food micro-enterprises with seed funding and branding assistance.</p>
-                                <ul class="bullet-list">
-                                    <li>Packaging and food safety standards</li>
-                                    <li>Direct-to-hotel supply agreements</li>
-                                </ul>
-                            </div>
-                            <div class="zone-illustration-box glass yellow-pulse">
-                                <div class="illustration-placeholder">Agri-Business Market Incubator</div>
+                        <!-- People Zone -->
+                        <div id="zone-people" class="village-zone-pane">
+                            <div class="grid-2col">
+                                <div>
+                                    <h3>People & Learning Zone</h3>
+                                    <p>The classroom under the sky. This zone hosts weekly outdoor lectures, community
+                                        film screenings on climate action, and schools' eco-excursions.</p>
+                                    <ul class="bullet-list">
+                                        <li>Weekly open climate workshops</li>
+                                        <li>Interactive digital dashboard displaying current island resource stats</li>
+                                        <li>Resource library containing student guides and climate toolkits</li>
+                                    </ul>
+                                </div>
+                                <div class="zone-illustration-box glass">
+                                    <div class="illustration-placeholder blue-pulse">
+                                        <span>Open-Air Eco-Classroom</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="village-zone-pane" id="zone-3">
-                        <div class="grid-2col">
-                            <div>
-                                <h4>Zone 3: Off-Grid Solar Microgrid</h4>
-                                <p>Providing clean electricity to power community irrigation pumps and cold storage refrigeration.</p>
-                            </div>
-                            <div class="zone-illustration-box glass blue-pulse">
-                                <div class="illustration-placeholder">Community Solar Storage Unit</div>
+                        <!-- Earn Zone -->
+                        <div id="zone-earn" class="village-zone-pane">
+                            <div class="grid-2col">
+                                <div>
+                                    <h3>Earn & Grow Zone</h3>
+                                    <p>Linking food security directly to micro-enterprise. Youth build vertical gardens,
+                                        design mobile agricultural carts, and learn how to package and sell organic
+                                        crops to local markets.</p>
+                                    <ul class="bullet-list">
+                                        <li>Hydroponics training systems</li>
+                                        <li>Value-added product design (organic sauces, dried herbs)</li>
+                                        <li>Cooperative youth crop marketing models</li>
+                                    </ul>
+                                </div>
+                                <div class="zone-illustration-box glass">
+                                    <div class="illustration-placeholder yellow-pulse">
+                                        <span>Micro-Agribusiness Incubator</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="village-zone-pane" id="zone-4">
-                        <h4>Zone 4: Organic Waste Composting</h4>
-                        <p>Converting hotel organic waste into nutrient-dense compost for local soil enrichment.</p>
-                    </div>
-                    <div class="village-zone-pane" id="zone-5">
-                        <h4>Zone 5: Indigenous Seed Sanctuary</h4>
-                        <p>Preserving drought-resistant local plant varieties to ensure long-term crop resilience.</p>
-                    </div>
-                    <div class="village-zone-pane" id="zone-6">
-                        <h4>Zone 6: Youth Farmers Market</h4>
-                        <p>Weekly pop-up market allowing youth growers to sell produce directly to consumers.</p>
                     </div>
                 </div>
 
-                <!-- PANE 4: YOTS Boat Building -->
-                <div class="prog-detail-pane" id="prog-yots">
+                <!-- SUB-VIEW: YOTS Boat Building -->
+                <div id="prog-yots" class="prog-detail-pane">
                     <div class="grid-2col">
                         <div>
-                            <span class="category-tag">Pillar 04</span>
-                            <h3>Youth of the Seas (YOTS) Boat Building</h3>
-                            <p class="lead">A 12-week intensive maritime apprenticeship building disaster-resilient sea vessels.</p>
-                            <p>In response to increasing climate storms and marine transport needs, YOTS trains youth in traditional boat construction, composite materials, marine mechanics, and navigation safety.</p>
+                            <span class="category-tag">Focus Area 4</span>
+                            <h2>Youth of the Seas (YOTS) Boat Building</h2>
+                            <p class="lead">Training 10 selected youth per cohort to construct climate-resilient marine
+                                vessels.</p>
+                            <p>Targeting young people ages 16-29, particularly SJPI graduates, NEET youth (Not in
+                                Education, Employment, or Training), and members of coastal communities. Under expert
+                                guidance, this cohort gains hands-on engineering, woodworking, and fiberglass skills.
+                            </p>
 
-                            <h4 class="mt-20">12-Week Roadmap</h4>
+                            <h3>Curriculum Roadmap</h3>
                             <ol class="timeline-roadmap">
                                 <li>
-                                    <div class="timeline-step">01</div>
-                                    <div>
-                                        <strong>Weeks 1-3: Marine Carpentry &amp; Lofting</strong>
-                                        <p>Tool safety, blueprint reading, hull geometry, and timber selection.</p>
-                                    </div>
+                                    <span class="timeline-step">1</span>
+                                    <strong>Marine Woodworking & Materials</strong>
+                                    <p>Fundamentals of select structural timbers, layout tool handling, and safety
+                                        protocols.</p>
                                 </li>
                                 <li>
-                                    <div class="timeline-step">02</div>
-                                    <div>
-                                        <strong>Weeks 4-7: Hull Framing &amp; Fiberglassing</strong>
-                                        <p>Building rib frameworks, planking, epoxy resin application, and fiberglass reinforcement.</p>
-                                    </div>
+                                    <span class="timeline-step">2</span>
+                                    <strong>Disaster-Resilient Construction</strong>
+                                    <p>Drafting and reinforcement methods to endure heavy waves and coastal weather
+                                        events.</p>
                                 </li>
                                 <li>
-                                    <div class="timeline-step">03</div>
-                                    <div>
-                                        <strong>Weeks 8-10: Engine Mechanics &amp; Electronics</strong>
-                                        <p>Outboard motor maintenance, marine wiring, bilge pumps, and navigation lights.</p>
-                                    </div>
+                                    <span class="timeline-step">3</span>
+                                    <strong>Marine Engines & Electronics</strong>
+                                    <p>Outboard motor repairs, battery configurations, and basic navigation setup.</p>
                                 </li>
                                 <li>
-                                    <div class="timeline-step">04</div>
-                                    <div>
-                                        <strong>Weeks 11-12: Sea Trials &amp; Launching</strong>
-                                        <p>Safety certification, flotation testing, sea trial navigation, and graduation.</p>
-                                    </div>
+                                    <span class="timeline-step">4</span>
+                                    <strong>Blue Economy Launch</strong>
+                                    <p>Marketing vessels, launching cooperative charter ideas, and certification
+                                        matching.</p>
                                 </li>
                             </ol>
                         </div>
-
                         <div class="glass p-30">
-                            <h3>Next Cohort Intake</h3>
-                            <div class="cohort-card text-center p-25">
-                                <span class="cohort-badge open">Applications Open</span>
-                                <h4 class="mt-15">Cohort 5 Enrollment</h4>
-                                <p><strong>Duration:</strong> September 15 - December 10</p>
-                                <p><strong>Location:</strong> Bridgetown Maritime Center</p>
-                                <p><strong>Stipend:</strong> Weekly training stipend provided</p>
-                                <button class="btn btn-primary w-100 mt-20" onclick="openApplyForm('yots')">Apply for Cohort 5</button>
-                            </div>
+                            <h3>Cohort Intake Status</h3>
+                            <div class="cohort-badge open">Intake Active</div>
+                            <p class="mt-10">We are currently accepting applications for <strong>Cohort 4 (Max 10
+                                    participants)</strong>.</p>
 
-                            <h4 class="mt-30">Participant Prerequisites</h4>
                             <ul class="criteria-list">
-                                <li>Ages 18-29 (Barbadian Citizenship or Residency)</li>
-                                <li>Interest in maritime trades, carpentry, or mechanics</li>
-                                <li>No prior experience required; full training provided</li>
+                                <li><strong>Target Age:</strong> 16-29 years</li>
+                                <li><strong>Priority:</strong> SJPI grads, NEET status, or residents of coastal
+                                    districts</li>
+                                <li><strong>Duration:</strong> 12-week hands-on workshop</li>
+                                <li><strong>Credentials:</strong> Certificate of Completion in Disaster-Resilient Marine
+                                    Crafting</li>
                             </ul>
+
+                            <a href="#apply" class="btn btn-primary w-100 mt-20"
+                                onclick="openApplyForm('Youth of the Seas')">Apply for Cohort 4</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- PANE 5: Pinelands Creative Workshop -->
-                <div class="prog-detail-pane" id="prog-pinelands">
-                    <div class="grid-2col">
-                        <div>
-                            <span class="category-tag">Pillar 05</span>
-                            <h3>Pinelands Pavilion: 6-Zone Creative Workshops</h3>
-                            <p class="lead">Discover your future career path across six high-growth creative and green economy pavilions.</p>
-                            <p>The Pinelands Pavilion provides hands-on exploration booths, career counseling, digital media labs, and mentorship for young Barbadians.</p>
+                <!-- SUB-VIEW: Pinelands Workshop -->
+                <div id="prog-pinelands" class="prog-detail-pane">
+                    <span class="category-tag">Focus Area 5</span>
+                    <h2>Pinelands Creative Workshop — 6-Zone Career Pavilion</h2>
+                    <p class="lead">A virtual guide through the six vocational exploration zones designed to expand
+                        career horizons.</p>
 
-                            <div class="pinelands-zone-grid">
-                                <div class="pinelands-card glass">
-                                    <span class="zone-num">Zone 1</span>
-                                    <h4>Green Enterprise</h4>
-                                    <p>Solar installation, eco-tourism, and circular economy startups.</p>
-                                </div>
-                                <div class="pinelands-card glass">
-                                    <span class="zone-num">Zone 2</span>
-                                    <h4>Emerging Markets</h4>
-                                    <p>Hydroponics, sustainable culinary arts, and wellness products.</p>
-                                </div>
-                                <div class="pinelands-card glass">
-                                    <span class="zone-num">Zone 3</span>
-                                    <h4>Build the Future</h4>
-                                    <p>Resilient carpentry, boat building, and green architecture.</p>
-                                </div>
-                                <div class="pinelands-card glass">
-                                    <span class="zone-num">Zone 4</span>
-                                    <h4>Tech &amp; Digital</h4>
-                                    <p>App development, digital media, coding, and remote work.</p>
-                                </div>
-                                <div class="pinelands-card glass">
-                                    <span class="zone-num">Zone 5</span>
-                                    <h4>Global Studies</h4>
-                                    <p>Climate policy, diplomacy, and international scholarships.</p>
-                                </div>
-                                <div class="pinelands-card glass">
-                                    <span class="zone-num">Zone 6</span>
-                                    <h4>Sports &amp; Performance</h4>
-                                    <p>Coastal sports, diving leadership, and athletic training.</p>
-                                </div>
-                            </div>
+                    <div class="pinelands-zone-grid">
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 1</span>
+                            <h4>Arrival: Find Your Path</h4>
+                            <p>Begin the career assessment. Identify interests in the green-blue sectors vs digital
+                                arenas.</p>
                         </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 2</span>
+                            <h4>Entrepreneurship: Create Your Own</h4>
+                            <p>Business support covering wellness startups, creative products, and environmental
+                                consultancies.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 3</span>
+                            <h4>Build the Future: Emerging Barbados</h4>
+                            <p>Exploring sustainable infrastructure, clean transport, and local organic products
+                                manufacturing.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 4</span>
+                            <h4>Tech & Digital: Work Without Borders</h4>
+                            <p>Global tech skills training, remote work portfolios, programming, and digital media
+                                design.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 5</span>
+                            <h4>Global Opportunities Pavilion</h4>
+                            <p>Preps graduates for international scholarships, exchange program entries, and
+                                cross-border certifications.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 6</span>
+                            <h4>Sports & Performance</h4>
+                            <p>Sports administration, coastal dive leadership, sports therapy, and performance arts
+                                commerce.</p>
+                        </div>
+                    </div>
 
-                        <!-- Interactive Career Discovery Wizard -->
-                        <div class="glass p-30">
-                            <h3>Interactive Career Discovery Wizard</h3>
-                            <p class="small text-muted mb-20">Answer 2 quick questions to find your recommended Pinelands Pavilion zone.</p>
+                    <!-- Career Path Wizard Sub-Widget -->
+                    <div class="glass p-30 mt-30">
+                        <h3 class="text-center">Pinelands Interactive Career Path Wizard</h3>
+                        <p class="text-center text-muted mb-20">Find out which of the 6 zones fits your skills best.</p>
 
-                            <div id="wiz-step-1" class="wizard-step">
-                                <div class="wizard-question">1. What kind of work environment excites you most?</div>
+                        <div id="wizard-container" class="wizard-box">
+                            <div class="wizard-step" id="wiz-step-1">
+                                <p class="wizard-question">1. What kind of environment do you enjoy working in most?</p>
                                 <div class="wizard-options">
-                                    <button class="btn btn-secondary" onclick="nextWizardStep('outdoor')">Outdoors, working with my hands, nature &amp; sea</button>
-                                    <button class="btn btn-secondary" onclick="nextWizardStep('office')">Tech, computers, design, or business management</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="nextWizardStep('outdoor')">Outdoors - on the beach, farms, or
+                                        water</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="nextWizardStep('office')">Indoors - using computers, media, and
+                                        designs</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="nextWizardStep('people')">Anywhere - as long as I am building a
+                                        business or coaching people</button>
                                 </div>
                             </div>
 
-                            <div id="wiz-step-2" class="wizard-step hidden">
-                                <div class="wizard-question">2. What is your primary career goal right now?</div>
+                            <div class="wizard-step hidden" id="wiz-step-2">
+                                <p class="wizard-question">2. Select the goal that sounds most exciting to you:</p>
                                 <div class="wizard-options">
-                                    <button class="btn btn-secondary" onclick="finishWizard('green')">Learning a practical trade with high job demand</button>
-                                    <button class="btn btn-secondary" onclick="finishWizard('digital')">Earning income remotely in digital tech or media</button>
-                                    <button class="btn btn-secondary" onclick="finishWizard('business')">Starting my own local eco business</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="finishWizard('green')">Building clean infrastructure, boats, or
+                                        restoring nature</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="finishWizard('digital')">Earning a living online, coding, or creating
+                                        digital brands</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="finishWizard('business')">Creating local products, wellness startups,
+                                        or coaching youth</button>
                                 </div>
                             </div>
 
-                            <div id="wiz-result" class="wizard-result hidden">
-                                <h4>Your Matched Pathway:</h4>
-                                <div class="wiz-result-title" id="wiz-result-title">Zone 3: Build the Future</div>
-                                <p id="wiz-result-desc" class="mt-15">You are a natural fit for sustainability engineering, eco-village farming, or resilient boat construction.</p>
-                                <button class="btn btn-primary mt-20" onclick="openApplyForm('pinelands')">Apply for This Zone</button>
-                                <button class="btn btn-secondary btn-sm mt-10" onclick="resetWizard()">Start Over</button>
+                            <div class="wizard-result hidden" id="wiz-result">
+                                <h4>Your Suggested Pavilion Path:</h4>
+                                <div id="wiz-result-title" class="wiz-result-title text-accent">Zone 3: Build the Future
+                                </div>
+                                <p id="wiz-result-desc" class="mt-10">You show a strong alignment with sustainable
+                                    island development and hands-on environmental restoration.</p>
+                                <button class="btn btn-primary mt-15" onclick="resetWizard()">Retake Career
+                                    Wizard</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- 3. IMPACT HUB DASHBOARD VIEW -->
+        <!-- 3. IMPACT DASHBOARD VIEW -->
         <section id="view-dashboard" class="app-view">
-            <div class="container max-width-1000 margin-auto">
-                <div class="text-center max-width-700 margin-auto mb-30">
-                    <span class="category-tag">Public Transparency</span>
-                    <h2>Green Rising Impact Dashboard</h2>
-                    <p class="section-subtitle">Real-time tracking of youth training, water conservation, boat construction, and climate job creation.</p>
+            <div class="container max-width-1000">
+                <div class="flex-column text-center mb-30">
+                    <span class="category-tag">Public Metrics &amp; Outcomes</span>
+                    <h2>Green Rising Impact Hub</h2>
+                    <p class="lead">A live look at outcomes achieved across our key climate &amp; blue economy initiatives in Barbados.</p>
                 </div>
 
-                <!-- Dashboard Sub-Tabs -->
+                <!-- Dashboard Interactive Filter Tabs -->
                 <div class="dash-tab-bar">
-                    <button class="dash-tab-btn active" onclick="switchDashTab('overview', this)">Overview Metrics</button>
+                    <button class="dash-tab-btn active" onclick="switchDashTab('overview', this)">Overview</button>
                     <button class="dash-tab-btn" onclick="switchDashTab('environmental', this)">Environmental Monitor</button>
-                    <button class="dash-tab-btn" onclick="switchDashTab('activities', this)">Recent Field Activities</button>
-                    <button class="dash-tab-btn" onclick="switchDashTab('admin', this)">Admin Simulator</button>
+                    <button class="dash-tab-btn" onclick="switchDashTab('milestones', this)">Milestones &amp; Feed</button>
+                    <button class="dash-tab-btn" onclick="switchDashTab('admin', this)">Simulate Admin Input</button>
                 </div>
 
-                <!-- TAB 1: Overview Metrics -->
-                <div class="dash-pane active" id="dash-tab-overview">
-                    <!-- Hero Milestone Card -->
-                    <div class="glass dash-hero-card p-30 mb-30">
+                <!-- TAB PANE 1: Overview -->
+                <div id="dash-tab-overview" class="dash-pane active">
+                    <!-- Featured Milestone Hero Card -->
+                    <div class="dash-hero-card glass p-30 mb-30">
                         <div class="dash-hero-grid">
                             <div class="dash-hero-info">
-                                <span class="dash-hero-badge">Key Milestone</span>
-                                <h3>2026 Climate Youth Goal</h3>
-                                <p>We are currently on track to train 300 Barbadian youth in green-blue sectors by Q4 2026.</p>
+                                <span class="dash-hero-badge">2026 Climate Target Progress</span>
+                                <h3>Barbados Youth Action Target</h3>
+                                <p>Green Rising is on track to empower 300 Barbadian youth by Q4 2026 through hands-on water conservation, boatbuilding, and eco-enterprise.</p>
+                                
                                 <div class="dash-hero-stats-inline">
                                     <div class="dash-inline-stat">
                                         <strong id="dash-hero-youth">242</strong>
-                                        <span>Youth Enrolled</span>
+                                        <span>Youth Trained</span>
                                     </div>
                                     <div class="dash-inline-stat">
                                         <strong id="dash-hero-water">85,210</strong>
-                                        <span>Gal Water Saved</span>
+                                        <span>Gals Saved</span>
                                     </div>
                                     <div class="dash-inline-stat">
                                         <strong id="dash-hero-jobs">32</strong>
-                                        <span>Green Jobs</span>
+                                        <span>Jobs Placed</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="dash-hero-ring-container">
                                 <div class="dash-ring-wrapper">
-                                    <svg class="ring-svg" viewBox="0 0 100 100">
-                                        <circle class="ring-bg" cx="50" cy="50" r="42"></circle>
-                                        <circle class="ring-fill" id="dash-ring-fill" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="51"></circle>
+                                    <svg viewBox="0 0 100 100" class="ring-svg">
+                                        <circle cx="50" cy="50" r="42" class="ring-bg"></circle>
+                                        <circle cx="50" cy="50" r="42" class="ring-fill" id="dash-ring-fill" style="stroke-dasharray: 264; stroke-dashoffset: 50;"></circle>
                                     </svg>
                                     <div class="ring-text">
                                         <span class="ring-val" id="dash-ring-val">81%</span>
-                                        <span class="ring-lbl">Target</span>
+                                        <span class="ring-lbl">On Track</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 4-Grid Metric Cards -->
+                    <!-- 4-Grid Key Performance Metric Cards -->
                     <div class="dash-grid-4col">
                         <div class="dash-metric-card glass">
                             <div class="dash-metric-header">
                                 <span class="dash-metric-title">Youth Trained</span>
-                                <span class="dash-trend-badge positive">+18% MoM</span>
+                                <span class="dash-trend-badge positive">+18% YoY</span>
                             </div>
                             <div class="dash-metric-num" id="dash-stat-youth">242</div>
-                            <p class="dash-metric-sub">Across 5 Barbadian Parishes</p>
+                            <p class="dash-metric-sub">Ages 10-29 across all 11 parishes</p>
                         </div>
 
                         <div class="dash-metric-card glass">
                             <div class="dash-metric-header">
                                 <span class="dash-metric-title">Water Conserved</span>
-                                <span class="dash-trend-badge highlight">Monthly</span>
+                                <span class="dash-trend-badge positive">+12k Gals</span>
                             </div>
                             <div class="dash-metric-num" id="dash-stat-water">85,210</div>
-                            <p class="dash-metric-sub">Gallons/Month Saved</p>
+                            <p class="dash-metric-sub">Gallons saved via audits &amp; rainwater harvest</p>
                         </div>
 
                         <div class="dash-metric-card glass">
                             <div class="dash-metric-header">
-                                <span class="dash-metric-title">Vessels Built</span>
-                                <span class="dash-trend-badge positive">YOTS Cohort</span>
+                                <span class="dash-metric-title">Vessels Constructed</span>
+                                <span class="dash-trend-badge highlight">Cohort 4 Active</span>
                             </div>
                             <div class="dash-metric-num" id="dash-stat-boats">4</div>
-                            <p class="dash-metric-sub">Disaster-Resilient Boats</p>
+                            <p class="dash-metric-sub">Disaster-resilient marine craft built</p>
                         </div>
 
                         <div class="dash-metric-card glass">
                             <div class="dash-metric-header">
-                                <span class="dash-metric-title">Green Jobs</span>
-                                <span class="dash-trend-badge highlight">Placed</span>
+                                <span class="dash-metric-title">Green-Blue Jobs</span>
+                                <span class="dash-trend-badge positive">100% Match</span>
                             </div>
                             <div class="dash-metric-num" id="dash-stat-jobs">32</div>
-                            <p class="dash-metric-sub">Full-Time Appointments</p>
+                            <p class="dash-metric-sub">Direct career placements in sustainability</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- TAB 2: Environmental Monitor -->
-                <div class="dash-pane" id="dash-tab-environmental">
-                    <div class="glass climate-dash-widget">
-                        <h3>Environmental Impact Indicators</h3>
-                        <p class="small text-muted mb-30">Calculated reduction in island resource strain based on current project deployment.</p>
-                        <div class="dash-grid-4col">
-                            <div class="dash-metric-card">
-                                <div class="dash-metric-num" id="dash-carbon">12.1 Tons</div>
-                                <div class="dash-metric-title">CO2 Offset / Year</div>
-                            </div>
-                            <div class="dash-metric-card">
-                                <div class="dash-metric-num" id="dash-coastline">1.2 km</div>
-                                <div class="dash-metric-title">Coastal Dune Restored</div>
-                            </div>
-                            <div class="dash-metric-card">
-                                <div class="dash-metric-num" id="dash-soil">8.5 Acres</div>
-                                <div class="dash-metric-title">Eco Village Crop Land</div>
-                            </div>
-                            <div class="dash-metric-card">
-                                <div class="dash-metric-num" id="dash-rain">16 Systems</div>
-                                <div class="dash-metric-title">School Rain Harvesters</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB 3: Recent Field Activities -->
-                <div class="dash-pane" id="dash-tab-activities">
+                <!-- TAB PANE 2: Environmental Monitor -->
+                <div id="dash-tab-environmental" class="dash-pane">
                     <div class="glass p-30">
-                        <h3>Field Activity Log</h3>
+                        <h3>Island Environmental Reduction Metrics</h3>
+                        <p class="small text-muted mb-25">Quantifiable environmental impact generated through Green Rising field projects in Barbados:</p>
+
+                        <div class="dash-progress-row mb-20">
+                            <div class="dash-progress-label">
+                                <span>CO2 Emissions Avoided</span>
+                                <strong id="dash-carbon">12.8 Tons</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 64%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dash-progress-row mb-20">
+                            <div class="dash-progress-label">
+                                <span>Vulnerable Coastal Coverage Restored</span>
+                                <strong id="dash-coastline">1.2 km</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 48%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dash-progress-row mb-20">
+                            <div class="dash-progress-label">
+                                <span>Soil Bio-Remediation (Compost &amp; Sargassum Extracts)</span>
+                                <strong id="dash-soil">8.4 Acres</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 72%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dash-progress-row">
+                            <div class="dash-progress-label">
+                                <span>Community Rainwater Harvesting Systems Active</span>
+                                <strong id="dash-rain">16 Systems</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB PANE 3: Milestones & Feed -->
+                <div id="dash-tab-milestones" class="dash-pane">
+                    <div class="glass p-30">
+                        <h3>Community Action Feed &amp; Key Milestones</h3>
+                        <p class="small text-muted mb-20">Recent verified updates from Green Rising cohorts across Barbados:</p>
+
                         <div class="activity-timeline">
                             <div class="activity-item">
                                 <div class="activity-date">July 2026</div>
                                 <div class="activity-content">
-                                    <strong>YOTS Boatbuilding Hull Assembly</strong>
-                                    <p>Cohort 4 completed fibreglass hull coating on vessel 'Rising Tide II' at Bridgetown Maritime Center.</p>
+                                    <strong>Youth of the Seas Cohort 3 Sea Trials Completed</strong>
+                                    <p>Cohort 3 successfully launched and sea-tested their 18-foot disaster-resilient marine craft off the coast of Oistins, St. Michael.</p>
                                 </div>
                             </div>
                             <div class="activity-item">
                                 <div class="activity-date">June 2026</div>
                                 <div class="activity-content">
-                                    <strong>St. Michael Water Audit Drive</strong>
-                                    <p>CYEN youth installed 140 tap aerators across 45 residential homes in Pinelands.</p>
+                                    <strong>5 Parish Rainwater Monitoring Systems Online</strong>
+                                    <p>Water conservation team completed installation of automated tank monitoring units in St. Lucy, St. Philip, and St. Thomas.</p>
                                 </div>
                             </div>
                             <div class="activity-item">
                                 <div class="activity-date">May 2026</div>
                                 <div class="activity-content">
-                                    <strong>Eco Village Hydroponic Harvest</strong>
-                                    <p>First harvest yielded 350 lbs of organic lettuce delivered to local hospitality vendors.</p>
+                                    <strong>Pinelands Workshop Career Fair Reaches 120 Youth</strong>
+                                    <p>Hosted 6-zone exploration pavilion connecting SJPI graduates with regional green technology and marine trade opportunities.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- TAB 4: Admin Simulator -->
-                <div class="dash-pane" id="dash-tab-admin">
+                <!-- TAB PANE 4: Simulate Admin Input -->
+                <div id="dash-tab-admin" class="dash-pane">
                     <div class="glass p-30 max-width-600 margin-auto">
-                        <h3>Live Impact Data Simulator</h3>
-                        <p class="small text-muted mb-20">Simulate real-time admin metrics updates to test dashboard reactivity.</p>
-                        <form id="admin-sim-form" onsubmit="event.preventDefault(); simulateAdminUpdate();">
-                            <div class="form-group">
-                                <label for="admin-youth">Total Youth Enrolled</label>
-                                <input type="number" id="admin-youth" class="form-control" value="242">
-                            </div>
-                            <div class="form-group">
-                                <label for="admin-water">Monthly Water Saved (Gallons)</label>
-                                <input type="number" id="admin-water" class="form-control" value="85210">
-                            </div>
-                            <div class="form-group">
-                                <label for="admin-boats">Vessels Constructed</label>
-                                <input type="number" id="admin-boats" class="form-control" value="4">
-                            </div>
-                            <div class="form-group">
-                                <label for="admin-jobs">Green Jobs Placed</label>
-                                <input type="number" id="admin-jobs" class="form-control" value="32">
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Update Live Dashboard</button>
-                        </form>
+                        <h3>Simulate Admin Data Input</h3>
+                        <p class="small text-muted mb-20">Adjust youth metrics to test real-time recalculation across the Impact Hub:</p>
 
-                        <div id="sim-status-box" class="sim-status-alert hidden mt-20 text-center">
-                            ✓ Live metrics updated across all dashboard widgets &amp; homepage stats!
+                        <div class="form-group">
+                            <label for="admin-youth">Youth Trained &amp; Empowered</label>
+                            <input type="number" id="admin-youth" class="form-control text-center" value="242">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-water">Gallons of Water Saved</label>
+                            <input type="number" id="admin-water" class="form-control text-center" value="85210">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-boats">Vessels / Boats Built</label>
+                            <input type="number" id="admin-boats" class="form-control text-center" value="4">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-jobs">Direct Placements/Jobs Created</label>
+                            <input type="number" id="admin-jobs" class="form-control text-center" value="32">
+                        </div>
+                        <button type="button" class="btn btn-primary w-100 mt-15" onclick="simulateAdminUpdate()">Push Live Updates</button>
+
+                        <div id="sim-status-box" class="sim-status-alert hidden mt-15">
+                            Data updated successfully! All homepage and Impact Hub indicators have synced.
                         </div>
                     </div>
                 </div>
@@ -800,53 +938,55 @@
             </div>
         </section>
 
-        <!-- 4. PROGRAMME MATCH QUIZ VIEW -->
+        <!-- 4. ELIGIBILITY MATCH QUIZ VIEW -->
         <section id="view-quiz" class="app-view">
-            <div class="container max-width-700 margin-auto">
-                <div class="text-center mb-30">
+            <div class="container max-width-700">
+                <div class="flex-column text-center mb-30">
                     <span class="category-tag">Programme Matcher</span>
-                    <h2>Find Your Green Rising Pathway</h2>
-                    <p class="section-subtitle">Take this 30-second quiz to discover which initiative matches your goals.</p>
+                    <h2>Which Green Rising Programme is Right for You?</h2>
+                    <p class="lead">Answer a few quick questions to find your custom pathway.</p>
                 </div>
 
-                <div class="glass p-30">
-                    <!-- Step 1 -->
-                    <div id="q-step-1" class="quiz-step">
-                        <div class="quiz-step-indicator">Question 1 of 3</div>
-                        <h3 class="mt-10 mb-20">What is your current age bracket?</h3>
-                        <div class="quiz-options-vertical">
+                <div class="glass p-30" id="quiz-card">
+                    <!-- Quiz Step 1 -->
+                    <div class="quiz-step-pane active" id="q-step-1">
+                        <span class="quiz-step-indicator">Question 1 of 3</span>
+                        <h3>What is your age group?</h3>
+                        <div class="quiz-options-vertical mt-20">
                             <label class="quiz-opt-card">
-                                <input type="radio" name="age-group" value="kids">
-                                <span>10 - 14 Years Old (Youth Explorer)</span>
+                                <input type="radio" name="age-group" value="kids" checked>
+                                <span>Ages 10 - 13</span>
                             </label>
                             <label class="quiz-opt-card">
-                                <input type="radio" name="age-group" value="youth" checked>
-                                <span>15 - 29 Years Old (Young Adult / Career Seeker)</span>
+                                <input type="radio" name="age-group" value="teens">
+                                <span>Ages 14 - 17</span>
                             </label>
                             <label class="quiz-opt-card">
-                                <input type="radio" name="age-group" value="mentor">
-                                <span>30+ Years Old (Community Mentor / Partner)</span>
+                                <input type="radio" name="age-group" value="youth">
+                                <span>Ages 18 - 29</span>
                             </label>
                         </div>
-                        <button class="btn btn-primary w-100 mt-25" onclick="quizNext(2)">Next Question &rarr;</button>
+                        <div class="text-right mt-25">
+                            <button class="btn btn-primary" onclick="quizNext(2)">Next Question &rarr;</button>
+                        </div>
                     </div>
 
-                    <!-- Step 2 -->
-                    <div id="q-step-2" class="quiz-step hidden">
-                        <div class="quiz-step-indicator">Question 2 of 3</div>
-                        <h3 class="mt-10 mb-20">What activity sounds most rewarding to you?</h3>
-                        <div class="quiz-options-vertical">
+                    <!-- Quiz Step 2 -->
+                    <div class="quiz-step-pane hidden" id="q-step-2">
+                        <span class="quiz-step-indicator">Question 2 of 3</span>
+                        <h3>What is your primary goal or area of interest?</h3>
+                        <div class="quiz-options-vertical mt-20">
                             <label class="quiz-opt-card">
-                                <input type="radio" name="interest" value="boats" checked>
-                                <span>Building boats, maritime mechanics &amp; working with tools</span>
+                                <input type="radio" name="interest" value="water" checked>
+                                <span>Tackling water resource preservation and climate metrics</span>
                             </label>
                             <label class="quiz-opt-card">
-                                <input type="radio" name="interest" value="water">
-                                <span>Community water auditing, conservation &amp; environmental science</span>
+                                <input type="radio" name="interest" value="boats">
+                                <span>Hands-on ship building, engineering, and marine logistics</span>
                             </label>
                             <label class="quiz-opt-card">
                                 <input type="radio" name="interest" value="business">
-                                <span>Sustainable agriculture, farming produce &amp; green business</span>
+                                <span>Starting an agriculture business, organic farming, or creative work</span>
                             </label>
                         </div>
                         <div class="flex-between mt-25">
@@ -855,117 +995,112 @@
                         </div>
                     </div>
 
-                    <!-- Step 3 -->
-                    <div id="q-step-3" class="quiz-step hidden">
-                        <div class="quiz-step-indicator">Question 3 of 3</div>
-                        <h3 class="mt-10 mb-20">What is your primary availability?</h3>
-                        <div class="quiz-options-vertical">
+                    <!-- Quiz Step 3 -->
+                    <div class="quiz-step-pane hidden" id="q-step-3">
+                        <span class="quiz-step-indicator">Question 3 of 3</span>
+                        <h3>What is your current education or employment status?</h3>
+                        <div class="quiz-options-vertical mt-20">
                             <label class="quiz-opt-card">
-                                <input type="radio" name="status" value="fulltime" checked>
-                                <span>Full-Time (12-Week Intensive Cohort)</span>
+                                <input type="radio" name="status" value="school" checked>
+                                <span>Enrolled in Primary / Secondary School</span>
                             </label>
                             <label class="quiz-opt-card">
-                                <input type="radio" name="status" value="parttime">
-                                <span>Part-Time / Weekend Workshops</span>
+                                <input type="radio" name="status" value="sjpi">
+                                <span>Enrolled in SJPI or other technical/vocational school</span>
+                            </label>
+                            <label class="quiz-opt-card">
+                                <input type="radio" name="status" value="neet">
+                                <span>Seeking employment, training pathways, or out-of-school (NEET)</span>
                             </label>
                         </div>
                         <div class="flex-between mt-25">
                             <button class="btn btn-secondary" onclick="quizNext(2)">&larr; Back</button>
-                            <button class="btn btn-primary" onclick="processQuizResults()">See My Match &rarr;</button>
+                            <button class="btn btn-primary" onclick="processQuizResults()">Match Me Now!</button>
                         </div>
                     </div>
 
                     <!-- Quiz Results -->
-                    <div id="q-result" class="quiz-result-pane hidden text-center">
-                        <span class="category-tag">Your Recommended Match</span>
-                        <div class="matched-box glass p-25 mt-15 mb-20">
-                            <h3 class="matched-title" id="matched-title">Youth of the Seas (YOTS) Boat Building</h3>
-                            <p id="matched-description" class="lead mt-15">Based on your interest in craftsmanship and marine sectors, you qualify for our 12-week Cohort intake.</p>
+                    <div class="quiz-result-pane hidden" id="q-result">
+                        <h3 class="text-center">Your Recommended Match:</h3>
+                        <div class="matched-box glass text-center mt-20 p-25">
+                            <div class="matched-title text-accent" id="matched-title">Youth of the Seas (YOTS)</div>
+                            <p class="mt-15" id="matched-description">Based on your age and interest in marine craft
+                                construction, you qualify for our YOTS boatbuilding cohort intakes.</p>
                         </div>
-                        <div class="flex-center gap-15">
-                            <button class="btn btn-primary btn-lg" id="quiz-cta" onclick="openApplyForm('yots')">Apply For This Programme</button>
+                        <div class="text-center mt-25 flex-center gap-15">
                             <button class="btn btn-secondary" onclick="resetQuiz()">Retake Quiz</button>
+                            <button class="btn btn-primary" id="quiz-cta"
+                                onclick="openApplyForm('Youth of the Seas')">Apply to this Programme</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. APPLICATION REGISTRATION VIEW -->
+        <!-- 5. APPLICATION MODAL / SECTION -->
         <section id="view-apply" class="app-view">
-            <div class="container max-width-700 margin-auto">
-                <div class="text-center mb-30">
-                    <span class="category-tag">Official Registration</span>
-                    <h2>Apply for Green Rising Programmes</h2>
-                    <p class="section-subtitle">Take the first step toward accredited climate training and green employment in Barbados.</p>
-                </div>
-
+            <div class="container max-width-600">
                 <div class="glass p-30">
+                    <h2 class="text-center">Quick Application Form</h2>
+                    <p class="text-center text-muted mb-25">Register your interest in our upcoming cohort intakes and
+                        events.</p>
+
                     <form id="apply-form" onsubmit="event.preventDefault(); handleApplySubmit();">
                         <div class="form-row">
                             <div class="form-group w-50">
-                                <label for="apply-fname">First Name *</label>
-                                <input type="text" id="apply-fname" class="form-control" required placeholder="e.g. Jamal">
+                                <label for="apply-fname">First Name</label>
+                                <input type="text" id="apply-fname" class="form-control" required
+                                    placeholder="e.g. John">
                             </div>
                             <div class="form-group w-50">
-                                <label for="apply-lname">Last Name *</label>
-                                <input type="text" id="apply-lname" class="form-control" required placeholder="e.g. Clarke">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group w-50">
-                                <label for="apply-email">Email Address *</label>
-                                <input type="email" id="apply-email" class="form-control" required placeholder="jamal@example.bb">
-                            </div>
-                            <div class="form-group w-50">
-                                <label for="apply-phone">Phone / WhatsApp *</label>
-                                <input type="tel" id="apply-phone" class="form-control" required placeholder="+1 (246) 234-5678">
+                                <label for="apply-lname">Last Name</label>
+                                <input type="text" id="apply-lname" class="form-control" required
+                                    placeholder="e.g. Sobers">
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label for="apply-email">Email Address</label>
+                            <input type="email" id="apply-email" class="form-control" required
+                                placeholder="name@domain.bb">
+                        </div>
+                        <div class="form-group">
+                            <label for="apply-phone">Phone / WhatsApp Number</label>
+                            <input type="tel" id="apply-phone" class="form-control" required
+                                placeholder="+1 (246) 555-0100">
+                        </div>
                         <div class="form-row">
                             <div class="form-group w-50">
-                                <label for="apply-age">Age *</label>
-                                <input type="number" id="apply-age" class="form-control" required min="10" max="65" value="20">
+                                <label for="apply-age">Age</label>
+                                <input type="number" id="apply-age" class="form-control" required min="10" max="35"
+                                    value="18">
                             </div>
                             <div class="form-group w-50">
-                                <label for="apply-prog">Programme Selection *</label>
-                                <select id="apply-prog" class="form-control" required>
-                                    <option value="yots">Youth of the Seas (YOTS) Boat Building</option>
-                                    <option value="water">Water Conservation Initiative</option>
+                                <label for="apply-prog">Selected Programme</label>
+                                <select id="apply-prog" class="form-control">
+                                    <option value="water">Water Conservation</option>
                                     <option value="cyen">CYEN Environmental Skills</option>
-                                    <option value="ecovillage">Eco Village: Earn &amp; Grow</option>
-                                    <option value="pinelands">Pinelands Creative Workshop</option>
+                                    <option value="ecovillage">Eco Village Zonal Program</option>
+                                    <option value="yots">YOTS Boat Building Cohort</option>
+                                    <option value="pinelands">Pinelands Career Pavilion</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="apply-district">Parish / District *</label>
-                            <select id="apply-district" class="form-control" required>
-                                <option value="St. Michael">St. Michael</option>
-                                <option value="Christ Church">Christ Church</option>
-                                <option value="St. James">St. James</option>
-                                <option value="St. Philip">St. Philip</option>
-                                <option value="St. George">St. George</option>
-                                <option value="St. Thomas">St. Thomas</option>
-                                <option value="St. Peter">St. Peter</option>
-                                <option value="St. Lucy">St. Lucy</option>
-                                <option value="St. Joseph">St. Joseph</option>
-                                <option value="St. John">St. John</option>
-                                <option value="St. Andrew">St. Andrew</option>
-                            </select>
+                            <label for="apply-district">Parish / District of Residence</label>
+                            <input type="text" id="apply-district" class="form-control" required
+                                placeholder="e.g. Pinelands, St. Michael">
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-20">Submit Registration</button>
+                        <button type="submit" class="btn btn-primary w-100 mt-15">Submit Application</button>
                     </form>
 
-                    <!-- Success State Alert Box -->
-                    <div id="apply-success-box" class="apply-success-alert hidden">
-                        <h4>Application Received Successfully!</h4>
-                        <p>Thank you for applying to Green Rising Barbados. Our cohort coordinator will contact you via WhatsApp/Email within 2 business days with next steps.</p>
-                        <button class="btn btn-secondary mt-20" onclick="resetApplyForm()">Submit Another Registration</button>
+                    <div id="apply-success-box" class="apply-success-alert hidden mt-15">
+                        <h4>Application Received!</h4>
+                        <p>Thank you for applying. A Green Rising coordinator will contact you via WhatsApp or Email
+                            within 3 working days.</p>
+                        <button class="btn btn-secondary mt-15 btn-sm" onclick="resetApplyForm()">Apply Another
+                            Person</button>
                     </div>
                 </div>
             </div>
@@ -980,24 +1115,26 @@
                     <p class="lead">The dedicated team driving Barbados's youth-led climate engine and blue-green transition.</p>
                 </div>
 
-                <!-- Category Filter Buttons -->
+                <!-- Team Category Filter Buttons -->
                 <div class="team-filters">
                     <button class="team-filter-btn active" onclick="filterTeam('all', this)">All Members</button>
                     <button class="team-filter-btn" onclick="filterTeam('leadership', this)">Leadership</button>
                     <button class="team-filter-btn" onclick="filterTeam('coordinator', this)">Coordinators</button>
-                    <button class="team-filter-btn" onclick="filterTeam('mentor', this)">Mentors &amp; Advisors</button>
+                    <button class="team-filter-btn" onclick="filterTeam('mentor', this)">Technical Mentors</button>
+                    <button class="team-filter-btn" onclick="filterTeam('champion', this)">Youth Champions</button>
                 </div>
 
-                <!-- Team Grid -->
-                <div class="team-grid">
+                <!-- Team Grid Cards -->
+                <div class="team-grid" id="team-cards-container">
+
                     <!-- Member 1 -->
                     <div class="team-card glass" data-category="leadership">
                         <div class="team-avatar-wrapper">
-                            <div class="team-avatar">KC</div>
+                            <div class="team-avatar">SP</div>
                         </div>
-                        <div class="team-name">Krystle C.</div>
-                        <span class="team-role">Project Lead &amp; Strategy</span>
-                        <p class="team-bio">Spearheading national youth climate strategy and Future Barbados inter-ministry partnerships.</p>
+                        <div class="team-name">Stefanie P.</div>
+                        <span class="team-role">Executive Director &amp; Climate Lead</span>
+                        <p class="team-bio">Spearheading Future Barbados &amp; Green Rising strategic vision, youth empowerment frameworks, and inter-ministerial climate partnerships.</p>
                         <div class="team-tags">
                             <span class="team-tag">#Leadership</span>
                             <span class="team-tag">#ClimateStrategy</span>
@@ -1036,31 +1173,31 @@
                     </div>
 
                     <!-- Member 4 -->
-                    <div class="team-card glass" data-category="leadership">
+                    <div class="team-card glass" data-category="champion">
                         <div class="team-avatar-wrapper">
-                            <div class="team-avatar">DR</div>
+                            <div class="team-avatar">KL</div>
                         </div>
-                        <div class="team-name">Dario Richards</div>
-                        <span class="team-role">Youth Engagement Director</span>
-                        <p class="team-bio">Connecting parish youth groups, organizing school outreach drives, and managing community volunteer programs.</p>
+                        <div class="team-name">Kaelan Lorde</div>
+                        <span class="team-role">CYEN Youth Facilitator</span>
+                        <p class="team-bio">Facilitating youth environmental workshops, hydro-agronomy projects, and grassroots climate advocacy drives.</p>
                         <div class="team-tags">
-                            <span class="team-tag">#YouthOutreach</span>
-                            <span class="team-tag">#Community</span>
-                            <span class="team-tag">#Empowerment</span>
+                            <span class="team-tag">#CYEN</span>
+                            <span class="team-tag">#AgriTech</span>
+                            <span class="team-tag">#Advocacy</span>
                         </div>
                     </div>
 
                     <!-- Member 5 -->
                     <div class="team-card glass" data-category="coordinator">
                         <div class="team-avatar-wrapper">
-                            <div class="team-avatar">SB</div>
+                            <div class="team-avatar">TN</div>
                         </div>
-                        <div class="team-name">Sarah Browne</div>
-                        <span class="team-role">Eco Village Lead</span>
-                        <p class="team-bio">Managing sustainable agri-business incubators, vertical hydroponic systems, and local farmer market partnerships.</p>
+                        <div class="team-name">Tia Nurse</div>
+                        <span class="team-role">Pinelands Workshop Manager</span>
+                        <p class="team-bio">Managing the 6-zone vocational career pavilion, connecting youth to tech, entrepreneurship, and global scholarships.</p>
                         <div class="team-tags">
-                            <span class="team-tag">#AgriBusiness</span>
-                            <span class="team-tag">#Hydroponics</span>
+                            <span class="team-tag">#Pinelands</span>
+                            <span class="team-tag">#CareerPavilion</span>
                             <span class="team-tag">#Innovation</span>
                         </div>
                     </div>
