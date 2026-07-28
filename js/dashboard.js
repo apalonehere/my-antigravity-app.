@@ -129,8 +129,8 @@ function animateValue(id, end, duration) {
 
 function switchDashTab(tabId, btnEl) {
     try {
-        const dashBtns = document.querySelectorAll('.dash-tab-bar .dash-tab-btn');
-        const dashPanes = document.querySelectorAll('#view-dashboard .dash-pane');
+        const dashBtns = document.querySelectorAll('.dash-tab-btn');
+        const dashPanes = document.querySelectorAll('.dash-pane');
 
         dashBtns.forEach(btn => btn.classList.remove('active'));
         if (btnEl) btnEl.classList.add('active');
@@ -331,17 +331,20 @@ function addSensorLogPrompt() {
     renderSensorLogAdminList();
 }
 
-window.MetricsStore = MetricsStore;
-window.CohortStore = CohortStore;
-window.SensorLogStore = SensorLogStore;
-window.initMetricsStore = initMetricsStore;
-window.saveMetricsStore = saveMetricsStore;
-window.updateAllMetricUI = updateAllMetricUI;
-window.switchDashTab = switchDashTab;
-window.syncLiveMetrics = syncLiveMetrics;
-window.renderCohortAdminList = renderCohortAdminList;
-window.addCohortPrompt = addCohortPrompt;
-window.editCohort = editCohort;
-window.deleteCohort = deleteCohort;
+// Expose stores via getters so window.MetricsStore always reflects the current variable reference
+Object.defineProperty(window, 'MetricsStore',    { get: () => MetricsStore,    enumerable: true });
+Object.defineProperty(window, 'CohortStore',     { get: () => CohortStore,     enumerable: true });
+Object.defineProperty(window, 'SensorLogStore',  { get: () => SensorLogStore,  enumerable: true });
+
+window.initMetricsStore        = initMetricsStore;
+window.saveMetricsStore        = saveMetricsStore;
+window.updateAllMetricUI       = updateAllMetricUI;
+window.switchDashTab           = switchDashTab;
+window.syncLiveMetrics         = syncLiveMetrics;
+window.renderCohortAdminList   = renderCohortAdminList;
+window.addCohortPrompt         = addCohortPrompt;
+window.editCohort              = editCohort;
+window.deleteCohort            = deleteCohort;
 window.renderSensorLogAdminList = renderSensorLogAdminList;
-window.addSensorLogPrompt = addSensorLogPrompt;
+window.addSensorLogPrompt      = addSensorLogPrompt;
+window.populateAdminImpactInputs = populateAdminImpactInputs;
