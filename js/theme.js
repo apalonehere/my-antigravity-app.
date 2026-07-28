@@ -17,19 +17,23 @@ function applyTheme(isDark) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('green-rising-theme', 'dark');
         togglePills.forEach(pill => {
-            pill.innerHTML = '☀️ <span class="theme-text">Light Mode</span>';
+            pill.innerHTML = '\u2600\ufe0f <span class="theme-text">Light Mode</span>';
         });
         toggleBtns.forEach(btn => {
-            btn.innerText = '☀️';
+            btn.innerText = '\u2600\ufe0f';
         });
     } else {
         document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('green-rising-theme', 'light');
         togglePills.forEach(pill => {
-            pill.innerHTML = '🌙 <span class="theme-text">Dark Mode</span>';
+            pill.innerHTML = '\uD83C\uDF19 <span class="theme-text">Dark Mode</span>';
         });
         toggleBtns.forEach(btn => {
-            btn.innerText = '🌙';
+            btn.innerText = '\uD83C\uDF19';
         });
     }
 }
+
+window.initTheme   = initTheme;
+window.toggleTheme = toggleTheme;
+window.applyTheme  = applyTheme;

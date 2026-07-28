@@ -11,16 +11,17 @@ function finishWizard(choice) {
     wizardAnswers.step2 = choice;
     document.getElementById('wiz-step-2')?.classList.add('hidden');
     
-    const resultBox = document.getElementById('wiz-result');
-    const resultTitle = document.getElementById('wiz-result-title');
-    const resultDesc = document.getElementById('wiz-result-desc');
+    // IDs in HTML: wiz-result, wiz-matched-zone, wiz-matched-desc
+    const resultBox   = document.getElementById('wiz-result');
+    const resultTitle = document.getElementById('wiz-matched-zone');
+    const resultDesc  = document.getElementById('wiz-matched-desc');
     
     if (resultBox) resultBox.classList.remove('hidden');
     
-    if (wizardAnswers.step1 === 'outdoor' && wizardAnswers.step2 === 'green') {
+    if (wizardAnswers.step1 === 'outdoor' && wizardAnswers.step2 === 'building') {
         if (resultTitle) resultTitle.innerText = "Zone 3: Build the Future & Zone 1";
         if (resultDesc) resultDesc.innerText = "You are a natural fit for sustainability engineering, eco-village farming, or resilient boat construction. Your path aligns with climate mitigation!";
-    } else if (wizardAnswers.step1 === 'outdoor' && wizardAnswers.step2 === 'business') {
+    } else if (wizardAnswers.step1 === 'outdoor' && wizardAnswers.step2 === 'community') {
         if (resultTitle) resultTitle.innerText = "Zone 6: Sports & Performance";
         if (resultDesc) resultDesc.innerText = "Your interests lead toward coastal stewardship, sports leadership, ocean diving charters, or performance arts administration.";
     } else if (wizardAnswers.step1 === 'office' && wizardAnswers.step2 === 'digital') {
@@ -41,3 +42,7 @@ function resetWizard() {
     document.getElementById('wiz-step-2')?.classList.add('hidden');
     document.getElementById('wiz-step-1')?.classList.remove('hidden');
 }
+
+window.nextWizardStep = nextWizardStep;
+window.finishWizard   = finishWizard;
+window.resetWizard    = resetWizard;

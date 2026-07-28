@@ -82,3 +82,8 @@ function resetApplyForm() {
     }
     if (successBox) successBox.classList.add('hidden');
 }
+
+window.openApplyForm     = openApplyForm;
+window.handleApplySubmit = handleApplySubmit;
+window.showSuccessState  = showSuccessState;
+window.resetApplyForm    = resetApplyForm;
