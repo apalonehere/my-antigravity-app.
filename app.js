@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         if (typeof initAuth === 'function') initAuth();
         if (typeof initEventStore === 'function') initEventStore();
+        if (typeof initMetricsStore === 'function') initMetricsStore();
         if (typeof initTheme === 'function') initTheme();
         if (typeof initNavigation === 'function') initNavigation();
         if (typeof initMobileMenu === 'function') initMobileMenu();
