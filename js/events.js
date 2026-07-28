@@ -1,4 +1,4 @@
-// Green Rising Barbados — Event & Schedule CRUD Manager Module
+// Green Rising Barbados — Event & Schedule CRUD Manager Module with Defensive Guards & Error Recovery
 
 const defaultEvents = [
     {
@@ -49,19 +49,49 @@ const defaultEvents = [
 
 let EventStore = [];
 
+/**
+ * Defensive Event Sanitizer
+ * Ensures every event object has valid fallback strings for all fields
+ */
+function sanitizeEvent(evt) {
+    if (!evt || typeof evt !== 'object') return null;
+    return {
+        id: String(evt.id || 'evt-' + Date.now()),
+        category: String(evt.category || 'environmental').trim(),
+        title: String(evt.title || 'Untitled Event').trim(),
+        date: String(evt.date || new Date().toISOString().split('T')[0]).trim(),
+        time: String(evt.time || '09:00 AM').trim(),
+        location: String(evt.location || 'Barbados Youth Engine HQ').trim(),
+        status: String(evt.status || 'Scheduled').trim(),
+        description: String(evt.description || '').trim(),
+        badge: String(evt.badge || 'Environmental').trim()
+    };
+}
+
 function initEventStore() {
-    const stored = localStorage.getItem('greenrising_events');
-    if (stored) {
-        try {
-            EventStore = JSON.parse(stored);
-        } catch (e) {
-            console.error('Error loading events from storage, resetting defaults', e);
-            EventStore = [...defaultEvents];
+    try {
+        const stored = localStorage.getItem('greenrising_events');
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    EventStore = parsed.map(sanitizeEvent).filter(Boolean);
+                } else {
+                    EventStore = defaultEvents.map(sanitizeEvent).filter(Boolean);
+                    saveEventStore();
+                }
+            } catch (e) {
+                console.error('Error parsing stored events JSON, resetting defaults:', e);
+                EventStore = defaultEvents.map(sanitizeEvent).filter(Boolean);
+                saveEventStore();
+            }
+        } else {
+            EventStore = defaultEvents.map(sanitizeEvent).filter(Boolean);
             saveEventStore();
         }
-    } else {
-        EventStore = [...defaultEvents];
-        saveEventStore();
+    } catch (err) {
+        console.error('Failed to initialize EventStore:', err);
+        EventStore = defaultEvents.map(sanitizeEvent).filter(Boolean);
     }
 
     renderPublicSchedules();
@@ -69,164 +99,249 @@ function initEventStore() {
 }
 
 function saveEventStore() {
-    localStorage.setItem('greenrising_events', JSON.stringify(EventStore));
+    try {
+        localStorage.setItem('greenrising_events', JSON.stringify(EventStore));
+    } catch (e) {
+        console.error('Error saving events to localStorage:', e);
+    }
 }
 
 function addEvent(eventData) {
-    const newEvent = {
-        id: 'evt-' + Date.now(),
-        category: eventData.category || 'environmental',
-        title: eventData.title || 'Untitled Event',
-        date: eventData.date || new Date().toISOString().split('T')[0],
-        time: eventData.time || '10:00 AM',
-        location: eventData.location || 'Barbados Youth Center',
-        status: eventData.status || 'Scheduled',
-        description: eventData.description || '',
-        badge: eventData.badge || 'Environmental'
-    };
+    try {
+        const newEvent = sanitizeEvent({
+            id: 'evt-' + Date.now(),
+            category: eventData.category || 'environmental',
+            title: eventData.title || 'Untitled Event',
+            date: eventData.date || new Date().toISOString().split('T')[0],
+            time: eventData.time || '09:00 AM',
+            location: eventData.location || 'Barbados Youth Engine HQ',
+            status: eventData.status || 'Scheduled',
+            description: eventData.description || '',
+            badge: eventData.badge || 'Environmental'
+        });
 
-    EventStore.unshift(newEvent);
-    saveEventStore();
-    renderPublicSchedules();
-    renderAdminScheduleManager();
-    return newEvent;
+        if (newEvent) {
+            EventStore.unshift(newEvent);
+            saveEventStore();
+            renderPublicSchedules();
+            renderAdminScheduleManager();
+            return newEvent;
+        }
+    } catch (err) {
+        console.error('Error in addEvent:', err);
+    }
+    return null;
 }
 
 function updateEvent(id, updatedFields) {
-    const idx = EventStore.findIndex(e => e.id === id);
-    if (idx !== -1) {
-        EventStore[idx] = { ...EventStore[idx], ...updatedFields };
-        saveEventStore();
-        renderPublicSchedules();
-        renderAdminScheduleManager();
-        return EventStore[idx];
+    try {
+        const idx = EventStore.findIndex(e => e && e.id === id);
+        if (idx !== -1) {
+            const merged = { ...EventStore[idx], ...updatedFields, id };
+            const sanitized = sanitizeEvent(merged);
+            if (sanitized) {
+                EventStore[idx] = sanitized;
+                saveEventStore();
+                renderPublicSchedules();
+                renderAdminScheduleManager();
+                return EventStore[idx];
+            }
+        }
+    } catch (err) {
+        console.error('Error in updateEvent:', err);
     }
     return null;
 }
 
 function deleteEvent(id) {
-    const idx = EventStore.findIndex(e => e.id === id);
-    if (idx !== -1) {
-        EventStore.splice(idx, 1);
-        saveEventStore();
-        renderPublicSchedules();
-        renderAdminScheduleManager();
-        return true;
+    try {
+        const idx = EventStore.findIndex(e => e && e.id === id);
+        if (idx !== -1) {
+            EventStore.splice(idx, 1);
+            saveEventStore();
+            renderPublicSchedules();
+            renderAdminScheduleManager();
+            return true;
+        }
+    } catch (err) {
+        console.error('Error in deleteEvent:', err);
     }
     return false;
 }
 
 function renderPublicSchedules() {
-    // Render Environmental Monitoring Public Schedule
-    const envContainer = document.getElementById('public-environmental-schedule');
-    if (envContainer) {
-        const envEvents = EventStore.filter(e => e.category === 'environmental');
-        if (envEvents.length === 0) {
-            envContainer.innerHTML = `<div class="fact-box"><p>No upcoming environmental monitoring sessions scheduled.</p></div>`;
-        } else {
-            envContainer.innerHTML = envEvents.map(evt => `
-                <div class="schedule-card glass p-25 mb-20" id="public-card-${evt.id}">
-                    <div class="flex-between align-center mb-10 flex-wrap gap-10">
-                        <span class="badge-orange">${escapeHtml(evt.badge)}</span>
-                        <span class="text-accent" style="font-weight:700; font-size:0.9rem;">📅 ${escapeHtml(evt.date)} at ${escapeHtml(evt.time)}</span>
-                    </div>
-                    <h4 style="font-size:1.25rem; margin-bottom:8px; color:var(--color-text-bright);">${escapeHtml(evt.title)}</h4>
-                    <p style="font-size:1rem; margin-bottom:12px; color:var(--color-text-muted);">${escapeHtml(evt.description)}</p>
-                    <div class="flex-between align-center text-muted" style="font-size:0.88rem;">
-                        <span>📍 ${escapeHtml(evt.location)}</span>
-                        <span class="tag-orange" style="font-size:0.78rem;">${escapeHtml(evt.status)}</span>
-                    </div>
-                </div>
-            `).join('');
+    // Environmental Monitoring Public Schedule Error Boundary
+    try {
+        const envContainer = document.getElementById('public-environmental-schedule');
+        if (envContainer) {
+            const envEvents = (Array.isArray(EventStore) ? EventStore : [])
+                .filter(e => e && e.category === 'environmental');
+            if (envEvents.length === 0) {
+                envContainer.innerHTML = `<div class="fact-box"><p>No upcoming environmental monitoring sessions scheduled.</p></div>`;
+            } else {
+                envContainer.innerHTML = envEvents.map(evt => {
+                    const safeId = escapeHtml(evt.id || 'evt-unknown');
+                    const safeBadge = escapeHtml(evt.badge || 'Water Conservation');
+                    const safeDate = escapeHtml(evt.date || 'TBD');
+                    const safeTime = escapeHtml(evt.time || '09:00 AM');
+                    const safeTitle = escapeHtml(evt.title || 'Untitled Event');
+                    const safeDesc = escapeHtml(evt.description || '');
+                    const safeLoc = escapeHtml(evt.location || 'Barbados Marine Reserve');
+                    const safeStatus = escapeHtml(evt.status || 'Scheduled');
+
+                    return `
+                        <div class="schedule-card glass p-25 mb-20" id="public-card-${safeId}">
+                            <div class="flex-between align-center mb-10 flex-wrap gap-10">
+                                <span class="badge-orange">${safeBadge}</span>
+                                <span class="text-accent" style="font-weight:700; font-size:0.9rem;">📅 ${safeDate} at ${safeTime}</span>
+                            </div>
+                            <h4 style="font-size:1.25rem; margin-bottom:8px; color:var(--color-text-bright);">${safeTitle}</h4>
+                            <p style="font-size:1rem; margin-bottom:12px; color:var(--color-text-muted);">${safeDesc}</p>
+                            <div class="flex-between align-center text-muted" style="font-size:0.88rem;">
+                                <span>📍 ${safeLoc}</span>
+                                <span class="tag-orange" style="font-size:0.78rem;">${safeStatus}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+    } catch (err) {
+        console.error('Error rendering public environmental schedule component:', err);
+        const envContainer = document.getElementById('public-environmental-schedule');
+        if (envContainer) {
+            envContainer.innerHTML = `<div class="fact-box"><p>Schedule currently updating...</p></div>`;
         }
     }
 
-    // Render Public Milestones Timeline
-    const milestonesContainer = document.getElementById('public-milestones-timeline');
-    if (milestonesContainer) {
-        const milestoneEvents = EventStore.filter(e => e.category === 'milestones');
-        if (milestoneEvents.length === 0) {
-            milestonesContainer.innerHTML = `<p class="text-muted">No upcoming milestones published.</p>`;
-        } else {
-            milestonesContainer.innerHTML = milestoneEvents.map((evt, idx) => `
-                <li id="public-milestone-${evt.id}">
-                    <div class="timeline-step">${idx + 1}</div>
-                    <div class="flex-between align-center flex-wrap gap-10">
-                        <strong>${escapeHtml(evt.title)}</strong>
-                        <span class="cohort-badge open">${escapeHtml(evt.date)}</span>
-                    </div>
-                    <p>${escapeHtml(evt.description)}</p>
-                    <div class="mt-10" style="font-size:0.85rem; color:var(--color-teal); font-weight:600;">
-                        📍 ${escapeHtml(evt.location)} • Status: ${escapeHtml(evt.status)}
-                    </div>
-                </li>
-            `).join('');
+    // Public Milestones Timeline Error Boundary
+    try {
+        const milestonesContainer = document.getElementById('public-milestones-timeline');
+        if (milestonesContainer) {
+            const milestoneEvents = (Array.isArray(EventStore) ? EventStore : [])
+                .filter(e => e && e.category === 'milestones');
+            if (milestoneEvents.length === 0) {
+                milestonesContainer.innerHTML = `<p class="text-muted">No upcoming milestones published.</p>`;
+            } else {
+                milestonesContainer.innerHTML = milestoneEvents.map((evt, idx) => {
+                    const safeId = escapeHtml(evt.id || 'evt-unknown');
+                    const safeTitle = escapeHtml(evt.title || 'Untitled Milestone');
+                    const safeDate = escapeHtml(evt.date || 'TBD');
+                    const safeDesc = escapeHtml(evt.description || '');
+                    const safeLoc = escapeHtml(evt.location || 'Barbados Coast Guard Base');
+                    const safeStatus = escapeHtml(evt.status || 'Upcoming Milestone');
+
+                    return `
+                        <li id="public-milestone-${safeId}">
+                            <div class="timeline-step">${idx + 1}</div>
+                            <div class="flex-between align-center flex-wrap gap-10">
+                                <strong>${safeTitle}</strong>
+                                <span class="cohort-badge open">${safeDate}</span>
+                            </div>
+                            <p>${safeDesc}</p>
+                            <div class="mt-10" style="font-size:0.85rem; color:var(--color-teal); font-weight:600;">
+                                📍 ${safeLoc} • Status: ${safeStatus}
+                            </div>
+                        </li>
+                    `;
+                }).join('');
+            }
+        }
+    } catch (err) {
+        console.error('Error rendering public milestones timeline component:', err);
+        const milestonesContainer = document.getElementById('public-milestones-timeline');
+        if (milestonesContainer) {
+            milestonesContainer.innerHTML = `<p class="text-muted">Milestone timeline currently updating...</p>`;
         }
     }
 }
 
 function renderAdminScheduleManager() {
-    // Only render admin components if authorized
-    const envAdminList = document.getElementById('admin-environmental-list');
-    if (envAdminList) {
-        const envEvents = EventStore.filter(e => e.category === 'environmental');
-        if (envEvents.length === 0) {
-            envAdminList.innerHTML = `<p class="text-muted p-20">No environmental events found.</p>`;
-        } else {
-            envAdminList.innerHTML = envEvents.map(evt => `
-                <div class="admin-event-row glass p-20 mb-15 flex-between align-center flex-wrap gap-15">
-                    <div style="flex:1; min-width:240px;">
-                        <div class="flex-between align-center mb-5">
-                            <span class="badge-orange" style="font-size:0.75rem;">${escapeHtml(evt.badge)}</span>
-                            <span class="text-muted small">ID: ${evt.id}</span>
-                        </div>
-                        <h4 style="margin-bottom:4px; font-size:1.15rem;">${escapeHtml(evt.title)}</h4>
-                        <p style="font-size:0.95rem; margin-bottom:6px; color:var(--color-text-muted);">${escapeHtml(evt.description)}</p>
-                        <div style="font-size:0.85rem; color:var(--color-teal);">
-                            📅 ${escapeHtml(evt.date)} (${escapeHtml(evt.time)}) • 📍 ${escapeHtml(evt.location)}
-                        </div>
-                    </div>
-                    <div class="flex-center gap-10" data-admin-only>
-                        <button class="btn btn-sm btn-secondary" onclick="openEditEventModal('${evt.id}')">✏️ Edit</button>
-                        <button class="btn btn-sm btn-outline-orange" onclick="handleDeleteEvent('${evt.id}')">🗑️ Delete</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-    }
+    try {
+        const envAdminList = document.getElementById('admin-environmental-list');
+        if (envAdminList) {
+            const envEvents = (Array.isArray(EventStore) ? EventStore : [])
+                .filter(e => e && e.category === 'environmental');
+            if (envEvents.length === 0) {
+                envAdminList.innerHTML = `<p class="text-muted p-20">No environmental events found.</p>`;
+            } else {
+                envAdminList.innerHTML = envEvents.map(evt => {
+                    const safeId = escapeHtml(evt.id || '');
+                    const safeBadge = escapeHtml(evt.badge || 'Environmental');
+                    const safeTitle = escapeHtml(evt.title || 'Untitled Event');
+                    const safeDesc = escapeHtml(evt.description || '');
+                    const safeDate = escapeHtml(evt.date || 'TBD');
+                    const safeTime = escapeHtml(evt.time || 'TBD');
+                    const safeLoc = escapeHtml(evt.location || 'Barbados');
 
-    const milestoneAdminList = document.getElementById('admin-milestone-list');
-    if (milestoneAdminList) {
-        const milestoneEvents = EventStore.filter(e => e.category === 'milestones');
-        if (milestoneEvents.length === 0) {
-            milestoneAdminList.innerHTML = `<p class="text-muted p-20">No milestone events found.</p>`;
-        } else {
-            milestoneAdminList.innerHTML = milestoneEvents.map(evt => `
-                <div class="admin-event-row glass p-20 mb-15 flex-between align-center flex-wrap gap-15">
-                    <div style="flex:1; min-width:240px;">
-                        <div class="flex-between align-center mb-5">
-                            <span class="cohort-badge open" style="font-size:0.75rem;">${escapeHtml(evt.badge)}</span>
-                            <span class="text-muted small">ID: ${evt.id}</span>
+                    return `
+                        <div class="admin-event-row glass p-20 mb-15 flex-between align-center flex-wrap gap-15">
+                            <div style="flex:1; min-width:240px;">
+                                <div class="flex-between align-center mb-5">
+                                    <span class="badge-orange" style="font-size:0.75rem;">${safeBadge}</span>
+                                    <span class="text-muted small">ID: ${safeId}</span>
+                                </div>
+                                <h4 style="margin-bottom:4px; font-size:1.15rem;">${safeTitle}</h4>
+                                <p style="font-size:0.95rem; margin-bottom:6px; color:var(--color-text-muted);">${safeDesc}</p>
+                                <div style="font-size:0.85rem; color:var(--color-teal);">
+                                    📅 ${safeDate} (${safeTime}) • 📍 ${safeLoc}
+                                </div>
+                            </div>
+                            <div class="flex-center gap-10" data-admin-only>
+                                <button class="btn btn-sm btn-secondary" onclick="openEditEventModal('${safeId}')">✏️ Edit</button>
+                                <button class="btn btn-sm btn-outline-orange" onclick="handleDeleteEvent('${safeId}')">🗑️ Delete</button>
+                            </div>
                         </div>
-                        <h4 style="margin-bottom:4px; font-size:1.15rem;">${escapeHtml(evt.title)}</h4>
-                        <p style="font-size:0.95rem; margin-bottom:6px; color:var(--color-text-muted);">${escapeHtml(evt.description)}</p>
-                        <div style="font-size:0.85rem; color:var(--color-teal);">
-                            📅 ${escapeHtml(evt.date)} (${escapeHtml(evt.time)}) • 📍 ${escapeHtml(evt.location)}
-                        </div>
-                    </div>
-                    <div class="flex-center gap-10" data-admin-only>
-                        <button class="btn btn-sm btn-secondary" onclick="openEditEventModal('${evt.id}')">✏️ Edit</button>
-                        <button class="btn btn-sm btn-outline-orange" onclick="handleDeleteEvent('${evt.id}')">🗑️ Delete</button>
-                    </div>
-                </div>
-            `).join('');
+                    `;
+                }).join('');
+            }
         }
-    }
 
+        const milestoneAdminList = document.getElementById('admin-milestone-list');
+        if (milestoneAdminList) {
+            const milestoneEvents = (Array.isArray(EventStore) ? EventStore : [])
+                .filter(e => e && e.category === 'milestones');
+            if (milestoneEvents.length === 0) {
+                milestoneAdminList.innerHTML = `<p class="text-muted p-20">No milestone events found.</p>`;
+            } else {
+                milestoneAdminList.innerHTML = milestoneEvents.map(evt => {
+                    const safeId = escapeHtml(evt.id || '');
+                    const safeBadge = escapeHtml(evt.badge || 'Milestone');
+                    const safeTitle = escapeHtml(evt.title || 'Untitled Milestone');
+                    const safeDesc = escapeHtml(evt.description || '');
+                    const safeDate = escapeHtml(evt.date || 'TBD');
+                    const safeTime = escapeHtml(evt.time || 'TBD');
+                    const safeLoc = escapeHtml(evt.location || 'Barbados');
+
+                    return `
+                        <div class="admin-event-row glass p-20 mb-15 flex-between align-center flex-wrap gap-15">
+                            <div style="flex:1; min-width:240px;">
+                                <div class="flex-between align-center mb-5">
+                                    <span class="cohort-badge open" style="font-size:0.75rem;">${safeBadge}</span>
+                                    <span class="text-muted small">ID: ${safeId}</span>
+                                </div>
+                                <h4 style="margin-bottom:4px; font-size:1.15rem;">${safeTitle}</h4>
+                                <p style="font-size:0.95rem; margin-bottom:6px; color:var(--color-text-muted);">${safeDesc}</p>
+                                <div style="font-size:0.85rem; color:var(--color-teal);">
+                                    📅 ${safeDate} (${safeTime}) • 📍 ${safeLoc}
+                                </div>
+                            </div>
+                            <div class="flex-center gap-10" data-admin-only>
+                                <button class="btn btn-sm btn-secondary" onclick="openEditEventModal('${safeId}')">✏️ Edit</button>
+                                <button class="btn btn-sm btn-outline-orange" onclick="handleDeleteEvent('${safeId}')">🗑️ Delete</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+    } catch (err) {
+        console.error('Error rendering admin schedule manager component:', err);
+    }
 }
 
 function handleDeleteEvent(id) {
-    if (!checkAuth('admin')) {
+    if (typeof checkAuth === 'function' && !checkAuth('admin')) {
         alert('Unauthorized action. Admin role required.');
         return;
     }
@@ -236,7 +351,7 @@ function handleDeleteEvent(id) {
 }
 
 function openCreateEventModal(defaultCategory = 'environmental') {
-    if (!checkAuth('admin')) {
+    if (typeof checkAuth === 'function' && !checkAuth('admin')) {
         alert('Unauthorized. Please log in as Admin first.');
         return;
     }
@@ -244,46 +359,76 @@ function openCreateEventModal(defaultCategory = 'environmental') {
     const modal = document.getElementById('event-editor-modal');
     if (!modal) return;
 
-    document.getElementById('event-modal-title').textContent = 'Create New Event Schedule';
-    document.getElementById('event-form-id').value = '';
-    document.getElementById('event-form-category').value = defaultCategory;
-    document.getElementById('event-form-title').value = '';
-    document.getElementById('event-form-badge').value = defaultCategory === 'environmental' ? 'Water Conservation' : 'Milestone';
-    document.getElementById('event-form-date').value = new Date().toISOString().split('T')[0];
-    document.getElementById('event-form-time').value = '09:00 AM';
-    document.getElementById('event-form-location').value = 'Barbados Youth Engine HQ';
-    document.getElementById('event-form-status').value = 'Scheduled';
-    document.getElementById('event-form-description').value = '';
+    try {
+        const titleEl = document.getElementById('event-modal-title');
+        const idEl = document.getElementById('event-form-id');
+        const catEl = document.getElementById('event-form-category');
+        const nameEl = document.getElementById('event-form-title');
+        const badgeEl = document.getElementById('event-form-badge');
+        const dateEl = document.getElementById('event-form-date');
+        const timeEl = document.getElementById('event-form-time');
+        const locEl = document.getElementById('event-form-location');
+        const statusEl = document.getElementById('event-form-status');
+        const descEl = document.getElementById('event-form-description');
 
-    modal.classList.add('active');
-    modal.style.display = 'flex';
+        if (titleEl) titleEl.textContent = 'Create New Event Schedule';
+        if (idEl) idEl.value = '';
+        if (catEl) catEl.value = defaultCategory;
+        if (nameEl) nameEl.value = '';
+        if (badgeEl) badgeEl.value = defaultCategory === 'environmental' ? 'Water Conservation' : 'Milestone';
+        if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
+        if (timeEl) timeEl.value = '09:00 AM';
+        if (locEl) locEl.value = 'Barbados Youth Engine HQ';
+        if (statusEl) statusEl.value = 'Scheduled';
+        if (descEl) descEl.value = '';
+
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+    } catch (err) {
+        console.error('Error opening create event modal:', err);
+    }
 }
 
 function openEditEventModal(id) {
-    if (!checkAuth('admin')) {
+    if (typeof checkAuth === 'function' && !checkAuth('admin')) {
         alert('Unauthorized. Please log in as Admin first.');
         return;
     }
 
-    const evt = EventStore.find(e => e.id === id);
+    const evt = EventStore.find(e => e && e.id === id);
     if (!evt) return;
 
     const modal = document.getElementById('event-editor-modal');
     if (!modal) return;
 
-    document.getElementById('event-modal-title').textContent = 'Edit Event Schedule';
-    document.getElementById('event-form-id').value = evt.id;
-    document.getElementById('event-form-category').value = evt.category;
-    document.getElementById('event-form-title').value = evt.title;
-    document.getElementById('event-form-badge').value = evt.badge;
-    document.getElementById('event-form-date').value = evt.date;
-    document.getElementById('event-form-time').value = evt.time;
-    document.getElementById('event-form-location').value = evt.location;
-    document.getElementById('event-form-status').value = evt.status;
-    document.getElementById('event-form-description').value = evt.description;
+    try {
+        const titleEl = document.getElementById('event-modal-title');
+        const idEl = document.getElementById('event-form-id');
+        const catEl = document.getElementById('event-form-category');
+        const nameEl = document.getElementById('event-form-title');
+        const badgeEl = document.getElementById('event-form-badge');
+        const dateEl = document.getElementById('event-form-date');
+        const timeEl = document.getElementById('event-form-time');
+        const locEl = document.getElementById('event-form-location');
+        const statusEl = document.getElementById('event-form-status');
+        const descEl = document.getElementById('event-form-description');
 
-    modal.classList.add('active');
-    modal.style.display = 'flex';
+        if (titleEl) titleEl.textContent = 'Edit Event Schedule';
+        if (idEl) idEl.value = evt.id || '';
+        if (catEl) catEl.value = evt.category || 'environmental';
+        if (nameEl) nameEl.value = evt.title || '';
+        if (badgeEl) badgeEl.value = evt.badge || '';
+        if (dateEl) dateEl.value = evt.date || '';
+        if (timeEl) timeEl.value = evt.time || '';
+        if (locEl) locEl.value = evt.location || '';
+        if (statusEl) statusEl.value = evt.status || '';
+        if (descEl) descEl.value = evt.description || '';
+
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+    } catch (err) {
+        console.error('Error opening edit event modal:', err);
+    }
 }
 
 function closeEventModal() {
@@ -296,38 +441,45 @@ function closeEventModal() {
 
 function handleSaveEvent(e) {
     if (e) e.preventDefault();
-    if (!checkAuth('admin')) {
+    if (typeof checkAuth === 'function' && !checkAuth('admin')) {
         alert('Unauthorized.');
         return;
     }
 
-    const id = document.getElementById('event-form-id').value;
-    const category = document.getElementById('event-form-category').value;
-    const title = document.getElementById('event-form-title').value;
-    const badge = document.getElementById('event-form-badge').value;
-    const date = document.getElementById('event-form-date').value;
-    const time = document.getElementById('event-form-time').value;
-    const location = document.getElementById('event-form-location').value;
-    const status = document.getElementById('event-form-status').value;
-    const description = document.getElementById('event-form-description').value;
+    try {
+        const id = document.getElementById('event-form-id')?.value?.trim() || '';
+        const category = document.getElementById('event-form-category')?.value?.trim() || 'environmental';
+        const title = document.getElementById('event-form-title')?.value?.trim() || '';
+        const badge = document.getElementById('event-form-badge')?.value?.trim() || 'Environmental';
+        const date = document.getElementById('event-form-date')?.value?.trim() || new Date().toISOString().split('T')[0];
+        const time = document.getElementById('event-form-time')?.value?.trim() || '09:00 AM';
+        const location = document.getElementById('event-form-location')?.value?.trim() || 'Barbados Youth Engine HQ';
+        const status = document.getElementById('event-form-status')?.value?.trim() || 'Scheduled';
+        const description = document.getElementById('event-form-description')?.value?.trim() || '';
 
-    if (!title) {
-        alert('Please enter an event title');
-        return;
+        if (!title) {
+            alert('Please enter an event / milestone title.');
+            return;
+        }
+
+        const payload = { category, title, badge, date, time, location, status, description };
+
+        if (id) {
+            updateEvent(id, payload);
+        } else {
+            addEvent(payload);
+        }
+
+        closeEventModal();
+    } catch (err) {
+        console.error('Error handling save event:', err);
+        alert('Failed to save event schedule. Please try again.');
     }
-
-    if (id) {
-        updateEvent(id, { category, title, badge, date, time, location, status, description });
-    } else {
-        addEvent({ category, title, badge, date, time, location, status, description });
-    }
-
-    closeEventModal();
 }
 
 function escapeHtml(str) {
     if (!str) return '';
-    return str.replace(/[&<>"']/g, function(m) {
+    return String(str).replace(/[&<>"']/g, function(m) {
         return {
             '&': '&amp;',
             '<': '&lt;',
