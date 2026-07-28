@@ -45,10 +45,13 @@
                         <li class="nav-admin-link" style="display:none;" data-admin-only><a href="#admin-environmental"
                                 class="nav-link" data-tab="admin-environmental"
                                 style="color:var(--color-orange); font-weight:700;">🔐 Admin Portal</a></li>
-                        <li><a href="#apply" class="btn btn-primary nav-apply-btn" id="quick-apply-btn">Apply Now</a>
+                        <li><a href="#apply" class="btn btn-primary nav-apply-btn" id="quick-apply-btn" onclick="switchView('apply')">Quick Apply</a>
                         </li>
                     </ul>
                 </nav>
+
+                <!-- Direct Header Quick Apply Button -->
+                <a href="#apply" class="btn btn-primary btn-sm header-apply-btn" onclick="switchView('apply')">Quick Apply</a>
 
                 <!-- Light / Dark Mode Switch Pill -->
                 <button class="theme-toggle-pill" id="header-theme-toggle" onclick="toggleTheme()"
@@ -66,8 +69,8 @@
         </div>
     </header>
 
-    <!-- Floating Action Button for Application (Mobile Friendly) -->
-    <a href="#apply" class="floating-apply-btn" id="floating-apply" title="Quick Register">
+    <!-- Floating Action Button for Application (Mobile & Desktop Friendly) -->
+    <a href="#apply" class="floating-apply-btn" id="floating-apply" title="Quick Register" onclick="switchView('apply')">
         <svg viewBox="0 0 24 24" width="24" height="24">
             <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
         </svg>
@@ -1230,7 +1233,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </section>
 
         <!-- LOGIN VIEW -->
