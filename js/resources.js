@@ -13,6 +13,7 @@ const resourcesData = [
         date: "July 2026",
         summary: "Featured Instagram reel recap of the Eco Leaders Workshop — empowering young Barbadian leaders in sustainability, environmental stewardship, and community climate action.",
         imageUrl: "Thumbnail.png", // Dedicated thumbnail picture file from project folder
+        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('Thumbnail.png') center/cover no-repeat",
         previewVisual: "▶",
         link: "https://www.instagram.com/p/DZbEuNSD4ht/",
         actionLabel: "Watch on Instagram"
@@ -22,19 +23,6 @@ const resourcesData = [
 let activeCategory = 'all';
 let activeEconomy = 'all';
 let searchQuery = '';
-
-function handleResourceImgError(imgElement) {
-    if (!imgElement) return;
-    const step = parseInt(imgElement.getAttribute('data-step') || '0', 10);
-    const fallbacks = ['Thumbnail.png', 'ThumbnaIl.png', './Thumbnail.png', '/Thumbnail.png'];
-    
-    if (step < fallbacks.length - 1) {
-        imgElement.setAttribute('data-step', (step + 1).toString());
-        imgElement.src = fallbacks[step + 1];
-    } else {
-        imgElement.style.opacity = '0';
-    }
-}
 
 function initResourcesHub() {
     const categoryButtons = document.querySelectorAll('.resource-cat-btn');
@@ -117,28 +105,26 @@ function renderResources() {
             
         const actionLabel = item.actionLabel || defaultLabel;
         const previewPlayBtn = item.previewVisual ? `<div class="resource-play-overlay"><span>${item.previewVisual}</span></div>` : '';
-        const thumbImgPath = item.imageUrl || 'Thumbnail.png';
+
+        // Dynamic thumbnail style: supports picture file path/URL or gradient fallback
+        const thumbStyle = item.imageUrl 
+            ? `background: linear-gradient(180deg, rgba(6, 20, 18, 0.35) 0%, rgba(6, 20, 18, 0.75) 100%), url('${item.imageUrl}') center/cover no-repeat;`
+            : `background: ${item.imageBg || 'linear-gradient(135deg, #059669 0%, #0d9488 100%)'};`;
 
         return `
             <article class="resource-card glass">
-                <a href="${item.link}" ${linkAttrs} class="resource-thumb-link" title="${item.title}">
-                    <div class="resource-thumb" style="background: linear-gradient(180deg, rgba(6, 20, 18, 0.2) 0%, rgba(6, 20, 18, 0.75) 100%), url('${thumbImgPath}') center/cover no-repeat;">
-                        <img src="${thumbImgPath}" alt="${item.title}" class="resource-thumb-img" onerror="handleResourceImgError(this)">
-                        <div class="resource-thumb-overlay"></div>
-                        <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
-                        <span class="economy-badge ${econClass}">${econLabel}</span>
-                        ${previewPlayBtn}
-                    </div>
-                </a>
+                <div class="resource-thumb" style="${thumbStyle}">
+                    <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
+                    <span class="economy-badge ${econClass}">${econLabel}</span>
+                    ${previewPlayBtn}
+                </div>
                 <div class="resource-body">
                     <div class="resource-meta">
                         <span class="meta-date">${item.date}</span>
                         <span class="meta-dot">•</span>
                         <span class="meta-time">${item.readTime}</span>
                     </div>
-                    <h3 class="resource-title">
-                        <a href="${item.link}" ${linkAttrs} style="color: inherit; text-decoration: none;">${item.title}</a>
-                    </h3>
+                    <h3 class="resource-title">${item.title}</h3>
                     <p class="resource-summary">${item.summary}</p>
                     <a href="${item.link}" ${linkAttrs} class="btn btn-secondary btn-sm resource-action-btn">
                         ${actionLabel} &rarr;
@@ -169,8 +155,3 @@ function resetResourceFilters() {
 
     renderResources();
 }
-
-window.handleResourceImgError = handleResourceImgError;
-window.initResourcesHub        = initResourcesHub;
-window.renderResources         = renderResources;
-window.resetResourceFilters    = resetResourceFilters;
