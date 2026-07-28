@@ -106,11 +106,12 @@ function renderResources() {
         const actionLabel = item.actionLabel || defaultLabel;
         const previewPlayBtn = item.previewVisual ? `<div class="resource-play-overlay"><span>${item.previewVisual}</span></div>` : '';
         const imgPath = item.imageUrl || 'Thumbnail.png';
+        const bgStyle = `background-image: linear-gradient(180deg, rgba(6, 20, 18, 0.15) 0%, rgba(6, 20, 18, 0.45) 100%), url('${imgPath}'), url('./${imgPath}'), url('/${imgPath}');`;
 
         return `
             <article class="resource-card glass">
-                <div class="resource-thumb">
-                    <img src="${imgPath}" alt="${item.title || 'Eco Leaders Workshop'}" class="resource-thumb-img" onerror="this.onerror=null; this.src='Thumbnail.png';" />
+                <div class="resource-thumb" style="${bgStyle}">
+                    <img src="${imgPath}" alt="${item.title || 'Eco Leaders Workshop'}" class="resource-thumb-img" onerror="if(this.src.startsWith('http')) return; if(!this.src.includes('./Thumbnail.png')){this.src='./Thumbnail.png';}else if(!this.src.includes('/Thumbnail.png')){this.src='/Thumbnail.png';}else{this.style.display='none';}" />
                     <div class="resource-thumb-overlay"></div>
                     <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
                     <span class="economy-badge ${econClass}">${econLabel}</span>
