@@ -57,6 +57,18 @@ function initResourcesHub() {
     renderResources();
 }
 
+function handleResourceImgError(img) {
+    if (!img) return;
+    const step = parseInt(img.dataset.step || '0', 10);
+    const altSources = ['./Thumbnail.png', '/Thumbnail.png', 'thumbnail.png', './thumbnail.png', '/thumbnail.png'];
+    if (step < altSources.length) {
+        img.dataset.step = (step + 1).toString();
+        img.src = altSources[step];
+    } else {
+        img.style.display = 'none';
+    }
+}
+
 function renderResources() {
     const grid = document.getElementById('resources-card-grid');
     const countEl = document.getElementById('resource-count-badge');
@@ -106,12 +118,12 @@ function renderResources() {
         const actionLabel = item.actionLabel || defaultLabel;
         const previewPlayBtn = item.previewVisual ? `<div class="resource-play-overlay"><span>${item.previewVisual}</span></div>` : '';
         const imgPath = item.imageUrl || 'Thumbnail.png';
-        const bgStyle = `background-image: linear-gradient(180deg, rgba(6, 20, 18, 0.15) 0%, rgba(6, 20, 18, 0.45) 100%), url('${imgPath}'), url('./${imgPath}'), url('/${imgPath}');`;
+        const bgStyle = `background-image: linear-gradient(180deg, rgba(6, 20, 18, 0.15) 0%, rgba(6, 20, 18, 0.45) 100%), url('Thumbnail.png'), url('./Thumbnail.png'); background-size: cover; background-position: center;`;
 
         return `
             <article class="resource-card glass">
                 <div class="resource-thumb" style="${bgStyle}">
-                    <img src="${imgPath}" alt="${item.title || 'Eco Leaders Workshop'}" class="resource-thumb-img" onerror="if(this.src.startsWith('http')) return; if(!this.src.includes('./Thumbnail.png')){this.src='./Thumbnail.png';}else if(!this.src.includes('/Thumbnail.png')){this.src='/Thumbnail.png';}else{this.style.display='none';}" />
+                    <img src="${imgPath}" alt="${item.title || 'Eco Leaders Workshop'}" class="resource-thumb-img" onerror="handleResourceImgError(this)" />
                     <div class="resource-thumb-overlay"></div>
                     <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
                     <span class="economy-badge ${econClass}">${econLabel}</span>
@@ -158,3 +170,4 @@ function resetResourceFilters() {
 window.initResourcesHub     = initResourcesHub;
 window.renderResources      = renderResources;
 window.resetResourceFilters = resetResourceFilters;
+window.handleResourceImgError = handleResourceImgError;
