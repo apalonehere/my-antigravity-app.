@@ -2,16 +2,29 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     try {
+        // 1. Auth must be first — restores session state from localStorage.
+        //    syncAuthUI() is called inside but will NOT redirect; routing is
+        //    handled exclusively by initHashRouter below.
         if (typeof initAuth === 'function') initAuth();
+
+        // 2. Data stores — must load before views render
         if (typeof initEventStore === 'function') initEventStore();
         if (typeof initMetricsStore === 'function') initMetricsStore();
+
+        // 3. Theme & UI chrome
         if (typeof initTheme === 'function') initTheme();
         if (typeof initNavigation === 'function') initNavigation();
         if (typeof initMobileMenu === 'function') initMobileMenu();
         initProgrammeSubTabs();
         initVillageTabs();
         if (typeof initResourcesHub === 'function') initResourcesHub();
+
+        // 4. Hash router LAST — reads fully-initialized auth + data state,
+        //    then activates the correct view based on URL hash.
+        //    Empty hash or / → always shows #home for public visitors.
         if (typeof initHashRouter === 'function') initHashRouter();
+
+        // 5. Polish
         initScrollReveal();
         initRippleEffect();
     } catch (err) {

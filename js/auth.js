@@ -70,8 +70,10 @@ function logout() {
     AuthState.isAuthenticated = false;
     saveAuthState();
     syncAuthUI();
-    if (window.location.hash.startsWith('#admin-')) {
-        switchView('home');
+    // Always return to public homepage on logout, regardless of current view
+    if (typeof navigateTo === 'function') {
+        navigateTo('home');
+    } else {
         window.location.hash = 'home';
     }
 }
@@ -81,13 +83,12 @@ function setRole(newRole) {
         AuthState.user = { email: 'admin@greenrising.bb', name: 'Site Administrator' };
         AuthState.role = 'admin';
         AuthState.isAuthenticated = true;
+        saveAuthState();
+        syncAuthUI();
     } else {
-        AuthState.user = null;
-        AuthState.role = 'public';
-        AuthState.isAuthenticated = false;
+        // setRole('public') is equivalent to logout — use full logout flow
+        logout();
     }
-    saveAuthState();
-    syncAuthUI();
 }
 
 function checkAuth(requiredRole = 'admin') {
@@ -99,7 +100,10 @@ function checkAuth(requiredRole = 'admin') {
 
 function syncAuthUI() {
     const body = document.body;
-    if (AuthState.role === 'admin') {
+    const isAdmin = AuthState.role === 'admin' && AuthState.isAuthenticated;
+
+    // Body class reflects auth state (used by CSS [data-admin-only] rules)
+    if (isAdmin) {
         body.classList.add('user-is-admin');
         body.classList.remove('user-is-public');
     } else {
@@ -107,10 +111,10 @@ function syncAuthUI() {
         body.classList.remove('user-is-admin');
     }
 
-    // Toggle [data-admin-only] elements
+    // Toggle [data-admin-only] elements — visibility only, NEVER routing
     const adminOnlyElements = document.querySelectorAll('[data-admin-only]');
     adminOnlyElements.forEach(el => {
-        if (AuthState.role === 'admin') {
+        if (isAdmin) {
             el.style.display = '';
             el.removeAttribute('hidden');
         } else {
@@ -119,22 +123,19 @@ function syncAuthUI() {
         }
     });
 
+    // Admin nav link visibility
     const adminNavLinks = document.querySelectorAll('.nav-admin-link');
     adminNavLinks.forEach(link => {
-        if (AuthState.role === 'admin') {
-            link.style.display = 'inline-flex';
-        } else {
-            link.style.display = 'none';
-        }
+        link.style.display = isAdmin ? 'inline-flex' : 'none';
     });
 
-    // Re-render schedule managers if functions exist
-    if (typeof renderAdminScheduleManager === 'function') {
-        renderAdminScheduleManager();
-    }
-    if (typeof renderPublicSchedules === 'function') {
-        renderPublicSchedules();
-    }
+    // Re-render data lists that depend on auth state (read-only — no navigation side effects)
+    try {
+        if (typeof renderAdminScheduleManager === 'function') renderAdminScheduleManager();
+    } catch(e) { /* non-critical */ }
+    try {
+        if (typeof renderPublicSchedules === 'function') renderPublicSchedules();
+    } catch(e) { /* non-critical */ }
 }
 
 window.AuthState = AuthState;
