@@ -83,8 +83,8 @@
             <section class="hero-section">
                 <!-- Hero Background Image -->
                 <div class="hero-img-bg-container">
-                    <img src="hero-bg.jpg.JPG" alt="Green Rising Hero" class="hero-img-bg"
-                        onerror="if(this.src.includes('.JPG')){ this.src='hero-bg.jpg'; } else if(this.src.includes('.jpg')){ this.src='hero-bg.png'; } else { this.style.display='none'; }">
+                    <img src="hero-bg.jpg" alt="Green Rising Hero" class="hero-img-bg"
+                        onerror="if(this.src.endsWith('hero-bg.jpg')){ this.src='hero-bg.jpg.JPG'; } else { this.style.display='none'; }">
                 </div>
                 <div class="hero-video-overlay"></div>
 
@@ -876,7 +876,7 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
         </section>
 
         <!-- RESOURCES HUB VIEW -->
@@ -1242,7 +1242,8 @@
                 <div class="glass p-30 max-width-600 w-100">
                     <h2 class="text-center section-title mb-10">Admin Passkey Authentication</h2>
                     <p class="text-center text-muted mb-25">Enter your secure Admin PIN configured via
-                        <code>process.env.ADMIN_PIN</code>.</p>
+                        <code>process.env.ADMIN_PIN</code>.
+                    </p>
 
                     <form id="admin-login-form"
                         onsubmit="event.preventDefault(); const res = loginPasskey(this.passkey.value); if(res.success){ navigateTo('admin-environmental'); } else { alert(res.message); }">
