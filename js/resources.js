@@ -12,8 +12,8 @@ const resourcesData = [
         readTime: "Instagram Reel • Watch",
         date: "July 2026",
         summary: "Featured Instagram reel recap of the Eco Leaders Workshop — empowering young Barbadian leaders in sustainability, environmental stewardship, and community climate action.",
-        imageUrl: "/Thumbnail.png", // Root-relative path — resolves on all routes/deployments
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/Thumbnail.png') center/cover no-repeat",
+        imageUrl: "Thumbnail.png", // Relative path — resolves across all routes and deployments
+        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('Thumbnail.png') center/cover no-repeat",
         previewVisual: "▶",
         link: "https://www.instagram.com/p/DZbEuNSD4ht/",
         actionLabel: "Watch on Instagram"
@@ -96,7 +96,7 @@ function renderResources() {
         const isExternal = item.link && item.link.startsWith('http');
         const linkAttrs = isExternal 
             ? 'target="_blank" rel="noopener"' 
-            : `onclick="switchView('${item.link.replace('#','')}')"` ;
+            : `onclick="switchView('${item.link.replace('#','')}')"`;
 
         const defaultLabel = item.category === 'video' ? 'Watch Video' 
             : item.category === 'workshop' ? 'Explore Workshop' 
@@ -105,15 +105,13 @@ function renderResources() {
             
         const actionLabel = item.actionLabel || defaultLabel;
         const previewPlayBtn = item.previewVisual ? `<div class="resource-play-overlay"><span>${item.previewVisual}</span></div>` : '';
-
-        // Dynamic thumbnail style: supports picture file path/URL or gradient fallback
-        const thumbStyle = item.imageUrl 
-            ? `background: linear-gradient(180deg, rgba(6, 20, 18, 0.35) 0%, rgba(6, 20, 18, 0.75) 100%), url('${item.imageUrl}') center/cover no-repeat;`
-            : `background: ${item.imageBg || 'linear-gradient(135deg, #059669 0%, #0d9488 100%)'};`;
+        const imgPath = item.imageUrl || 'Thumbnail.png';
 
         return `
             <article class="resource-card glass">
-                <div class="resource-thumb" style="${thumbStyle}">
+                <div class="resource-thumb">
+                    <img src="${imgPath}" alt="${item.title || 'Eco Leaders Workshop'}" class="resource-thumb-img" onerror="this.onerror=null; this.src='Thumbnail.png';" />
+                    <div class="resource-thumb-overlay"></div>
                     <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
                     <span class="economy-badge ${econClass}">${econLabel}</span>
                     ${previewPlayBtn}

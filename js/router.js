@@ -116,7 +116,15 @@ function _activateView(viewId) {
 
         navLinks.forEach(link => {
             const tab = link.getAttribute('data-tab');
-            if (link && (tab === viewId || (viewId === 'dashboard' && tab === 'dashboard'))) {
+            const isMatch = link && (
+                tab === viewId ||
+                (viewId === 'dashboard' && (tab === 'dashboard' || tab === 'impact-hub')) ||
+                (viewId === 'team' && (tab === 'team' || tab === 'teams')) ||
+                (viewId === 'quiz' && (tab === 'quiz' || tab === 'match-quiz')) ||
+                (viewId === 'apply' && (tab === 'apply' || tab === 'apply-now')) ||
+                (viewId.startsWith('admin-') && tab === 'admin-environmental')
+            );
+            if (isMatch) {
                 link.classList.add('active');
             } else if (link) {
                 link.classList.remove('active');

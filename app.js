@@ -96,7 +96,7 @@ function initRippleEffect() {
 // Programmes Sub-Tabs Switching Helper
 function initProgrammeSubTabs() {
     try {
-        const subTabButtons = document.querySelectorAll('.sub-tab-btn');
+        const subTabButtons = document.querySelectorAll('.sub-tab-btn[data-prog]');
         subTabButtons.forEach(btn => {
             if (btn) {
                 btn.addEventListener('click', () => {
@@ -112,7 +112,7 @@ function initProgrammeSubTabs() {
 
 function openProgram(progId) {
     try {
-        const subTabButtons = document.querySelectorAll('.sub-tab-btn');
+        const subTabButtons = document.querySelectorAll('.sub-tab-btn[data-prog]');
         const programPanes = document.querySelectorAll('.prog-detail-pane');
 
         subTabButtons.forEach(btn => {

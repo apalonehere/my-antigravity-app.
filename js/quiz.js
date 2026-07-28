@@ -1,11 +1,18 @@
 // --- Programme Eligibility Match Quiz Module ---
 function quizNext(step) {
-    document.getElementById('q-step-1')?.classList.add('hidden');
-    document.getElementById('q-step-2')?.classList.add('hidden');
-    document.getElementById('q-step-3')?.classList.add('hidden');
-    document.getElementById('q-result')?.classList.add('hidden');
+    ['q-step-1', 'q-step-2', 'q-step-3', 'q-result'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.classList.add('hidden');
+            el.classList.remove('active');
+        }
+    });
     
-    document.getElementById(`q-step-${step}`)?.classList.remove('hidden');
+    const activePane = document.getElementById(`q-step-${step}`);
+    if (activePane) {
+        activePane.classList.remove('hidden');
+        activePane.classList.add('active');
+    }
 }
 
 function processQuizResults() {
@@ -20,14 +27,24 @@ function processQuizResults() {
     const matchedDesc = document.getElementById('matched-description');
     const quizCta = document.getElementById('quiz-cta');
     
-    document.getElementById('q-step-3')?.classList.add('hidden');
-    if (resultPane) resultPane.classList.remove('hidden');
+    ['q-step-1', 'q-step-2', 'q-step-3'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.classList.add('hidden');
+            el.classList.remove('active');
+        }
+    });
+    
+    if (resultPane) {
+        resultPane.classList.remove('hidden');
+        resultPane.classList.add('active');
+    }
     
     if (ageVal === 'kids') {
         if (matchedTitle) matchedTitle.innerText = "CYEN Skills - Eco-Explorers";
         if (matchedDesc) matchedDesc.innerText = "For ages 10-13, our CYEN partnership provides eco-exploration, recycling games, and climate literacy workshops. A fun, safe, hands-on path for young leaders.";
         if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('cyen')");
-    } else if (interestVal === 'boats' && ageVal === 'youth') {
+    } else if (interestVal === 'boats') {
         if (matchedTitle) matchedTitle.innerText = "Youth of the Seas (YOTS) Boat Building";
         if (matchedDesc) matchedDesc.innerText = "Based on your interest in craftsmanship and marine sectors, you qualify for our 12-week Cohort intake. Build disaster-resilient vessels and learn engine repair.";
         if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('yots')");
@@ -49,3 +66,7 @@ function processQuizResults() {
 function resetQuiz() {
     quizNext(1);
 }
+
+window.quizNext = quizNext;
+window.processQuizResults = processQuizResults;
+window.resetQuiz = resetQuiz;
