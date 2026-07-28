@@ -1,155 +1,204 @@
-// Green Rising Barbados — Resources Hub Module
-
-// Curated live resources dataset
-const resourcesData = [
+// --- Knowledge & Media Resources Hub Module ---
+const RESOURCES_DATA = [
     {
-        id: 1,
-        title: "Eco Leaders Workshop",
-        category: "workshop",
-        economy: "green",
-        platform: "Instagram",
-        platformIcon: "📸",
-        readTime: "Instagram Reel • Watch",
-        date: "July 2026",
-        summary: "Featured Instagram reel recap of the Eco Leaders Workshop — empowering young Barbadian leaders in sustainability, environmental stewardship, and community climate action.",
-        imageUrl: "Thumbnail.png", // Relative path — resolves across all routes and deployments
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('Thumbnail.png') center/cover no-repeat",
-        previewVisual: "▶",
-        link: "https://www.instagram.com/p/DZbEuNSD4ht/",
-        actionLabel: "Watch on Instagram"
+        id: 'res-1',
+        title: 'Water Scarcity & Rainwater Harvesting in Barbados',
+        category: 'article',
+        economy: 'blue',
+        summary: 'A deep-dive technical brief on how Barbadian youth are implementing rainwater capture systems to counter drought.',
+        url: 'https://futurebarbados.bb/resources/water-harvesting-guide.pdf',
+        icon: '💧',
+        tags: ['Water', 'ClimateAdaptation', 'BlueEconomy'],
+        date: '2026-06-15',
+        platform: 'Future Barbados Portal',
+        thumbnail: 'Thumbnail.png'
+    },
+    {
+        id: 'res-2',
+        title: 'CYEN Youth Eco-Skills & Career Transition Playbook',
+        category: 'workshop',
+        economy: 'green',
+        summary: 'A practical curriculum guide for young people transitioning into hydroponics, soil remediation, and eco-advocacy.',
+        url: 'https://cyen.org/barbados-youth-playbook',
+        icon: '🌿',
+        tags: ['CYEN', 'YouthSkills', 'GreenEconomy'],
+        date: '2026-05-20',
+        platform: 'CYEN Caribbean Network',
+        thumbnail: 'Thumbnail.png'
+    },
+    {
+        id: 'res-3',
+        title: 'Youth of the Seas (YOTS) Boat Building Demo & Sea Trial',
+        category: 'video',
+        economy: 'blue',
+        summary: 'Watch Cohort 3 sea trial their 18-foot disaster-resilient marine craft off Oistins.',
+        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        icon: '🎬',
+        tags: ['YOTS', 'BoatBuilding', 'BlueEconomy', 'Video'],
+        date: '2026-07-02',
+        platform: 'YouTube',
+        thumbnail: 'Thumbnail.png'
+    },
+    {
+        id: 'res-4',
+        title: 'Pinelands Creative Workshop & 6-Zone Career Pavilion Overview',
+        category: 'social',
+        economy: 'orange',
+        summary: 'Highlights and youth testimonials from the Pinelands Orange Economy career exploration pavilion in St. Michael.',
+        url: 'https://instagram.com/greenrisingbarbados',
+        icon: '📱',
+        tags: ['Pinelands', 'OrangeEconomy', 'YouthCareers', 'Instagram'],
+        date: '2026-06-28',
+        platform: 'Instagram Reel',
+        thumbnail: 'Thumbnail.png'
+    },
+    {
+        id: 'res-5',
+        title: 'Eco-Leaders Workshop Reel',
+        category: 'social',
+        economy: 'green',
+        summary: 'Watch our youth leaders in action during the Eco-Leaders field workshop on climate mitigation and sustainable agriculture.',
+        url: 'https://www.instagram.com/p/DZbEuNSD4ht/',
+        icon: '📱',
+        tags: ['EcoLeaders', 'Workshop', 'Instagram', 'Video'],
+        date: '2026-07-10',
+        platform: 'Instagram Reel',
+        thumbnail: 'Thumbnail.png'
     }
 ];
 
-let activeCategory = 'all';
-let activeEconomy = 'all';
-let searchQuery = '';
+let activeResourceCategory = 'all';
+let activeResourceEconomy = 'all';
+let currentSearchQuery = '';
 
 function initResourcesHub() {
-    const categoryButtons = document.querySelectorAll('.resource-cat-btn');
-    const economyButtons = document.querySelectorAll('.resource-econ-btn');
     const searchInput = document.getElementById('resource-search-input');
-
-    categoryButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            categoryButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeCategory = btn.getAttribute('data-category');
-            renderResources();
-        });
-    });
-
-    economyButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            economyButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeEconomy = btn.getAttribute('data-economy');
-            renderResources();
-        });
-    });
-
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value.toLowerCase().trim();
-            renderResources();
+            currentSearchQuery = e.target.value.toLowerCase().trim();
+            renderResourcesGrid();
         });
     }
 
-    renderResources();
+    const catButtons = document.querySelectorAll('.resource-cat-btn');
+    catButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            catButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeResourceCategory = btn.getAttribute('data-category') || 'all';
+            renderResourcesGrid();
+        });
+    });
+
+    const econButtons = document.querySelectorAll('.resource-econ-btn');
+    econButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            econButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeResourceEconomy = btn.getAttribute('data-economy') || 'all';
+            renderResourcesGrid();
+        });
+    });
+
+    renderResourcesGrid();
 }
 
-function handleResourceImgError(img) {
-    if (!img) return;
-    const step = parseInt(img.dataset.step || '0', 10);
-    const altSources = ['./Thumbnail.png', '/Thumbnail.png', 'thumbnail.png', './thumbnail.png', '/thumbnail.png'];
-    if (step < altSources.length) {
-        img.dataset.step = (step + 1).toString();
-        img.src = altSources[step];
+function handleResourceImgError(imgElement, defaultSrc) {
+    if (!imgElement) return;
+    const attempt = parseInt(imgElement.getAttribute('data-attempt') || '0', 10);
+    
+    if (attempt === 0) {
+        imgElement.setAttribute('data-attempt', '1');
+        imgElement.src = 'Thumbnail.png';
+    } else if (attempt === 1) {
+        imgElement.setAttribute('data-attempt', '2');
+        imgElement.src = './Thumbnail.png';
+    } else if (attempt === 2) {
+        imgElement.setAttribute('data-attempt', '3');
+        imgElement.src = defaultSrc || '/Thumbnail.png';
     } else {
-        img.style.display = 'none';
+        imgElement.style.display = 'none';
+        const fallbackIcon = imgElement.parentElement ? imgElement.parentElement.querySelector('.resource-card-icon-fallback') : null;
+        if (fallbackIcon) {
+            fallbackIcon.style.display = 'flex';
+        }
     }
 }
 
-function renderResources() {
-    const grid = document.getElementById('resources-card-grid');
-    const countEl = document.getElementById('resource-count-badge');
-    if (!grid) return;
+function renderResourcesGrid() {
+    const gridContainer = document.getElementById('resources-card-grid');
+    const countBadge = document.getElementById('resource-count-badge');
+    if (!gridContainer) return;
 
-    const filtered = resourcesData.filter(item => {
-        const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
-        const matchesEconomy = activeEconomy === 'all' || item.economy === activeEconomy;
-        const matchesSearch = searchQuery === '' || 
-            item.title.toLowerCase().includes(searchQuery) ||
-            item.summary.toLowerCase().includes(searchQuery) ||
-            item.platform.toLowerCase().includes(searchQuery);
+    const filtered = RESOURCES_DATA.filter(res => {
+        const matchesCat = (activeResourceCategory === 'all') || (res.category === activeResourceCategory);
+        const matchesEcon = (activeResourceEconomy === 'all') || (res.economy === activeResourceEconomy);
+        
+        let matchesSearch = true;
+        if (currentSearchQuery) {
+            const titleMatch = res.title.toLowerCase().includes(currentSearchQuery);
+            const summaryMatch = res.summary.toLowerCase().includes(currentSearchQuery);
+            const platformMatch = res.platform.toLowerCase().includes(currentSearchQuery);
+            const tagMatch = res.tags.some(t => t.toLowerCase().includes(currentSearchQuery));
+            matchesSearch = titleMatch || summaryMatch || platformMatch || tagMatch;
+        }
 
-        return matchesCategory && matchesEconomy && matchesSearch;
+        return matchesCat && matchesEcon && matchesSearch;
     });
 
-    if (countEl) {
-        countEl.textContent = `${filtered.length} Resource${filtered.length === 1 ? '' : 's'} Found`;
+    if (countBadge) {
+        countBadge.innerText = `${filtered.length} Resource${filtered.length === 1 ? '' : 's'} Found`;
     }
 
     if (filtered.length === 0) {
-        grid.innerHTML = `
-            <div class="resources-empty-state glass">
-                <div class="empty-icon">📁</div>
-                <h3>No Resources Found in this Category</h3>
-                <p>Select a different category filter or check back soon as new articles, videos, and workshops are published.</p>
-                <button class="btn btn-secondary mt-15" onclick="resetResourceFilters()">Reset Category Filters</button>
+        gridContainer.innerHTML = `
+            <div class="glass p-30 text-center w-100" style="grid-column: 1 / -1;">
+                <h3>No matching resources found</h3>
+                <p class="text-muted mt-10">Try clearing your search query or selecting a different category/economy filter.</p>
+                <button class="btn btn-secondary mt-15" onclick="resetResourceFilters()">Reset Filters</button>
             </div>
         `;
         return;
     }
 
-    grid.innerHTML = filtered.map(item => {
-        const econClass = item.economy === 'blue' ? 'badge-blue' : item.economy === 'green' ? 'badge-green' : 'badge-orange-tag';
-        const econLabel = item.economy === 'blue' ? 'Blue Economy' : item.economy === 'green' ? 'Green Economy' : 'Orange Economy';
+    gridContainer.innerHTML = filtered.map(res => {
+        const econClass = res.economy === 'blue' ? 'tag-blue' : (res.economy === 'green' ? 'tag-green' : 'tag-orange');
+        const econLabel = res.economy === 'blue' ? 'Blue Economy' : (res.economy === 'green' ? 'Green Economy' : 'Orange Economy');
         
-        const isExternal = item.link && item.link.startsWith('http');
-        const linkAttrs = isExternal 
-            ? 'target="_blank" rel="noopener"' 
-            : `onclick="switchView('${item.link.replace('#','')}')"`;
-
-        const defaultLabel = item.category === 'video' ? 'Watch Video' 
-            : item.category === 'workshop' ? 'Explore Workshop' 
-            : item.category === 'social' ? 'View Post' 
-            : 'Read Article';
-            
-        const actionLabel = item.actionLabel || defaultLabel;
-        const previewPlayBtn = item.previewVisual ? `<div class="resource-play-overlay"><span>${item.previewVisual}</span></div>` : '';
-        const imgPath = item.imageUrl || 'Thumbnail.png';
-        const bgStyle = `background-image: linear-gradient(180deg, rgba(6, 20, 18, 0.15) 0%, rgba(6, 20, 18, 0.45) 100%), url('Thumbnail.png'), url('./Thumbnail.png'); background-size: cover; background-position: center;`;
+        const isInstagram = res.url.includes('instagram.com');
+        const actionLabel = isInstagram ? 'Watch on Instagram ↗' : 'Access Resource ↗';
+        const thumbPath = res.thumbnail || 'Thumbnail.png';
 
         return `
-            <article class="resource-card glass">
-                <div class="resource-thumb" style="${bgStyle}">
-                    <img src="${imgPath}" alt="${item.title || 'Eco Leaders Workshop'}" class="resource-thumb-img" onerror="handleResourceImgError(this)" />
-                    <div class="resource-thumb-overlay"></div>
-                    <span class="platform-badge">${item.platformIcon} ${item.platform}</span>
-                    <span class="economy-badge ${econClass}">${econLabel}</span>
-                    ${previewPlayBtn}
+            <div class="resource-card glass" data-category="${res.category}" data-economy="${res.economy}">
+                <div class="resource-card-media">
+                    <img src="${thumbPath}" alt="${res.title}" class="resource-thumb-img" onerror="handleResourceImgError(this, '${thumbPath}')">
+                    <div class="resource-card-icon-fallback" style="display: none;">${res.icon}</div>
+                    <span class="resource-badge ${econClass}">${econLabel}</span>
                 </div>
-                <div class="resource-body">
+                <div class="resource-card-body">
                     <div class="resource-meta">
-                        <span class="meta-date">${item.date}</span>
-                        <span class="meta-dot">•</span>
-                        <span class="meta-time">${item.readTime}</span>
+                        <span class="resource-platform">${res.platform}</span>
+                        <span class="resource-date">${res.date}</span>
                     </div>
-                    <h3 class="resource-title">${item.title}</h3>
-                    <p class="resource-summary">${item.summary}</p>
-                    <a href="${item.link}" ${linkAttrs} class="btn btn-secondary btn-sm resource-action-btn">
-                        ${actionLabel} &rarr;
+                    <h3 class="resource-card-title">${res.title}</h3>
+                    <p class="resource-card-summary">${res.summary}</p>
+                    <div class="resource-tags">
+                        ${res.tags.map(t => `<span class="resource-tag">#${t}</span>`).join('')}
+                    </div>
+                    <a href="${res.url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm resource-cta-btn">
+                        ${actionLabel}
                     </a>
                 </div>
-            </article>
+            </div>
         `;
     }).join('');
 }
 
 function resetResourceFilters() {
-    activeCategory = 'all';
-    activeEconomy = 'all';
-    searchQuery = '';
+    activeResourceCategory = 'all';
+    activeResourceEconomy = 'all';
+    currentSearchQuery = '';
 
     const searchInput = document.getElementById('resource-search-input');
     if (searchInput) searchInput.value = '';
@@ -164,10 +213,5 @@ function resetResourceFilters() {
         else b.classList.remove('active');
     });
 
-    renderResources();
+    renderResourcesGrid();
 }
-
-window.initResourcesHub     = initResourcesHub;
-window.renderResources      = renderResources;
-window.resetResourceFilters = resetResourceFilters;
-window.handleResourceImgError = handleResourceImgError;
