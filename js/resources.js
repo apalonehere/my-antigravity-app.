@@ -12,8 +12,8 @@ const resourcesData = [
         readTime: "Instagram Reel • Watch",
         date: "July 2026",
         summary: "Featured Instagram reel recap of the Eco Leaders Workshop — empowering young Barbadian leaders in sustainability, environmental stewardship, and community climate action.",
-        imageUrl: "Thumbnail.png", // Dedicated thumbnail picture file from project folder
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('Thumbnail.png') center/cover no-repeat",
+        imageUrl: "/Thumbnail.png", // Root-relative path — resolves on all routes/deployments
+        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/Thumbnail.png') center/cover no-repeat",
         previewVisual: "▶",
         link: "https://www.instagram.com/p/DZbEuNSD4ht/",
         actionLabel: "Watch on Instagram"
@@ -96,7 +96,7 @@ function renderResources() {
         const isExternal = item.link && item.link.startsWith('http');
         const linkAttrs = isExternal 
             ? 'target="_blank" rel="noopener"' 
-            : `onclick="switchView('${item.link.replace('#','')}')"`;
+            : `onclick="switchView('${item.link.replace('#','')}')"` ;
 
         const defaultLabel = item.category === 'video' ? 'Watch Video' 
             : item.category === 'workshop' ? 'Explore Workshop' 
@@ -155,3 +155,7 @@ function resetResourceFilters() {
 
     renderResources();
 }
+
+window.initResourcesHub     = initResourcesHub;
+window.renderResources      = renderResources;
+window.resetResourceFilters = resetResourceFilters;
