@@ -1,6 +1,6 @@
-// --- Navigation & Router Module ---
+// --- Navigation & Hash Router Module with Strict Section Isolation & Passkey Guards ---
 function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-link, [data-tab]');
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const tabId = link.getAttribute('data-tab');
@@ -14,18 +14,54 @@ function initNavigation() {
 }
 
 function switchView(viewId) {
+    // Standardize view aliases
+    if (viewId === 'admin' || viewId === 'admin-login') {
+        const isAuth = typeof checkAuth === 'function' ? checkAuth('admin') : false;
+        viewId = isAuth ? 'admin-environmental' : 'login';
+    } else if (viewId === 'impact-hub') {
+        viewId = 'dashboard';
+    } else if (viewId === 'teams') {
+        viewId = 'team';
+    } else if (viewId === 'apply-now') {
+        viewId = 'apply';
+    } else if (viewId === 'match-quiz') {
+        viewId = 'quiz';
+    }
+
+    // Protected Admin Route Guard
+    const isAdminRoute = viewId.startsWith('admin-') || ['admin-impact', 'admin-environmental', 'admin-milestones'].includes(viewId);
+    if (isAdminRoute) {
+        const isAuthorized = typeof checkAuth === 'function' ? checkAuth('admin') : false;
+        if (!isAuthorized) {
+            console.warn(`Access Denied to protected route: #${viewId}. Redirecting to passkey login.`);
+            viewId = 'login';
+            window.location.hash = 'login';
+        }
+    }
+
     const views = document.querySelectorAll('.app-view');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    let targetFound = false;
     views.forEach(view => {
         if (view.id === `view-${viewId}`) {
             view.classList.add('active');
             view.style.display = 'block';
+            targetFound = true;
         } else {
             view.classList.remove('active');
             view.style.display = 'none';
         }
     });
+
+    if (!targetFound && views.length > 0) {
+        // Fallback to home if unknown route
+        const homeView = document.getElementById('view-home');
+        if (homeView) {
+            homeView.classList.add('active');
+            homeView.style.display = 'block';
+        }
+    }
 
     navLinks.forEach(link => {
         if (link.getAttribute('data-tab') === viewId) {
@@ -44,8 +80,11 @@ function initHashRouter() {
         if (hash) {
             if (['water', 'cyen', 'ecovillage', 'yots', 'pinelands'].includes(hash)) {
                 switchView('programmes');
-                openProgram(hash);
-            } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
+                if (typeof openProgram === 'function') openProgram(hash);
+            } else if (['admin', 'admin-login'].includes(hash)) {
+                const isAuth = typeof checkAuth === 'function' ? checkAuth('admin') : false;
+                switchView(isAuth ? 'admin-environmental' : 'login');
+            } else if (['home', 'programmes', 'team', 'teams', 'dashboard', 'impact-hub', 'resources', 'quiz', 'match-quiz', 'apply', 'apply-now', 'login', 'forbidden', 'admin-impact', 'admin-environmental', 'admin-milestones'].includes(hash)) {
                 switchView(hash);
             }
         }
@@ -73,3 +112,8 @@ function initMobileMenu() {
         });
     }
 }
+
+window.initNavigation = initNavigation;
+window.switchView = switchView;
+window.initHashRouter = initHashRouter;
+window.initMobileMenu = initMobileMenu;
