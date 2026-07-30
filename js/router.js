@@ -112,8 +112,12 @@ function initNavigation() {
 }
 
 function switchView(viewId) {
-    if ((viewId === 'login' || viewId === 'admin') && !isAdminAuthenticated() && viewId !== 'login') {
-        viewId = 'login';
+    if (viewId === 'admin' || viewId === 'login') {
+        if (!isAdminAuthenticated()) {
+            viewId = 'login';
+        } else {
+            viewId = 'admin';
+        }
     }
 
     const views = document.querySelectorAll('.app-view');
@@ -161,6 +165,8 @@ function initHashRouter() {
                 switchView('programmes');
                 if (typeof openProgram === 'function') openProgram(hash);
             } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
+                switchView(hash);
+            } else if (hash === 'admin' || hash === 'login') {
                 switchView(hash);
             }
         }
