@@ -18,12 +18,13 @@ while ($true) {
     if (Test-Path $filePath -PathType Leaf) {
         $bytes = [System.IO.File]::ReadAllBytes($filePath)
         $ext = [System.IO.Path]::GetExtension($filePath)
-        $ct = switch ($ext) {
+        $ct = switch ($ext.ToLower()) {
             '.html' { 'text/html; charset=utf-8' }
             '.css'  { 'text/css; charset=utf-8' }
             '.js'   { 'application/javascript; charset=utf-8' }
             '.png'  { 'image/png' }
             '.jpg'  { 'image/jpeg' }
+            '.jpeg' { 'image/jpeg' }
             '.svg'  { 'image/svg+xml' }
             default { 'application/octet-stream' }
         }
@@ -31,9 +32,18 @@ while ($true) {
         $res.ContentLength64 = $bytes.Length
         $res.OutputStream.Write($bytes, 0, $bytes.Length)
     } else {
-        $res.StatusCode = 404
-        $msg = [System.Text.Encoding]::UTF8.GetBytes('404 Not Found')
-        $res.OutputStream.Write($msg, 0, $msg.Length)
+        $ext = [System.IO.Path]::GetExtension($filePath)
+        if ($ext -eq '' -and (Test-Path (Join-Path $root 'index.html'))) {
+            $indexPath = Join-Path $root 'index.html'
+            $bytes = [System.IO.File]::ReadAllBytes($indexPath)
+            $res.ContentType = 'text/html; charset=utf-8'
+            $res.ContentLength64 = $bytes.Length
+            $res.OutputStream.Write($bytes, 0, $bytes.Length)
+        } else {
+            $res.StatusCode = 404
+            $msg = [System.Text.Encoding]::UTF8.GetBytes('404 Not Found')
+            $res.OutputStream.Write($msg, 0, $msg.Length)
+        }
     }
 
     $res.Close()
