@@ -143,6 +143,13 @@ function switchView(viewId) {
         }
     });
 
+    if (viewId === 'admin' && typeof switchAdminTab === 'function') {
+        const activeTabBtn = document.querySelector('.admin-portal-tab-btn.active') || document.querySelector('.admin-portal-tab-btn');
+        const activePane = document.querySelector('.admin-tab-pane.active');
+        const targetTab = activePane ? activePane.id.replace('admin-tab-', '') : 'schedules';
+        switchAdminTab(targetTab, activeTabBtn);
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
