@@ -255,3 +255,11 @@
     background: rgba(225, 48, 108, 0.85);
     border-color: #ffffff;
 }
+
+/* Header Logo Image Sizing Guardrail */
+.header-logo-img {
+    height: 42px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+}
