@@ -17,7 +17,7 @@ function getAdminPin() {
     if (typeof window !== 'undefined' && window.ADMIN_PIN) {
         return window.ADMIN_PIN;
     }
-    return "2026-GREEN-RISING";
+    return '1234';
 }
 
 function updateAuthUI() {
@@ -77,9 +77,7 @@ function handleLoginSubmit(event) {
     const enteredPin = pinInput ? pinInput.value.trim() : '';
     const validPin = getAdminPin();
 
-    const isMatch = (enteredPin === validPin) || (enteredPin === '1234') || (enteredPin === '2026-GREEN-RISING');
-
-    if (isMatch) {
+    if (enteredPin === validPin) {
         localStorage.setItem('isAdminAuthenticated', 'true');
         localStorage.setItem('admin_auth', 'true');
         window.isAuthenticated = true;
@@ -114,12 +112,8 @@ function initNavigation() {
 }
 
 function switchView(viewId) {
-    if (viewId === 'admin' || viewId === 'login') {
-        if (!isAdminAuthenticated()) {
-            viewId = 'login';
-        } else {
-            viewId = 'admin';
-        }
+    if ((viewId === 'login' || viewId === 'admin') && !isAdminAuthenticated() && viewId !== 'login') {
+        viewId = 'login';
     }
 
     const views = document.querySelectorAll('.app-view');
@@ -143,47 +137,38 @@ function switchView(viewId) {
         }
     });
 
-    if (viewId === 'admin' && typeof switchAdminTab === 'function') {
-        const activeTabBtn = document.querySelector('.admin-portal-tab-btn.active') || document.querySelector('.admin-portal-tab-btn');
-        const activePane = document.querySelector('.admin-tab-pane.active');
-        const targetTab = activePane ? activePane.id.replace('admin-tab-', '') : 'schedules';
-        switchAdminTab(targetTab, activeTabBtn);
-    }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function handleRoute() {
-    const hash = window.location.hash.substring(1);
-    const pathname = window.location.pathname;
-
-    updateAuthUI();
-
-    if (hash === 'login' || hash === 'admin' || pathname === '/admin' || pathname.endsWith('/admin')) {
-        if (!isAdminAuthenticated()) {
-            switchView('login');
-        } else {
-            switchView('admin');
-        }
-        return;
-    }
-
-    if (hash) {
-        if (['water', 'cyen', 'ecovillage', 'yots', 'pinelands'].includes(hash)) {
-            switchView('programmes');
-            if (typeof openProgram === 'function') openProgram(hash);
-        } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
-            switchView(hash);
-        } else if (hash === 'admin' || hash === 'login') {
-            switchView(hash);
-        }
-    }
-}
-
 function initHashRouter() {
-    window.addEventListener('hashchange', handleRoute);
-    window.addEventListener('popstate', handleRoute);
-    handleRoute();
+    const handleHash = () => {
+        const hash = window.location.hash.substring(1);
+        const pathname = window.location.pathname;
+
+        updateAuthUI();
+
+        if (hash === 'login' || hash === 'admin' || pathname === '/admin' || pathname.endsWith('/admin')) {
+            if (!isAdminAuthenticated()) {
+                switchView('login');
+            } else {
+                switchView('admin');
+            }
+            return;
+        }
+
+        if (hash) {
+            if (['water', 'cyen', 'ecovillage', 'yots', 'pinelands'].includes(hash)) {
+                switchView('programmes');
+                if (typeof openProgram === 'function') openProgram(hash);
+            } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
+                switchView(hash);
+            }
+        }
+    };
+    
+    window.addEventListener('hashchange', handleHash);
+    window.addEventListener('popstate', handleHash);
+    handleHash();
 }
 
 function initMobileMenu() {
@@ -203,9 +188,4 @@ function initMobileMenu() {
             });
         });
     }
-}
-
-// Immediate invocation at script load time for instant Vercel route evaluation
-if (typeof handleRoute === 'function') {
-    handleRoute();
 }

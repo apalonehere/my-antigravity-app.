@@ -255,17 +255,3 @@
     background: rgba(225, 48, 108, 0.85);
     border-color: #ffffff;
 }
-
-/* Explicit Admin View & Tab Pane Display Guardrails */
-#view-admin.active,
-#view-login.active {
-    display: block !important;
-}
-
-.admin-tab-pane {
-    display: none;
-}
-
-.admin-tab-pane.active {
-    display: block !important;
-}
