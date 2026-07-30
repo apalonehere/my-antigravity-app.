@@ -144,37 +144,37 @@ function switchView(viewId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function handleRoute() {
+    const hash = window.location.hash.substring(1);
+    const pathname = window.location.pathname;
+
+    updateAuthUI();
+
+    if (hash === 'login' || hash === 'admin' || pathname === '/admin' || pathname.endsWith('/admin')) {
+        if (!isAdminAuthenticated()) {
+            switchView('login');
+        } else {
+            switchView('admin');
+        }
+        return;
+    }
+
+    if (hash) {
+        if (['water', 'cyen', 'ecovillage', 'yots', 'pinelands'].includes(hash)) {
+            switchView('programmes');
+            if (typeof openProgram === 'function') openProgram(hash);
+        } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
+            switchView(hash);
+        } else if (hash === 'admin' || hash === 'login') {
+            switchView(hash);
+        }
+    }
+}
+
 function initHashRouter() {
-    const handleHash = () => {
-        const hash = window.location.hash.substring(1);
-        const pathname = window.location.pathname;
-
-        updateAuthUI();
-
-        if (hash === 'login' || hash === 'admin' || pathname === '/admin' || pathname.endsWith('/admin')) {
-            if (!isAdminAuthenticated()) {
-                switchView('login');
-            } else {
-                switchView('admin');
-            }
-            return;
-        }
-
-        if (hash) {
-            if (['water', 'cyen', 'ecovillage', 'yots', 'pinelands'].includes(hash)) {
-                switchView('programmes');
-                if (typeof openProgram === 'function') openProgram(hash);
-            } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
-                switchView(hash);
-            } else if (hash === 'admin' || hash === 'login') {
-                switchView(hash);
-            }
-        }
-    };
-    
-    window.addEventListener('hashchange', handleHash);
-    window.addEventListener('popstate', handleHash);
-    handleHash();
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate', handleRoute);
+    handleRoute();
 }
 
 function initMobileMenu() {
@@ -194,4 +194,9 @@ function initMobileMenu() {
             });
         });
     }
+}
+
+// Immediate invocation at script load time for instant Vercel route evaluation
+if (typeof handleRoute === 'function') {
+    handleRoute();
 }
