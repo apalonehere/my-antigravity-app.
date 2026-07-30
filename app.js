@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initProgrammeSubTabs();
     initVillageTabs();
     if (typeof initResourcesHub === 'function') initResourcesHub();
+    if (typeof initImpactMetrics === 'function') initImpactMetrics();
+    if (typeof initSchedulesModule === 'function') initSchedulesModule();
+    if (typeof initAdminTabsModules === 'function') initAdminTabsModules();
     initHashRouter();
     initScrollReveal();
     initRippleEffect();
@@ -16,117 +19,99 @@ document.addEventListener('DOMContentLoaded', () => {
 function initScrollReveal() {
     const revealTargets = [
         { selector: '.program-card',         delay: true },
-        { selector: '.home-impact-brief',    delay: false },
         { selector: '.stat-item',            delay: true },
-        { selector: '.glass',                delay: false },
-        { selector: '.pinelands-card',       delay: true },
+        { selector: '.village-card',         delay: true },
         { selector: '.matrix-item',          delay: true },
-        { selector: '.resource-card',        delay: true },
-        { selector: '.wave-divider',         delay: false },
+        { selector: '.pinelands-card',       delay: true },
+        { selector: '.dash-metric-card',     delay: true }
     ];
 
-    revealTargets.forEach(({ selector, delay }) => {
-        document.querySelectorAll(selector).forEach((el, i) => {
-            el.classList.add('reveal');
-            if (delay && i < 6) el.classList.add(`reveal-delay-${(i % 4) + 1}`);
-        });
-    });
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.12
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
-
-// Liquid ripple on button clicks
-function initRippleEffect() {
-    document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.btn');
-        if (!btn) return;
-
-        const circle = document.createElement('span');
-        circle.classList.add('ripple-circle');
-        const rect = btn.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        circle.style.width = circle.style.height = size + 'px';
-        circle.style.left = (e.clientX - rect.left - size / 2) + 'px';
-        circle.style.top  = (e.clientY - rect.top  - size / 2) + 'px';
-        btn.appendChild(circle);
-        circle.addEventListener('animationend', () => circle.remove());
-    });
-}
-
-// Programmes Sub-Tabs Switching Helper
-function initProgrammeSubTabs() {
-    const subTabButtons = document.querySelectorAll('.sub-tab-btn');
-    subTabButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetProg = btn.getAttribute('data-prog');
-            openProgram(targetProg);
-        });
-    });
-}
-
-function openProgram(progId) {
-    const subTabButtons = document.querySelectorAll('.sub-tab-btn');
-    const programPanes = document.querySelectorAll('.prog-detail-pane');
-
-    subTabButtons.forEach(btn => {
-        if (btn.getAttribute('data-prog') === progId) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-
-    programPanes.forEach(pane => {
-        if (pane.id === `prog-${progId}`) {
-            pane.classList.add('active');
-        } else {
-            pane.classList.remove('active');
-        }
-    });
-    
-    switchView('programmes');
-}
-
-// Eco Village Zonal Tab Switching Helper
-function initVillageTabs() {
-    const villageTabButtons = document.querySelectorAll('.village-tab-btn');
-    const villageZones = document.querySelectorAll('.village-zone-pane');
-
-    villageTabButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const zoneId = btn.getAttribute('data-zone');
-            
-            villageTabButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            villageZones.forEach(pane => {
-                if (pane.id === `zone-${zoneId}`) {
-                    pane.classList.add('active');
-                } else {
-                    pane.classList.remove('active');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
                 }
             });
+        }, observerOptions);
+
+        revealTargets.forEach(target => {
+            const elements = document.querySelectorAll(target.selector);
+            elements.forEach((el, index) => {
+                el.classList.add('reveal-on-scroll');
+                if (target.delay) {
+                    el.style.transitionDelay = `${(index % 4) * 0.12}s`;
+                }
+                observer.observe(el);
+            });
+        });
+    } else {
+        // Fallback for browsers without IntersectionObserver
+        document.querySelectorAll('.program-card, .stat-item, .village-card, .matrix-item, .pinelands-card, .dash-metric-card')
+            .forEach(el => el.classList.add('revealed'));
+    }
+}
+
+// Button ripple feedback effect
+function initRippleEffect() {
+    document.querySelectorAll('.btn-primary, .btn-secondary, .program-card, .team-filter-btn').forEach(button => {
+        button.addEventListener('click', function (e) {
+            const rect = this.getBoundingClientRect();
+            const circle = document.createElement('span');
+            const diameter = Math.max(rect.width, rect.height);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${e.clientX - rect.left - radius}px`;
+            circle.style.top = `${e.clientY - rect.top - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = this.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            this.appendChild(circle);
         });
     });
 }
 
-// Accordion toggle helper
+// Global Accordions helper
 function toggleAccordion(button) {
-    const activeHeader = button.parentElement.parentElement.querySelector('.accordion-header.active');
-    if (activeHeader && activeHeader !== button) {
-        activeHeader.classList.remove('active');
-        activeHeader.nextElementSibling.classList.remove('show');
-    }
-    
-    button.classList.toggle('active');
     const content = button.nextElementSibling;
-    if (content) content.classList.toggle('show');
+    const isShow = content.classList.contains('show');
+
+    // Close all other accordion items in the same container
+    const parent = button.closest('.accordion');
+    if (parent) {
+        parent.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+        parent.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('show'));
+    }
+
+    if (!isShow) {
+        button.classList.add('active');
+        content.classList.add('show');
+    }
 }
+
+// Smooth scrolling for internal anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href && href !== '#') {
+            const targetId = href.substring(1);
+            const targetEl = document.getElementById(`view-${targetId}`) || document.getElementById(targetId);
+            if (targetEl) {
+                e.preventDefault();
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+});

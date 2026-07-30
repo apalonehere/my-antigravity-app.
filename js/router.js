@@ -24,7 +24,7 @@ function updateAuthUI() {
     const authenticated = isAdminAuthenticated();
     window.isAuthenticated = authenticated;
 
-    const adminElements = document.querySelectorAll('.admin-only, [data-admin="true"]');
+    const adminElements = document.querySelectorAll('.admin-only:not(.app-view), [data-admin="true"]:not(.app-view)');
     adminElements.forEach(el => {
         if (authenticated) {
             el.style.display = '';
@@ -39,6 +39,35 @@ function updateAuthUI() {
     if (adminTabBtn) {
         adminTabBtn.style.display = authenticated ? '' : 'none';
     }
+}
+
+function logoutAdmin() {
+    localStorage.removeItem('isAdminAuthenticated');
+    localStorage.removeItem('admin_auth');
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('admin_pin_auth');
+    window.isAuthenticated = false;
+    updateAuthUI();
+    switchView('home');
+    window.location.hash = 'home';
+}
+
+function switchAdminTab(tabId, btnEl) {
+    const tabBtns = document.querySelectorAll('.admin-portal-tab-btn');
+    const tabPanes = document.querySelectorAll('.admin-tab-pane');
+
+    tabBtns.forEach(btn => btn.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+
+    tabPanes.forEach(pane => {
+        if (pane.id === `admin-tab-${tabId}`) {
+            pane.classList.add('active');
+            pane.style.display = 'block';
+        } else {
+            pane.classList.remove('active');
+            pane.style.display = 'none';
+        }
+    });
 }
 
 function handleLoginSubmit(event) {
@@ -58,12 +87,8 @@ function handleLoginSubmit(event) {
         }
         if (pinInput) pinInput.value = '';
         updateAuthUI();
-        switchView('dashboard');
-        window.location.hash = 'dashboard';
-        if (typeof switchDashTab === 'function') {
-            const adminTabBtn = document.getElementById('dash-admin-tab-btn');
-            switchDashTab('admin', adminTabBtn);
-        }
+        switchView('admin');
+        window.location.hash = 'admin';
     } else {
         if (errorMsg) {
             errorMsg.style.display = 'block';
@@ -126,11 +151,7 @@ function initHashRouter() {
             if (!isAdminAuthenticated()) {
                 switchView('login');
             } else {
-                switchView('dashboard');
-                if (typeof switchDashTab === 'function') {
-                    const adminTabBtn = document.getElementById('dash-admin-tab-btn');
-                    switchDashTab('admin', adminTabBtn);
-                }
+                switchView('admin');
             }
             return;
         }
