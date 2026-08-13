@@ -1,0 +1,105 @@
+/* ============================================================
+   GREEN RISING — UTILITY CLASSES
+   Missing helpers referenced throughout index.html
+   ============================================================ */
+
+/* Visibility */
+.hidden { display: none !important; }
+
+/* Width helpers */
+.w-100 { width: 100%; }
+.w-50  { width: 50%; }
+
+/* Flex layouts */
+.flex-between  { display: flex; justify-content: space-between; align-items: center; }
+.flex-column   { display: flex; flex-direction: column; }
+.flex-center   { display: flex; align-items: center; justify-content: center; }
+.flex-wrap     { flex-wrap: wrap; }
+.align-center  { align-items: center; }
+
+/* Gap helpers */
+.gap-5  { gap: 5px; }
+.gap-10 { gap: 10px; }
+.gap-12 { gap: 12px; }
+.gap-15 { gap: 15px; }
+.gap-16 { gap: 16px; }
+.gap-20 { gap: 20px; }
+.gap-24 { gap: 24px; }
+.gap-30 { gap: 30px; }
+
+/* Text alignment */
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.text-left   { text-align: left; }
+
+/* Text helpers */
+.text-muted { color: var(--color-text-muted); }
+.small      { font-size: 0.9rem; }
+
+/* Margin top */
+.mt-5  { margin-top: 5px; }
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mt-25 { margin-top: 25px; }
+.mt-30 { margin-top: 30px; }
+.mt-40 { margin-top: 40px; }
+
+/* Margin bottom */
+.mb-5  { margin-bottom: 5px; }
+.mb-10 { margin-bottom: 10px; }
+.mb-15 { margin-bottom: 15px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-25 { margin-bottom: 25px; }
+.mb-30 { margin-bottom: 30px; }
+
+/* Padding helpers */
+.p-20  { padding: 20px; }
+.p-25  { padding: 25px; }
+.p-30  { padding: 30px; }
+.pt-20 { padding-top: 20px; }
+.pb-20 { padding-bottom: 20px; }
+
+/* Min-height viewport helpers */
+.min-vh-70 { min-height: 70vh; }
+.min-vh-50 { min-height: 50vh; }
+
+/* 2-column responsive grid */
+.grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+/* Badge orange (used in admin portal headers) */
+.badge-orange {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(234, 88, 12, 0.12);
+    border: 1px solid rgba(234, 88, 12, 0.3);
+    color: var(--color-orange);
+    font-weight: 700;
+    font-size: 0.82rem;
+    font-family: var(--font-heading);
+}
+
+/* Header Quick Apply button - visible on desktop only; mobile uses the nav pill */
+.header-apply-btn {
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+@media (max-width: 1150px) {
+    .header-apply-btn {
+        display: none !important;
+    }
+}

@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Green Rising Barbados - Future Barbados Youth Climate Engine. Empowering youth through Tomorrow's Reef underwater museum, Climate Dash & Eco-Village, and Pinelands Creative Workshop.">
+    <title>Green Rising Barbados | Future Barbados Youth Climate Engine</title>
+    <!-- Google Fonts: Outfit (Headings) and Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="preload" as="image" href="images/climate-dash-bg.png">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="#home" class="logo-lockup" id="nav-logo" onclick="switchView('home')">
+                <img src="images/logo.png" alt="Green Rising Barbados" class="header-logo-img"
+                    onerror="this.style.display='none';">
+                <div class="brand-text-block">
+                    <span class="brand-name">GREEN RISING</span>
+                    <span class="brand-subtitle-header">Youth Climate Engine</span>
+                </div>
+            </a>
+
+            <!-- Header Controls & Actions -->
+            <div class="header-controls">
+                <!-- Navigation Links -->
+                <nav class="main-nav" id="main-navigation">
+                    <ul>
+                        <li><a href="#home" class="nav-link active" data-tab="home">Home</a></li>
+                        <li><a href="#programmes" class="nav-link" data-tab="programmes">Programmes</a></li>
+                        <li><a href="#team" class="nav-link" data-tab="team">Team</a></li>
+                        <li><a href="#dashboard" class="nav-link" data-tab="dashboard">Impact Hub</a></li>
+                        <li><a href="#resources" class="nav-link" data-tab="resources">Resources</a></li>
+                        <li><a href="#quiz" class="nav-link" data-tab="quiz">Match Quiz</a></li>
+                        <li class="admin-only" style="display: none;"><a href="#admin" class="nav-link nav-admin-link"
+                                data-tab="admin"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="margin-right: 4px; vertical-align: text-bottom;"><path fill="currentColor" d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 10 0v2h1m-6-4a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/></svg>Admin Portal</a></li>
+                        <li><a href="#apply" class="btn btn-primary nav-apply-btn nav-link" id="quick-apply-btn"
+                                data-tab="apply">Apply Now</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Light / Dark Mode Switch Pill -->
+                <button class="theme-toggle-pill" id="header-theme-toggle" onclick="toggleTheme()"
+                    aria-label="Toggle Light and Dark Mode" title="Toggle Light/Dark Mode">
+                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="vertical-align: text-bottom; margin-right: 4px;"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3Z"/></svg><span class="theme-text">Dark Mode</span>
+                </button>
+
+                <!-- Mobile Hamburger Menu Toggle -->
+                <button class="mobile-toggle" aria-label="Toggle Navigation" id="mobile-toggle-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Floating Action Button for Application (Mobile Friendly) -->
+    <a href="#apply" class="floating-apply-btn" id="floating-apply" title="Quick Register">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+        </svg>
+        <span>Quick Apply</span>
+    </a>
+
+    <!-- Main Content Container -->
+    <main class="content-wrapper">
+
+        <!-- 1. HOME VIEW -->
+        <section id="view-home" class="app-view active">
+            <!-- Hero Banner -->
+            <section class="hero-section">
+                <!-- Hero Background Image -->
+                <div class="hero-img-bg-container">
+                    <img src="images/hero-bg.jpg" alt="Green Rising Hero" class="hero-img-bg"
+                        onerror="this.style.display='none';">
+                </div>
+                <div class="hero-video-overlay"></div>
+
+                <!-- Organic floating orbs -->
+                <div class="hero-orb hero-orb-1"></div>
+                <div class="hero-orb hero-orb-2"></div>
+                <div class="hero-orb hero-orb-3"></div>
+                <div class="hero-content text-center">
+                    <div class="ministry-badge">
+                        Ministry of Industry, Innovation, Health Technology and Science (Barbados)
+                    </div>
+                    <h1 class="hero-title">Empowering youth to drive the <span class="gradient-text-blue">Blue-Green
+                            Economy</span></h1>
+                    <p class="hero-description">
+                        Green Rising is Future Barbados's youth climate engine. We train, skill, and resource the next
+                        generation of Barbadians to tackle water scarcity, build eco-friendly marine vessels, and launch
+                        climate-smart enterprises.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#quiz" class="btn btn-primary btn-lg" onclick="switchView('quiz')">Find Your
+                            Programme</a>
+                        <a href="#programmes" class="btn btn-secondary btn-lg"
+                            onclick="switchView('programmes')">Explore Focus Areas</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wave divider: hero → programmes -->
+            <div class="wave-divider" aria-hidden="true">
+                <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#b2e0d6"
+                        opacity="0.5" />
+                    <path d="M0,55 C360,20 720,70 1080,30 C1260,10 1380,50 1440,55 L1440,80 L0,80 Z" fill="#a8d8ea"
+                        opacity="0.6" />
+                </svg>
+            </div>
+
+            <!-- Quick Program Overview Grid -->
+            <section class="home-programs container">
+                <h2 class="section-title text-center">Key Focus Areas</h2>
+                <p class="section-subtitle text-center">Click any card to explore curriculum, schedules, and pathways.
+                </p>
+
+                <div class="program-grid">
+                    <!-- Program: Tomorrow's Reef -->
+                    <div class="program-card glass" onclick="openProgram('tomorrowsreef')">
+                        <div class="card-icon sea-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,14.4 18.9,16.5 17.2,18C15.8,16.7 13.9,16 12,16C10.1,16 8.2,16.7 6.8,18C5.1,16.5 4,14.4 4,12A8,8 0 0,1 12,4Z" />
+                            </svg>
+                        </div>
+                        <h3>Tomorrow's Reef</h3>
+                        <p>Barbados' first youth-designed underwater heritage reef & founding installation of the Oceana
+                            Innovation Hub Underwater Museum.</p>
+                        <span class="card-link">Explore Area &rarr;</span>
+                    </div>
+                    <!-- Program 3 -->
+                    <div class="program-card glass" onclick="openProgram('ecovillage')">
+                        <div class="card-icon village-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14,7.7 15.6,9.3 15.6,11.3C15.6,13.3 12,17.5 12,17.5C12,17.5 8.4,13.3 8.4,11.3C8.4,9.3 10,7.7 12,7.7Z" />
+                            </svg>
+                        </div>
+                        <h3>Climate Dash & Eco-Village</h3>
+                        <p>A themed 3K run through Barbados' environmental frontlines paired with a festival-style
+                            village across 3 zones: Planet & Greening, People & Learning, and Earn & Grow.</p>
+                        <span class="card-link">Explore Area &rarr;</span>
+                    </div>
+
+                    <!-- Program 5 -->
+                    <div class="program-card glass border-orange-accent" onclick="openProgram('pinelands')">
+                        <div class="card-icon fair-icon">
+                            <svg viewBox="0 0 24 24" width="40" height="40">
+                                <path fill="currentColor"
+                                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
+                            </svg>
+                        </div>
+                        <div class="flex-between align-center mb-10">
+                            <h3>Pinelands Workshops</h3>
+                            <span class="tag-orange">Orange Economy &amp; Tech</span>
+                        </div>
+                        <p>A 6-zone dynamic career pavilion spanning creative industries, digital media,
+                            entrepreneurship, and performance careers.</p>
+                        <span class="card-link" style="color:var(--color-orange);">Explore Creative &amp; Tech Pavilion
+                            &rarr;</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Highlight Statistics Widget Section (Centered Impact Hub Visual) -->
+            <div class="home-impact-section-wrapper">
+                <section class="home-impact-brief glass">
+                    <div class="flex-column text-center">
+                        <h2>Our Impact in Numbers</h2>
+                        <p>Real-time outcomes tracked directly from our community programs across Barbados.</p>
+                    </div>
+                    <div class="stats-strip">
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-youth">242</div>
+                            <div class="stat-label">Youth Trained</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-water">85,210</div>
+                            <div class="stat-label">Gal Water Saved</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-boats">4</div>
+                            <div class="stat-label">Boats Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="brief-stat-jobs">32</div>
+                            <div class="stat-label">Jobs Created</div>
+                        </div>
+                    </div>
+                    <div class="text-center pt-20">
+                        <a href="#dashboard" class="btn btn-secondary" onclick="switchView('dashboard')">View Full
+                            Impact Hub</a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Meet the Team Section on Home Page -->
+            <section id="home-team-section" class="container mt-40">
+                <div class="flex-column text-center mb-30">
+                    <span class="category-tag">Our People</span>
+                    <h2>Meet the Leadership &amp; Mentors</h2>
+                    <p class="lead">The dedicated team driving Barbados's youth-led climate engine and blue-green
+                        transition.</p>
+                </div>
+
+                <!-- Team Category Filter Buttons -->
+                <div class="team-filters">
+                    <button class="team-filter-btn active" onclick="filterTeam('all', this)">All Members</button>
+                    <button class="team-filter-btn" onclick="filterTeam('leadership', this)">Leadership</button>
+                    <button class="team-filter-btn" onclick="filterTeam('coordinator', this)">Coordinators</button>
+                    <button class="team-filter-btn" onclick="filterTeam('mentor', this)">Technical Mentors</button>
+                    <button class="team-filter-btn" onclick="filterTeam('champion', this)">Youth Champions</button>
+                </div>
+
+                <!-- Team Grid Cards -->
+                <div class="team-grid" id="team-cards-container-home">
+
+                    <!-- Member 1: Dr. Crystal Drakes -->
+                    <div class="team-card glass" data-category="leadership">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">CD</div>
+                        </div>
+                        <div class="team-name">Dr. Crystal Drakes</div>
+                        <span class="team-role">Chairperson</span>
+                        <p class="team-bio">Leading strategic governance, policy frameworks, and island-wide climate
+                            resilience direction for Future Barbados and Green Rising.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#Leadership</span>
+                            <span class="team-tag">#Chairperson</span>
+                            <span class="team-tag">#ClimateGovernance</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 2: Myrico Morris -->
+                    <div class="team-card glass" data-category="coordinator">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">MM</div>
+                        </div>
+                        <div class="team-name">Myrico Morris</div>
+                        <span class="team-role">Project Coordinator &amp; Community Activation Lead</span>
+                        <p class="team-bio">Overseeing cohort operations, youth community activation, field execution,
+                            and flagship environmental events across Barbados.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#Operations</span>
+                            <span class="team-tag">#CommunityActivation</span>
+                            <span class="team-tag">#ProjectLead</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 3: Shanice Haynes -->
+                    <div class="team-card glass" data-category="coordinator">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">SH</div>
+                        </div>
+                        <div class="team-name">Shanice Haynes</div>
+                        <span class="team-role">Project Officer</span>
+                        <p class="team-bio">Managing day-to-day project workflows, youth cohort engagement, partner
+                            coordination, and field initiative logistics.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#ProjectOfficer</span>
+                            <span class="team-tag">#YouthEngagement</span>
+                            <span class="team-tag">#Operations</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 4: Nicole Hazel -->
+                    <div class="team-card glass" data-category="mentor">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">NH</div>
+                        </div>
+                        <div class="team-name">Nicole Hazel</div>
+                        <span class="team-role">Monitoring &amp; Evaluation Specialist</span>
+                        <p class="team-bio">Tracking impact metrics, data analysis, programme evaluation, and climate
+                            action reporting across all project focus areas.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#DataAnalytics</span>
+                            <span class="team-tag">#ImpactEvaluation</span>
+                            <span class="team-tag">#M&amp;ESpecialist</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 5: Deborah Lawrance -->
+                    <div class="team-card glass" data-category="leadership">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">DL</div>
+                        </div>
+                        <div class="team-name">Deborah Lawrance</div>
+                        <span class="team-role">Administration &amp; Finance Consultant</span>
+                        <p class="team-bio">Directing administrative systems, financial management, governance
+                            compliance, and fiscal allocation across initiatives.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#Finance</span>
+                            <span class="team-tag">#Administration</span>
+                            <span class="team-tag">#Governance</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </section>
+
+        <!-- 2. PROGRAMMES DETAIL VIEW -->
+        <section id="view-programmes" class="app-view">
+            <div class="container">
+                <!-- Program Section Navigation Tab List -->
+                <div class="programme-sub-tabs">
+                    <button class="sub-tab-btn active" data-prog="tomorrowsreef">Tomorrow's Reef</button>
+                    <button class="sub-tab-btn" data-prog="ecovillage">Climate Dash & Eco-Village</button>
+                    <button class="sub-tab-btn" data-prog="pinelands">Pinelands Pavilion</button>
+                </div>
+
+                <!-- SUB-VIEW: Tomorrow's Reef -->
+                <div id="prog-tomorrowsreef" class="prog-detail-pane active">
+                    <!-- Full-Page Fixed Artwork Background Overlay Layer -->
+                    <div class="reef-fullpage-bg-layer"></div>
+
+                    <!-- Main Content Wrapper Layer -->
+                    <div class="reef-main-content-wrapper">
+                        <!-- Fluid Top Banner Header Section -->
+                        <div class="tomorrows-reef-header">
+                            <div class="header-content-layer">
+                                <span class="reef-badge-pill">Focus Area 1 · Marine Heritage & Blue Economy</span>
+                                <h2>Tomorrow's Reef</h2>
+                                <p class="lead">Barbados' First Youth-Designed Underwater Heritage Reef & Founding Installation of the Oceana Innovation Hub Underwater Museum.</p>
+
+                                <!-- Campaign Theme Quote Badge -->
+                                <div class="reef-campaign-pill">
+                                    <span class="reef-campaign-badge">Campaign Theme</span>
+                                    <strong class="reef-campaign-quote">"Designed by Barbados. Growing for Tomorrow."</strong>
+                                </div>
+
+                                <!-- HIGH-IMPACT HORIZONTAL KEY INFO BAR / STATS ROW -->
+                                <div class="reef-key-info-bar glass">
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper green">📅</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Proposed Unveiling Date</span>
+                                            <strong class="info-value">Friday, Nov 27, 2026</strong>
+                                            <span class="info-sub">60th Independence & 5th Republic Year</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-bar-divider"></div>
+
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper blue">📍</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Location & Waters</span>
+                                            <strong class="info-value">Carlisle Bay Marine Reserve</strong>
+                                            <span class="info-sub">Oceana Innovation Hub Waters</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-bar-divider"></div>
+
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper teal">🪸</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Target Reach & Impact</span>
+                                            <strong class="info-value">300+ Youth & Divers</strong>
+                                            <span class="info-sub">50–100 Blue Ambassadors & BCC Artists</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-bar-divider"></div>
+
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper orange">🎨</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Lead Design Partner</span>
+                                            <strong class="info-value">BCC Fine Arts Programme</strong>
+                                            <span class="info-sub">Student & Faculty Sculptors</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERVIEW & LANDMARK VISION (Collapsible Progressive Disclosure Accordion) -->
+                        <div class="reef-overview-section mt-25">
+                            <details class="reef-accordion glass" open>
+                                <summary class="reef-accordion-header">
+                                    <div class="summary-title-group">
+                                        <span class="summary-badge">Landmark Vision</span>
+                                        <h3>Overview & Landmark Independence Vision</h3>
+                                    </div>
+                                    <div class="summary-toggle-icon">
+                                        <span class="toggle-text">Toggle Details</span>
+                                        <svg class="chevron-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+                                    </div>
+                                </summary>
+                                <div class="reef-accordion-content">
+                                    <div class="grid-2col gap-24 align-center">
+                                        <div>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">As Barbados marks its <strong>60th Anniversary of Independence</strong> and 5th year as a Republic in 2026, <strong>Tomorrow’s Reef</strong> stands as a landmark climate legacy initiative. Led by Green Rising Barbados, this flagship project merges youth leadership, cultural heritage, and marine conservation into a permanent underwater cultural monument.</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">Designed and fabricated by students and faculty from the <strong>Barbados Community College (BCC) Fine Arts Programme</strong>, the large-scale sculpture will be deployed off the coast using pH-neutral marine concrete. Over time, it will be colonized by corals and marine life, transforming public art into a living, thriving artificial reef.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- 4 KEY PILLARS (Responsive Bento Grid) -->
+                        <div class="reef-bento-section mt-30">
+                            <div class="section-header-inline flex-between align-center mb-20 flex-wrap gap-10">
+                                <div>
+                                    <span class="category-tag">Strategic Foundation</span>
+                                    <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Key Pillars & Impact Dimensions</h3>
+                                </div>
+                                <span class="small text-muted">Visual Bento Layout</span>
+                            </div>
+
+                            <div class="reef-bento-grid">
+                                <!-- Bento Card 1: Hero Primary Ecological Pillar -->
+                                <div class="bento-card bento-hero bento-span-7 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge green">🪸</div>
+                                        <span class="bento-pill-tag green">Primary Ecological Goal</span>
+                                    </div>
+                                    <h4>Environmental Restoration & Habitat Recovery</h4>
+                                    <p>Restores degraded marine habitats, accelerates coral recruitment, and creates an active subsea monitoring site for marine scientists and the Coastal Zone Management Unit (CZMU).</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">🪸 Coral Recruitment</span>
+                                        <span class="bento-chip">🔬 Subsea Telemetry</span>
+                                        <span class="bento-chip">🏗️ Marine Concrete</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bento Card 2: Youth Empowerment -->
+                                <div class="bento-card bento-span-5 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge blue">🎨</div>
+                                        <span class="bento-pill-tag blue">Youth Leadership</span>
+                                    </div>
+                                    <h4>Youth Empowerment & Artistry</h4>
+                                    <p>Places young Barbadians at the center of the blue economy as designers, sculptors, environmental ambassadors, and ocean storytellers.</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">🎨 BCC Fine Arts Residency</span>
+                                        <span class="bento-chip">🌊 50–100 Ambassadors</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bento Card 3: Cultural Legacy -->
+                                <div class="bento-card bento-span-5 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge gold">🇧🇧</div>
+                                        <span class="bento-pill-tag gold">60th Independence</span>
+                                    </div>
+                                    <h4>Cultural Legacy & Heritage</h4>
+                                    <p>Celebrates 60 years of Independence with motifs honoring Barbadian identity—featuring the Broken Trident, coral stone architecture, and indigenous marine fauna.</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">🔱 Broken Trident</span>
+                                        <span class="bento-chip">🏛️ Coral Architecture</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bento Card 4: Sustainable Tourism -->
+                                <div class="bento-card bento-teal bento-span-7 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge teal">🌊</div>
+                                        <span class="bento-pill-tag teal">Eco-Tourism Destination</span>
+                                    </div>
+                                    <h4>Sustainable Tourism & Underwater Museum</h4>
+                                    <p>Establishes the founding installation of the Oceana Innovation Hub Underwater Museum, creating a premier eco-tourism landmark for international divers and marine researchers.</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">🤿 Underwater Museum</span>
+                                        <span class="bento-chip">🎟️ Eco-Tourism</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PROJECT COMPONENTS (Horizontal Interactive Stepper / Timeline) -->
+                        <div class="reef-stepper-section mt-35">
+                            <div class="section-header-inline mb-20">
+                                <span class="category-tag">Implementation Roadmap</span>
+                                <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Phased Project Component Timeline</h3>
+                            </div>
+
+                            <div class="reef-stepper-container glass p-30">
+                                <div class="stepper-track-line"></div>
+                                <div class="stepper-grid">
+                                    <!-- Step 1 -->
+                                    <div class="stepper-card">
+                                        <div class="step-badge">
+                                            <span class="step-num">01</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time">June – August 2026</div>
+                                        <h4>BCC Design & Sculpture Residency</h4>
+                                        <p>Fine Arts students & faculty collaborate with sculptors and marine engineers to produce drawings, scale models, and reef-safe sculptures.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip">🎨 Scale Modeling</span>
+                                            <span class="step-chip">🔨 Sculptural Craft</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 2 -->
+                                    <div class="stepper-card">
+                                        <div class="step-badge">
+                                            <span class="step-num">02</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time">August – Sept 2026</div>
+                                        <h4>Fabrication & Coral Out-Planting</h4>
+                                        <p>Marine concrete fabrication engineered for wave resilience. Subsea deployment followed by targeted coral out-planting with CZMU.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip">🏗️ Concrete Casting</span>
+                                            <span class="step-chip">🪸 Coral Planting</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 3 -->
+                                    <div class="stepper-card">
+                                        <div class="step-badge">
+                                            <span class="step-num">03</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time">July – Nov 2026</div>
+                                        <h4>Youth Blue Ambassadors Programme</h4>
+                                        <p>Training 50–100 young leaders in marine conservation, reef telemetry monitoring, and climate advocacy via Oceana Blue Curriculum.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip">🌊 50–100 Ambassadors</span>
+                                            <span class="step-chip">📊 Reef Literacy</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 4 -->
+                                    <div class="stepper-card active-step">
+                                        <div class="step-badge highlight">
+                                            <span class="step-num">04</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time gold">November 27, 2026</div>
+                                        <h4>National Unveiling & Exhibition</h4>
+                                        <p>Official launch featuring Prime Minister Mottley, UNICEF, international development partners, and cultural leaders.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip gold">👑 Prime Minister Launch</span>
+                                            <span class="step-chip gold">🇧🇧 60th Independence</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STRATEGIC PARTNERS (Monochrome Logo Grid) -->
+                        <div class="reef-partners-section mt-35">
+                            <div class="glass p-30">
+                                <div class="flex-between align-center mb-20 wrap-gap">
+                                    <div>
+                                        <span class="category-tag">Collaborators</span>
+                                        <h3 class="mt-5 mb-0" style="font-size: 1.4rem;">Strategic & Media Partners</h3>
+                                    </div>
+                                    <span class="small text-muted">Cross-Sector Institutional Alliance</span>
+                                </div>
+
+                                <div class="reef-partner-logo-grid">
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🏛️</span>
+                                        <span class="tile-name">Government of Barbados</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🇺🇳</span>
+                                        <span class="tile-name">UNICEF</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🌊</span>
+                                        <span class="tile-name">Oceana Innovation Hub</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🎓</span>
+                                        <span class="tile-name">Barbados Community College</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🏝️</span>
+                                        <span class="tile-name">Coastal Zone Management Unit</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🌿</span>
+                                        <span class="tile-name">National Conservation Commission</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🏫</span>
+                                        <span class="tile-name">UWI Cave Hill Campus</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">📡</span>
+                                        <span class="tile-name">CBC & Barbados GIS</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TOMORROW'S REEF CTA BANNER -->
+                        <div class="eco-village-cta-banner glass mt-30">
+                            <div class="cta-content">
+                                <h3>Join the Youth Blue Ambassadors & Sculptural Legacy</h3>
+                                <p>Apply to become one of the 50–100 Youth Blue Ambassadors or collaborate on Tomorrow's Reef today.</p>
+                            </div>
+                            <div class="cta-actions">
+                                <button class="btn btn-primary" onclick="openApplyForm('tomorrowsreef')">Apply / Get Involved &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB-VIEW: Climate Dash x Climate Ninja Throwdown & Eco-Village -->
+                <div id="prog-ecovillage" class="prog-detail-pane">
+                    <!-- Fixed Full-Bleed Backdrop Overlay Layer -->
+                    <div class="dash-fullpage-bg-layer"></div>
+
+                    <!-- Main Content Wrapper Layer -->
+                    <div class="dash-main-content-wrapper">
+                        <!-- Fluid Top Banner Header Section -->
+                        <div class="ecovillage-header">
+                            <div class="header-content-layer">
+                                <span class="reef-badge-pill" style="background: rgba(112, 168, 59, 0.14); color: #65a30d; border-color: rgba(112, 168, 59, 0.3);">Focus Area 3 · Flagship Community Action Event</span>
+                                <h2 style="color: #65a30d;">Climate Dash x Climate Ninja Throwdown & Eco-Village</h2>
+                                <p class="lead">A themed 3K walk/run through Barbados' environmental frontlines, paired with the Climate Ninja Throwdown school preview and a festival-style Eco-Village at the Usain Bolt Sports Complex.</p>
+
+                                <!-- Campaign Theme Quote Badge -->
+                                <div class="reef-campaign-pill">
+                                    <span class="reef-campaign-badge" style="background: #65a30d;">Event Slogan</span>
+                                    <strong class="reef-campaign-quote">"Run for the Planet. Learn for the Future. Build the Blue Economy."</strong>
+                                </div>
+
+                                <!-- HIGH-IMPACT HORIZONTAL KEY INFO BAR / STATS ROW -->
+                                <div class="reef-key-info-bar glass">
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper green">📅</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Flagship Event Date</span>
+                                            <strong class="info-value">Friday, Oct 9, 2026</strong>
+                                            <span class="info-sub">3K Dash & Eco-Village Festival</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper blue">📍</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Event Location</span>
+                                            <strong class="info-value">Usain Bolt Complex</strong>
+                                            <span class="info-sub">St. Michael, Barbados</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper orange">🏃</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Target Turnout</span>
+                                            <strong class="info-value">~600 Runners + 60 Volunteers</strong>
+                                            <span class="info-sub">24 Secondary Schools (Ages 10–18)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-bar-item">
+                                        <div class="info-icon-wrapper teal">🏛️</div>
+                                        <div class="info-text-group">
+                                            <span class="info-label">Lead Supporters</span>
+                                            <strong class="info-value">PM Office & UNICEF</strong>
+                                            <span class="info-sub">Generation Unlimited Alliance</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OVERVIEW & EVENT VISION (Collapsible Progressive Disclosure Accordion) -->
+                        <div class="dash-overview-section mt-25">
+                            <details class="reef-accordion glass" open>
+                                <summary class="reef-accordion-header">
+                                    <div class="summary-title-group">
+                                        <span class="summary-badge">Flagship Event</span>
+                                        <h3>Overview & 3K Frontline Route Vision</h3>
+                                    </div>
+                                    <div class="summary-toggle-icon">
+                                        <span class="toggle-text">Toggle Details</span>
+                                        <svg class="chevron-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+                                    </div>
+                                </summary>
+                                <div class="reef-accordion-content">
+                                    <div class="grid-2col gap-24 align-center">
+                                        <div>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">The <strong>Climate Dash x Climate Ninja Throwdown</strong> is Barbados' premiere youth-led action event. Combining a themed 3K walk/run with interactive kilometre stations and an immersive festival-style Eco-Village, the event unites over 600 students from 21 public and 3 private secondary schools across the island.</p>
+                                        </div>
+                                        <div>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">Prior to event day, the Green Rising team executes the <strong>Climate Ninja Throwdown School Tour</strong> across 5–10 secondary schools—hosting high-energy assemblies, fitness warm-ups, and student registration drives that prepare youth for the Usain Bolt Sports Complex finale.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- 4 KEY EVENT PILLARS & ZONES (Responsive Bento Grid) -->
+                        <div class="dash-bento-section mt-30">
+                            <div class="section-header-inline flex-between align-center mb-20 flex-wrap gap-10">
+                                <div>
+                                    <span class="category-tag">Festival Architecture</span>
+                                    <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Eco-Village Zones & Strategic Impact</h3>
+                                </div>
+                                <span class="small text-muted">Bento Grid Layout</span>
+                            </div>
+
+                            <div class="reef-bento-grid">
+                                <!-- Bento Card 1: Planet & Greening Zone (Hero 7-column span) -->
+                                <div class="bento-card bento-hero bento-span-7 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge green">🌿</div>
+                                        <span class="bento-pill-tag green">Zone 01 · Environmental Frontlines</span>
+                                    </div>
+                                    <h4>Planet & Greening Zone</h4>
+                                    <p>Anchored in 5 environmental themes along the 3K route—featuring Kilometre-by-Kilometre installations (1KM Freshwater, 2KM Marine Conservation, 3KM Biodiversity & Soil), live restoration demos, and youth-designed creative signage.</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">💧 1KM Water Security</span>
+                                        <span class="bento-chip">🌊 2KM Marine Reefs</span>
+                                        <span class="bento-chip">🌱 3KM Soil & Flora</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bento Card 2: People & Learning Zone (5-column span) -->
+                                <div class="bento-card bento-span-5 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge blue">🧠</div>
+                                        <span class="bento-pill-tag blue">Zone 02 · Behavior Change</span>
+                                    </div>
+                                    <h4>People & Learning Zone</h4>
+                                    <p>Interactive educational route stations led by youth groups, live quizzes, NGO eco-workshops, spoken word poetry, and festival cultural showcases.</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">🎓 School Stations</span>
+                                        <span class="bento-chip">🎭 Cultural Eco-Theatre</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bento Card 3: Earn & Grow Zone (5-column span) -->
+                                <div class="bento-card bento-span-5 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge gold">💡</div>
+                                        <span class="bento-pill-tag gold">Zone 03 · Green Enterprise</span>
+                                    </div>
+                                    <h4>Earn & Grow Zone</h4>
+                                    <p>Marketplace featuring youth-led green technology exhibitions, sustainable vendors, micro-enterprise grant pitching, and green career pipeline matching.</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">💼 Green Job Pipelines</span>
+                                        <span class="bento-chip">🚀 Micro-Grant Demos</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bento Card 4: Strategic Goals & Building Toward (7-column span) -->
+                                <div class="bento-card bento-teal bento-span-7 glass">
+                                    <div class="bento-header flex-between align-center mb-15">
+                                        <div class="bento-icon-badge teal">🎯</div>
+                                        <span class="bento-pill-tag teal">Strategic Targets</span>
+                                    </div>
+                                    <h4>What It's Building Toward</h4>
+                                    <p>Driving 600+ student turnout, equipping youth with practical climate literacy, integrating 8+ frontline environmental agencies, and expanding GRB's 5,000-youth target by 2030.</p>
+                                    <div class="bento-chips-footer mt-15">
+                                        <span class="bento-chip">🏃 600+ Students</span>
+                                        <span class="bento-chip">🏫 24 Schools</span>
+                                        <span class="bento-chip">🤝 Institutional Alliance</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EVENT ROADMAP STEPPER (Horizontal Stepper / Timeline) -->
+                        <div class="dash-stepper-section mt-35">
+                            <div class="section-header-inline mb-20">
+                                <span class="category-tag">Implementation Timeline</span>
+                                <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Event Day & Pre-Event Rollout Stepper</h3>
+                            </div>
+
+                            <div class="reef-stepper-container glass p-30">
+                                <div class="stepper-track-line"></div>
+                                <div class="stepper-grid">
+                                    <!-- Step 1 -->
+                                    <div class="stepper-card">
+                                        <div class="step-badge">
+                                            <span class="step-num">01</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time">September 2026</div>
+                                        <h4>Climate Ninja School Tour</h4>
+                                        <p>High-energy previews across 5–10 secondary schools featuring assemblies, fitness warm-ups, and student registration drives.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip">🏫 School Assemblies</span>
+                                            <span class="step-chip">📋 Registration</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 2 -->
+                                    <div class="stepper-card">
+                                        <div class="step-badge">
+                                            <span class="step-num">02</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time">Oct 9 · 07:30 AM</div>
+                                        <h4>3K Climate Dash Launch</h4>
+                                        <p>Runners assemble at Usain Bolt Sports Complex and embark on the 3K frontline route with 3 theme stations.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip">🏃 3K Frontline Route</span>
+                                            <span class="step-chip">📍 Usain Bolt Track</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 3 -->
+                                    <div class="stepper-card">
+                                        <div class="step-badge">
+                                            <span class="step-num">03</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time">Oct 9 · 09:30 AM</div>
+                                        <h4>Festival Eco-Village Open</h4>
+                                        <p>3-zone festival grounds open with 5 environmental theme booths, live restoration demos, and youth micro-market.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip">🎪 3-Zone Festival</span>
+                                            <span class="step-chip">🌱 Restoration Demos</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 4 -->
+                                    <div class="stepper-card active-step">
+                                        <div class="step-badge highlight">
+                                            <span class="step-num">04</span>
+                                            <span class="step-dot"></span>
+                                        </div>
+                                        <div class="step-time gold">Oct 9 · 12:30 PM</div>
+                                        <h4>Ninja Throwdown Finals & Awards</h4>
+                                        <p>School competition finals, live cultural performances, awards presentation, and closing ceremony.</p>
+                                        <div class="step-tags mt-10">
+                                            <span class="step-chip gold">🏆 School Awards</span>
+                                            <span class="step-chip gold">🎭 Youth Showcase</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STRATEGIC EXHIBITORS & PARTNERS (Monochrome Logo Grid) -->
+                        <div class="dash-partners-section mt-35">
+                            <div class="glass p-30">
+                                <div class="flex-between align-center mb-20 wrap-gap">
+                                    <div>
+                                        <span class="category-tag">Exhibitors & Supporters</span>
+                                        <h3 class="mt-5 mb-0" style="font-size: 1.4rem;">Featured Partner Organisations</h3>
+                                    </div>
+                                    <span class="small text-muted">Institutional Alliance</span>
+                                </div>
+
+                                <div class="reef-partner-logo-grid">
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🏛️</span>
+                                        <span class="tile-name">Prime Minister's Office</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🇺🇳</span>
+                                        <span class="tile-name">UNICEF Barbados</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">💧</span>
+                                        <span class="tile-name">Barbados Water Authority</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🚨</span>
+                                        <span class="tile-name">Dept of Emergency Mgmt</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🏠</span>
+                                        <span class="tile-name">Roofs to Reefs Programme</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🎨</span>
+                                        <span class="tile-name">Pinelands Workshop</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">⚖️</span>
+                                        <span class="tile-name">Pink Parliament</span>
+                                    </div>
+                                    <div class="partner-logo-tile">
+                                        <span class="tile-icon">🍀</span>
+                                        <span class="tile-name">Barbados 4-H Foundation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ECO-VILLAGE CALL TO ACTION BANNER -->
+                        <div class="eco-village-cta-banner glass mt-30">
+                            <div class="cta-content">
+                                <h3>Be Part of the Climate Dash & Eco-Village</h3>
+                                <p>Register as a runner, showcase your green business, or volunteer at an educational station today.</p>
+                            </div>
+                            <div class="cta-actions">
+                                <button class="btn btn-primary" onclick="openApplyForm('ecovillage')">Apply / Register Now &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB-VIEW: Pinelands Workshop -->
+                <div id="prog-pinelands" class="prog-detail-pane">
+                    <span class="category-tag">Focus Area 4</span>
+                    <h2>Pinelands Creative Workshop — 6-Zone Career Pavilion</h2>
+                    <p class="lead">A virtual guide through the six vocational exploration zones designed to expand
+                        career horizons.</p>
+
+                    <div class="pinelands-zone-grid">
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 1</span>
+                            <h4>Arrival: Find Your Path</h4>
+                            <p>Begin the career assessment. Identify interests in the green-blue sectors vs digital
+                                arenas.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 2</span>
+                            <h4>Entrepreneurship: Create Your Own</h4>
+                            <p>Business support covering wellness startups, creative products, and environmental
+                                consultancies.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 3</span>
+                            <h4>Build the Future: Emerging Barbados</h4>
+                            <p>Exploring sustainable infrastructure, clean transport, and local organic products
+                                manufacturing.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 4</span>
+                            <h4>Tech & Digital: Work Without Borders</h4>
+                            <p>Global tech skills training, remote work portfolios, programming, and digital media
+                                design.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 5</span>
+                            <h4>Global Opportunities Pavilion</h4>
+                            <p>Preps graduates for international scholarships, exchange program entries, and
+                                cross-border certifications.</p>
+                        </div>
+                        <div class="pinelands-card glass">
+                            <span class="zone-num">Zone 6</span>
+                            <h4>Sports & Performance</h4>
+                            <p>Sports administration, coastal dive leadership, sports therapy, and performance arts
+                                commerce.</p>
+                        </div>
+                    </div>
+
+                    <!-- Career Path Wizard Sub-Widget -->
+                    <div class="glass p-30 mt-30">
+                        <h3 class="text-center">Pinelands Interactive Career Path Wizard</h3>
+                        <p class="text-center text-muted mb-20">Find out which of the 6 zones fits your skills best.</p>
+
+                        <div id="wizard-container" class="wizard-box">
+                            <div class="wizard-step" id="wiz-step-1">
+                                <p class="wizard-question">1. What kind of environment do you enjoy working in most?</p>
+                                <div class="wizard-options">
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="nextWizardStep('outdoor')">Outdoors - on the beach, farms, or
+                                        water</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="nextWizardStep('office')">Indoors - using computers, media, and
+                                        designs</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="nextWizardStep('people')">Anywhere - as long as I am building a
+                                        business or coaching people</button>
+                                </div>
+                            </div>
+
+                            <div class="wizard-step hidden" id="wiz-step-2">
+                                <p class="wizard-question">2. Select the goal that sounds most exciting to you:</p>
+                                <div class="wizard-options">
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="finishWizard('green')">Building clean infrastructure, boats, or
+                                        restoring nature</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="finishWizard('digital')">Earning a living online, coding, or creating
+                                        digital brands</button>
+                                    <button class="btn btn-secondary text-left w-100"
+                                        onclick="finishWizard('business')">Creating local products, wellness startups,
+                                        or coaching youth</button>
+                                </div>
+                            </div>
+
+                            <div class="wizard-result hidden" id="wiz-result">
+                                <h4>Your Suggested Pavilion Path:</h4>
+                                <div id="wiz-result-title" class="wiz-result-title text-accent">Zone 3: Build the Future
+                                </div>
+                                <p id="wiz-result-desc" class="mt-10">You show a strong alignment with sustainable
+                                    island development and hands-on environmental restoration.</p>
+                                <button class="btn btn-primary mt-15" onclick="resetWizard()">Retake Career
+                                    Wizard</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. IMPACT DASHBOARD VIEW -->
+        <section id="view-dashboard" class="app-view">
+            <div class="container">
+                <div class="flex-column text-center mb-30">
+                    <span class="category-tag">Public Metrics &amp; Outcomes</span>
+                    <h2>Green Rising Impact Hub</h2>
+                    <p class="lead">A live look at outcomes achieved across our key climate &amp; blue economy
+                        initiatives in Barbados.</p>
+                </div>
+
+                <!-- Dashboard Interactive Filter Tabs -->
+                <div class="dash-tab-bar">
+                    <button class="dash-tab-btn active" onclick="switchDashTab('overview', this)">Overview</button>
+                    <button class="dash-tab-btn" onclick="switchDashTab('environmental', this)">Environmental
+                        Monitor</button>
+                    <button class="dash-tab-btn" onclick="switchDashTab('milestones', this)">Milestones &amp;
+                        Feed</button>
+                    <button class="dash-tab-btn admin-only" id="dash-admin-tab-btn"
+                        onclick="switchDashTab('admin', this)" style="display: none;">Simulate Admin Input</button>
+                </div>
+
+                <!-- TAB PANE 1: Overview -->
+                <div id="dash-tab-overview" class="dash-pane active">
+                    <!-- Featured Milestone Hero Card -->
+                    <div class="dash-hero-card glass p-30 mb-30">
+                        <div class="dash-hero-grid">
+                            <div class="dash-hero-info">
+                                <span class="dash-hero-badge">2026 Climate Target Progress</span>
+                                <h3>Barbados Youth Action Target</h3>
+                                <p>Green Rising is on track to empower 300 Barbadian youth by Q4 2026 through hands-on
+                                    water conservation, boatbuilding, and eco-enterprise.</p>
+
+                                <div class="dash-hero-stats-inline">
+                                    <div class="dash-inline-stat">
+                                        <strong id="dash-hero-youth">242</strong>
+                                        <span>Youth Trained</span>
+                                    </div>
+                                    <div class="dash-inline-stat">
+                                        <strong id="dash-hero-water">85,210</strong>
+                                        <span>Gals Saved</span>
+                                    </div>
+                                    <div class="dash-inline-stat">
+                                        <strong id="dash-hero-jobs">32</strong>
+                                        <span>Jobs Placed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dash-hero-ring-container">
+                                <div class="dash-ring-wrapper">
+                                    <svg viewBox="0 0 100 100" class="ring-svg">
+                                        <circle cx="50" cy="50" r="42" class="ring-bg"></circle>
+                                        <circle cx="50" cy="50" r="42" class="ring-fill" id="dash-ring-fill"
+                                            style="stroke-dasharray: 264; stroke-dashoffset: 50;"></circle>
+                                    </svg>
+                                    <div class="ring-text">
+                                        <span class="ring-val" id="dash-ring-val">81%</span>
+                                        <span class="ring-lbl">On Track</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4-Grid Key Performance Metric Cards -->
+                    <div class="dash-grid-4col">
+                        <div class="dash-metric-card glass">
+                            <div class="dash-metric-header">
+                                <span class="dash-metric-title">Youth Trained</span>
+                                <span class="dash-trend-badge positive">+18% YoY</span>
+                            </div>
+                            <div class="dash-metric-num" id="dash-stat-youth">242</div>
+                            <p class="dash-metric-sub">Ages 10-29 across all 11 parishes</p>
+                        </div>
+
+                        <div class="dash-metric-card glass">
+                            <div class="dash-metric-header">
+                                <span class="dash-metric-title">Water Conserved</span>
+                                <span class="dash-trend-badge positive">+12k Gals</span>
+                            </div>
+                            <div class="dash-metric-num" id="dash-stat-water">85,210</div>
+                            <p class="dash-metric-sub">Gallons saved via audits &amp; rainwater harvest</p>
+                        </div>
+
+                        <div class="dash-metric-card glass">
+                            <div class="dash-metric-header">
+                                <span class="dash-metric-title">Vessels Constructed</span>
+                                <span class="dash-trend-badge highlight">Cohort 4 Active</span>
+                            </div>
+                            <div class="dash-metric-num" id="dash-stat-boats">4</div>
+                            <p class="dash-metric-sub">Disaster-resilient marine craft built</p>
+                        </div>
+
+                        <div class="dash-metric-card glass">
+                            <div class="dash-metric-header">
+                                <span class="dash-metric-title">Green-Blue Jobs</span>
+                                <span class="dash-trend-badge positive">100% Match</span>
+                            </div>
+                            <div class="dash-metric-num" id="dash-stat-jobs">32</div>
+                            <p class="dash-metric-sub">Direct career placements in sustainability</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB PANE 2: Environmental Monitor -->
+                <div id="dash-tab-environmental" class="dash-pane">
+                    <div class="glass p-30">
+                        <h3>Island Environmental Reduction Metrics</h3>
+                        <p class="small text-muted mb-25">Quantifiable environmental impact generated through Green
+                            Rising field projects in Barbados:</p>
+
+                        <div class="dash-progress-row mb-20">
+                            <div class="dash-progress-label">
+                                <span>CO2 Emissions Avoided</span>
+                                <strong id="dash-carbon">12.8 Tons</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 64%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dash-progress-row mb-20">
+                            <div class="dash-progress-label">
+                                <span>Vulnerable Coastal Coverage Restored</span>
+                                <strong id="dash-coastline">1.2 km</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 48%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dash-progress-row mb-20">
+                            <div class="dash-progress-label">
+                                <span>Soil Bio-Remediation (Compost &amp; Sargassum Extracts)</span>
+                                <strong id="dash-soil">8.4 Acres</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 72%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="dash-progress-row">
+                            <div class="dash-progress-label">
+                                <span>Community Rainwater Harvesting Systems Active</span>
+                                <strong id="dash-rain">16 Systems</strong>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+
+                        <div id="public-sensor-logs-list" class="mt-25"></div>
+                    </div>
+                </div>
+
+                <!-- TAB PANE 3: Milestones & Feed -->
+                <div id="dash-tab-milestones" class="dash-pane">
+                    <div class="glass p-30">
+                        <h3>Community Action Feed &amp; Key Milestones</h3>
+                        <p class="small text-muted mb-20">Recent verified updates from Green Rising cohorts across
+                            Barbados:</p>
+
+                        <div class="activity-timeline" id="public-milestones-feed">
+                            <div class="activity-item">
+                                <div class="activity-date">July 2026</div>
+                                <div class="activity-content">
+                                    <strong>Youth of the Seas Cohort 3 Sea Trials Completed</strong>
+                                    <p>Cohort 3 successfully launched and sea-tested their 18-foot disaster-resilient
+                                        marine craft off the coast of Oistins, St. Michael.</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-date">June 2026</div>
+                                <div class="activity-content">
+                                    <strong>5 Parish Rainwater Monitoring Systems Online</strong>
+                                    <p>Water conservation team completed installation of automated tank monitoring units
+                                        in St. Lucy, St. Philip, and St. Thomas.</p>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-date">May 2026</div>
+                                <div class="activity-content">
+                                    <strong>Pinelands Workshop Career Fair Reaches 120 Youth</strong>
+                                    <p>Hosted 6-zone exploration pavilion connecting SJPI graduates with regional green
+                                        technology and marine trade opportunities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB PANE 4: Simulate Admin Input -->
+                <div id="dash-tab-admin" class="dash-pane admin-only" style="display: none;">
+                    <div class="glass p-30 max-width-600 margin-auto">
+                        <h3>Simulate Admin Data Input</h3>
+                        <p class="small text-muted mb-20">Adjust youth metrics to test real-time recalculation across
+                            the Impact Hub:</p>
+
+                        <div class="form-group">
+                            <label for="admin-youth">Youth Trained &amp; Empowered</label>
+                            <input type="number" id="admin-youth" class="form-control text-center" value="242">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-water">Gallons of Water Saved</label>
+                            <input type="number" id="admin-water" class="form-control text-center" value="85210">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-boats">Vessels / Boats Built</label>
+                            <input type="number" id="admin-boats" class="form-control text-center" value="4">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin-jobs">Direct Placements/Jobs Created</label>
+                            <input type="number" id="admin-jobs" class="form-control text-center" value="32">
+                        </div>
+                        <button type="button" class="btn btn-primary w-100 mt-15" onclick="simulateAdminUpdate()">Push
+                            Live Updates</button>
+
+                        <div id="sim-status-box" class="sim-status-alert hidden mt-15">
+                            Data updated successfully! All homepage and Impact Hub indicators have synced.
+                        </div>
+                    </div>
+                </div>
+
+        </section>
+
+        <!-- RESOURCES HUB VIEW -->
+        <section id="view-resources" class="app-view">
+            <div class="container max-width-1200">
+                <div class="flex-column text-center mb-30">
+                    <span class="category-tag">Knowledge &amp; Media Library</span>
+                    <h2>Green Rising Resources Hub</h2>
+                    <p class="lead">Explore articles, video demos, workshop guides, and community stories across
+                        Barbados's Blue, Green, and Orange Economies.</p>
+                </div>
+
+                <!-- Search & Filter Control Bar -->
+                <div class="resources-control-bar glass p-30 mb-30">
+                    <!-- Real-Time Search Bar -->
+                    <div class="resource-search-wrapper mb-20">
+                        <div class="search-input-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="resource-search-input" class="form-control resource-search-input"
+                                placeholder="Search by title, keyword, or platform (e.g. Water, YOTS, YouTube, Pinelands)...">
+                        </div>
+                        <span class="resource-count-badge" id="resource-count-badge">0 Resources Found</span>
+                    </div>
+
+                    <!-- Filter Rows -->
+                    <div class="resource-filter-rows">
+                        <!-- Top-Level Category Filter Pills -->
+                        <div class="filter-group">
+                            <label class="filter-label">Category:</label>
+                            <div class="resource-pill-group">
+                                <button class="resource-cat-btn active" data-category="all">All</button>
+                                <button class="resource-cat-btn" data-category="article">Articles</button>
+                                <button class="resource-cat-btn" data-category="video">Videos</button>
+                                <button class="resource-cat-btn" data-category="social">Social Media</button>
+                                <button class="resource-cat-btn" data-category="workshop">Workshops</button>
+                            </div>
+                        </div>
+
+                        <!-- Target Economy Sub-Tags -->
+                        <div class="filter-group mt-15">
+                            <label class="filter-label">Target Economy:</label>
+                            <div class="resource-pill-group">
+                                <button class="resource-econ-btn active" data-economy="all">All Economies</button>
+                                <button class="resource-econ-btn econ-pill-blue" data-economy="blue">Blue
+                                    Economy</button>
+                                <button class="resource-econ-btn econ-pill-green" data-economy="green">Green
+                                    Economy</button>
+                                <button class="resource-econ-btn econ-pill-orange" data-economy="orange">Orange
+                                    Economy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Resource Cards Grid (3 col desktop, 2 col tablet, 1 col mobile) -->
+                <div class="resources-grid" id="resources-card-grid">
+                    <!-- Rendered dynamically by js/resources.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ELIGIBILITY MATCH QUIZ VIEW -->
+        <section id="view-quiz" class="app-view quiz-section-container">
+            <div class="quiz-bg-overlay"></div>
+            <div class="container max-width-700 quiz-inner-wrap">
+                <!-- Header Content -->
+                <div class="quiz-header-block text-center">
+                    <div class="quiz-sub-badge-wrap">
+                        <span class="quiz-logo-tagline">PROGRAMME MATCHER</span>
+                        <span class="quiz-sub-badge">FIND YOUR PATHWAY</span>
+                    </div>
+                    <h1 class="quiz-main-title">Which Green Rising programme is right for you?</h1>
+                    <p class="quiz-subtitle">
+                        Answer three quick questions and we'll match you to the pathway built for your age, your
+                        interests, and where you want to grow — from junior climate leaders to green-economy job
+                        seekers.
+                    </p>
+                </div>
+
+                <!-- Floating Quiz Card Container -->
+                <div class="quiz-floating-card" id="quiz-card">
+                    <!-- Progress Bar & Counter Header -->
+                    <div class="quiz-card-header" id="quiz-card-header">
+                        <div class="quiz-counter-text" id="quiz-counter-text">QUESTION 1 OF 3</div>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-step active" id="prog-step-1"></div>
+                            <div class="quiz-progress-step" id="prog-step-2"></div>
+                            <div class="quiz-progress-step" id="prog-step-3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Step 1 -->
+                    <div class="quiz-step-pane active" id="q-step-1">
+                        <h2 class="quiz-question-title">What is your age group?</h2>
+                        <div class="quiz-options-list">
+                            <label class="quiz-option-card selected" onclick="selectQuizOption(this)">
+                                <input type="radio" name="age-group" value="kids" checked>
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Ages 10 – 13</span>
+                                    <span class="quiz-opt-subtitle">Junior Rising · discovery &amp; eco-clubs</span>
+                                </div>
+                            </label>
+
+                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
+                                <input type="radio" name="age-group" value="teens">
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Ages 14 – 17</span>
+                                    <span class="quiz-opt-subtitle">Teen Rising · skills &amp; mentorship</span>
+                                </div>
+                            </label>
+
+                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
+                                <input type="radio" name="age-group" value="youth">
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Ages 18 – 29</span>
+                                    <span class="quiz-opt-subtitle">GreenPath · training &amp; job placement</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Footer Controls -->
+                        <div class="quiz-footer-controls">
+                            <a href="#programmes" class="quiz-skip-btn" onclick="switchView('programmes')">Skip for
+                                now</a>
+                            <button class="btn quiz-primary-btn" onclick="quizNext(2)">Next Question &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Step 2 -->
+                    <div class="quiz-step-pane hidden" id="q-step-2">
+                        <h2 class="quiz-question-title">What is your primary goal or area of interest?</h2>
+                        <div class="quiz-options-list">
+                            <label class="quiz-option-card selected" onclick="selectQuizOption(this)">
+                                <input type="radio" name="interest" value="water" checked>
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Water Resource Preservation</span>
+                                    <span class="quiz-opt-subtitle">Water Conservation · community leak checks &amp;
+                                        rainwater harvesting</span>
+                                </div>
+                            </label>
+
+                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
+                                <input type="radio" name="interest" value="boats">
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Maritime &amp; Marine Heritage</span>
+                                    <span class="quiz-opt-subtitle">Tomorrow's Reef · underwater ocean heritage &amp; reef restoration</span>
+                                </div>
+                            </label>
+
+                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
+                                <input type="radio" name="interest" value="business">
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Agri-Tech &amp; Micro-Enterprise</span>
+                                    <span class="quiz-opt-subtitle">Eco Village · hydroponics, food security &amp; green
+                                        business</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Footer Controls -->
+                        <div class="quiz-footer-controls">
+                            <button class="btn btn-secondary quiz-back-btn" onclick="quizNext(1)">&larr; Back</button>
+                            <button class="btn quiz-primary-btn" onclick="quizNext(3)">Next Question &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Step 3 -->
+                    <div class="quiz-step-pane hidden" id="q-step-3">
+                        <h2 class="quiz-question-title">What is your current education or employment status?</h2>
+                        <div class="quiz-options-list">
+                            <label class="quiz-option-card selected" onclick="selectQuizOption(this)">
+                                <input type="radio" name="status" value="school" checked>
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Enrolled in Primary / Secondary School</span>
+                                    <span class="quiz-opt-subtitle">Eco-Explorers &amp; Youth Clubs</span>
+                                </div>
+                            </label>
+
+                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
+                                <input type="radio" name="status" value="sjpi">
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Technical / Vocational Student (SJPI)</span>
+                                    <span class="quiz-opt-subtitle">Hands-on technical craft &amp; marine
+                                        engineering</span>
+                                </div>
+                            </label>
+
+                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
+                                <input type="radio" name="status" value="neet">
+                                <div class="custom-radio-indicator"></div>
+                                <div class="quiz-opt-content">
+                                    <span class="quiz-opt-title">Seeking Employment / Out of School (NEET)</span>
+                                    <span class="quiz-opt-subtitle">Green economy job placement &amp;
+                                        micro-grants</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Footer Controls -->
+                        <div class="quiz-footer-controls">
+                            <button class="btn btn-secondary quiz-back-btn" onclick="quizNext(2)">&larr; Back</button>
+                            <button class="btn quiz-primary-btn" onclick="processQuizResults()">Find My Match
+                                &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Results -->
+                    <div class="quiz-result-pane hidden" id="q-result">
+                        <div class="matched-header-badge text-center mb-15">YOUR RECOMMENDED PATHWAY</div>
+                        <div class="matched-box glass text-center p-25">
+                            <div class="matched-title text-accent" id="matched-title">Tomorrow's Reef: Marine Heritage</div>
+                            <p class="mt-15" id="matched-description">Based on your interests, you qualify for our ocean heritage and reef conservation initiatives.</p>
+                        </div>
+                        <div class="text-center mt-25 flex-center gap-15">
+                            <button class="btn btn-secondary" onclick="resetQuiz()">Retake Quiz</button>
+                            <button class="btn quiz-primary-btn" id="quiz-cta"
+                                onclick="openApplyForm('tomorrowsreef')">Apply to this Programme</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. APPLICATION MODAL / SECTION -->
+        <section id="view-apply" class="app-view">
+            <div class="container max-width-600">
+                <div class="glass p-30">
+                    <h2 class="text-center">Quick Application Form</h2>
+                    <p class="text-center text-muted mb-25">Register your interest in our upcoming cohort intakes and
+                        events.</p>
+
+                    <form id="apply-form" onsubmit="event.preventDefault(); handleApplySubmit();">
+                        <div class="form-row">
+                            <div class="form-group w-50">
+                                <label for="apply-fname">First Name</label>
+                                <input type="text" id="apply-fname" class="form-control" required
+                                    placeholder="e.g. John">
+                            </div>
+                            <div class="form-group w-50">
+                                <label for="apply-lname">Last Name</label>
+                                <input type="text" id="apply-lname" class="form-control" required
+                                    placeholder="e.g. Sobers">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="apply-email">Email Address</label>
+                            <input type="email" id="apply-email" class="form-control" required
+                                placeholder="name@domain.bb">
+                        </div>
+                        <div class="form-group">
+                            <label for="apply-phone">Phone / WhatsApp Number</label>
+                            <input type="tel" id="apply-phone" class="form-control" required
+                                placeholder="+1 (246) 555-0100"
+                                oninput="this.value = this.value.replace(/[^\d+() \-]/g, '')"
+                                title="Please enter numbers and phone symbols only (e.g. +1 (246) 555-0100)">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group w-50">
+                                <label for="apply-age">Age</label>
+                                <input type="number" id="apply-age" class="form-control" required min="10" max="35"
+                                    value="18">
+                            </div>
+                            <div class="form-group w-50">
+                                <label for="apply-prog">Selected Programme</label>
+                                <select id="apply-prog" class="form-control">
+                                    <option value="tomorrowsreef">Tomorrow's Reef (Underwater Heritage Reef)</option>
+                                    <option value="ecovillage">Climate Dash & Eco-Village</option>
+                                    <option value="pinelands">Pinelands Career Pavilion</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apply-district">Parish of Residence</label>
+                            <select id="apply-district" class="form-control" required>
+                                <option value="" disabled selected>Select your Parish...</option>
+                                <option value="St. Michael">St. Michael</option>
+                                <option value="Christ Church">Christ Church</option>
+                                <option value="St. George">St. George</option>
+                                <option value="St. Philip">St. Philip</option>
+                                <option value="St. John">St. John</option>
+                                <option value="St. James">St. James</option>
+                                <option value="St. Thomas">St. Thomas</option>
+                                <option value="St. Joseph">St. Joseph</option>
+                                <option value="St. Peter">St. Peter</option>
+                                <option value="St. Andrew">St. Andrew</option>
+                                <option value="St. Lucy">St. Lucy</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-15">Submit Application</button>
+                    </form>
+
+                    <div id="apply-success-box" class="apply-success-alert hidden mt-15">
+                        <h4>Application Received!</h4>
+                        <p>Thank you for applying. A Green Rising coordinator will contact you via WhatsApp or Email
+                            within 3 working days.</p>
+                        <button class="btn btn-secondary mt-15 btn-sm" onclick="resetApplyForm()">Apply Another
+                            Person</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. MEET THE TEAM VIEW -->
+        <section id="view-team" class="app-view">
+            <div class="container">
+                <div class="flex-column text-center mb-15">
+                    <span class="category-tag">Our People</span>
+                    <h2>Meet the Leadership &amp; Mentors</h2>
+                    <p class="lead">The dedicated team driving Barbados's youth-led climate engine and blue-green
+                        transition.</p>
+                </div>
+
+                <!-- Team Category Filter Buttons -->
+                <div class="team-filters">
+                    <button class="team-filter-btn active" onclick="filterTeam('all', this)">All Members</button>
+                    <button class="team-filter-btn" onclick="filterTeam('leadership', this)">Leadership</button>
+                    <button class="team-filter-btn" onclick="filterTeam('coordinator', this)">Coordinators</button>
+                    <button class="team-filter-btn" onclick="filterTeam('mentor', this)">Technical Mentors</button>
+                    <button class="team-filter-btn" onclick="filterTeam('champion', this)">Youth Champions</button>
+                </div>
+
+                <!-- Team Grid Cards -->
+                <div class="team-grid" id="team-cards-container">
+
+                    <!-- Member 1: Dr. Crystal Drakes -->
+                    <div class="team-card glass" data-category="leadership">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">CD</div>
+                        </div>
+                        <div class="team-name">Dr. Crystal Drakes</div>
+                        <span class="team-role">Chairperson</span>
+                        <p class="team-bio">Leading strategic governance, policy frameworks, and island-wide climate
+                            resilience direction for Future Barbados and Green Rising.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#Leadership</span>
+                            <span class="team-tag">#Chairperson</span>
+                            <span class="team-tag">#ClimateGovernance</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 2: Myrico Morris -->
+                    <div class="team-card glass" data-category="coordinator">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">MM</div>
+                        </div>
+                        <div class="team-name">Myrico Morris</div>
+                        <span class="team-role">Project Coordinator &amp; Community Activation Lead</span>
+                        <p class="team-bio">Overseeing cohort operations, youth community activation, field execution,
+                            and flagship environmental events across Barbados.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#Operations</span>
+                            <span class="team-tag">#CommunityActivation</span>
+                            <span class="team-tag">#ProjectLead</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 3: Shanice Haynes -->
+                    <div class="team-card glass" data-category="coordinator">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">SH</div>
+                        </div>
+                        <div class="team-name">Shanice Haynes</div>
+                        <span class="team-role">Project Officer</span>
+                        <p class="team-bio">Managing day-to-day project workflows, youth cohort engagement, partner
+                            coordination, and field initiative logistics.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#ProjectOfficer</span>
+                            <span class="team-tag">#YouthEngagement</span>
+                            <span class="team-tag">#Operations</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 4: Nicole Hazel -->
+                    <div class="team-card glass" data-category="mentor">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">NH</div>
+                        </div>
+                        <div class="team-name">Nicole Hazel</div>
+                        <span class="team-role">Monitoring &amp; Evaluation Specialist</span>
+                        <p class="team-bio">Tracking impact metrics, data analysis, programme evaluation, and climate
+                            action reporting across all project focus areas.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#DataAnalytics</span>
+                            <span class="team-tag">#ImpactEvaluation</span>
+                            <span class="team-tag">#M&amp;ESpecialist</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 5: Deborah Lawrance -->
+                    <div class="team-card glass" data-category="leadership">
+                        <div class="team-avatar-wrapper">
+                            <div class="team-avatar">DL</div>
+                        </div>
+                        <div class="team-name">Deborah Lawrance</div>
+                        <span class="team-role">Administration &amp; Finance Consultant</span>
+                        <p class="team-bio">Directing administrative systems, financial management, governance
+                            compliance, and fiscal allocation across initiatives.</p>
+                        <div class="team-tags">
+                            <span class="team-tag">#Finance</span>
+                            <span class="team-tag">#Administration</span>
+                            <span class="team-tag">#Governance</span>
+                        </div>
+                    </div>
+
+                </div>
+        </section>
+
+        <!-- 7. PASSKEY PIN LOGIN VIEW -->
+        <section id="view-login" class="app-view">
+            <div class="container max-width-600">
+                <div class="glass p-40 text-center"
+                    style="max-width: 480px; margin: 40px auto; border-radius: var(--radius-lg);">
+                    <div style="font-size: 2.8rem; margin-bottom: 12px;">🔒</div>
+                    <h2 class="mb-10">Admin Access</h2>
+                    <p class="small text-muted mb-25">Please enter the passkey PIN to unlock admin tools and input
+                        controls.</p>
+
+                    <form id="login-form" onsubmit="handleLoginSubmit(event)">
+                        <div class="form-group mb-20 text-left">
+                            <label for="passkey-input"
+                                style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Passkey
+                                PIN</label>
+                            <input type="password" id="passkey-input" class="form-control text-center"
+                                placeholder="Enter PIN" required style="font-size: 1.2rem; letter-spacing: 3px;">
+                        </div>
+                        <div id="login-error-msg" class="text-danger small mb-15 hidden"
+                            style="color: #ef4444; font-weight: 500; display: none;">Invalid Passkey PIN. Please try
+                            again.</div>
+                        <button type="submit" class="btn btn-primary w-100 mt-10">Unlock Admin Panel</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. ADMIN PORTAL VIEW -->
+        <section id="view-admin" class="app-view" style="display: none;">
+            <div class="container max-width-1100" style="padding-top: 30px; padding-bottom: 60px;">
+                <!-- Header Banner -->
+                <div class="glass p-25 mb-30 flex-between align-center flex-wrap gap-15"
+                    style="border-radius: var(--radius-lg);">
+                    <div>
+                        <div class="flex-center align-center gap-10" style="justify-content: flex-start;">
+                            <span class="category-tag"
+                                style="background: rgba(249, 115, 22, 0.15); color: var(--color-orange); border: 1px solid rgba(249, 115, 22, 0.3);">🔒
+                                Admin Portal</span>
+                            <span class="cohort-badge open" style="font-size: 0.8rem;">Authenticated Session</span>
+                        </div>
+                        <h2 class="mt-10 mb-5">Green Rising Administration Dashboard</h2>
+                        <p class="small text-muted mb-0">Manage community milestones, youth cohort intakes,
+                            environmental sensors, and real-time impact metrics.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary" onclick="logoutAdmin()"
+                            style="border-color: #ef4444; color: #ef4444; font-weight: 600;">
+                            🚪 Logout Admin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Admin Tab Navigation Bar -->
+                <div class="dash-tab-bar mb-30" style="justify-content: flex-start; gap: 10px;">
+                    <button class="dash-tab-btn admin-portal-tab-btn active"
+                        onclick="switchAdminTab('milestones', this)">
+                        🚩 Milestones Management
+                    </button>
+                    <button class="dash-tab-btn admin-portal-tab-btn" onclick="switchAdminTab('cohorts', this)">
+                        👥 Cohorts Management
+                    </button>
+                    <button class="dash-tab-btn admin-portal-tab-btn" onclick="switchAdminTab('sensors', this)">
+                        🌊 Environmental Sensors
+                    </button>
+                    <button class="dash-tab-btn admin-portal-tab-btn" onclick="switchAdminTab('metrics', this)">
+                        📊 Impact Metrics Sync
+                    </button>
+                </div>
+
+                <!-- TAB 1: Milestones Management -->
+                <div id="admin-tab-milestones" class="admin-tab-pane active">
+                    <div class="grid-2col gap-30">
+                        <!-- Milestone Form -->
+                        <div class="glass p-30" style="border-radius: var(--radius-md);">
+                            <h3 id="milestone-form-heading" class="mb-15">Publish New Milestone</h3>
+                            <form id="admin-milestone-form" onsubmit="handleMilestoneSubmit(event)">
+                                <input type="hidden" id="milestone-id-input">
+
+                                <div class="form-group mb-15">
+                                    <label for="milestone-title-input"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Milestone
+                                        Title</label>
+                                    <input type="text" id="milestone-title-input" class="form-control" required
+                                        placeholder="e.g. YOTS Cohort 3 Sea Trials Completed">
+                                </div>
+
+                                <div class="form-row mb-15 flex-between gap-15">
+                                    <div class="form-group w-50">
+                                        <label for="milestone-date-input"
+                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Target
+                                            Date / Period</label>
+                                        <input type="text" id="milestone-date-input" class="form-control"
+                                            placeholder="e.g. July 2026">
+                                    </div>
+                                    <div class="form-group w-50">
+                                        <label for="milestone-initiative-input"
+                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Initiative
+                                            Focus</label>
+                                        <select id="milestone-initiative-input" class="form-control">
+                                            <option value="General">General</option>
+                                            <option value="YOTS">YOTS</option>
+                                            <option value="Water Conservation">Water Conservation</option>
+                                            <option value="Pinelands">Pinelands</option>
+                                            <option value="Eco Village">Eco Village</option>
+                                            <option value="Oceana">Oceana Hub</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-20">
+                                    <label for="milestone-desc-input"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Description
+                                        & Summary</label>
+                                    <textarea id="milestone-desc-input" class="form-control" rows="3"
+                                        placeholder="Provide milestone details for the public community feed..."></textarea>
+                                </div>
+
+                                <div class="flex-center gap-10">
+                                    <button type="submit" id="milestone-submit-btn"
+                                        class="btn btn-primary w-100">Publish Milestone</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="resetMilestoneForm()">Reset</button>
+                                </div>
+                            </form>
+
+                            <div id="admin-milestone-success-msg" class="sim-status-alert hidden mt-15"
+                                style="display:none; color: var(--color-primary); font-weight:600; text-align:center;">
+                                ✅ Milestone saved successfully!
+                            </div>
+                        </div>
+
+                        <!-- Milestones List Table -->
+                        <div class="glass p-30" style="border-radius: var(--radius-md);">
+                            <h3 class="mb-15">Published Milestones</h3>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="border-bottom: 2px solid rgba(5,150,105,0.2); text-align: left;">
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Date</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Title & Summary</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Initiative</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted); text-align: right;">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-milestones-table-body">
+                                        <!-- Rendered dynamically by js/admin-tabs.js -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Cohorts Management -->
+                <div id="admin-tab-cohorts" class="admin-tab-pane" style="display: none;">
+                    <div class="grid-2col gap-30">
+                        <!-- Cohort Form -->
+                        <div class="glass p-30" style="border-radius: var(--radius-md);">
+                            <h3 id="cohort-form-heading" class="mb-15">Configure Youth Cohort</h3>
+                            <form id="admin-cohort-form" onsubmit="handleCohortSubmit(event)">
+                                <input type="hidden" id="cohort-id-input">
+
+                                <div class="form-group mb-15">
+                                    <label for="cohort-name-input"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Cohort
+                                        Program Name</label>
+                                    <input type="text" id="cohort-name-input" class="form-control" required
+                                        placeholder="e.g. Youth of the Seas (YOTS) Cohort 4">
+                                </div>
+
+                                <div class="form-row mb-15 flex-between gap-15">
+                                    <div class="form-group w-50">
+                                        <label for="cohort-age-input"
+                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Target
+                                            Age Range</label>
+                                        <input type="text" id="cohort-age-input" class="form-control"
+                                            placeholder="e.g. 16-29 years">
+                                    </div>
+                                    <div class="form-group w-50">
+                                        <label for="cohort-status-input"
+                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Intake
+                                            Status</label>
+                                        <select id="cohort-status-input" class="form-control">
+                                            <option value="Open">Open (Intake Active)</option>
+                                            <option value="Closed">Closed</option>
+                                            <option value="Planning">Planning</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-15">
+                                    <label for="cohort-count-input"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Active
+                                        / Target Participants</label>
+                                    <input type="number" id="cohort-count-input" class="form-control" value="10"
+                                        min="1">
+                                </div>
+
+                                <div class="form-group mb-20">
+                                    <label for="cohort-details-input"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Cohort
+                                        Focus & Requirements</label>
+                                    <textarea id="cohort-details-input" class="form-control" rows="3"
+                                        placeholder="Description of training focus, eligibility criteria, and deliverables..."></textarea>
+                                </div>
+
+                                <div class="flex-center gap-10">
+                                    <button type="submit" id="cohort-submit-btn" class="btn btn-primary w-100">Save
+                                        Cohort Status</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="resetCohortForm()">Reset</button>
+                                </div>
+                            </form>
+
+                            <div id="admin-cohort-success-msg" class="sim-status-alert hidden mt-15"
+                                style="display:none; color: var(--color-primary); font-weight:600; text-align:center;">
+                                ✅ Cohort record updated!
+                            </div>
+                        </div>
+
+                        <!-- Cohorts List Table -->
+                        <div class="glass p-30" style="border-radius: var(--radius-md);">
+                            <h3 class="mb-15">Youth Cohorts Overview</h3>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="border-bottom: 2px solid rgba(5,150,105,0.2); text-align: left;">
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Cohort Name</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Age Group</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Count</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Status</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted); text-align: right;">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-cohorts-table-body">
+                                        <!-- Rendered dynamically by js/admin-tabs.js -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: Environmental Sensor Telemetry Logs -->
+                <div id="admin-tab-sensors" class="admin-tab-pane" style="display: none;">
+                    <div class="grid-2col gap-30">
+                        <!-- Sensor Form -->
+                        <div class="glass p-30" style="border-radius: var(--radius-md);">
+                            <h3 class="mb-15">Record Sensor Telemetry Log</h3>
+                            <form id="admin-sensor-form" onsubmit="handleSensorLogSubmit(event)">
+                                <div class="form-group mb-15">
+                                    <label for="sensor-location-input"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Probe
+                                        / Sensor Station Location</label>
+                                    <input type="text" id="sensor-location-input" class="form-control" required
+                                        placeholder="e.g. Carlisle Bay Marine Probe #1">
+                                </div>
+
+                                <div class="form-row mb-15 flex-between gap-15">
+                                    <div class="form-group w-50">
+                                        <label for="sensor-metric-input"
+                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Metric
+                                            Reading</label>
+                                        <input type="text" id="sensor-metric-input" class="form-control" required
+                                            placeholder="e.g. 1.2 NTU (High Clarity)">
+                                    </div>
+                                    <div class="form-group w-50">
+                                        <label for="sensor-date-input"
+                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Log
+                                            Date</label>
+                                        <input type="date" id="sensor-date-input" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-20">
+                                    <label for="sensor-notes-input"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Telemetry
+                                        Notes & Condition</label>
+                                    <textarea id="sensor-notes-input" class="form-control" rows="3"
+                                        placeholder="Technical telemetry notes, water quality index, or soil remediation metrics..."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">Log Sensor Reading</button>
+                            </form>
+
+                            <div id="admin-sensor-success-msg" class="sim-status-alert hidden mt-15"
+                                style="display:none; color: var(--color-primary); font-weight:600; text-align:center;">
+                                ✅ Sensor reading logged!
+                            </div>
+                        </div>
+
+                        <!-- Sensors List Table -->
+                        <div class="glass p-30" style="border-radius: var(--radius-md);">
+                            <h3 class="mb-15">Active Environmental Probes</h3>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="border-bottom: 2px solid rgba(5,150,105,0.2); text-align: left;">
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Date</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Location</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Metric</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
+                                                Notes</th>
+                                            <th
+                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted); text-align: right;">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-sensor-table-body">
+                                        <!-- Rendered dynamically by js/admin-tabs.js -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: Impact Hub Metrics Sync -->
+                <div id="admin-tab-metrics" class="admin-tab-pane" style="display: none;">
+                    <div class="glass p-30 max-width-700 margin-auto" style="border-radius: var(--radius-md);">
+                        <h3 class="mb-10">Live Impact Metrics Sync</h3>
+                        <p class="small text-muted mb-25">Update key metrics across the entire platform. These numbers
+                            sync instantly across the Homepage and Impact Hub indicators.</p>
+
+                        <form id="admin-metrics-form" onsubmit="handleAdminMetricsSubmit(event)">
+                            <div class="grid-2col gap-20 mb-20">
+                                <div class="form-group">
+                                    <label for="metric-input-youth"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Youth
+                                        Trained & Empowered</label>
+                                    <input type="number" id="metric-input-youth" class="form-control text-center"
+                                        value="242">
+                                </div>
+                                <div class="form-group">
+                                    <label for="metric-input-water"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Gallons
+                                        of Water Saved</label>
+                                    <input type="number" id="metric-input-water" class="form-control text-center"
+                                        value="85210">
+                                </div>
+                                <div class="form-group">
+                                    <label for="metric-input-vessels"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Vessels
+                                        / Boats Built</label>
+                                    <input type="number" id="metric-input-vessels" class="form-control text-center"
+                                        value="4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="metric-input-jobs"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Jobs
+                                        Created & Placements</label>
+                                    <input type="number" id="metric-input-jobs" class="form-control text-center"
+                                        value="32">
+                                </div>
+                                <div class="form-group">
+                                    <label for="metric-input-co2"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">CO2
+                                        Offset (Tons)</label>
+                                    <input type="number" id="metric-input-co2" class="form-control text-center"
+                                        value="18.5" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="metric-input-coastline"
+                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Coastline
+                                        Restored (km)</label>
+                                    <input type="number" id="metric-input-coastline" class="form-control text-center"
+                                        value="3.2" step="0.1">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Push Live Impact Updates</button>
+                        </form>
+
+                        <div id="admin-metrics-success-msg" class="sim-status-alert hidden mt-15"
+                            style="display:none; color: var(--color-primary); font-weight:600; text-align:center;">
+                            ✅ Metrics synced live across all homepage and Impact Hub indicators!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Segment -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">GREEN RISING</div>
+                <p>Youth engine for Barbados climate action and sustainable enterprise development.</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><strong>Collaborators</strong></li>
+                    <li><a href="https://futurebarbados.bb/" target="_blank" rel="noopener">Future Barbados</a></li>
+                    <li><a href="https://www.gov.bb/Ministries/innovation-science-smart-technology" target="_blank"
+                            rel="noopener">Ministry of Industry & Science</a></li>
+                    <li class="admin-only" style="display: none;"><a href="#admin" onclick="switchView('admin')"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="margin-right: 4px; vertical-align: text-bottom;"><path fill="currentColor" d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 10 0v2h1m-6-4a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/></svg>Admin Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            &copy; 2026 Green Rising Barbados. This is a government-affiliated youth development resource portal.
+        </div>
+    </footer>
+
+    <!-- Modular JavaScript Services & Logic -->
+    <script src="js/theme.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/wizard.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/apply.js"></script>
+    <script src="js/team.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/admin-tabs.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
