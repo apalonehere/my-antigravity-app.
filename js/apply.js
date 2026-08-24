@@ -1,11 +1,11 @@
 // --- Application Form Module ---
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw7_Ferq7x7ULlFjHsOwSTihGYAU_qPqlPMzBKnEhT_J2hNxy5B70wNM3OqHiiEhyY5/exec'; 
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw7_Ferq7x7ULlFjHsOwSTihGYAU_qPqlPMzBKnEhT_J2hNxy5B70wNM3OqHiiEhyY5/exec';
 
 function openApplyForm(progName) {
     switchView('apply');
     const progSelect = document.getElementById('apply-prog');
     if (!progSelect) return;
-    
+
     if (progName === 'tomorrowsreef' || progName.includes('reef') || progName.includes('Reef')) {
         progSelect.value = 'tomorrowsreef';
     } else if (progName === 'yots' || progName.includes('Seas')) {
@@ -44,20 +44,20 @@ function handleApplySubmit() {
             },
             body: JSON.stringify(formData)
         })
-        .then(() => {
-            showSuccessState();
-        })
-        .catch(err => {
-            console.error('Error submitting to Google Sheet:', err);
-            showSuccessState();
-        })
-        .finally(() => {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('btn-loading');
-                submitBtn.innerText = originalText;
-            }
-        });
+            .then(() => {
+                showSuccessState();
+            })
+            .catch(err => {
+                console.error('Error submitting to Google Sheet:', err);
+                showSuccessState();
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('btn-loading');
+                    submitBtn.innerText = originalText;
+                }
+            });
     } else {
         showSuccessState();
     }
@@ -82,6 +82,38 @@ function resetApplyForm() {
     if (successBox) successBox.classList.add('hidden');
 }
 
+function switchApplyPathway(pathway, btn) {
+    document.querySelectorAll('.pathway-tab-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const titleEl = document.getElementById('apply-form-title');
+    const subtitleEl = document.getElementById('apply-form-subtitle');
+    const ageInput = document.getElementById('apply-age');
+    const ageGroup = ageInput ? ageInput.closest('.form-group') : null;
+
+    if (pathway === 'schools') {
+        if (titleEl) titleEl.textContent = 'School & Educator Partnership Form';
+        if (subtitleEl) subtitleEl.textContent = 'Register your school or club for assembly tours, eco-projects, and educational workshops.';
+        if (ageGroup) ageGroup.style.display = 'none';
+    } else if (pathway === 'community') {
+        if (titleEl) titleEl.textContent = 'Community Group Expression of Interest';
+        if (subtitleEl) subtitleEl.textContent = 'Partner with us for neighborhood resilience, mangrove restoration, and local workshops.';
+        if (ageGroup) ageGroup.style.display = 'none';
+    } else if (pathway === 'mentors') {
+        if (titleEl) titleEl.textContent = 'Mentor & Expert Application';
+        if (subtitleEl) subtitleEl.textContent = 'Share your technical skills, business guidance, or environmental expertise with Barbadian youth.';
+        if (ageGroup) ageGroup.style.display = 'none';
+    } else if (pathway === 'funders') {
+        if (titleEl) titleEl.textContent = 'Funder & Strategic Partner Inquiry';
+        if (subtitleEl) subtitleEl.textContent = 'Co-finance micro-grants, sponsor youth tech cohorts, or collaborate on national scale-up.';
+        if (ageGroup) ageGroup.style.display = 'none';
+    } else {
+        if (titleEl) titleEl.textContent = 'Quick Application Form';
+        if (subtitleEl) subtitleEl.textContent = 'Register your interest in our upcoming cohort intakes and events.';
+        if (ageGroup) ageGroup.style.display = 'block';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const phoneInput = document.getElementById('apply-phone');
     if (phoneInput) {
@@ -91,7 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-window.openApplyForm     = openApplyForm;
+window.openApplyForm = openApplyForm;
 window.handleApplySubmit = handleApplySubmit;
-window.showSuccessState  = showSuccessState;
-window.resetApplyForm    = resetApplyForm;
+window.showSuccessState = showSuccessState;
+window.resetApplyForm = resetApplyForm;
+window.switchApplyPathway = switchApplyPathway;

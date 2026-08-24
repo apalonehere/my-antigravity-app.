@@ -44,7 +44,11 @@
                         <li><a href="#resources" class="nav-link" data-tab="resources">Resources</a></li>
                         <li><a href="#quiz" class="nav-link" data-tab="quiz">Match Quiz</a></li>
                         <li class="admin-only" style="display: none;"><a href="#admin" class="nav-link nav-admin-link"
-                                data-tab="admin"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="margin-right: 4px; vertical-align: text-bottom;"><path fill="currentColor" d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 10 0v2h1m-6-4a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/></svg>Admin Portal</a></li>
+                                data-tab="admin"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
+                                    style="margin-right: 4px; vertical-align: text-bottom;">
+                                    <path fill="currentColor"
+                                        d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 10 0v2h1m-6-4a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z" />
+                                </svg>Admin Portal</a></li>
                         <li><a href="#apply" class="btn btn-primary nav-apply-btn nav-link" id="quick-apply-btn"
                                 data-tab="apply">Apply Now</a></li>
                     </ul>
@@ -53,7 +57,11 @@
                 <!-- Light / Dark Mode Switch Pill -->
                 <button class="theme-toggle-pill" id="header-theme-toggle" onclick="toggleTheme()"
                     aria-label="Toggle Light and Dark Mode" title="Toggle Light/Dark Mode">
-                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="vertical-align: text-bottom; margin-right: 4px;"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3Z"/></svg><span class="theme-text">Dark Mode</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
+                        style="vertical-align: text-bottom; margin-right: 4px;">
+                        <path fill="currentColor"
+                            d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3Z" />
+                    </svg><span class="theme-text">Dark Mode</span>
                 </button>
 
                 <!-- Mobile Hamburger Menu Toggle -->
@@ -96,14 +104,8 @@
                     <div class="ministry-badge">
                         Ministry of Industry, Innovation, Health Technology and Science (Barbados)
                     </div>
-                    <h1 class="hero-title">Empowering youth to drive the <span class="gradient-text-blue">Blue-Green
-                            Economy</span></h1>
-                    <p class="hero-description">
-                        Green Rising is Future Barbados's youth climate engine. We train, skill, and resource the next
-                        generation of Barbadians to tackle water scarcity, build eco-friendly marine vessels, and launch
-                        climate-smart enterprises.
-                    </p>
-                    <div class="hero-ctas">
+                    <h1 class="hero-title">Young Barbadians rising for <span class="gradient-text-blue">people, planet, &amp; possibility</span></h1>
+                    <div class="hero-ctas mt-30">
                         <a href="#quiz" class="btn btn-primary btn-lg" onclick="switchView('quiz')">Find Your
                             Programme</a>
                         <a href="#programmes" class="btn btn-secondary btn-lg"
@@ -122,56 +124,207 @@
                 </svg>
             </div>
 
-            <!-- Quick Program Overview Grid -->
-            <section class="home-programs container">
-                <h2 class="section-title text-center">Key Focus Areas</h2>
-                <p class="section-subtitle text-center">Click any card to explore curriculum, schedules, and pathways.
-                </p>
-
-                <div class="program-grid">
-                    <!-- Program: Tomorrow's Reef -->
-                    <div class="program-card glass" onclick="openProgram('tomorrowsreef')">
-                        <div class="card-icon sea-icon">
-                            <svg viewBox="0 0 24 24" width="40" height="40">
-                                <path fill="currentColor"
-                                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,14.4 18.9,16.5 17.2,18C15.8,16.7 13.9,16 12,16C10.1,16 8.2,16.7 6.8,18C5.1,16.5 4,14.4 4,12A8,8 0 0,1 12,4Z" />
-                            </svg>
-                        </div>
-                        <h3>Tomorrow's Reef</h3>
-                        <p>Barbados' first youth-designed underwater heritage reef & founding installation of the Oceana
-                            Innovation Hub Underwater Museum.</p>
-                        <span class="card-link">Explore Area &rarr;</span>
+            <!-- 1. Who We Are Section -->
+            <section class="container mt-30" id="who-we-are-section">
+                <div class="glass p-30">
+                    <div class="text-center mb-25">
+                        <span class="category-tag">National Initiative</span>
+                        <h2 class="section-title mt-5 mb-10">Who We Are</h2>
+                        <p class="section-subtitle">Youth engine for Barbados climate action and sustainable enterprise development.</p>
                     </div>
-                    <!-- Program 3 -->
-                    <div class="program-card glass" onclick="openProgram('ecovillage')">
-                        <div class="card-icon village-icon">
-                            <svg viewBox="0 0 24 24" width="40" height="40">
-                                <path fill="currentColor"
-                                    d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14,7.7 15.6,9.3 15.6,11.3C15.6,13.3 12,17.5 12,17.5C12,17.5 8.4,13.3 8.4,11.3C8.4,9.3 10,7.7 12,7.7Z" />
-                            </svg>
+                    <div class="grid-2col align-center">
+                        <div>
+                            <p class="lead mb-15">
+                                <strong>Green Rising Barbados</strong> empowers young Barbadians aged 15–35 to build sustainable livelihoods and lead frontline climate solutions across the Blue, Green, and Orange Economies.
+                            </p>
+                            <p class="text-muted mb-0">
+                                Co-anchored by <strong>Future Barbados</strong> and the <strong>Ministry of Industry, Innovation, Health Technology and Science</strong>, we connect youth directly with micro-grants, technical incubators, and global climate networks.
+                            </p>
                         </div>
-                        <h3>Climate Dash & Eco-Village</h3>
-                        <p>A themed 3K run through Barbados' environmental frontlines paired with a festival-style
-                            village across 3 zones: Planet & Greening, People & Learning, and Earn & Grow.</p>
-                        <span class="card-link">Explore Area &rarr;</span>
+                        <div class="flex-column gap-15">
+                            <div class="glass p-15 flex-between align-center" style="background: rgba(255, 255, 255, 0.04); border-radius: 12px;">
+                                <div class="flex-column">
+                                    <strong class="text-primary mb-5">🌱 Youth-First Approach</strong>
+                                    <span class="small text-muted">Direct micro-grant funding, maritime skills, and climate leadership for Barbadian youth.</span>
+                                </div>
+                            </div>
+                            <div class="glass p-15 flex-between align-center" style="background: rgba(255, 255, 255, 0.04); border-radius: 12px;">
+                                <div class="flex-column">
+                                    <strong class="text-accent mb-5">🇧🇧 Strategic Institutional Support</strong>
+                                    <span class="small text-muted">Co-anchored with Future Barbados and the Ministry of Industry &amp; Science.</span>
+                                </div>
+                            </div>
+                            <div class="glass p-15 flex-between align-center" style="background: rgba(255, 255, 255, 0.04); border-radius: 12px;">
+                                <div class="flex-column">
+                                    <strong style="color: #60a5fa;" class="mb-5">🌍 Global Movement Integration</strong>
+                                    <span class="small text-muted">Active member of the worldwide Green Rising network backed by UNICEF &amp; GenU.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Global Leadership / PM Mottley Credibility Banner -->
+            <section class="container mt-25" id="global-leadership-section">
+                <div class="glass p-20 flex-between align-center flex-wrap gap-15" style="border-left: 4px solid var(--color-primary, #059669);">
+                    <div class="flex-column" style="flex: 1; min-width: 280px;">
+                        <div class="flex-between align-center mb-5">
+                            <span class="category-tag mb-0" style="font-size: 0.75rem; padding: 2px 8px;">Global Leadership</span>
+                            <span class="small text-muted">UNICEF &amp; Generation Unlimited Initiative</span>
+                        </div>
+                        <h4 class="mb-5" style="font-size: 1.1rem; font-weight: 700;">Global Leadership &amp; Climate Advocacy</h4>
+                        <p class="small text-muted mb-0">
+                            Prime Minister <strong>Mia Amor Mottley</strong> serves as Global Chair of the Green Rising movement, driving international advocacy to mobilize global youth, climate finance, and sustainable enterprise development across island nations and developing economies.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Our Four Core Pillars Section (Thematic Framework) -->
+            <section class="container mt-40" id="our-four-pillars-section">
+                <div class="text-center mb-25">
+                    <span class="category-tag">Strategic Foundation</span>
+                    <h2 class="section-title mt-5 mb-10">Our Four Core Pillars</h2>
+                    <p class="section-subtitle">The framework guiding our island-wide climate action and youth empowerment agenda.</p>
+                </div>
+                <div class="program-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                    <!-- Pillar 1 -->
+                    <div class="program-card glass pillar-card entrepreneurship-pillar" onclick="openProgram('pinelands')">
+                        <div class="pillar-card-top mb-15">
+                            <div class="card-icon fair-icon">🌱</div>
+                            <span class="pillar-badge pillar-tag-entrepreneurship">Pillar 01</span>
+                        </div>
+                        <h3 class="pillar-title">Green &amp; Blue Entrepreneurship</h3>
+                        <p>Fostering sustainable venture creation, eco-vessel fabrication, micro-grant pitching, and circular business models for young founders.</p>
+                        <div class="pillar-initiatives-list mt-15 mb-15">
+                            <span class="bento-chip">💼 Micro-Grants</span>
+                            <span class="bento-chip">🛠️ Eco-Vessels</span>
+                        </div>
+                        <span class="card-link" style="color: var(--color-primary); font-weight: 700;">View Enterprise Pathways &rarr;</span>
                     </div>
 
-                    <!-- Program 5 -->
-                    <div class="program-card glass border-orange-accent" onclick="openProgram('pinelands')">
-                        <div class="card-icon fair-icon">
-                            <svg viewBox="0 0 24 24" width="40" height="40">
-                                <path fill="currentColor"
-                                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
-                            </svg>
+                    <!-- Pillar 2 -->
+                    <div class="program-card glass pillar-card advocacy-pillar" onclick="openProgram('ecovillage')">
+                        <div class="pillar-card-top mb-15">
+                            <div class="card-icon village-icon">📢</div>
+                            <span class="pillar-badge pillar-tag-advocacy">Pillar 02</span>
                         </div>
-                        <div class="flex-between align-center mb-10">
-                            <h3>Pinelands Workshops</h3>
-                            <span class="tag-orange">Orange Economy &amp; Tech</span>
+                        <h3 class="pillar-title">Climate Leadership &amp; Advocacy</h3>
+                        <p>Mobilizing youth voices through secondary school tours, island-wide campaigns, ocean literacy, and regional climate ambassadorships.</p>
+                        <div class="pillar-initiatives-list mt-15 mb-15">
+                            <span class="bento-chip">🏫 School Assemblies</span>
+                            <span class="bento-chip">🌊 Blue Ambassadors</span>
                         </div>
-                        <p>A 6-zone dynamic career pavilion spanning creative industries, digital media,
-                            entrepreneurship, and performance careers.</p>
-                        <span class="card-link" style="color:var(--color-orange);">Explore Creative &amp; Tech Pavilion
-                            &rarr;</span>
+                        <span class="card-link" style="color: #2563eb; font-weight: 700;">Explore Advocacy Hub &rarr;</span>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="program-card glass pillar-card resilience-pillar" onclick="openProgram('tomorrowsreef')">
+                        <div class="pillar-card-top mb-15">
+                            <div class="card-icon sea-icon">🪸</div>
+                            <span class="pillar-badge pillar-tag-resilience">Pillar 03</span>
+                        </div>
+                        <h3 class="pillar-title">Community Environmental Action</h3>
+                        <p>Deploying grassroots marine restoration, rainwater harvesting, subsea sculpture reefs, and neighborhood eco-surveillance.</p>
+                        <div class="pillar-initiatives-list mt-15 mb-15">
+                            <span class="bento-chip">🪸 Reef Restoration</span>
+                            <span class="bento-chip">💧 Water Action</span>
+                        </div>
+                        <span class="card-link" style="color: #d97706; font-weight: 700;">Discover Field Projects &rarr;</span>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="program-card glass pillar-card" style="border-top: 3px solid #8b5cf6;" onclick="switchView('dashboard')">
+                        <div class="pillar-card-top mb-15">
+                            <div class="card-icon" style="color: #8b5cf6;">📡</div>
+                            <span class="pillar-badge" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.3);">Pillar 04</span>
+                        </div>
+                        <h3 class="pillar-title">Digital Innovation for Climate</h3>
+                        <p>Leveraging IoT sensor networks, environmental dashboard telemetry, data analytics, and digital tools for climate monitoring.</p>
+                        <div class="pillar-initiatives-list mt-15 mb-15">
+                            <span class="bento-chip">📊 IoT Telemetry</span>
+                            <span class="bento-chip">💻 Digital Dash</span>
+                        </div>
+                        <span class="card-link" style="color: #8b5cf6; font-weight: 700;">Explore Data Dashboard &rarr;</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Focus Areas & Active Programmes -->
+            <section class="home-programs container" id="home-pillars-section">
+                <h2 class="section-title text-center">Active Programmes &amp; Intakes</h2>
+                <p class="section-subtitle text-center">Click any programme to explore curriculum, schedules, and application pathways.</p>
+                <div class="program-grid three-pillars-grid">
+                    <!-- Focus Area 1: Blue/Green Entrepreneurship -->
+                    <div class="program-card glass pillar-card entrepreneurship-pillar"
+                        onclick="openProgram('pinelands')">
+                        <div class="pillar-card-top mb-15">
+                            <div class="card-icon fair-icon">
+                                <svg viewBox="0 0 24 24" width="36" height="36">
+                                    <path fill="currentColor"
+                                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
+                                </svg>
+                            </div>
+                            <span class="pillar-badge pillar-tag-entrepreneurship">Pillar 01</span>
+                        </div>
+                        <h3 class="pillar-title">Blue/Green Entrepreneurship</h3>
+                        <p>Driving sustainable economic growth through youth-led green technology, micro-grant pitching,
+                            maritime craft fabrication, and Pinelands career incubators.</p>
+                        <div class="pillar-initiatives-list mt-15 mb-15">
+                            <span class="bento-chip">💼 Micro-Grant Pitches</span>
+                            <span class="bento-chip">🛠️ Eco-Vessels</span>
+                            <span class="bento-chip">🎨 Pinelands Pavilion</span>
+                        </div>
+                        <span class="card-link" style="color: var(--color-primary); font-weight: 700;">Explore Programme
+                            &amp; Pathway &rarr;</span>
+                    </div>
+
+                    <!-- Focus Area 2: Advocacy and Awareness -->
+                    <div class="program-card glass pillar-card advocacy-pillar" onclick="openProgram('ecovillage')">
+                        <div class="pillar-card-top mb-15">
+                            <div class="card-icon village-icon">
+                                <svg viewBox="0 0 24 24" width="36" height="36">
+                                    <path fill="currentColor"
+                                        d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14,7.7 15.6,9.3 15.6,11.3C15.6,13.3 12,17.5 12,17.5C12,17.5 8.4,13.3 8.4,11.3C8.4,9.3 10,7.7 12,7.7Z" />
+                                </svg>
+                            </div>
+                            <span class="pillar-badge pillar-tag-advocacy">Pillar 02</span>
+                        </div>
+                        <h3 class="pillar-title">Advocacy and Awareness</h3>
+                        <p>Mobilizing climate education across Barbados through secondary school assembly tours, youth
+                            climate ambassadors, ocean literacy, and the Climate Dash 3K.</p>
+                        <div class="pillar-initiatives-list mt-15 mb-15">
+                            <span class="bento-chip">🏃 Climate Dash 3K</span>
+                            <span class="bento-chip">🏫 School Assemblies</span>
+                            <span class="bento-chip">🌊 Blue Ambassadors</span>
+                        </div>
+                        <span class="card-link" style="color: #2563eb; font-weight: 700;">Explore Programme &amp;
+                            Pathway &rarr;</span>
+                    </div>
+
+                    <!-- Focus Area 3: Community Resilience -->
+                    <div class="program-card glass pillar-card resilience-pillar"
+                        onclick="openProgram('tomorrowsreef')">
+                        <div class="pillar-card-top mb-15">
+                            <div class="card-icon sea-icon">
+                                <svg viewBox="0 0 24 24" width="36" height="36">
+                                    <path fill="currentColor"
+                                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,14.4 18.9,16.5 17.2,18C15.8,16.7 13.9,16 12,16C10.1,16 8.2,16.7 6.8,18C5.1,16.5 4,14.4 4,12A8,8 0 0,1 12,4Z" />
+                                </svg>
+                            </div>
+                            <span class="pillar-badge pillar-tag-resilience">Pillar 03</span>
+                        </div>
+                        <h3 class="pillar-title">Community Resilience</h3>
+                        <p>Strengthening island climate defense with pH-neutral subsea sculpture reefs, coastal water
+                            telemetry, rainwater harvesting, and mangrove restoration.</p>
+                        <div class="pillar-initiatives-list mt-15 mb-15">
+                            <span class="bento-chip">🪸 Tomorrow's Reef</span>
+                            <span class="bento-chip">💧 Water Quality</span>
+                            <span class="bento-chip">📊 Subsea Telemetry</span>
+                        </div>
+                        <span class="card-link" style="color: #d97706; font-weight: 700;">Explore Programme &amp;
+                            Pathway &rarr;</span>
                     </div>
                 </div>
             </section>
@@ -208,107 +361,17 @@
                 </section>
             </div>
 
-            <!-- Meet the Team Section on Home Page -->
-            <section id="home-team-section" class="container mt-40">
-                <div class="flex-column text-center mb-30">
-                    <span class="category-tag">Our People</span>
-                    <h2>Meet the Leadership &amp; Mentors</h2>
-                    <p class="lead">The dedicated team driving Barbados's youth-led climate engine and blue-green
-                        transition.</p>
-                </div>
-
-                <!-- Team Category Filter Buttons -->
-                <div class="team-filters">
-                    <button class="team-filter-btn active" onclick="filterTeam('all', this)">All Members</button>
-                    <button class="team-filter-btn" onclick="filterTeam('leadership', this)">Leadership</button>
-                    <button class="team-filter-btn" onclick="filterTeam('coordinator', this)">Coordinators</button>
-                    <button class="team-filter-btn" onclick="filterTeam('mentor', this)">Technical Mentors</button>
-                    <button class="team-filter-btn" onclick="filterTeam('champion', this)">Youth Champions</button>
-                </div>
-
-                <!-- Team Grid Cards -->
-                <div class="team-grid" id="team-cards-container-home">
-
-                    <!-- Member 1: Dr. Crystal Drakes -->
-                    <div class="team-card glass" data-category="leadership">
-                        <div class="team-avatar-wrapper">
-                            <div class="team-avatar">CD</div>
-                        </div>
-                        <div class="team-name">Dr. Crystal Drakes</div>
-                        <span class="team-role">Chairperson</span>
-                        <p class="team-bio">Leading strategic governance, policy frameworks, and island-wide climate
-                            resilience direction for Future Barbados and Green Rising.</p>
-                        <div class="team-tags">
-                            <span class="team-tag">#Leadership</span>
-                            <span class="team-tag">#Chairperson</span>
-                            <span class="team-tag">#ClimateGovernance</span>
-                        </div>
+            <!-- Meet the Team Teaser Banner on Home Page -->
+            <section id="home-team-section" class="container mt-40 mb-20">
+                <div class="glass p-30 flex-between align-center flex-wrap gap-20">
+                    <div style="max-width: 620px;">
+                        <span class="category-tag">Our People</span>
+                        <h3 class="mt-5 mb-10">Meet the Leadership &amp; Mentors</h3>
+                        <p class="text-muted mb-0">The dedicated coordinators, mentors, and youth champions driving Barbados's climate engine and blue-green transition.</p>
                     </div>
-
-                    <!-- Member 2: Myrico Morris -->
-                    <div class="team-card glass" data-category="coordinator">
-                        <div class="team-avatar-wrapper">
-                            <div class="team-avatar">MM</div>
-                        </div>
-                        <div class="team-name">Myrico Morris</div>
-                        <span class="team-role">Project Coordinator &amp; Community Activation Lead</span>
-                        <p class="team-bio">Overseeing cohort operations, youth community activation, field execution,
-                            and flagship environmental events across Barbados.</p>
-                        <div class="team-tags">
-                            <span class="team-tag">#Operations</span>
-                            <span class="team-tag">#CommunityActivation</span>
-                            <span class="team-tag">#ProjectLead</span>
-                        </div>
+                    <div>
+                        <a href="#team" class="btn btn-secondary btn-lg" onclick="switchView('team')">View All Team Members &rarr;</a>
                     </div>
-
-                    <!-- Member 3: Shanice Haynes -->
-                    <div class="team-card glass" data-category="coordinator">
-                        <div class="team-avatar-wrapper">
-                            <div class="team-avatar">SH</div>
-                        </div>
-                        <div class="team-name">Shanice Haynes</div>
-                        <span class="team-role">Project Officer</span>
-                        <p class="team-bio">Managing day-to-day project workflows, youth cohort engagement, partner
-                            coordination, and field initiative logistics.</p>
-                        <div class="team-tags">
-                            <span class="team-tag">#ProjectOfficer</span>
-                            <span class="team-tag">#YouthEngagement</span>
-                            <span class="team-tag">#Operations</span>
-                        </div>
-                    </div>
-
-                    <!-- Member 4: Nicole Hazel -->
-                    <div class="team-card glass" data-category="mentor">
-                        <div class="team-avatar-wrapper">
-                            <div class="team-avatar">NH</div>
-                        </div>
-                        <div class="team-name">Nicole Hazel</div>
-                        <span class="team-role">Monitoring &amp; Evaluation Specialist</span>
-                        <p class="team-bio">Tracking impact metrics, data analysis, programme evaluation, and climate
-                            action reporting across all project focus areas.</p>
-                        <div class="team-tags">
-                            <span class="team-tag">#DataAnalytics</span>
-                            <span class="team-tag">#ImpactEvaluation</span>
-                            <span class="team-tag">#M&amp;ESpecialist</span>
-                        </div>
-                    </div>
-
-                    <!-- Member 5: Deborah Lawrance -->
-                    <div class="team-card glass" data-category="leadership">
-                        <div class="team-avatar-wrapper">
-                            <div class="team-avatar">DL</div>
-                        </div>
-                        <div class="team-name">Deborah Lawrance</div>
-                        <span class="team-role">Administration &amp; Finance Consultant</span>
-                        <p class="team-bio">Directing administrative systems, financial management, governance
-                            compliance, and fiscal allocation across initiatives.</p>
-                        <div class="team-tags">
-                            <span class="team-tag">#Finance</span>
-                            <span class="team-tag">#Administration</span>
-                            <span class="team-tag">#Governance</span>
-                        </div>
-                    </div>
-
                 </div>
             </section>
         </section>
@@ -335,12 +398,14 @@
                             <div class="header-content-layer">
                                 <span class="reef-badge-pill">Focus Area 1 · Marine Heritage & Blue Economy</span>
                                 <h2>Tomorrow's Reef</h2>
-                                <p class="lead">Barbados' First Youth-Designed Underwater Heritage Reef & Founding Installation of the Oceana Innovation Hub Underwater Museum.</p>
+                                <p class="lead">Barbados' First Youth-Designed Underwater Heritage Reef & Founding
+                                    Installation of the Oceana Innovation Hub Underwater Museum.</p>
 
                                 <!-- Campaign Theme Quote Badge -->
                                 <div class="reef-campaign-pill">
                                     <span class="reef-campaign-badge">Campaign Theme</span>
-                                    <strong class="reef-campaign-quote">"Designed by Barbados. Growing for Tomorrow."</strong>
+                                    <strong class="reef-campaign-quote">"Designed by Barbados. Growing for
+                                        Tomorrow."</strong>
                                 </div>
 
                                 <!-- HIGH-IMPACT HORIZONTAL KEY INFO BAR / STATS ROW -->
@@ -400,16 +465,31 @@
                                     </div>
                                     <div class="summary-toggle-icon">
                                         <span class="toggle-text">Toggle Details</span>
-                                        <svg class="chevron-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+                                        <svg class="chevron-icon" viewBox="0 0 24 24" width="20" height="20">
+                                            <path fill="currentColor"
+                                                d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+                                        </svg>
                                     </div>
                                 </summary>
                                 <div class="reef-accordion-content">
                                     <div class="grid-2col gap-24 align-center">
                                         <div>
-                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">As Barbados marks its <strong>60th Anniversary of Independence</strong> and 5th year as a Republic in 2026, <strong>Tomorrow’s Reef</strong> stands as a landmark climate legacy initiative. Led by Green Rising Barbados, this flagship project merges youth leadership, cultural heritage, and marine conservation into a permanent underwater cultural monument.</p>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">As
+                                                Barbados marks its <strong>60th Anniversary of Independence</strong> and
+                                                5th year as a Republic in 2026, <strong>Tomorrow’s Reef</strong> stands
+                                                as a landmark climate legacy initiative. Led by Green Rising Barbados,
+                                                this flagship project merges youth leadership, cultural heritage, and
+                                                marine conservation into a permanent underwater cultural monument.</p>
                                         </div>
                                         <div>
-                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">Designed and fabricated by students and faculty from the <strong>Barbados Community College (BCC) Fine Arts Programme</strong>, the large-scale sculpture will be deployed off the coast using pH-neutral marine concrete. Over time, it will be colonized by corals and marine life, transforming public art into a living, thriving artificial reef.</p>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">
+                                                Designed and fabricated by students and faculty from the
+                                                <strong>Barbados Community College (BCC) Fine Arts Programme</strong>,
+                                                the large-scale sculpture will be deployed off the coast using
+                                                pH-neutral marine concrete. Over time, it will be colonized by corals
+                                                and marine life, transforming public art into a living, thriving
+                                                artificial reef.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -421,7 +501,8 @@
                             <div class="section-header-inline flex-between align-center mb-20 flex-wrap gap-10">
                                 <div>
                                     <span class="category-tag">Strategic Foundation</span>
-                                    <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Key Pillars & Impact Dimensions</h3>
+                                    <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Key Pillars & Impact Dimensions
+                                    </h3>
                                 </div>
                                 <span class="small text-muted">Visual Bento Layout</span>
                             </div>
@@ -434,7 +515,9 @@
                                         <span class="bento-pill-tag green">Primary Ecological Goal</span>
                                     </div>
                                     <h4>Environmental Restoration & Habitat Recovery</h4>
-                                    <p>Restores degraded marine habitats, accelerates coral recruitment, and creates an active subsea monitoring site for marine scientists and the Coastal Zone Management Unit (CZMU).</p>
+                                    <p>Restores degraded marine habitats, accelerates coral recruitment, and creates an
+                                        active subsea monitoring site for marine scientists and the Coastal Zone
+                                        Management Unit (CZMU).</p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">🪸 Coral Recruitment</span>
                                         <span class="bento-chip">🔬 Subsea Telemetry</span>
@@ -449,7 +532,8 @@
                                         <span class="bento-pill-tag blue">Youth Leadership</span>
                                     </div>
                                     <h4>Youth Empowerment & Artistry</h4>
-                                    <p>Places young Barbadians at the center of the blue economy as designers, sculptors, environmental ambassadors, and ocean storytellers.</p>
+                                    <p>Places young Barbadians at the center of the blue economy as designers,
+                                        sculptors, environmental ambassadors, and ocean storytellers.</p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">🎨 BCC Fine Arts Residency</span>
                                         <span class="bento-chip">🌊 50–100 Ambassadors</span>
@@ -463,7 +547,9 @@
                                         <span class="bento-pill-tag gold">60th Independence</span>
                                     </div>
                                     <h4>Cultural Legacy & Heritage</h4>
-                                    <p>Celebrates 60 years of Independence with motifs honoring Barbadian identity—featuring the Broken Trident, coral stone architecture, and indigenous marine fauna.</p>
+                                    <p>Celebrates 60 years of Independence with motifs honoring Barbadian
+                                        identity—featuring the Broken Trident, coral stone architecture, and indigenous
+                                        marine fauna.</p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">🔱 Broken Trident</span>
                                         <span class="bento-chip">🏛️ Coral Architecture</span>
@@ -477,7 +563,9 @@
                                         <span class="bento-pill-tag teal">Eco-Tourism Destination</span>
                                     </div>
                                     <h4>Sustainable Tourism & Underwater Museum</h4>
-                                    <p>Establishes the founding installation of the Oceana Innovation Hub Underwater Museum, creating a premier eco-tourism landmark for international divers and marine researchers.</p>
+                                    <p>Establishes the founding installation of the Oceana Innovation Hub Underwater
+                                        Museum, creating a premier eco-tourism landmark for international divers and
+                                        marine researchers.</p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">🤿 Underwater Museum</span>
                                         <span class="bento-chip">🎟️ Eco-Tourism</span>
@@ -504,7 +592,8 @@
                                         </div>
                                         <div class="step-time">June – August 2026</div>
                                         <h4>BCC Design & Sculpture Residency</h4>
-                                        <p>Fine Arts students & faculty collaborate with sculptors and marine engineers to produce drawings, scale models, and reef-safe sculptures.</p>
+                                        <p>Fine Arts students & faculty collaborate with sculptors and marine engineers
+                                            to produce drawings, scale models, and reef-safe sculptures.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip">🎨 Scale Modeling</span>
                                             <span class="step-chip">🔨 Sculptural Craft</span>
@@ -519,7 +608,8 @@
                                         </div>
                                         <div class="step-time">August – Sept 2026</div>
                                         <h4>Fabrication & Coral Out-Planting</h4>
-                                        <p>Marine concrete fabrication engineered for wave resilience. Subsea deployment followed by targeted coral out-planting with CZMU.</p>
+                                        <p>Marine concrete fabrication engineered for wave resilience. Subsea deployment
+                                            followed by targeted coral out-planting with CZMU.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip">🏗️ Concrete Casting</span>
                                             <span class="step-chip">🪸 Coral Planting</span>
@@ -534,7 +624,8 @@
                                         </div>
                                         <div class="step-time">July – Nov 2026</div>
                                         <h4>Youth Blue Ambassadors Programme</h4>
-                                        <p>Training 50–100 young leaders in marine conservation, reef telemetry monitoring, and climate advocacy via Oceana Blue Curriculum.</p>
+                                        <p>Training 50–100 young leaders in marine conservation, reef telemetry
+                                            monitoring, and climate advocacy via Oceana Blue Curriculum.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip">🌊 50–100 Ambassadors</span>
                                             <span class="step-chip">📊 Reef Literacy</span>
@@ -549,7 +640,8 @@
                                         </div>
                                         <div class="step-time gold">November 27, 2026</div>
                                         <h4>National Unveiling & Exhibition</h4>
-                                        <p>Official launch featuring Prime Minister Mottley, UNICEF, international development partners, and cultural leaders.</p>
+                                        <p>Official launch featuring Prime Minister Mottley, UNICEF, international
+                                            development partners, and cultural leaders.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip gold">👑 Prime Minister Launch</span>
                                             <span class="step-chip gold">🇧🇧 60th Independence</span>
@@ -611,10 +703,12 @@
                         <div class="eco-village-cta-banner glass mt-30">
                             <div class="cta-content">
                                 <h3>Join the Youth Blue Ambassadors & Sculptural Legacy</h3>
-                                <p>Apply to become one of the 50–100 Youth Blue Ambassadors or collaborate on Tomorrow's Reef today.</p>
+                                <p>Apply to become one of the 50–100 Youth Blue Ambassadors or collaborate on Tomorrow's
+                                    Reef today.</p>
                             </div>
                             <div class="cta-actions">
-                                <button class="btn btn-primary" onclick="openApplyForm('tomorrowsreef')">Apply / Get Involved &rarr;</button>
+                                <button class="btn btn-primary" onclick="openApplyForm('tomorrowsreef')">Apply / Get
+                                    Involved &rarr;</button>
                             </div>
                         </div>
                     </div>
@@ -630,14 +724,19 @@
                         <!-- Fluid Top Banner Header Section -->
                         <div class="ecovillage-header">
                             <div class="header-content-layer">
-                                <span class="reef-badge-pill" style="background: rgba(112, 168, 59, 0.14); color: #65a30d; border-color: rgba(112, 168, 59, 0.3);">Focus Area 3 · Flagship Community Action Event</span>
+                                <span class="reef-badge-pill"
+                                    style="background: rgba(112, 168, 59, 0.14); color: #65a30d; border-color: rgba(112, 168, 59, 0.3);">Focus
+                                    Area 3 · Flagship Community Action Event</span>
                                 <h2 style="color: #65a30d;">Climate Dash x Climate Ninja Throwdown & Eco-Village</h2>
-                                <p class="lead">A themed 3K walk/run through Barbados' environmental frontlines, paired with the Climate Ninja Throwdown school preview and a festival-style Eco-Village at the Usain Bolt Sports Complex.</p>
+                                <p class="lead">A themed 3K walk/run through Barbados' environmental frontlines, paired
+                                    with the Climate Ninja Throwdown school preview and a festival-style Eco-Village at
+                                    the Usain Bolt Sports Complex.</p>
 
                                 <!-- Campaign Theme Quote Badge -->
                                 <div class="reef-campaign-pill">
                                     <span class="reef-campaign-badge" style="background: #65a30d;">Event Slogan</span>
-                                    <strong class="reef-campaign-quote">"Run for the Planet. Learn for the Future. Build the Blue Economy."</strong>
+                                    <strong class="reef-campaign-quote">"Run for the Planet. Learn for the Future. Build
+                                        the Blue Economy."</strong>
                                 </div>
 
                                 <!-- HIGH-IMPACT HORIZONTAL KEY INFO BAR / STATS ROW -->
@@ -691,16 +790,29 @@
                                     </div>
                                     <div class="summary-toggle-icon">
                                         <span class="toggle-text">Toggle Details</span>
-                                        <svg class="chevron-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+                                        <svg class="chevron-icon" viewBox="0 0 24 24" width="20" height="20">
+                                            <path fill="currentColor"
+                                                d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+                                        </svg>
                                     </div>
                                 </summary>
                                 <div class="reef-accordion-content">
                                     <div class="grid-2col gap-24 align-center">
                                         <div>
-                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">The <strong>Climate Dash x Climate Ninja Throwdown</strong> is Barbados' premiere youth-led action event. Combining a themed 3K walk/run with interactive kilometre stations and an immersive festival-style Eco-Village, the event unites over 600 students from 21 public and 3 private secondary schools across the island.</p>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">
+                                                The <strong>Climate Dash x Climate Ninja Throwdown</strong> is Barbados'
+                                                premiere youth-led action event. Combining a themed 3K walk/run with
+                                                interactive kilometre stations and an immersive festival-style
+                                                Eco-Village, the event unites over 600 students from 21 public and 3
+                                                private secondary schools across the island.</p>
                                         </div>
                                         <div>
-                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">Prior to event day, the Green Rising team executes the <strong>Climate Ninja Throwdown School Tour</strong> across 5–10 secondary schools—hosting high-energy assemblies, fitness warm-ups, and student registration drives that prepare youth for the Usain Bolt Sports Complex finale.</p>
+                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">
+                                                Prior to event day, the Green Rising team executes the <strong>Climate
+                                                    Ninja Throwdown School Tour</strong> across 5–10 secondary
+                                                schools—hosting high-energy assemblies, fitness warm-ups, and student
+                                                registration drives that prepare youth for the Usain Bolt Sports Complex
+                                                finale.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -712,7 +824,8 @@
                             <div class="section-header-inline flex-between align-center mb-20 flex-wrap gap-10">
                                 <div>
                                     <span class="category-tag">Festival Architecture</span>
-                                    <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Eco-Village Zones & Strategic Impact</h3>
+                                    <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Eco-Village Zones & Strategic
+                                        Impact</h3>
                                 </div>
                                 <span class="small text-muted">Bento Grid Layout</span>
                             </div>
@@ -725,7 +838,10 @@
                                         <span class="bento-pill-tag green">Zone 01 · Environmental Frontlines</span>
                                     </div>
                                     <h4>Planet & Greening Zone</h4>
-                                    <p>Anchored in 5 environmental themes along the 3K route—featuring Kilometre-by-Kilometre installations (1KM Freshwater, 2KM Marine Conservation, 3KM Biodiversity & Soil), live restoration demos, and youth-designed creative signage.</p>
+                                    <p>Anchored in 5 environmental themes along the 3K route—featuring
+                                        Kilometre-by-Kilometre installations (1KM Freshwater, 2KM Marine Conservation,
+                                        3KM Biodiversity & Soil), live restoration demos, and youth-designed creative
+                                        signage.</p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">💧 1KM Water Security</span>
                                         <span class="bento-chip">🌊 2KM Marine Reefs</span>
@@ -740,7 +856,8 @@
                                         <span class="bento-pill-tag blue">Zone 02 · Behavior Change</span>
                                     </div>
                                     <h4>People & Learning Zone</h4>
-                                    <p>Interactive educational route stations led by youth groups, live quizzes, NGO eco-workshops, spoken word poetry, and festival cultural showcases.</p>
+                                    <p>Interactive educational route stations led by youth groups, live quizzes, NGO
+                                        eco-workshops, spoken word poetry, and festival cultural showcases.</p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">🎓 School Stations</span>
                                         <span class="bento-chip">🎭 Cultural Eco-Theatre</span>
@@ -754,7 +871,9 @@
                                         <span class="bento-pill-tag gold">Zone 03 · Green Enterprise</span>
                                     </div>
                                     <h4>Earn & Grow Zone</h4>
-                                    <p>Marketplace featuring youth-led green technology exhibitions, sustainable vendors, micro-enterprise grant pitching, and green career pipeline matching.</p>
+                                    <p>Marketplace featuring youth-led green technology exhibitions, sustainable
+                                        vendors, micro-enterprise grant pitching, and green career pipeline matching.
+                                    </p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">💼 Green Job Pipelines</span>
                                         <span class="bento-chip">🚀 Micro-Grant Demos</span>
@@ -768,7 +887,9 @@
                                         <span class="bento-pill-tag teal">Strategic Targets</span>
                                     </div>
                                     <h4>What It's Building Toward</h4>
-                                    <p>Driving 600+ student turnout, equipping youth with practical climate literacy, integrating 8+ frontline environmental agencies, and expanding GRB's 5,000-youth target by 2030.</p>
+                                    <p>Driving 600+ student turnout, equipping youth with practical climate literacy,
+                                        integrating 8+ frontline environmental agencies, and expanding GRB's 5,000-youth
+                                        target by 2030.</p>
                                     <div class="bento-chips-footer mt-15">
                                         <span class="bento-chip">🏃 600+ Students</span>
                                         <span class="bento-chip">🏫 24 Schools</span>
@@ -782,7 +903,8 @@
                         <div class="dash-stepper-section mt-35">
                             <div class="section-header-inline mb-20">
                                 <span class="category-tag">Implementation Timeline</span>
-                                <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Event Day & Pre-Event Rollout Stepper</h3>
+                                <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Event Day & Pre-Event Rollout Stepper
+                                </h3>
                             </div>
 
                             <div class="reef-stepper-container glass p-30">
@@ -796,7 +918,8 @@
                                         </div>
                                         <div class="step-time">September 2026</div>
                                         <h4>Climate Ninja School Tour</h4>
-                                        <p>High-energy previews across 5–10 secondary schools featuring assemblies, fitness warm-ups, and student registration drives.</p>
+                                        <p>High-energy previews across 5–10 secondary schools featuring assemblies,
+                                            fitness warm-ups, and student registration drives.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip">🏫 School Assemblies</span>
                                             <span class="step-chip">📋 Registration</span>
@@ -811,7 +934,8 @@
                                         </div>
                                         <div class="step-time">Oct 9 · 07:30 AM</div>
                                         <h4>3K Climate Dash Launch</h4>
-                                        <p>Runners assemble at Usain Bolt Sports Complex and embark on the 3K frontline route with 3 theme stations.</p>
+                                        <p>Runners assemble at Usain Bolt Sports Complex and embark on the 3K frontline
+                                            route with 3 theme stations.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip">🏃 3K Frontline Route</span>
                                             <span class="step-chip">📍 Usain Bolt Track</span>
@@ -826,7 +950,8 @@
                                         </div>
                                         <div class="step-time">Oct 9 · 09:30 AM</div>
                                         <h4>Festival Eco-Village Open</h4>
-                                        <p>3-zone festival grounds open with 5 environmental theme booths, live restoration demos, and youth micro-market.</p>
+                                        <p>3-zone festival grounds open with 5 environmental theme booths, live
+                                            restoration demos, and youth micro-market.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip">🎪 3-Zone Festival</span>
                                             <span class="step-chip">🌱 Restoration Demos</span>
@@ -841,7 +966,8 @@
                                         </div>
                                         <div class="step-time gold">Oct 9 · 12:30 PM</div>
                                         <h4>Ninja Throwdown Finals & Awards</h4>
-                                        <p>School competition finals, live cultural performances, awards presentation, and closing ceremony.</p>
+                                        <p>School competition finals, live cultural performances, awards presentation,
+                                            and closing ceremony.</p>
                                         <div class="step-tags mt-10">
                                             <span class="step-chip gold">🏆 School Awards</span>
                                             <span class="step-chip gold">🎭 Youth Showcase</span>
@@ -857,7 +983,8 @@
                                 <div class="flex-between align-center mb-20 wrap-gap">
                                     <div>
                                         <span class="category-tag">Exhibitors & Supporters</span>
-                                        <h3 class="mt-5 mb-0" style="font-size: 1.4rem;">Featured Partner Organisations</h3>
+                                        <h3 class="mt-5 mb-0" style="font-size: 1.4rem;">Featured Partner Organisations
+                                        </h3>
                                     </div>
                                     <span class="small text-muted">Institutional Alliance</span>
                                 </div>
@@ -903,10 +1030,12 @@
                         <div class="eco-village-cta-banner glass mt-30">
                             <div class="cta-content">
                                 <h3>Be Part of the Climate Dash & Eco-Village</h3>
-                                <p>Register as a runner, showcase your green business, or volunteer at an educational station today.</p>
+                                <p>Register as a runner, showcase your green business, or volunteer at an educational
+                                    station today.</p>
                             </div>
                             <div class="cta-actions">
-                                <button class="btn btn-primary" onclick="openApplyForm('ecovillage')">Apply / Register Now &rarr;</button>
+                                <button class="btn btn-primary" onclick="openApplyForm('ecovillage')">Apply / Register
+                                    Now &rarr;</button>
                             </div>
                         </div>
                     </div>
@@ -1384,7 +1513,8 @@
                                 <div class="custom-radio-indicator"></div>
                                 <div class="quiz-opt-content">
                                     <span class="quiz-opt-title">Maritime &amp; Marine Heritage</span>
-                                    <span class="quiz-opt-subtitle">Tomorrow's Reef · underwater ocean heritage &amp; reef restoration</span>
+                                    <span class="quiz-opt-subtitle">Tomorrow's Reef · underwater ocean heritage &amp;
+                                        reef restoration</span>
                                 </div>
                             </label>
 
@@ -1452,8 +1582,10 @@
                     <div class="quiz-result-pane hidden" id="q-result">
                         <div class="matched-header-badge text-center mb-15">YOUR RECOMMENDED PATHWAY</div>
                         <div class="matched-box glass text-center p-25">
-                            <div class="matched-title text-accent" id="matched-title">Tomorrow's Reef: Marine Heritage</div>
-                            <p class="mt-15" id="matched-description">Based on your interests, you qualify for our ocean heritage and reef conservation initiatives.</p>
+                            <div class="matched-title text-accent" id="matched-title">Tomorrow's Reef: Marine Heritage
+                            </div>
+                            <p class="mt-15" id="matched-description">Based on your interests, you qualify for our ocean
+                                heritage and reef conservation initiatives.</p>
                         </div>
                         <div class="text-center mt-25 flex-center gap-15">
                             <button class="btn btn-secondary" onclick="resetQuiz()">Retake Quiz</button>
@@ -1467,11 +1599,35 @@
 
         <!-- 5. APPLICATION MODAL / SECTION -->
         <section id="view-apply" class="app-view">
-            <div class="container max-width-600">
-                <div class="glass p-30">
-                    <h2 class="text-center">Quick Application Form</h2>
-                    <p class="text-center text-muted mb-25">Register your interest in our upcoming cohort intakes and
-                        events.</p>
+            <div class="container max-width-800">
+                <!-- Get Involved Pathways Selector -->
+                <div class="glass p-25 mb-30 text-center">
+                    <span class="category-tag">Get Involved</span>
+                    <h2 class="mt-5 mb-10">Choose Your Pathway</h2>
+                    <p class="section-subtitle mb-20">Select how you or your organization would like to engage with Green Rising Barbados.</p>
+                    
+                    <div class="pathway-selector-grid flex-center flex-wrap gap-10">
+                        <button class="btn btn-secondary pathway-tab-btn active" data-pathway="youth" onclick="switchApplyPathway('youth', this)">
+                            🌱 Youth Participant (15–35)
+                        </button>
+                        <button class="btn btn-secondary pathway-tab-btn" data-pathway="schools" onclick="switchApplyPathway('schools', this)">
+                            🏫 Schools &amp; Educators
+                        </button>
+                        <button class="btn btn-secondary pathway-tab-btn" data-pathway="community" onclick="switchApplyPathway('community', this)">
+                            🏡 Community Groups
+                        </button>
+                        <button class="btn btn-secondary pathway-tab-btn" data-pathway="mentors" onclick="switchApplyPathway('mentors', this)">
+                            💡 Mentors &amp; Experts
+                        </button>
+                        <button class="btn btn-secondary pathway-tab-btn" data-pathway="funders" onclick="switchApplyPathway('funders', this)">
+                            🤝 Funders &amp; Partners
+                        </button>
+                    </div>
+                </div>
+
+                <div class="glass p-30 max-width-600" style="margin: 0 auto;">
+                    <h2 class="text-center" id="apply-form-title">Quick Application Form</h2>
+                    <p class="text-center text-muted mb-25" id="apply-form-subtitle">Register your interest in our upcoming cohort intakes and events.</p>
 
                     <form id="apply-form" onsubmit="event.preventDefault(); handleApplySubmit();">
                         <div class="form-row">
@@ -2074,7 +2230,12 @@
                     <li><a href="https://futurebarbados.bb/" target="_blank" rel="noopener">Future Barbados</a></li>
                     <li><a href="https://www.gov.bb/Ministries/innovation-science-smart-technology" target="_blank"
                             rel="noopener">Ministry of Industry & Science</a></li>
-                    <li class="admin-only" style="display: none;"><a href="#admin" onclick="switchView('admin')"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" style="margin-right: 4px; vertical-align: text-bottom;"><path fill="currentColor" d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 10 0v2h1m-6-4a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/></svg>Admin Dashboard</a></li>
+                    <li class="admin-only" style="display: none;"><a href="#admin" onclick="switchView('admin')"><svg
+                                viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"
+                                style="margin-right: 4px; vertical-align: text-bottom;">
+                                <path fill="currentColor"
+                                    d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 10 0v2h1m-6-4a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z" />
+                            </svg>Admin Dashboard</a></li>
                 </ul>
             </div>
         </div>

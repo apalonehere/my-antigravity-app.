@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Scroll-triggered reveal animations
 function initScrollReveal() {
     const revealTargets = [
-        { selector: '.program-card',         delay: true },
-        { selector: '.stat-item',            delay: true },
-        { selector: '.village-card',         delay: true },
-        { selector: '.matrix-item',          delay: true },
-        { selector: '.pinelands-card',       delay: true },
-        { selector: '.dash-metric-card',     delay: true }
+        { selector: '.program-card', delay: true },
+        { selector: '.stat-item', delay: true },
+        { selector: '.village-card', delay: true },
+        { selector: '.matrix-item', delay: true },
+        { selector: '.pinelands-card', delay: true },
+        { selector: '.dash-metric-card', delay: true }
     ];
 
     if ('IntersectionObserver' in window) {
@@ -115,3 +115,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Green Rising Hero Information Dropdown Toggle
+function toggleGreenRisingInfo(btnEl) {
+    const contentPanel = document.getElementById('green-rising-info-panel');
+    if (!contentPanel) return;
+    const isHidden = contentPanel.classList.contains('hidden');
+    if (isHidden) {
+        contentPanel.classList.remove('hidden');
+        if (btnEl) {
+            btnEl.classList.add('active');
+            btnEl.setAttribute('aria-expanded', 'true');
+        }
+    } else {
+        contentPanel.classList.add('hidden');
+        if (btnEl) {
+            btnEl.classList.remove('active');
+            btnEl.setAttribute('aria-expanded', 'false');
+        }
+    }
+}
+window.toggleGreenRisingInfo = toggleGreenRisingInfo;
