@@ -6456,9 +6456,11 @@ details[open] .chevron-icon {
     0% {
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
     }
+
     70% {
         box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
     }
+
     100% {
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
@@ -6571,6 +6573,7 @@ details[open] .chevron-icon {
     background: rgba(16, 185, 129, 0.15);
     color: #34d399;
 }
+
 [data-theme="light"] .icon-emerald {
     color: #059669;
 }
@@ -6579,6 +6582,7 @@ details[open] .chevron-icon {
     background: rgba(6, 182, 212, 0.15);
     color: #38bdf8;
 }
+
 [data-theme="light"] .icon-cyan {
     color: #0284c7;
 }
@@ -6587,6 +6591,7 @@ details[open] .chevron-icon {
     background: rgba(99, 102, 241, 0.15);
     color: #818cf8;
 }
+
 [data-theme="light"] .icon-blue {
     color: #4f46e5;
 }
@@ -6665,6 +6670,7 @@ details[open] .chevron-icon {
     .who-stat-divider {
         display: none;
     }
+
     .who-stats-bar {
         grid-template-columns: 1fr 1fr;
         display: grid;
@@ -6678,18 +6684,22 @@ details[open] .chevron-icon {
    ============================================================ */
 
 /* 1. Root & Scroll Overflow Protection */
-html, body {
+html,
+body {
     overflow-x: hidden !important;
     max-width: 100vw;
     box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 /* 2. Mobile Viewport Responsive Overrides (max-width: 768px) */
 @media (max-width: 768px) {
+
     /* Touch Target Minimum Sizing (~48px height/width min) */
     .btn,
     .dash-tab-btn,
