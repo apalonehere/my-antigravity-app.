@@ -967,11 +967,14 @@ p {
    ============================================================ */
 .wave-divider {
     position: relative;
-    height: 90px;
+    height: 75px;
     overflow: hidden;
     line-height: 0;
-    margin: 0;
+    margin-top: -38px;
+    margin-bottom: 0;
     padding: 0;
+    z-index: 3;
+    pointer-events: none;
 }
 
 .wave-divider svg {
@@ -987,10 +990,11 @@ p {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(5, 150, 105, 0.16);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(5, 150, 105, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     transition: var(--transition);
 }
 
@@ -1295,7 +1299,7 @@ p {
    ============================================================ */
 .hero-section {
     position: relative;
-    padding: 130px 24px 110px;
+    padding: 85px 24px 75px;
     overflow: hidden;
     background: var(--grad-hero);
     isolation: isolate;
@@ -1313,26 +1317,26 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    opacity: 0.92;
+    object-position: center 35%;
+    opacity: 0.95;
     filter: saturate(1.15) contrast(1.05);
     transition: transform 0.6s var(--ease-smooth);
 }
 
 [data-theme="dark"] .hero-img-bg {
-    opacity: 0.65;
+    opacity: 0.70;
 }
 
 .hero-video-overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.28) 45%, rgba(255, 255, 255, 0.82) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.12) 40%, rgba(255, 255, 255, 0.40) 80%, rgba(255, 255, 255, 0.72) 100%);
     pointer-events: none;
 }
 
 [data-theme="dark"] .hero-video-overlay {
-    background: linear-gradient(180deg, rgba(6, 20, 18, 0.65) 0%, rgba(6, 20, 18, 0.45) 45%, rgba(6, 20, 18, 0.88) 100%);
+    background: linear-gradient(180deg, rgba(6, 20, 18, 0.45) 0%, rgba(6, 20, 18, 0.30) 40%, rgba(6, 20, 18, 0.60) 80%, rgba(6, 20, 18, 0.85) 100%);
 }
 
 /* Vivid color washes layered on top */
