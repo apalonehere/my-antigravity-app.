@@ -94,39 +94,39 @@
 
                 <!-- Media Track -->
                 <div id="hero-track"
-                    class="flex w-full h-full transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]">
+                    class="flex w-full h-full will-change-transform">
                     <!-- Slide 1 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/Hero 1.JPG" alt="Green Rising Hero 1"
+                        <img src="images/hero-1.jpg" alt="Green Rising Hero 1" fetchpriority="high" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 2 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/Hero 2.jpg" alt="Green Rising Hero 2"
+                        <img src="images/hero-2.jpg" alt="Green Rising Hero 2" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 3 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/Hero 3.jpg" alt="Green Rising Hero 3"
+                        <img src="images/hero-3.jpg" alt="Green Rising Hero 3" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 4 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/Hero 4.JPG" alt="Green Rising Hero 4"
+                        <img src="images/hero-4.jpg" alt="Green Rising Hero 4" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 5 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/Hero 5.jpg" alt="Green Rising Hero 5"
+                        <img src="images/hero-5.jpg" alt="Green Rising Hero 5" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
                 </div>
@@ -172,43 +172,88 @@
                     const prevBtn = document.getElementById('prev-btn');
                     const nextBtn = document.getElementById('next-btn');
                     const slideCount = track.children.length;
+                    const DURATION = 700;
+
+                    // Clone the first slide onto the end. Advancing past the last slide
+                    // moves onto the clone, then we snap back to the real first slide with
+                    // the transition off — so the loop never sweeps backwards across every
+                    // slide, which was the visible lag when it wrapped around.
+                    track.appendChild(track.children[0].cloneNode(true));
 
                     let currentIndex = 0;
+                    let animating = false;
                     let autoSlideInterval;
 
-                    // Shift the track horizontally
+                    const setTransition = (on) => {
+                        track.style.transition = on
+                            ? `transform ${DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`
+                            : 'none';
+                    };
+
                     const updateSlide = () => {
                         track.style.transform = `translateX(-${currentIndex * 100}%)`;
                     };
 
-                    const nextSlide = () => {
-                        currentIndex = (currentIndex + 1) % slideCount;
+                    // Force a reflow so a transition-less jump is painted before re-enabling
+                    const snapTo = (index) => {
+                        setTransition(false);
+                        currentIndex = index;
                         updateSlide();
+                        void track.offsetWidth;
+                        setTransition(true);
+                    };
+
+                    const nextSlide = () => {
+                        if (animating) return;
+                        animating = true;
+                        setTransition(true);
+                        currentIndex++;
+                        updateSlide();
+                        setTimeout(() => {
+                            if (currentIndex === slideCount) snapTo(0);
+                            animating = false;
+                        }, DURATION);
                     };
 
                     const prevSlide = () => {
-                        currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                        if (animating) return;
+                        animating = true;
+                        if (currentIndex === 0) {
+                            // Jump to the clone first so we can animate backwards into the last slide
+                            snapTo(slideCount);
+                        }
+                        currentIndex--;
                         updateSlide();
+                        setTimeout(() => { animating = false; }, DURATION);
                     };
+
+                    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+                    const stopAuto = () => clearInterval(autoSlideInterval);
 
                     // Resets the timer so it doesn't double-slide right after a manual click
                     const resetInterval = () => {
-                        clearInterval(autoSlideInterval);
-                        autoSlideInterval = setInterval(nextSlide, 5000);
+                        stopAuto();
+                        if (!reduceMotion.matches) {
+                            autoSlideInterval = setInterval(nextSlide, 5000);
+                        }
                     };
 
-                    // Button Event Listeners
-                    nextBtn.addEventListener('click', () => {
-                        nextSlide();
-                        resetInterval();
-                    });
+                    nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
+                    prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
 
-                    prevBtn.addEventListener('click', () => {
-                        prevSlide();
-                        resetInterval();
+                    // Rotation must be pausable, and must stop while a control has focus
+                    const hero = track.parentElement;
+                    hero.addEventListener('mouseenter', stopAuto);
+                    hero.addEventListener('mouseleave', resetInterval);
+                    hero.addEventListener('focusin', stopAuto);
+                    hero.addEventListener('focusout', resetInterval);
+                    document.addEventListener('visibilitychange', () => {
+                        document.hidden ? stopAuto() : resetInterval();
                     });
+                    reduceMotion.addEventListener('change', resetInterval);
 
-                    // Initialize auto-sliding
+                    setTransition(true);
                     resetInterval();
                 });
             </script>
