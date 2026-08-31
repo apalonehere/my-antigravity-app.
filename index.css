@@ -8661,3 +8661,189 @@ body {
 [data-theme="dark"] .brand-subtitle-header {
     color: #2dd4bf;
 }
+
+/* ============================================================
+   "WHO WE ARE" SNAPSHOT CARDS
+   Replaces the previous bento layout. Three equal cards, each
+   stating one verified relationship, so nothing here asserts a
+   fact the site cannot back up elsewhere.
+   ============================================================ */
+
+.snap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+@media (max-width: 900px) {
+    .snap-grid { grid-template-columns: 1fr; }
+}
+
+.snap-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--color-bg-card);
+    border: 1px solid rgba(5, 150, 105, 0.16);
+    border-radius: var(--radius-lg, 16px);
+    padding: 24px 22px;
+}
+
+[data-theme="dark"] .snap-card {
+    border-color: rgba(16, 185, 129, 0.22);
+}
+
+.snap-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary-text);
+}
+
+.snap-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.snap-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 13px;
+    border-left: 2px solid rgba(5, 150, 105, 0.30);
+}
+
+[data-theme="dark"] .snap-list li {
+    border-left-color: rgba(16, 185, 129, 0.38);
+}
+
+.snap-list strong {
+    font-family: var(--font-heading);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--color-text-bright);
+    line-height: 1.25;
+}
+
+.snap-list span {
+    font-size: 0.86rem;
+    color: var(--color-text-muted);
+}
+
+.snap-body {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+}
+
+/* Unwritten copy. Deliberately conspicuous so a placeholder can never be
+   mistaken for finished text or shipped by accident. */
+[data-needs-copy] {
+    position: relative;
+    border: 1px dashed rgba(217, 119, 6, 0.65);
+    border-radius: 8px;
+    padding: 10px 12px 10px 14px;
+    color: var(--color-text-dim);
+    font-style: italic;
+    background: rgba(245, 158, 11, 0.06);
+}
+
+[data-needs-copy]::after {
+    content: "needs copy";
+    display: inline-block;
+    margin-left: 8px;
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #b45309;
+    background: rgba(245, 158, 11, 0.16);
+    border-radius: 4px;
+    padding: 2px 6px;
+    vertical-align: middle;
+}
+
+[data-theme="dark"] [data-needs-copy]::after {
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.14);
+}
+
+/* Portrait treatment for the "Backed by" card */
+.snap-portrait-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.snap-portrait {
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 18%;
+    border: 2px solid rgba(5, 150, 105, 0.35);
+}
+
+[data-theme="dark"] .snap-portrait {
+    border-color: rgba(16, 185, 129, 0.45);
+}
+
+.snap-portrait-name {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-text-bright);
+}
+
+.snap-portrait-role {
+    display: block;
+    font-size: 0.84rem;
+    color: var(--color-text-muted);
+}
+
+/* Card hover lift — Hover Micro-interaction / Standard preset.
+   Kept in CSS rather than GSAP: quickTo tweens carry `overwrite` and were
+   killing the entrance animation, stranding cards at opacity 0. Transform
+   and box-shadow only, so this stays on the compositor. */
+.motion-lift {
+    transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1),
+                box-shadow 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (hover: hover) {
+    .motion-lift:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(11, 42, 47, 0.12);
+    }
+}
+
+.motion-lift:focus-within {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(11, 42, 47, 0.12);
+}
+
+[data-theme="dark"] .motion-lift:hover,
+[data-theme="dark"] .motion-lift:focus-within {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .motion-lift,
+    .motion-lift:hover,
+    .motion-lift:focus-within {
+        transition: none;
+        transform: none;
+    }
+}

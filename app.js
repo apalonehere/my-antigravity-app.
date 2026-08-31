@@ -17,12 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Scroll-triggered reveal animations
+// .reel-card, .snap-card and .pillar-visual-card are deliberately absent:
+// js/motion.js reveals those with GSAP, and running both systems on the same
+// element leaves it fighting over opacity and transform.
+// ('.who-bento-card' used to be listed here; that class no longer exists.)
 function initScrollReveal() {
     const revealTargets = [
         { selector: '.program-card', delay: true },
-        { selector: '.reel-card', delay: true },
-        { selector: '.who-bento-card', delay: true },
-        { selector: '.pillar-visual-card', delay: true },
         { selector: '.stat-item', delay: true },
         { selector: '.village-card', delay: true },
         { selector: '.matrix-item', delay: true },
@@ -58,7 +59,7 @@ function initScrollReveal() {
         });
     } else {
         // Fallback for browsers without IntersectionObserver
-        document.querySelectorAll('.program-card, .reel-card, .who-bento-card, .pillar-visual-card, .stat-item, .village-card, .matrix-item, .pinelands-card, .dash-metric-card')
+        document.querySelectorAll('.program-card, .stat-item, .village-card, .matrix-item, .pinelands-card, .dash-metric-card')
             .forEach(el => el.classList.add('revealed'));
     }
 }
@@ -142,25 +143,29 @@ function toggleGreenRisingInfo(btnEl) {
 window.toggleGreenRisingInfo = toggleGreenRisingInfo;
 
 // --- Video Spotlight Modal & Player Controller ---
+// `desc` is intentionally empty: the previous descriptions were written without
+// reference to the footage and did not describe what the videos actually show.
+// The modal hides the line while it is blank — fill one in once the real
+// content of each reel is confirmed.
 const VIDEO_REELS_DATA = {
     video1: {
         category: '🪸 Subsea Reef Action',
         title: 'Youth Underwater Reef Installation',
-        desc: 'BCC Fine Arts sculptors & youth divers submerging pH-neutral artificial coral structures off Carlisle Bay.',
+        desc: '',
         videoSrc: 'images/video1.mp4',
         poster: 'images/eco-leaders.jpg'
     },
     video2: {
         category: '⛵ Eco-Vessel Engineering',
         title: 'Building Solar Boats & Maritime Craft',
-        desc: 'Hands-on fabrication incubator in Pinelands turning sustainable composite craft engineering into clean marine transit.',
+        desc: '',
         videoSrc: 'images/video2.mp4',
         poster: 'images/eco-leaders.jpg'
     },
     video3: {
         category: '🏃 Climate Dash 3K',
         title: 'Youth Sprinting for Planet & Ocean',
-        desc: 'Island-wide youth sprint bringing together over 500 Barbadian youth to raise funds for community water harvesting.',
+        desc: '',
         videoSrc: 'images/video3.mp4',
         poster: 'images/eco-leaders.jpg'
     }
@@ -184,7 +189,12 @@ function openVideoModal(type = 'video1') {
 
     if (catEl) catEl.innerText = data.category;
     if (titleEl) titleEl.innerText = data.title;
-    if (descEl) descEl.innerText = data.desc;
+    if (descEl) {
+        // Collapse the line entirely when there is no description, rather than
+        // leaving an empty paragraph holding vertical space
+        descEl.innerText = data.desc || '';
+        descEl.style.display = data.desc ? '' : 'none';
+    }
     if (progressEl) progressEl.style.width = '0%';
 
     // Check if real video file exists / path set
