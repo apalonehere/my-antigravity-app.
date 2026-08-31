@@ -48,8 +48,7 @@ function logoutAdmin() {
     localStorage.removeItem('admin_pin_auth');
     window.isAuthenticated = false;
     updateAuthUI();
-    switchView('home');
-    window.location.hash = 'home';
+    navigateTo('/home');
 }
 
 function switchAdminTab(tabId, btnEl) {
@@ -87,8 +86,7 @@ function handleLoginSubmit(event) {
         }
         if (pinInput) pinInput.value = '';
         updateAuthUI();
-        switchView('admin');
-        window.location.hash = 'admin';
+        navigateTo('/admin');
     } else {
         if (errorMsg) {
             errorMsg.style.display = 'block';
@@ -99,7 +97,7 @@ function handleLoginSubmit(event) {
 
 function normalizeProgId(progId) {
     if (!progId) return 'tomorrowsreef';
-    const clean = String(progId).toLowerCase().trim().replace(/^#/, '');
+    const clean = String(progId).toLowerCase().trim().replace(/^#/, '').replace(/^\//, '');
     if (clean.includes('reef') || clean.includes('tomorrow') || clean.includes('oceana')) return 'tomorrowsreef';
     if (clean.includes('eco') || clean.includes('village')) return 'ecovillage';
     if (clean.includes('yots') || clean.includes('boat')) return 'tomorrowsreef';
@@ -107,8 +105,8 @@ function normalizeProgId(progId) {
     return 'tomorrowsreef';
 }
 
-function openProgram(progId) {
-    switchView('programmes');
+function openProgram(progId, updateUrl = false) {
+    switchView('programmes', updateUrl);
     const targetKey = normalizeProgId(progId);
     const subTabBtns = document.querySelectorAll('.programme-sub-tabs .sub-tab-btn');
     const detailPanes = document.querySelectorAll('.prog-detail-pane');
@@ -132,6 +130,13 @@ function openProgram(progId) {
             pane.style.display = 'none';
         }
     });
+
+    if (updateUrl) {
+        const cleanPath = `/programmes/${targetKey}`;
+        if (window.location.pathname !== cleanPath) {
+            window.history.pushState({ viewId: 'programmes', subTab: targetKey }, '', cleanPath);
+        }
+    }
 }
 
 function initProgrammeSubTabs() {
@@ -141,8 +146,7 @@ function initProgrammeSubTabs() {
             if (e) e.preventDefault();
             const progKey = btn.getAttribute('data-prog');
             if (progKey) {
-                openProgram(progKey);
-                window.location.hash = progKey;
+                openProgram(progKey, true);
             }
         });
     });
@@ -173,30 +177,92 @@ function initVillageTabs() {
     });
 }
 
-function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link, #quick-apply-btn, #floating-apply, a[href="#apply"]');
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const dataTab = link.getAttribute('data-tab');
-            const href = link.getAttribute('href');
-            let targetId = dataTab;
-            if (!targetId && href && href.startsWith('#')) {
-                targetId = href.substring(1);
-            }
-            if (targetId) {
-                e.preventDefault();
-                switchView(targetId);
-                window.location.hash = targetId;
+function navigateTo(path, pushState = true) {
+    if (!path) path = '/';
+    let cleanPath = path.toLowerCase().trim();
+    if (cleanPath.startsWith('#')) {
+        cleanPath = '/' + cleanPath.substring(1);
+    }
+    if (!cleanPath.startsWith('/')) {
+        cleanPath = '/' + cleanPath;
+    }
+    
+    let viewId = 'home';
+    let subTab = null;
 
-                if (targetId === 'apply' && typeof resetApplyForm === 'function') {
-                    resetApplyForm();
-                }
-            }
-        });
+    if (cleanPath === '/' || cleanPath === '/home') {
+        viewId = 'home';
+        cleanPath = '/';
+    } else if (cleanPath.startsWith('/programmes') || cleanPath.startsWith('/programs')) {
+        viewId = 'programmes';
+        const parts = cleanPath.split('/').filter(Boolean);
+        if (parts.length > 1) {
+            subTab = parts[1];
+        }
+    } else if (cleanPath === '/team') {
+        viewId = 'team';
+    } else if (cleanPath === '/dashboard' || cleanPath === '/impact') {
+        viewId = 'dashboard';
+        cleanPath = '/dashboard';
+    } else if (cleanPath === '/resources') {
+        viewId = 'resources';
+    } else if (cleanPath === '/quiz') {
+        viewId = 'quiz';
+    } else if (cleanPath === '/apply') {
+        viewId = 'apply';
+    } else if (cleanPath === '/admin') {
+        viewId = isAdminAuthenticated() ? 'admin' : 'login';
+        cleanPath = isAdminAuthenticated() ? '/admin' : '/login';
+    } else if (cleanPath === '/login') {
+        viewId = 'login';
+    } else {
+        const rawKey = cleanPath.replace(/^\//, '');
+        if (['tomorrowsreef', 'reef', 'ecovillage', 'pinelands'].includes(rawKey)) {
+            viewId = 'programmes';
+            subTab = rawKey;
+            cleanPath = '/programmes/' + normalizeProgId(rawKey);
+        }
+    }
+
+    if (pushState && window.location.pathname !== cleanPath) {
+        window.history.pushState({ viewId, subTab }, '', cleanPath);
+    }
+
+    switchView(viewId, false);
+
+    if (viewId === 'programmes' && subTab) {
+        openProgram(subTab, false);
+    }
+
+    if (viewId === 'apply' && typeof resetApplyForm === 'function') {
+        resetApplyForm();
+    }
+}
+
+function initNavigation() {
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        
+        const href = link.getAttribute('href');
+        const dataTab = link.getAttribute('data-tab');
+
+        if (dataTab) {
+            e.preventDefault();
+            const targetPath = (dataTab === 'home') ? '/' : `/${dataTab}`;
+            navigateTo(targetPath, true);
+            return;
+        }
+
+        if (href && (href.startsWith('/') || href.startsWith('#'))) {
+            // Internal HTML5 route link
+            e.preventDefault();
+            navigateTo(href, true);
+        }
     });
 }
 
-function switchView(viewId) {
+function switchView(viewId, updateState = true) {
     if (viewId === 'admin' || viewId === 'login') {
         if (!isAdminAuthenticated()) {
             viewId = 'login';
@@ -232,12 +298,21 @@ function switchView(viewId) {
     }
 
     navLinks.forEach(link => {
-        if (link.getAttribute('data-tab') === viewId) {
+        const linkTab = link.getAttribute('data-tab');
+        const linkHref = link.getAttribute('href');
+        if (linkTab === viewId || (linkHref && (linkHref === `/${viewId}` || (viewId === 'home' && linkHref === '/')))) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
         }
     });
+
+    if (updateState) {
+        const targetPath = (viewId === 'home') ? '/' : `/${viewId}`;
+        if (window.location.pathname !== targetPath) {
+            window.history.pushState({ viewId }, '', targetPath);
+        }
+    }
 
     if (typeof initAdminTabsModules === 'function') initAdminTabsModules();
     if (typeof initImpactMetrics === 'function') initImpactMetrics();
@@ -246,39 +321,26 @@ function switchView(viewId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function initHashRouter() {
-    const handleHash = () => {
-        const hash = window.location.hash.substring(1);
+function initHTML5Router() {
+    const handleRoute = () => {
+        updateAuthUI();
+        const hash = window.location.hash;
         const pathname = window.location.pathname;
 
-        updateAuthUI();
-
-        if (hash === 'login' || hash === 'admin' || pathname === '/admin' || pathname.endsWith('/admin')) {
-            if (!isAdminAuthenticated()) {
-                switchView('login');
-            } else {
-                switchView('admin');
-            }
+        // Backward compatibility: Convert legacy hash fragments to HTML5 clean paths
+        if (hash && hash.length > 1) {
+            const rawHash = hash.substring(1);
+            const targetPath = (rawHash === 'home') ? '/' : `/${rawHash}`;
+            window.history.replaceState({}, '', targetPath);
+            navigateTo(targetPath, false);
             return;
         }
 
-        if (hash) {
-            if (['tomorrowsreef', 'reef', 'tomorrows-reef', 'ecovillage', 'yots', 'pinelands', 'eco-village', 'yots-boat-building', 'pinelands-pavillion', 'pinelands-pavilion'].includes(hash)) {
-                openProgram(hash);
-            } else if (['home', 'programmes', 'team', 'dashboard', 'resources', 'quiz', 'apply'].includes(hash)) {
-                switchView(hash);
-                if (hash === 'apply' && typeof resetApplyForm === 'function') {
-                    resetApplyForm();
-                }
-            } else if (hash === 'admin' || hash === 'login') {
-                switchView(hash);
-            }
-        }
+        navigateTo(pathname, false);
     };
-    
-    window.addEventListener('hashchange', handleHash);
-    window.addEventListener('popstate', handleHash);
-    handleHash();
+
+    window.addEventListener('popstate', handleRoute);
+    handleRoute();
 }
 
 function initMobileMenu() {
@@ -300,7 +362,10 @@ function initMobileMenu() {
     }
 }
 
+window.navigateTo = navigateTo;
 window.openProgram = openProgram;
 window.initProgrammeSubTabs = initProgrammeSubTabs;
 window.initVillageTabs = initVillageTabs;
 window.switchView = switchView;
+window.initHTML5Router = initHTML5Router;
+

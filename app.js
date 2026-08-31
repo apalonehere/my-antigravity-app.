@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initImpactMetrics === 'function') initImpactMetrics();
     if (typeof initSchedulesModule === 'function') initSchedulesModule();
     if (typeof initAdminTabsModules === 'function') initAdminTabsModules();
-    initHashRouter();
+    if (typeof initHTML5Router === 'function') initHTML5Router();
+    else if (typeof initHashRouter === 'function') initHashRouter();
     initScrollReveal();
     initRippleEffect();
 });
@@ -19,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function initScrollReveal() {
     const revealTargets = [
         { selector: '.program-card', delay: true },
+        { selector: '.reel-card', delay: true },
+        { selector: '.who-bento-card', delay: true },
+        { selector: '.pillar-visual-card', delay: true },
         { selector: '.stat-item', delay: true },
         { selector: '.village-card', delay: true },
         { selector: '.matrix-item', delay: true },
@@ -54,7 +58,7 @@ function initScrollReveal() {
         });
     } else {
         // Fallback for browsers without IntersectionObserver
-        document.querySelectorAll('.program-card, .stat-item, .village-card, .matrix-item, .pinelands-card, .dash-metric-card')
+        document.querySelectorAll('.program-card, .reel-card, .who-bento-card, .pillar-visual-card, .stat-item, .village-card, .matrix-item, .pinelands-card, .dash-metric-card')
             .forEach(el => el.classList.add('revealed'));
     }
 }
@@ -136,3 +140,132 @@ function toggleGreenRisingInfo(btnEl) {
     }
 }
 window.toggleGreenRisingInfo = toggleGreenRisingInfo;
+
+// --- Video Spotlight Modal & Player Controller ---
+const VIDEO_REELS_DATA = {
+    video1: {
+        category: '🪸 Subsea Reef Action',
+        title: 'Youth Underwater Reef Installation',
+        desc: 'BCC Fine Arts sculptors & youth divers submerging pH-neutral artificial coral structures off Carlisle Bay.',
+        videoSrc: 'images/video1.mp4'
+    },
+    video2: {
+        category: '⛵ Eco-Vessel Engineering',
+        title: 'Building Solar Boats & Maritime Craft',
+        desc: 'Hands-on fabrication incubator in Pinelands turning sustainable composite craft engineering into clean marine transit.',
+        videoSrc: 'images/video2.mp4'
+    },
+    video3: {
+        category: '🏃 Climate Dash 3K',
+        title: 'Youth Sprinting for Planet & Ocean',
+        desc: 'Island-wide youth sprint bringing together over 500 Barbadian youth to raise funds for community water harvesting.',
+        videoSrc: 'images/video3.mp4'
+    }
+};
+
+let modalVideoProgressInterval = null;
+let isModalVideoPlaying = false;
+
+function openVideoModal(type = 'video1') {
+    const modal = document.getElementById('video-reel-modal');
+    if (!modal) return;
+
+    const data = VIDEO_REELS_DATA[type] || VIDEO_REELS_DATA.video1;
+    const catEl = document.getElementById('modal-reel-category');
+    const titleEl = document.getElementById('modal-reel-title');
+    const descEl = document.getElementById('modal-reel-desc');
+    const posterEl = document.getElementById('modal-video-poster');
+    const videoTag = document.getElementById('modal-video-tag');
+    const overlayControls = document.getElementById('modal-overlay-controls');
+    const progressEl = document.getElementById('modal-video-progress');
+
+    if (catEl) catEl.innerText = data.category;
+    if (titleEl) titleEl.innerText = data.title;
+    if (descEl) descEl.innerText = data.desc;
+    if (progressEl) progressEl.style.width = '0%';
+
+    // Check if real video file exists / path set
+    if (videoTag && data.videoSrc) {
+        videoTag.src = data.videoSrc;
+        videoTag.style.display = 'block';
+        if (posterEl) posterEl.style.display = 'none';
+        if (overlayControls) overlayControls.style.display = 'none';
+        videoTag.play().catch(() => {
+            // Fallback to poster preview if video file is not yet copied or unsupported
+            videoTag.style.display = 'none';
+            if (posterEl) {
+                posterEl.style.display = 'block';
+                posterEl.src = data.poster;
+            }
+            if (overlayControls) overlayControls.style.display = 'flex';
+        });
+    } else {
+        if (videoTag) videoTag.style.display = 'none';
+        if (posterEl) {
+            posterEl.style.display = 'block';
+            posterEl.src = data.poster;
+        }
+        if (overlayControls) overlayControls.style.display = 'flex';
+    }
+
+    isModalVideoPlaying = false;
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('video-reel-modal');
+    if (!modal) return;
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    const videoTag = document.getElementById('modal-video-tag');
+    if (videoTag) {
+        videoTag.pause();
+        videoTag.currentTime = 0;
+    }
+
+    if (modalVideoProgressInterval) {
+        clearInterval(modalVideoProgressInterval);
+        modalVideoProgressInterval = null;
+    }
+}
+
+function toggleModalVideoPlay() {
+    const progressEl = document.getElementById('modal-video-progress');
+    const playBtn = document.getElementById('modal-play-btn');
+    if (!progressEl) return;
+
+    isModalVideoPlaying = !isModalVideoPlaying;
+
+    if (isModalVideoPlaying) {
+        if (playBtn) playBtn.style.opacity = '0.4';
+        let currentWidth = parseFloat(progressEl.style.width) || 0;
+        if (modalVideoProgressInterval) clearInterval(modalVideoProgressInterval);
+
+        modalVideoProgressInterval = setInterval(() => {
+            currentWidth += 1.5;
+            if (currentWidth > 100) {
+                currentWidth = 0;
+                isModalVideoPlaying = false;
+                if (playBtn) playBtn.style.opacity = '1';
+                clearInterval(modalVideoProgressInterval);
+            }
+            progressEl.style.width = `${currentWidth}%`;
+        }, 100);
+    } else {
+        if (playBtn) playBtn.style.opacity = '1';
+        if (modalVideoProgressInterval) {
+            clearInterval(modalVideoProgressInterval);
+            modalVideoProgressInterval = null;
+        }
+    }
+}
+
+window.openVideoModal = openVideoModal;
+window.closeVideoModal = closeVideoModal;
+window.toggleModalVideoPlay = toggleModalVideoPlay;
+
+
