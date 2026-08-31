@@ -152,7 +152,7 @@
 
                 <!-- Hero Content -->
                 <div
-                    class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+                    class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-16 md:px-4 pointer-events-none">
                     <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4" style="line-height: 1.2;">
                         Green Rising
                     </h1>
@@ -1745,7 +1745,8 @@
                     <!-- Real-Time Search Bar -->
                     <div class="resource-search-wrapper mb-20">
                         <div class="search-input-box">
-                            <span class="search-icon">🔍</span>
+                            <span class="search-icon" aria-hidden="true">🔍</span>
+                            <label for="resource-search-input" class="sr-only">Search resources</label>
                             <input type="text" id="resource-search-input" class="form-control resource-search-input"
                                 placeholder="Search by title, keyword, or platform (e.g. Water, YOTS, YouTube, Pinelands)...">
                         </div>
