@@ -149,22 +149,22 @@ window.toggleGreenRisingInfo = toggleGreenRisingInfo;
 // content of each reel is confirmed.
 const VIDEO_REELS_DATA = {
     video1: {
-        category: '🪸 Subsea Reef Action',
-        title: 'Youth Underwater Reef Installation',
+        category: '🚌 Field Trip',
+        title: 'Eco-Ride Bus Trip',
         desc: '',
         videoSrc: 'images/video1.mp4',
         poster: 'images/eco-leaders.jpg'
     },
     video2: {
-        category: '⛵ Eco-Vessel Engineering',
-        title: 'Building Solar Boats & Maritime Craft',
+        category: '🐟 Conference',
+        title: 'Aqua-Producers Conference',
         desc: '',
         videoSrc: 'images/video2.mp4',
         poster: 'images/eco-leaders.jpg'
     },
     video3: {
-        category: '🏃 Climate Dash 3K',
-        title: 'Youth Sprinting for Planet & Ocean',
+        category: '🌱 Workshop',
+        title: 'Eco-Leaders Workshop',
         desc: '',
         videoSrc: 'images/video3.mp4',
         poster: 'images/eco-leaders.jpg'
@@ -173,6 +173,42 @@ const VIDEO_REELS_DATA = {
 
 let modalVideoProgressInterval = null;
 let isModalVideoPlaying = false;
+let currentReelKey = 'video1';
+
+const REEL_ORDER = ['video1', 'video2', 'video3'];
+
+function updateReelCounter() {
+    const el = document.getElementById('modal-reel-count');
+    if (!el) return;
+    const i = REEL_ORDER.indexOf(currentReelKey);
+    el.textContent = `${(i < 0 ? 0 : i) + 1} / ${REEL_ORDER.length}`;
+}
+
+// Move between reels without closing the modal — wraps at both ends
+function stepVideoModal(delta) {
+    const i = REEL_ORDER.indexOf(currentReelKey);
+    const next = REEL_ORDER[(((i < 0 ? 0 : i) + delta) % REEL_ORDER.length + REEL_ORDER.length) % REEL_ORDER.length];
+    openVideoModal(next);
+}
+window.stepVideoModal = stepVideoModal;
+
+// A modal needs a way out that isn't the mouse, and arrow keys are the
+// expected way to move through a reel player.
+document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('video-reel-modal');
+    if (!modal || modal.getAttribute('aria-hidden') !== 'false') return;
+
+    if (e.key === 'Escape') {
+        e.preventDefault();
+        closeVideoModal();
+    } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        stepVideoModal(1);
+    } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        stepVideoModal(-1);
+    }
+});
 
 function openVideoModal(type = 'video1') {
     const modal = document.getElementById('video-reel-modal');
@@ -197,8 +233,18 @@ function openVideoModal(type = 'video1') {
     }
     if (progressEl) progressEl.style.width = '0%';
 
+    currentReelKey = VIDEO_REELS_DATA[type] ? type : 'video1';
+    updateReelCounter();
+
     // Check if real video file exists / path set
     if (videoTag && data.videoSrc) {
+        // These reels are shot vertically. Size the modal to the video's real
+        // aspect ratio rather than cropping it into a landscape box.
+        videoTag.onloadedmetadata = () => {
+            if (videoTag.videoWidth && videoTag.videoHeight) {
+                modal.style.setProperty('--reel-ar', videoTag.videoWidth / videoTag.videoHeight);
+            }
+        };
         videoTag.src = data.videoSrc;
         videoTag.style.display = 'block';
         if (posterEl) posterEl.style.display = 'none';

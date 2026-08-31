@@ -321,9 +321,9 @@
                                         d="M2 12h20M2 12a10 10 0 0 1 10-10 10 10 0 0 1 10 10M2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10">
                                     </path>
                                 </svg>
-                                Subsea Reef Action
+                                Field Trip
                             </span>
-                            <h3 class="reel-title" id="reel-title-1">Youth Underwater Reef Installation</h3>
+                            <h3 class="reel-title" id="reel-title-1">Eco-Ride Bus Trip</h3>
                         </div>
                     </div>
 
@@ -354,9 +354,9 @@
                                     stroke-width="2">
                                     <polygon points="12 2 19 21 12 17 5 21 12 2"></polygon>
                                 </svg>
-                                Eco-Vessel Engineering
+                                Conference
                             </span>
-                            <h3 class="reel-title" id="reel-title-2">Building Solar Boats &amp; Maritime Craft</h3>
+                            <h3 class="reel-title" id="reel-title-2">Aqua-Producers Conference</h3>
                         </div>
                     </div>
 
@@ -387,9 +387,9 @@
                                     stroke-width="2">
                                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                 </svg>
-                                Climate Dash 3K
+                                Workshop
                             </span>
-                            <h3 class="reel-title" id="reel-title-3">Youth Sprinting for Planet &amp; Ocean</h3>
+                            <h3 class="reel-title" id="reel-title-3">Eco-Leaders Workshop</h3>
                         </div>
                     </div>
                 </div>
@@ -438,7 +438,8 @@
                                 <span>Global Green Rising movement</span>
                             </li>
                         </ul>
-                        <p class="snap-body" data-needs-copy>What this backing means for a young person applying.</p>
+                        <p class="snap-body">$3M behind the programme — US$1M from Generation Unlimited and $1M from
+                            the Prime Minister's foundation.</p>
                     </article>
 
                     <!-- 2. Anchors -->
@@ -454,7 +455,8 @@
                                 <span>Government anchor</span>
                             </li>
                         </ul>
-                        <p class="snap-body" data-needs-copy>What these two partners actually provide.</p>
+                        <p class="snap-body">Training, mentorship and the local backing to turn a place on the
+                            programme into real work.</p>
                     </article>
 
                     <!-- 3. Pathways -->
@@ -474,7 +476,8 @@
                                 <span>Arts &amp; eco-craft</span>
                             </li>
                         </ul>
-                        <p class="snap-body" data-needs-copy>How someone picks between the three.</p>
+                        <p class="snap-body">Pick by where you want to work — the ocean, the land, or the culture.
+                            The Match Quiz sorts it in three questions.</p>
                     </article>
 
                 </div>
@@ -2602,8 +2605,8 @@
                 <div class="video-preview-player" id="video-player-container">
                     <img id="modal-video-poster" src="images/eco-leaders.jpg" alt="Video Reel Preview"
                         class="video-player-img">
-                    <video id="modal-video-tag" controls
-                        style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
+                    <video id="modal-video-tag" controls playsinline
+                        style="display: none;"></video>
                     <div class="video-player-controls-overlay" id="modal-overlay-controls">
                         <span class="live-pill-tag"><span class="pulse-dot"></span> HD REEL</span>
                         <div class="video-play-center-btn" id="modal-play-btn" onclick="toggleModalVideoPlay()">
@@ -2618,12 +2621,20 @@
                 </div>
             </div>
 
-            <div class="reel-modal-details p-20">
-                <div class="flex-between align-center flex-wrap gap-10">
-                    <div>
-                        <span class="reel-category-pill" id="modal-reel-category">🪸 Carlisle Bay · Subsea Reef</span>
-                        <h3 class="mt-5 mb-5" id="modal-reel-title">Deploying Barbados' First Youth Sculpture Reef</h3>
-                        <p class="text-muted small mb-0" id="modal-reel-desc" style="display: none;"></p>
+            <div class="reel-modal-details">
+                <div class="reel-modal-meta">
+                    <span class="reel-category-pill" id="modal-reel-category">Field Trip</span>
+                    <h3 id="modal-reel-title">Eco-Ride Bus Trip</h3>
+                    <p class="text-muted small mb-0" id="modal-reel-desc" style="display: none;"></p>
+                </div>
+
+                <div class="reel-modal-actions">
+                    <div class="reel-nav" role="group" aria-label="Move between reels">
+                        <button type="button" class="reel-nav-btn" id="modal-prev-reel"
+                            onclick="stepVideoModal(-1)" aria-label="Previous reel">&#8249;</button>
+                        <span class="reel-nav-count" id="modal-reel-count" aria-live="polite">1 / 3</span>
+                        <button type="button" class="reel-nav-btn" id="modal-next-reel"
+                            onclick="stepVideoModal(1)" aria-label="Next reel">&#8250;</button>
                     </div>
                     <a href="#apply" class="btn btn-primary btn-sm"
                         onclick="closeVideoModal(); switchView('apply')">Apply to Join &rarr;</a>
@@ -2651,6 +2662,20 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
     <script src="js/motion.js" defer></script>
+    <script src="js/background.js" defer></script>
+
+    <!-- React islands (js/islands.js, built from src/ by `npm run build:islands`).
+         The bundle is ~475KB gzipped because it carries React + Three + R3F, so
+         it is fetched only if the page actually contains an island. A page with
+         no [data-island] element pays nothing. -->
+    <script>
+        if (document.querySelector('[data-island]')) {
+            var s = document.createElement('script');
+            s.src = 'js/islands.js';
+            s.defer = true;
+            document.head.appendChild(s);
+        }
+    </script>
 </body>
 
 </html>
