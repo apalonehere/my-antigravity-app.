@@ -1,1 +1,27 @@
+# Dependencies
 node_modules/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Editor / IDE / AI-assistant workspace files
+.gemini/
+.vscode/
+.idea/
+*.code-workspace
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build output
+dist/
+build/
+.netlify/
+
+# Logs
+*.log
+npm-debug.log*
