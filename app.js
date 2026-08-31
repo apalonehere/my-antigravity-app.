@@ -147,19 +147,22 @@ const VIDEO_REELS_DATA = {
         category: '🪸 Subsea Reef Action',
         title: 'Youth Underwater Reef Installation',
         desc: 'BCC Fine Arts sculptors & youth divers submerging pH-neutral artificial coral structures off Carlisle Bay.',
-        videoSrc: 'images/video1.mp4'
+        videoSrc: 'images/video1.mp4',
+        poster: 'images/eco-leaders.jpg'
     },
     video2: {
         category: '⛵ Eco-Vessel Engineering',
         title: 'Building Solar Boats & Maritime Craft',
         desc: 'Hands-on fabrication incubator in Pinelands turning sustainable composite craft engineering into clean marine transit.',
-        videoSrc: 'images/video2.mp4'
+        videoSrc: 'images/video2.mp4',
+        poster: 'images/eco-leaders.jpg'
     },
     video3: {
         category: '🏃 Climate Dash 3K',
         title: 'Youth Sprinting for Planet & Ocean',
         desc: 'Island-wide youth sprint bringing together over 500 Barbadian youth to raise funds for community water harvesting.',
-        videoSrc: 'images/video3.mp4'
+        videoSrc: 'images/video3.mp4',
+        poster: 'images/eco-leaders.jpg'
     }
 };
 
@@ -195,7 +198,7 @@ function openVideoModal(type = 'video1') {
             videoTag.style.display = 'none';
             if (posterEl) {
                 posterEl.style.display = 'block';
-                posterEl.src = data.poster;
+                posterEl.src = data.poster || 'images/eco-leaders.jpg';
             }
             if (overlayControls) overlayControls.style.display = 'flex';
         });
@@ -203,7 +206,7 @@ function openVideoModal(type = 'video1') {
         if (videoTag) videoTag.style.display = 'none';
         if (posterEl) {
             posterEl.style.display = 'block';
-            posterEl.src = data.poster;
+            posterEl.src = data.poster || 'images/eco-leaders.jpg';
         }
         if (overlayControls) overlayControls.style.display = 'flex';
     }
