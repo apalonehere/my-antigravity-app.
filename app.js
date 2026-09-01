@@ -1,18 +1,45 @@
 // Green Rising Barbados — Main App Entry Point & Orchestrator
 
+// Boot sequence.
+//
+// Each step is isolated. This used to be a bare list of calls, and any one of
+// them throwing killed every step after it — the page still rendered, because
+// it is static HTML, but nothing initialised. That is not hypothetical: the
+// browser caches app.js and js/*.js separately, so after a deploy a visitor
+// can hold a stale app.js against a fresh module for as long as the
+// Cache-Control window allows. When a function that app.js called was removed
+// from js/router.js, that mismatch threw at the top of the sequence and the
+// Resources grid, the Impact Hub metrics and the router all silently never ran.
+//
+// A missing or failing module must degrade to "that one feature is absent",
+// never "the rest of the page is dead".
+function boot(label, fn) {
+    if (typeof fn !== 'function') {
+        console.warn(`[boot] ${label} unavailable — skipping`);
+        return;
+    }
+    try {
+        fn();
+    } catch (err) {
+        console.error(`[boot] ${label} failed:`, err);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    initNavigation();
-    initMobileMenu();
-    initProgrammeSubTabs();
-    if (typeof initResourcesHub === 'function') initResourcesHub();
-    if (typeof initImpactMetrics === 'function') initImpactMetrics();
-    if (typeof initSchedulesModule === 'function') initSchedulesModule();
-    if (typeof initAdminTabsModules === 'function') initAdminTabsModules();
-    if (typeof initHTML5Router === 'function') initHTML5Router();
-    else if (typeof initHashRouter === 'function') initHashRouter();
-    initScrollReveal();
-    initRippleEffect();
+    boot('theme', typeof initTheme === 'function' ? initTheme : null);
+    boot('navigation', typeof initNavigation === 'function' ? initNavigation : null);
+    boot('mobile menu', typeof initMobileMenu === 'function' ? initMobileMenu : null);
+    boot('programme sub-tabs', typeof initProgrammeSubTabs === 'function' ? initProgrammeSubTabs : null);
+    boot('resources hub', typeof initResourcesHub === 'function' ? initResourcesHub : null);
+    boot('impact metrics', typeof initImpactMetrics === 'function' ? initImpactMetrics : null);
+    boot('schedules', typeof initSchedulesModule === 'function' ? initSchedulesModule : null);
+    boot('admin tabs', typeof initAdminTabsModules === 'function' ? initAdminTabsModules : null);
+
+    if (typeof initHTML5Router === 'function') boot('router', initHTML5Router);
+    else boot('hash router', typeof initHashRouter === 'function' ? initHashRouter : null);
+
+    boot('scroll reveal', typeof initScrollReveal === 'function' ? initScrollReveal : null);
+    boot('ripple effect', typeof initRippleEffect === 'function' ? initRippleEffect : null);
 });
 
 // Scroll-triggered reveal animations
