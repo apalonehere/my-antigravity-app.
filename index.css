@@ -1534,11 +1534,6 @@ p {
     pointer-events: none;
 }
 
-.section-title {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    margin-bottom: 14px;
-}
-
 .section-subtitle {
     color: var(--color-text-muted);
     margin-bottom: 36px;
@@ -1714,49 +1709,11 @@ p {
 /* ============================================================
    IMPACT STATS — DISTINCT GRADIENT SECTION
    ============================================================ */
-.home-impact-section-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 24px;
-    box-sizing: border-box;
-}
-
+/* The impact strip is a plain container now; it used to sit in a wrapper
+   whose only job was hosting a full-bleed gradient that has been removed. */
 .home-impact-brief {
-    max-width: 1040px;
     width: 100%;
-    margin: 0 auto !important;
-    padding: 48px 36px;
-    border-color: rgba(2, 132, 199, 0.25);
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(5, 150, 105, 0.06) 50%, rgba(234, 88, 12, 0.05) 100%);
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.home-impact-brief::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(2, 132, 199, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-@media(max-width:768px) {
-    .home-impact-section-wrapper {
-        padding: 24px 16px;
-    }
-
-    .home-impact-brief {
-        padding: 32px 18px;
-    }
 }
 
 .stats-strip {
@@ -1764,11 +1721,9 @@ p {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    margin-top: 36px;
-    border-top: 1px solid rgba(5, 150, 105, 0.16);
-    padding-top: 36px;
-    justify-items: center;
-    align-items: center;
+    margin-top: 4px;
+    justify-items: stretch;
+    align-items: stretch;
 }
 
 @media(max-width:991px) {
@@ -3042,33 +2997,8 @@ p {
 
 .quiz-intro { margin: 0 0 30px; }
 
-.quiz-eyebrow {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-primary-text);
-    margin-bottom: 10px;
-}
 
-.quiz-headline {
-    font-family: var(--font-heading);
-    font-size: clamp(1.9rem, 4vw, 2.9rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    margin: 0 0 12px;
-    color: var(--color-text-bright);
-    text-wrap: balance;
-}
 
-.quiz-standfirst {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    margin: 0;
-    max-width: 56ch;
-}
 
 /* --- the card --- */
 .quiz-card {
@@ -5200,38 +5130,6 @@ body {
     transform: scale(1.2);
 }
 
-/* Category Glow Tag */
-.category-tag-glow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 14px;
-    border-radius: 50px;
-    font-size: 0.78rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    background: rgba(6, 182, 212, 0.12);
-    color: #06b6d4;
-    border: 1px solid rgba(6, 182, 212, 0.3);
-    margin-bottom: 8px;
-}
-
-[data-theme="dark"] .category-tag-glow {
-    color: #67e8f9;
-    border-color: rgba(34, 211, 238, 0.4);
-    background: rgba(6, 182, 212, 0.22);
-}
-
-/* --- Section Header Flex --- */
-.section-header-flex {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
 .btn-outline-cyan {
     display: inline-flex;
     align-items: center;
@@ -6114,27 +6012,6 @@ body {
     border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* Category Tags & Glow Section Badges */
-.category-tag-glow {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 14px;
-    border-radius: var(--radius-full);
-    background: rgba(6, 182, 212, 0.12);
-    border: 1px solid rgba(6, 182, 212, 0.3);
-    color: var(--color-blue);
-    font-size: 0.825rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-
-[data-theme="dark"] .category-tag-glow {
-    background: rgba(6, 182, 212, 0.2);
-    border-color: rgba(6, 182, 212, 0.5);
-    color: #38bdf8;
-}
-
 /* Spotlight Reels Grid & Cards */
 .reels-video-grid {
     display: grid;
@@ -6710,17 +6587,9 @@ body {
 }
 
 /* Live Impact Counter Bar */
-.home-impact-section-wrapper {
-    position: relative;
-}
 
-.home-impact-brief {
-    padding: 32px;
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sm);
-}
+
+
 
 .stats-strip {
     display: grid;
@@ -7681,33 +7550,8 @@ body .mb-20 { margin-bottom: 20px; }
    ============================================================ */
 .roster-intro { max-width: 62ch; margin: 0 0 4px; }
 
-.roster-eyebrow {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-primary-text);
-    margin-bottom: 10px;
-}
 
-.roster-headline {
-    font-family: var(--font-heading);
-    font-size: clamp(1.9rem, 4vw, 2.9rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    margin: 0 0 12px;
-    color: var(--color-text-bright);
-    text-wrap: balance;
-}
 
-.roster-standfirst {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    margin: 0;
-    max-width: 58ch;
-}
 
 /* --sbw is the measured scrollbar width published by js/reef.js; without it a
    100vw block overhangs the viewport by that width. */
@@ -7999,32 +7843,8 @@ body .mb-20 { margin-bottom: 20px; }
    ============================================================ */
 .impact-intro { max-width: 62ch; margin: 0 0 26px; }
 
-.impact-eyebrow {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-primary-text);
-    margin-bottom: 10px;
-}
 
-.impact-headline {
-    font-family: var(--font-heading);
-    font-size: clamp(1.9rem, 4vw, 2.9rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    margin: 0 0 12px;
-    color: var(--color-text-bright);
-    text-wrap: balance;
-}
 
-.impact-standfirst {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    margin: 0;
-}
 
 /* --- metric tiles ---------------------------------------------------- */
 .dash-grid-3col {
@@ -8544,3 +8364,65 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
     .resource-card:hover,
     .resource-card:focus-within { transform: none; }
 }
+
+/* ============================================================
+   EDITORIAL SECTION HEADER
+   One definition for every section opener on the site — landing
+   page, team roster, Impact Hub, match quiz. These used to be
+   three near-identical copies, which is how they drift apart.
+   ============================================================ */
+.section-eyebrow,
+.roster-eyebrow,
+.impact-eyebrow,
+.quiz-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary-text);
+    margin-bottom: 10px;
+}
+
+.section-headline,
+.roster-headline,
+.impact-headline,
+.quiz-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    color: var(--color-text-bright);
+    text-wrap: balance;
+}
+
+.section-standfirst,
+.roster-standfirst,
+.impact-standfirst,
+.quiz-standfirst {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+    max-width: 58ch;
+}
+
+/* Landing-page section opener: left-aligned like every inner page,
+   with room to breathe between it and the content it introduces. */
+.section-intro {
+    max-width: 62ch;
+    margin: 0 0 28px;
+}
+
+/* Header with a trailing action (Play all, Open hub, Meet team) */
+.section-intro-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 0 0 28px;
+}
+
+.section-intro-row .section-intro { margin: 0; }
