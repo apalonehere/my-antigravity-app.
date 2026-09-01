@@ -9233,8 +9233,13 @@ body .mb-20 { margin-bottom: 20px; }
 }
 
 .reef-beat {
-    max-width: 46ch;
-    margin: 0 0 34vh;
+    /* Centred, not left-pinned. The column is ~48% of the viewport, so on a
+       wide screen a left-aligned 46ch block dumped all the slack on the right —
+       354px of dead space at 1985px wide. Centring splits it evenly, and the
+       measure grows a little with the viewport while staying well inside the
+       65-75ch readability ceiling. */
+    width: min(54ch, 100%);
+    margin: 0 auto 34vh;
 }
 
 .reef-beat:last-child { margin-bottom: 0; }
