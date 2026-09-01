@@ -1,8 +1,8 @@
 # Section story prompt
 
 Reusable brief for turning a text-heavy programme section into a visual story.
-Written after rebuilding Tomorrow's Reef; apply the same treatment to Climate
-Dash & Eco-Village and Pinelands Pavilion.
+Written after rebuilding Tomorrow's Reef; apply the same treatment to any future
+programme section.
 
 Paste the prompt below, replace `[SECTION]`, and attach the photo folder and any
 edited video.

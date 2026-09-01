@@ -6,15 +6,8 @@ function openApplyForm(progName) {
     const progSelect = document.getElementById('apply-prog');
     if (!progSelect) return;
 
-    if (progName === 'tomorrowsreef' || progName.includes('reef') || progName.includes('Reef')) {
-        progSelect.value = 'tomorrowsreef';
-    } else if (progName === 'yots' || progName.includes('Seas')) {
-        progSelect.value = 'tomorrowsreef';
-    } else if (progName === 'ecovillage' || progName.includes('Village') || progName.includes('Dash')) {
-        progSelect.value = 'ecovillage';
-    } else {
-        progSelect.value = 'pinelands';
-    }
+    // Tomorrow's Reef is the only programme taking applications.
+    progSelect.value = 'tomorrowsreef';
 }
 
 function handleApplySubmit() {

@@ -22,17 +22,6 @@ const DEFAULT_SCHEDULES = [
         endTime: '14:00',
         location: 'Future Barbados Innovation Hub',
         description: 'Community soil bio-remediation testing using organic compost extracts.'
-    },
-    {
-        id: 'sched-3',
-        title: 'Pinelands Orange Economy Expo',
-        category: 'workshop',
-        economy: 'orange',
-        date: '2026-09-05',
-        startTime: '13:00',
-        endTime: '17:00',
-        location: 'Pinelands Community Center',
-        description: 'Showcasing youth creative technology, digital media, and sustainable design.'
     }
 ];
 
@@ -249,7 +238,6 @@ function editScheduleEvent(eventId) {
     const knownVenues = [
         'Bridgetown Port & Maritime Center',
         'Future Barbados Innovation Hub',
-        'Pinelands Community Center',
         'UWI Cave Hill Campus'
     ];
 

@@ -1,12 +1,12 @@
 // --- Impact Dashboard & Admin Simulation Module ---
 
+// Vessels/boats went with the boatbuilding programme; CO2 and coastline went
+// with the Environmental Monitor tab. What is left is what the Impact Hub and
+// the homepage strip actually display.
 const DEFAULT_METRICS = {
     youth: 242,
     water: 85210,
-    boats: 4,
-    jobs: 32,
-    co2: 12.8,
-    coastline: 1.2
+    jobs: 32
 };
 
 function getImpactMetrics() {
@@ -29,12 +29,10 @@ function applyMetricsToUI(newMetrics, animate = false) {
     const numericTargets = [
         { id: 'brief-stat-youth', val: m.youth },
         { id: 'brief-stat-water', val: m.water },
-        { id: 'brief-stat-boats', val: m.boats },
         { id: 'brief-stat-jobs',  val: m.jobs },
 
         { id: 'dash-stat-youth',  val: m.youth },
         { id: 'dash-stat-water',  val: m.water },
-        { id: 'dash-stat-boats',  val: m.boats },
         { id: 'dash-stat-jobs',   val: m.jobs },
 
         { id: 'dash-hero-youth',  val: m.youth },
@@ -52,13 +50,7 @@ function applyMetricsToUI(newMetrics, animate = false) {
         }
     });
 
-    // 2. Environmental Monitor Indicators
-    const carbonEl = document.getElementById('dash-carbon');
-    const coastEl = document.getElementById('dash-coastline');
-    if (carbonEl) carbonEl.innerText = `${m.co2} Tons`;
-    if (coastEl) coastEl.innerText = `${m.coastline} km`;
-
-    // 3. 2026 Progress Ring Sync
+    // 2. 2026 Progress Ring Sync
     const targetPct = Math.min(Math.round((m.youth / 300) * 100), 100);
     const ringValEl = document.getElementById('dash-ring-val');
     const ringFillEl = document.getElementById('dash-ring-fill');
@@ -68,6 +60,10 @@ function applyMetricsToUI(newMetrics, animate = false) {
         ringFillEl.style.strokeDashoffset = offset;
     }
 
+    // 3. The trend chart's final point tracks the live youth figure, so the
+    //    chart and the tile beside it can never disagree.
+    if (typeof window.refreshImpactChart === 'function') window.refreshImpactChart();
+
     // 4. Pre-fill Admin Form Inputs if present
     populateAdminMetricsInputs(m);
 }
@@ -76,17 +72,11 @@ function populateAdminMetricsInputs(m) {
     const data = m || getImpactMetrics();
     const inputYouth = document.getElementById('metric-input-youth');
     const inputWater = document.getElementById('metric-input-water');
-    const inputVessels = document.getElementById('metric-input-vessels');
     const inputJobs = document.getElementById('metric-input-jobs');
-    const inputCO2 = document.getElementById('metric-input-co2');
-    const inputCoastline = document.getElementById('metric-input-coastline');
 
     if (inputYouth && document.activeElement !== inputYouth) inputYouth.value = data.youth;
     if (inputWater && document.activeElement !== inputWater) inputWater.value = data.water;
-    if (inputVessels && document.activeElement !== inputVessels) inputVessels.value = data.boats;
     if (inputJobs && document.activeElement !== inputJobs) inputJobs.value = data.jobs;
-    if (inputCO2 && document.activeElement !== inputCO2) inputCO2.value = data.co2;
-    if (inputCoastline && document.activeElement !== inputCoastline) inputCoastline.value = data.coastline;
 }
 
 function handleAdminMetricsSubmit(event) {
@@ -94,18 +84,12 @@ function handleAdminMetricsSubmit(event) {
 
     const youthVal = parseInt(document.getElementById('metric-input-youth')?.value) || 0;
     const waterVal = parseInt(document.getElementById('metric-input-water')?.value) || 0;
-    const vesselsVal = parseInt(document.getElementById('metric-input-vessels')?.value) || 0;
     const jobsVal = parseInt(document.getElementById('metric-input-jobs')?.value) || 0;
-    const co2Val = parseFloat(document.getElementById('metric-input-co2')?.value) || 0;
-    const coastlineVal = parseFloat(document.getElementById('metric-input-coastline')?.value) || 0;
 
     const updated = {
         youth: youthVal,
         water: waterVal,
-        boats: vesselsVal,
-        jobs: jobsVal,
-        co2: co2Val,
-        coastline: coastlineVal
+        jobs: jobsVal
     };
 
     localStorage.setItem('green_rising_impact_metrics', JSON.stringify(updated));
@@ -130,11 +114,19 @@ function switchDashTab(tabId, btnEl) {
         }
         return;
     }
-    const dashBtns = document.querySelectorAll('.dash-tab-btn');
+    // Scoped to the hub's own tab bar: the admin portal reuses .dash-tab-btn
+    // for its tabs, and an unscoped query deactivated those too.
+    const dashBtns = document.querySelectorAll('.dash-tab-bar .dash-tab-btn');
     const dashPanes = document.querySelectorAll('.dash-pane');
 
-    dashBtns.forEach(btn => btn.classList.remove('active'));
-    if (btnEl) btnEl.classList.add('active');
+    dashBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.hasAttribute('role')) btn.setAttribute('aria-selected', 'false');
+    });
+    if (btnEl) {
+        btnEl.classList.add('active');
+        if (btnEl.hasAttribute('role')) btnEl.setAttribute('aria-selected', 'true');
+    }
 
     dashPanes.forEach(pane => {
         if (pane.id === `dash-tab-${tabId}`) {

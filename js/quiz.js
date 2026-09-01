@@ -17,8 +17,7 @@ const quizQuestions = [
         question: "What is your primary goal or area of interest?",
         options: [
             { value: "water", title: "Water Resource Preservation", subtitle: "Water Conservation · community leak checks & rainwater harvesting" },
-            { value: "boats", title: "Maritime & Marine Heritage", subtitle: "Tomorrow's Reef · underwater ocean heritage & reef restoration" },
-            { value: "business", title: "Agri-Tech & Micro-Enterprise", subtitle: "Eco Village · hydroponics, food security & green business" }
+            { value: "marine", title: "Maritime & Marine Heritage", subtitle: "Tomorrow's Reef · underwater ocean heritage & reef restoration" }
         ]
     },
     {
@@ -87,7 +86,7 @@ function processQuizResults() {
     const statusChecked = document.querySelector('input[name="status"]:checked');
 
     const ageVal = ageChecked ? ageChecked.value : 'youth';
-    const interestVal = interestChecked ? interestChecked.value : 'boats';
+    const interestVal = interestChecked ? interestChecked.value : 'marine';
     const statusVal = statusChecked ? statusChecked.value : 'school';
 
     const counterEl = document.getElementById('quiz-counter-text');
@@ -122,12 +121,12 @@ function processQuizResults() {
     if (ageVal === 'kids') {
         if (matchedTitle) matchedTitle.innerText = "Junior Rising: Eco-Explorers";
         if (matchedDesc) matchedDesc.innerText = "For ages 10-13, our Junior Rising pathway provides interactive eco-exploration, recycling clubs, and environmental literacy workshops.";
-        if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('ecovillage')");
+        if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('tomorrowsreef')");
     } else if (ageVal === 'teens') {
         if (matchedTitle) matchedTitle.innerText = "Teen Rising: Green & Blue Skills";
         if (matchedDesc) matchedDesc.innerText = "Designed for ages 14-17, Teen Rising combines school environmental projects, youth advocacy, and certified introductory blue-green economy courses.";
-        if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('ecovillage')");
-    } else if (interestVal === 'boats' || statusVal === 'sjpi') {
+        if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('tomorrowsreef')");
+    } else if (interestVal === 'marine' || statusVal === 'sjpi') {
         if (matchedTitle) matchedTitle.innerText = "Tomorrow's Reef: Marine Heritage & Conservation";
         if (matchedDesc) matchedDesc.innerText = "Based on your technical interest in marine heritage and coastal conservation, you qualify for our ocean heritage and underwater museum initiatives.";
         if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('tomorrowsreef')");
@@ -135,14 +134,10 @@ function processQuizResults() {
         if (matchedTitle) matchedTitle.innerText = "Water Conservation Initiative";
         if (matchedDesc) matchedDesc.innerText = "Your interests align with community-led water preservation. Participate in household water checkups, rain-barrel monitoring, and island-wide conservation drives.";
         if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('water')");
-    } else if (interestVal === 'business') {
-        if (matchedTitle) matchedTitle.innerText = "Eco Village: Earn & Grow Zonal Pathway";
-        if (matchedDesc) matchedDesc.innerText = "You align with sustainable agri-business, crop marketing, and hydroponics. Learn how to launch your own food security micro-enterprise.";
-        if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('ecovillage')");
     } else {
-        if (matchedTitle) matchedTitle.innerText = "GreenPath: Pinelands 6-Zone Career Pavilion";
-        if (matchedDesc) matchedDesc.innerText = "We recommend entering the GreenPath career incubator. Explore sports performance, global studies, remote digital skills, and wellness enterprise pathways.";
-        if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('pinelands')");
+        if (matchedTitle) matchedTitle.innerText = "Tomorrow's Reef: Marine Heritage & Conservation";
+        if (matchedDesc) matchedDesc.innerText = "Start with our ocean heritage programme — reef restoration, underwater museum fabrication, and coastal stewardship training.";
+        if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('tomorrowsreef')");
     }
 }
 

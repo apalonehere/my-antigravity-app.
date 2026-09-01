@@ -3,37 +3,15 @@
 // 1. DEFAULT DATA SETS WITH FALLBACK GUARDRAILS
 const DEFAULT_MILESTONES = [
     {
-        id: 'ms-1',
-        title: 'Youth of the Seas Cohort 3 Sea Trials Completed',
-        date: 'July 2026',
-        initiative: 'YOTS',
-        description: 'Cohort 3 successfully launched and sea-tested their 18-foot disaster-resilient marine craft off the coast of Oistins.'
-    },
-    {
         id: 'ms-2',
         title: '5 Parish Rainwater Monitoring Systems Online',
         date: 'June 2026',
         initiative: 'Water Conservation',
         description: 'Water conservation team completed installation of automated tank monitoring units in St. Lucy, St. Philip, and St. Thomas.'
-    },
-    {
-        id: 'ms-3',
-        title: 'Pinelands Creative Tech Pavilion Inauguration',
-        date: 'May 2026',
-        initiative: 'Pinelands',
-        description: 'Launched 6-zone career pavilion showcasing creative media, green architecture, and digital entrepreneurship.'
     }
 ];
 
 const DEFAULT_COHORTS = [
-    {
-        id: 'cohort-1',
-        name: 'Youth of the Seas (YOTS) Cohort 4',
-        targetAge: '16-29 years',
-        status: 'Open',
-        activeCount: 10,
-        details: 'Accepting applications for disaster-resilient boatbuilding and marine engineering.'
-    },
     {
         id: 'cohort-2',
         name: 'Eco-Explorers Cohort 2',
@@ -41,14 +19,6 @@ const DEFAULT_COHORTS = [
         status: 'Closed',
         activeCount: 25,
         details: 'Ecological literacy, recycling workshops, and outdoor nature exploration.'
-    },
-    {
-        id: 'cohort-3',
-        name: 'Pinelands Tech & Creative Fellows',
-        targetAge: '18-29 years',
-        status: 'Open',
-        activeCount: 15,
-        details: 'Digital media, sustainable craft design, and micro-enterprise incubation.'
     }
 ];
 
@@ -173,38 +143,25 @@ function renderAdminMilestonesTable() {
 function renderPublicMilestones() {
     const list = getMilestones();
 
-    // 1. Impact Hub Community Action Feed (#public-milestones-feed)
+    // 1. Impact Hub milestones timeline (#public-milestones-feed).
+    //    The container is an <ol> in the new Impact Hub, so each entry is an
+    //    <li>; the markup in index.html is only the pre-render fallback.
     const feedContainer = document.getElementById('public-milestones-feed');
     if (feedContainer) {
         if (!list || list.length === 0) {
-            feedContainer.innerHTML = `<div class="text-muted p-20 text-center">No recent milestones recorded.</div>`;
+            feedContainer.innerHTML = `<li class="text-muted p-20 text-center">No recent milestones recorded.</li>`;
         } else {
             feedContainer.innerHTML = list.map(item => `
-                <div class="activity-item">
-                    <div class="activity-date">${item.date || 'Recent'}</div>
-                    <div class="activity-content">
-                        <strong>${item.title || 'Milestone Update'}</strong>
+                <li class="impact-milestone">
+                    <span class="impact-milestone-date">${item.date || 'Recent'}</span>
+                    <div class="impact-milestone-body">
+                        <h4>${item.title || 'Milestone Update'}</h4>
                         <p>${item.description || item.summary || ''}</p>
                     </div>
-                </div>`).join('');
-        }
-    }
-
-    // 2. YOTS Page Timeline (#public-milestones-timeline)
-    const timelineContainer = document.getElementById('public-milestones-timeline');
-    if (timelineContainer) {
-        const yotsMilestones = (list || []).filter(m => (m.initiative || '').toUpperCase() === 'YOTS' || (m.initiative || '').toUpperCase() === 'GENERAL');
-        if (yotsMilestones.length === 0) {
-            timelineContainer.innerHTML = `<div class="text-muted p-20">No active YOTS milestone entries.</div>`;
-        } else {
-            timelineContainer.innerHTML = yotsMilestones.map((m, idx) => `
-                <li>
-                    <span class="timeline-step">${idx + 1}</span>
-                    <strong>${m.title || 'Milestone'} (${m.date || 'TBD'})</strong>
-                    <p>${m.description || m.summary || ''}</p>
                 </li>`).join('');
         }
     }
+
 }
 
 function handleMilestoneSubmit(event) {
@@ -318,25 +275,6 @@ function renderAdminCohortsTable() {
     }).join('');
 }
 
-function renderPublicCohortBadge() {
-    const list = getCohorts();
-    const yotsCohort = (list || []).find(c => (c.name || '').includes('Youth of the Seas') || (c.name || '').includes('YOTS')) || (list && list[0]);
-
-    const badgeEl = document.getElementById('yots-cohort-badge');
-    const infoEl = document.getElementById('yots-cohort-info');
-
-    if (yotsCohort) {
-        const isOpen = (yotsCohort.status || 'Open').toLowerCase() === 'open';
-        if (badgeEl) {
-            badgeEl.className = `cohort-badge ${isOpen ? 'open' : ''}`;
-            badgeEl.innerText = isOpen ? 'Intake Active' : `Intake ${yotsCohort.status || 'Closed'}`;
-        }
-        if (infoEl) {
-            infoEl.innerHTML = `We are currently ${isOpen ? 'accepting applications for' : 'monitoring'} <strong>${yotsCohort.name || 'YOTS Cohort'} (${yotsCohort.activeCount || 10} participants, ${yotsCohort.targetAge || 'Ages 16-29'})</strong>.`;
-        }
-    }
-}
-
 function handleCohortSubmit(event) {
     if (event) event.preventDefault();
     const idInput = document.getElementById('cohort-id-input');
@@ -368,7 +306,6 @@ function handleCohortSubmit(event) {
 
     saveCohorts(currentList);
     renderAdminCohortsTable();
-    renderPublicCohortBadge();
     resetCohortForm();
 
     const alertMsg = document.getElementById('admin-cohort-success-msg');
@@ -403,7 +340,6 @@ function deleteCohortItem(id) {
     list = list.filter(x => x.id !== id);
     saveCohorts(list);
     renderAdminCohortsTable();
-    renderPublicCohortBadge();
 }
 
 function resetCohortForm() {
@@ -446,26 +382,6 @@ function renderAdminSensorLogsTable() {
     }).join('');
 }
 
-function renderPublicSensorLogs() {
-    const container = document.getElementById('public-sensor-logs-list');
-    if (!container) return;
-    const list = getSensorLogs();
-
-    if (!list || list.length === 0) {
-        container.innerHTML = `<div class="text-muted p-20 text-center">No active sensor telemetry available.</div>`;
-        return;
-    }
-
-    container.innerHTML = list.map(item => `
-        <div class="dash-progress-row mb-15">
-            <div class="dash-progress-label">
-                <span>📍 <strong>${item.location || 'Sensor'}</strong> (${item.date || 'TBD'})</span>
-                <strong style="color: var(--color-teal);">${item.metric || 'Normal'}</strong>
-            </div>
-            ${item.notes ? `<div style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 2px;">${item.notes}</div>` : ''}
-        </div>`).join('');
-}
-
 function handleSensorLogSubmit(event) {
     if (event) event.preventDefault();
     const locInput = document.getElementById('sensor-location-input');
@@ -487,7 +403,6 @@ function handleSensorLogSubmit(event) {
     saveSensorLogs(currentList);
 
     renderAdminSensorLogsTable();
-    renderPublicSensorLogs();
 
     const form = document.getElementById('admin-sensor-form');
     if (form) form.reset();
@@ -506,7 +421,6 @@ function deleteSensorLog(id) {
     list = list.filter(x => x.id !== id);
     saveSensorLogs(list);
     renderAdminSensorLogsTable();
-    renderPublicSensorLogs();
 }
 
 // --- INIT ALL TAB MODULES ---
@@ -515,10 +429,8 @@ function initAdminTabsModules() {
     renderPublicMilestones();
 
     renderAdminCohortsTable();
-    renderPublicCohortBadge();
 
     renderAdminSensorLogsTable();
-    renderPublicSensorLogs();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -8,6 +8,7 @@ node_modules/
 
 # Editor / IDE / AI-assistant workspace files
 .gemini/
+.claude/
 .vscode/
 .idea/
 *.code-workspace

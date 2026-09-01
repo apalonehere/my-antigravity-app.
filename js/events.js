@@ -22,28 +22,6 @@ const defaultEvents = [
         status: 'Scheduled',
         description: 'Groundwater monitoring checks and community rain-barrel inspection checks with youth ambassadors.',
         badge: 'Groundwater Tech'
-    },
-    {
-        id: 'evt-3',
-        category: 'milestones',
-        title: 'Cohort 3 YOTS Vessel Assembly & Hull Testing',
-        date: '2026-08-20',
-        time: '09:00 AM',
-        location: 'Barbados Coast Guard Base, Bridgetown',
-        status: 'Upcoming Milestone',
-        description: '10 youth builders complete final hull pressure testing on eco-composite ocean rescue craft.',
-        badge: 'YOTS Maritime'
-    },
-    {
-        id: 'evt-4',
-        category: 'milestones',
-        title: 'Pinelands Creative Pavilion Grand Showcase',
-        date: '2026-09-02',
-        time: '04:00 PM',
-        location: 'Pinelands Cultural Center, St. Michael',
-        status: 'Upcoming Event',
-        description: 'Live presentation of student digital media projects, sustainable fashion, and renewable energy models.',
-        badge: 'Orange Economy'
     }
 ];
 

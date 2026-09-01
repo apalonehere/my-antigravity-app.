@@ -99,9 +99,6 @@ function normalizeProgId(progId) {
     if (!progId) return 'tomorrowsreef';
     const clean = String(progId).toLowerCase().trim().replace(/^#/, '').replace(/^\//, '');
     if (clean.includes('reef') || clean.includes('tomorrow') || clean.includes('oceana')) return 'tomorrowsreef';
-    if (clean.includes('eco') || clean.includes('village')) return 'ecovillage';
-    if (clean.includes('yots') || clean.includes('boat')) return 'tomorrowsreef';
-    if (clean.includes('pine') || clean.includes('pavilion') || clean.includes('pavillion')) return 'pinelands';
     return 'tomorrowsreef';
 }
 
@@ -152,31 +149,6 @@ function initProgrammeSubTabs() {
     });
 }
 
-function initVillageTabs() {
-    const villageBtns = document.querySelectorAll('.village-tab-btn');
-    const villagePanes = document.querySelectorAll('.village-zone-pane');
-
-    villageBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            if (e) e.preventDefault();
-            const zoneKey = btn.getAttribute('data-zone');
-            
-            villageBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            villagePanes.forEach(pane => {
-                if (pane.id === `zone-${zoneKey}`) {
-                    pane.classList.add('active');
-                    pane.style.display = 'block';
-                } else {
-                    pane.classList.remove('active');
-                    pane.style.display = 'none';
-                }
-            });
-        });
-    });
-}
-
 function navigateTo(path, pushState = true) {
     if (!path) path = '/';
     let cleanPath = path.toLowerCase().trim();
@@ -217,7 +189,7 @@ function navigateTo(path, pushState = true) {
         viewId = 'login';
     } else {
         const rawKey = cleanPath.replace(/^\//, '');
-        if (['tomorrowsreef', 'reef', 'ecovillage', 'pinelands'].includes(rawKey)) {
+        if (['tomorrowsreef', 'reef'].includes(rawKey)) {
             viewId = 'programmes';
             subTab = rawKey;
             cleanPath = '/programmes/' + normalizeProgId(rawKey);
@@ -365,7 +337,6 @@ function initMobileMenu() {
 window.navigateTo = navigateTo;
 window.openProgram = openProgram;
 window.initProgrammeSubTabs = initProgrammeSubTabs;
-window.initVillageTabs = initVillageTabs;
 window.switchView = switchView;
 window.initHTML5Router = initHTML5Router;
 

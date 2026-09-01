@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initMobileMenu();
     initProgrammeSubTabs();
-    initVillageTabs();
     if (typeof initResourcesHub === 'function') initResourcesHub();
     if (typeof initImpactMetrics === 'function') initImpactMetrics();
     if (typeof initSchedulesModule === 'function') initSchedulesModule();
@@ -23,11 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ('.who-bento-card' used to be listed here; that class no longer exists.)
 function initScrollReveal() {
     const revealTargets = [
-        { selector: '.program-card', delay: true },
         { selector: '.stat-item', delay: true },
-        { selector: '.village-card', delay: true },
-        { selector: '.matrix-item', delay: true },
-        { selector: '.pinelands-card', delay: true },
         { selector: '.dash-metric-card', delay: true }
     ];
 
@@ -59,7 +54,7 @@ function initScrollReveal() {
         });
     } else {
         // Fallback for browsers without IntersectionObserver
-        document.querySelectorAll('.program-card, .stat-item, .village-card, .matrix-item, .pinelands-card, .dash-metric-card')
+        document.querySelectorAll('.stat-item, .dash-metric-card')
             .forEach(el => el.classList.add('revealed'));
     }
 }
