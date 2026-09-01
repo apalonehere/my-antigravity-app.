@@ -98,6 +98,7 @@ function handleLoginSubmit(event) {
 function normalizeProgId(progId) {
     if (!progId) return 'tomorrowsreef';
     const clean = String(progId).toLowerCase().trim().replace(/^#/, '').replace(/^\//, '');
+    if (clean.includes('eco-leader') || clean.includes('ecoleader') || clean.includes('workshop')) return 'ecoleaders';
     if (clean.includes('reef') || clean.includes('tomorrow') || clean.includes('oceana')) return 'tomorrowsreef';
     return 'tomorrowsreef';
 }
@@ -134,6 +135,7 @@ function openProgram(progId, updateUrl = false) {
             window.history.pushState({ viewId: 'programmes', subTab: targetKey }, '', cleanPath);
         }
     }
+
 }
 
 function initProgrammeSubTabs() {
@@ -145,6 +147,9 @@ function initProgrammeSubTabs() {
             if (progKey) {
                 openProgram(progKey, true);
             }
+            // Keep the tablist's state in the accessibility tree, not just the
+            // class list — the bar is role="tablist" now that it is back.
+            subTabBtns.forEach(b => b.setAttribute('aria-selected', String(b === btn)));
         });
     });
 }
@@ -189,7 +194,7 @@ function navigateTo(path, pushState = true) {
         viewId = 'login';
     } else {
         const rawKey = cleanPath.replace(/^\//, '');
-        if (['tomorrowsreef', 'reef'].includes(rawKey)) {
+        if (['tomorrowsreef', 'reef', 'ecoleaders', 'eco-leaders'].includes(rawKey)) {
             viewId = 'programmes';
             subTab = rawKey;
             cleanPath = '/programmes/' + normalizeProgId(rawKey);

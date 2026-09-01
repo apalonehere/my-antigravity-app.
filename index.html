@@ -19,8 +19,8 @@
          index.css — which is how Tailwind's mt-40 (160px) came to beat the
          site's own 40px. Loading it first means index.css wins by document
          order, the way it was written to. 3KB gzipped. -->
-    <link rel="stylesheet" href="css/tailwind.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/index.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
         <div class="header-container">
             <!-- Logo -->
             <a href="/" class="logo-lockup" id="nav-logo" onclick="navigateTo('/', true)">
-                <img src="images/logo.png" alt="Green Rising Barbados" class="header-logo-img"
+                <img src="/images/logo.png" alt="Green Rising Barbados" class="header-logo-img"
                     onerror="this.style.display='none';">
                 <div class="brand-text-block">
                     <span class="brand-name">GREEN RISING</span>
@@ -103,35 +103,35 @@
                     <!-- Slide 1 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/hero-1.jpg" alt="Green Rising Hero 1" fetchpriority="high" decoding="async"
+                        <img src="/images/hero-1.jpg" alt="Green Rising Hero 1" fetchpriority="high" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 2 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/hero-2.jpg" alt="Green Rising Hero 2" loading="lazy" decoding="async"
+                        <img src="/images/hero-2.jpg" alt="Green Rising Hero 2" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 3 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/hero-3.jpg" alt="Green Rising Hero 3" loading="lazy" decoding="async"
+                        <img src="/images/hero-3.jpg" alt="Green Rising Hero 3" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 4 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/hero-4.jpg" alt="Green Rising Hero 4" loading="lazy" decoding="async"
+                        <img src="/images/hero-4.jpg" alt="Green Rising Hero 4" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
 
                     <!-- Slide 5 -->
                     <div class="relative w-full h-full flex-shrink-0">
                         <div class="absolute inset-0 bg-black/50 z-10"></div>
-                        <img src="images/hero-5.jpg" alt="Green Rising Hero 5" loading="lazy" decoding="async"
+                        <img src="/images/hero-5.jpg" alt="Green Rising Hero 5" loading="lazy" decoding="async"
                             class="absolute inset-0 w-full h-full object-cover">
                     </div>
                 </div>
@@ -297,7 +297,7 @@
                     <!-- Reel Card 1 -->
                     <div class="reel-card glass" onclick="openVideoModal('video1')">
                         <div class="reel-thumbnail-wrap">
-                            <video src="images/video1.mp4#t=5.0" preload="metadata" muted playsinline
+                            <video src="/images/video1.mp4#t=5.0" preload="metadata" muted playsinline
                                 class="reel-thumb-video"></video>
                             <div class="reel-overlay-gradient"></div>
                             <span class="reel-duration-badge" id="reel-dur-1">0:54</span>
@@ -332,7 +332,7 @@
                     <!-- Reel Card 2 -->
                     <div class="reel-card glass" onclick="openVideoModal('video2')">
                         <div class="reel-thumbnail-wrap">
-                            <video src="images/video2.mp4#t=5.0" preload="metadata" muted playsinline
+                            <video src="/images/video2.mp4#t=5.0" preload="metadata" muted playsinline
                                 class="reel-thumb-video"></video>
                             <div class="reel-overlay-gradient"></div>
                             <span class="reel-duration-badge" id="reel-dur-2">1:12</span>
@@ -365,7 +365,7 @@
                     <!-- Reel Card 3 -->
                     <div class="reel-card glass" onclick="openVideoModal('video3')">
                         <div class="reel-thumbnail-wrap">
-                            <video src="images/video3.mp4#t=5.0" preload="metadata" muted playsinline
+                            <video src="/images/video3.mp4#t=5.0" preload="metadata" muted playsinline
                                 class="reel-thumb-video"></video>
                             <div class="reel-overlay-gradient"></div>
                             <span class="reel-duration-badge" id="reel-dur-3">0:45</span>
@@ -414,7 +414,7 @@
                     <article class="snap-card snap-card-portrait motion-lift">
                         <span class="snap-eyebrow">Backed by</span>
                         <div class="snap-portrait-row">
-                            <img src="images/pm_mia_mottley.jpg"
+                            <img src="/images/pm_mia_mottley.jpg"
                                 alt="Prime Minister Mia Amor Mottley" class="snap-portrait" loading="lazy"
                                 decoding="async">
                             <div>
@@ -658,6 +658,14 @@
         <!-- 2. PROGRAMMES DETAIL VIEW -->
         <section id="view-programmes" class="app-view">
             <div class="container">
+                <!-- Two programmes again, so the sub-tab bar returns. It was
+                     removed when only Tomorrow's Reef was left, because a
+                     one-item navigation is not a navigation. -->
+                <div class="programme-sub-tabs" role="tablist" aria-label="Programmes">
+                    <button class="sub-tab-btn active" role="tab" aria-selected="true" data-prog="tomorrowsreef">Tomorrow's Reef</button>
+                    <button class="sub-tab-btn" role="tab" aria-selected="false" data-prog="ecoleaders">Eco-Leaders Workshop</button>
+                </div>
+
                 <!-- SUB-VIEW: Tomorrow's Reef -->
                 <div id="prog-tomorrowsreef" class="prog-detail-pane active">
 
@@ -682,7 +690,7 @@
                     <figure class="reef-film">
                         <button type="button" class="reef-film-trigger" onclick="openReefFilm()"
                             aria-label="Play the Tomorrow's Reef film, 2 minutes 6 seconds">
-                            <img src="images/reef/reef-film-poster.jpg"
+                            <img src="/images/reef/reef-film-poster.jpg"
                                 alt="Clay reef maquettes lined up on a workbench at the Tomorrow's Reef workshop"
                                 loading="lazy" decoding="async">
                             <span class="reef-film-play" aria-hidden="true">
@@ -704,64 +712,64 @@
                                     {
                                         "title": "It starts with a question about the water",
                                         "body": "The first session opens on a slide: what human activity in the area affects marine ecosystems? Golf courses. Runoff. The answers come from the room, not the front of it.",
-                                        "media": "images/reef/reef-01-learn.jpg",
+                                        "media": "/images/reef/reef-01-learn.jpg",
                                         "alt": "A facilitator presenting to seated participants beneath a slide asking what human activity affects marine ecosystems",
                                         "focus": "center 40%"
                                     },
                                     {
                                         "title": "Then they argue about the answer",
                                         "body": "Sketchpads out, markers uncapped. Before anyone touches clay the group has to agree what a reef built by Barbadians should even look like.",
-                                        "media": "images/reef/reef-02-discuss.jpg",
+                                        "media": "/images/reef/reef-02-discuss.jpg",
                                         "alt": "Participants at a long desk talking over open sketchpads and markers",
                                         "focus": "center 35%"
                                     },
                                     {
                                         "title": "Everyone starts from the same lump",
                                         "body": "Same clay, same tools, same hour. What comes out of it is where people stop being alike.",
-                                        "media": "images/reef/reef-10-pair.jpg",
+                                        "media": "/images/reef/reef-10-pair.jpg",
                                         "alt": "Two participants sitting side by side at a window, each shaping a small clay figure",
                                         "focus": "center 42%"
                                     },
                                     {
                                         "title": "Then it has to hold its own weight",
                                         "body": "Clay is less forgiving than paper. A shape that worked as a drawing has to stand up, take a base, and survive being moved.",
-                                        "media": "images/reef/reef-04-shape.jpg",
+                                        "media": "/images/reef/reef-04-shape.jpg",
                                         "alt": "A young woman in an apron and headphones shaping a piece of clay in her hands",
                                         "focus": "center 40%"
                                     },
                                     {
                                         "title": "Not all of it is coral",
                                         "body": "Faces turned up alongside the reef forms. A monument for sixty years of Independence was always going to be about people as much as habitat.",
-                                        "media": "images/reef/reef-09-face.jpg",
+                                        "media": "/images/reef/reef-09-face.jpg",
                                         "alt": "Hands finishing the features on a small clay head, a second head resting behind it on the board",
                                         "focus": "center 45%"
                                     },
                                     {
                                         "title": "Some of it outgrew the table",
                                         "body": "Pieces stopped being palm-sized. Figures started climbing structures that needed both hands and a plan.",
-                                        "media": "images/reef/reef-11-scale.jpg",
+                                        "media": "/images/reef/reef-11-scale.jpg",
                                         "alt": "A participant smiling as she places a small clay figure onto a much larger clay structure",
                                         "focus": "center 35%"
                                     },
                                     {
                                         "title": "Every table, a different reef",
                                         "body": "No two came out the same. The final sculpture draws on the room, not on one person.",
-                                        "media": "images/reef/reef-05-room.jpg",
+                                        "media": "/images/reef/reef-05-room.jpg",
                                         "alt": "Wide view of the workshop room with participants modelling clay at every table",
                                         "focus": "center 45%"
                                     },
                                     {
                                         "title": "This one goes in the sea",
                                         "body": "The maquette becomes the plan. Barbados Community College Fine Arts students and faculty scale it up in pH-neutral marine concrete, and it goes down off Carlisle Bay.",
-                                        "media": "images/reef/reef-06-maquette.jpg",
+                                        "media": "/images/reef/reef-06-maquette.jpg",
                                         "alt": "A finished clay maquette built from coiled strands, resembling a branching coral",
                                         "focus": "center 50%"
                                     }
                                 ],
                                 "compare": {
                                     "title": "Drawing to object",
-                                    "before": "images/reef/reef-03-sketch.jpg",
-                                    "after": "images/reef/reef-08-structure.jpg",
+                                    "before": "/images/reef/reef-03-sketch.jpg",
+                                    "after": "/images/reef/reef-08-structure.jpg",
                                     "beforeAlt": "Pencil sketches of coral forms across an open sketchbook",
                                     "afterAlt": "A built clay structure of arches and platforms, the sketchbook still open beside it",
                                     "beforeLabel": "Drawn",
@@ -800,6 +808,142 @@
                             <li>Barbados Community College</li>
                             <li>Coastal Zone Management Unit</li>
                             <li>National Conservation Commission</li>
+                        </ul>
+                    </section>
+
+                </div>
+
+                <!-- SUB-VIEW: Eco-Leaders Workshop -->
+                <!-- ============================================================
+                     ECO-LEADERS WORKSHOP — visual story.
+                     Same spine as Tomorrow's Reef and deliberately the same
+                     component (StoryScroll = ReefStory under a neutral name):
+                     one sticky-media scroll implementation on this page, not
+                     two competing ones. No GSAP pin here either.
+
+                     The film is images/video3.mp4 — the same recap that already
+                     ships for the home-page reel, so nothing is duplicated.
+                     ============================================================ -->
+                <div id="prog-ecoleaders" class="prog-detail-pane">
+
+                    <header class="story-intro">
+                        <span class="section-eyebrow">Eco-Leaders Workshop</span>
+                        <h2 class="section-headline">They told us what the climate space is missing.</h2>
+                        <p class="section-standfirst">
+                            A day at the Oceana Innovation Hub with UNICEF Eastern Caribbean. Young people from
+                            across Barbados set the agenda; the adults took notes.
+                        </p>
+                    </header>
+
+                    <figure class="eco-film">
+                        <button type="button" class="eco-film-trigger" onclick="openEcoFilm()"
+                            aria-label="Play the Eco-Leaders workshop recap, 52 seconds">
+                            <img src="/images/eco/eco-film-poster.jpg"
+                                alt="Myrico Morris speaking to camera outside the Oceana Innovation Hub"
+                                loading="lazy" decoding="async">
+                            <span class="eco-film-play" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                                </svg>
+                            </span>
+                            <span class="eco-film-meta" aria-hidden="true">Watch the recap &middot; 0:52</span>
+                        </button>
+                    </figure>
+
+                    <div class="story-fullbleed">
+                        <div data-island="StoryScroll" data-props='{
+                                "items": [
+                                    {
+                                        "title": "It starts at a building that already works",
+                                        "body": "The Oceana Innovation Hub. Before anyone speaks, the place has made half the argument for you.",
+                                        "media": "/images/eco/eco-01-hub.jpg",
+                                        "alt": "The Oceana Innovation Hub, a white building with a facade of coloured stripes, seen from its front steps",
+                                        "focus": "center 45%"
+                                    },
+                                    {
+                                        "title": "A flying fish, made of bottle caps",
+                                        "body": "Waste sorted by colour and turned into the national symbol. Nobody had to explain the point.",
+                                        "media": "/images/eco/eco-02-mosaic.jpg",
+                                        "alt": "A large wall mosaic of a flying fish assembled entirely from coloured plastic bottle caps",
+                                        "focus": "center 40%"
+                                    },
+                                    {
+                                        "title": "Then the room fills",
+                                        "body": "Young people from across Barbados, at the same tables, for one day.",
+                                        "media": "/images/eco/eco-03-room.jpg",
+                                        "alt": "Rows of young participants seated at desks, listening",
+                                        "focus": "center 40%"
+                                    },
+                                    {
+                                        "title": "The mic goes to them",
+                                        "body": "Not a panel talking at the room. The questions came off the floor and stayed there.",
+                                        "media": "/images/eco/eco-04-mic.jpg",
+                                        "alt": "A young woman standing with a microphone, addressing a full room of seated participants",
+                                        "focus": "center 35%"
+                                    },
+                                    {
+                                        "title": "The adults are the ones listening",
+                                        "body": "Mentors moved between the tables. Mostly they wrote things down.",
+                                        "media": "/images/eco/eco-05-listening.jpg",
+                                        "alt": "A mentor in a yellow jacket leaning over a table, listening to seated participants",
+                                        "focus": "center 40%"
+                                    },
+                                    {
+                                        "title": "Markers out, chairs turned",
+                                        "body": "The room broke into groups and the paper came out.",
+                                        "media": "/images/eco/eco-06-groups.jpg",
+                                        "alt": "A small group around a table covered in handwritten notes and coloured markers",
+                                        "focus": "center 45%"
+                                    },
+                                    {
+                                        "title": "What they actually asked for",
+                                        "body": "Proposal and grant writing. Research skills. The practical things between an idea and the money to run it.",
+                                        "media": "/images/eco/eco-07-grantwriting.jpg",
+                                        "alt": "A hand writing on a large sheet, the words proposal and grant writing visible in marker",
+                                        "focus": "center 50%"
+                                    },
+                                    {
+                                        "title": "Youth-led, or it does not count",
+                                        "body": "“We are making sure that these initiatives are youth led.” — Myrico Morris, Project Coordinator.",
+                                        "media": "/images/eco/eco-08-payoff.jpg",
+                                        "alt": "The whole workshop group on a boardwalk with their arms raised",
+                                        "focus": "center 45%"
+                                    }
+                                ]
+                            }'>
+                            <!-- Fallback: visible without JavaScript -->
+                            <noscript>
+                                <p class="section-standfirst">Photographs from the Eco-Leaders workshop at the
+                                    Oceana Innovation Hub.</p>
+                            </noscript>
+                        </div>
+                    </div>
+
+                    <section class="story-facts" aria-label="About the workshop">
+                        <div class="story-fact">
+                            <h3>Where</h3>
+                            <p>The Oceana Innovation Hub — hydroponics under grow lights and a wall built from
+                                salvaged bottle caps.</p>
+                        </div>
+                        <div class="story-fact">
+                            <h3>With</h3>
+                            <p>UNICEF Eastern Caribbean, alongside Green Rising Barbados.</p>
+                        </div>
+                        <div class="story-fact">
+                            <h3>Who came</h3>
+                            <!-- TODO(green-rising): confirm the attendance figure and the intake mix before
+                                 publishing. The only sourced claim is "youth from across Barbados". -->
+                            <p>Young people from across Barbados.</p>
+                        </div>
+                    </section>
+
+                    <section class="story-partners" aria-label="Partners">
+                        <h3 class="story-partners-label">Partners</h3>
+                        <ul class="story-partners-list">
+                            <li>Green Rising Barbados</li>
+                            <li>UNICEF Eastern Caribbean</li>
+                            <li>Oceana Innovation Hub</li>
+                            <li>Future Barbados</li>
                         </ul>
                     </section>
 
@@ -1872,7 +2016,7 @@
 
             <div class="reel-modal-video-wrap">
                 <div class="video-preview-player" id="video-player-container">
-                    <img id="modal-video-poster" src="images/eco-leaders.jpg" alt="Video Reel Preview"
+                    <img id="modal-video-poster" src="/images/eco-leaders.jpg" alt="Video Reel Preview"
                         class="video-player-img">
                     <video id="modal-video-tag" controls playsinline
                         style="display: none;"></video>
@@ -1913,26 +2057,27 @@
     </div>
 
     <!-- Modular JavaScript Services & Logic -->
-    <script src="js/theme.js"></script>
-    <script src="js/router.js"></script>
-    <script src="js/calculator.js"></script>
-    <script src="js/dashboard.js"></script>
-    <script src="js/impact-chart.js"></script>
-    <script src="js/quiz.js"></script>
-    <script src="js/apply.js"></script>
-    <script src="js/resources.js"></script>
-    <script src="js/admin-tabs.js"></script>
-    <script src="app.js"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/router.js"></script>
+    <script src="/js/calculator.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/impact-chart.js"></script>
+    <script src="/js/quiz.js"></script>
+    <script src="/js/apply.js"></script>
+    <script src="/js/resources.js"></script>
+    <script src="/js/admin-tabs.js"></script>
+    <script src="/app.js"></script>
 
     <!-- Motion. GSAP is an enhancement only: every element animated below is
          fully visible without it, so a CDN failure costs the animation and
          nothing else. motion.js exits early if GSAP is absent. -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-    <script src="js/motion.js" defer></script>
-    <script src="js/background.js" defer></script>
+    <script src="/js/motion.js" defer></script>
+    <script src="/js/background.js" defer></script>
     <!-- After GSAP (needs ScrollTrigger) and after app.js (reuses the reel modal) -->
-    <script src="js/reef.js" defer></script>
+    <script src="/js/reef.js" defer></script>
+    <script src="/js/eco.js" defer></script>
 
     <!-- React islands (js/islands.js, built from src/ by `npm run build:islands`).
          The bundle is ~475KB gzipped because it carries React + Three + R3F, so
@@ -1941,7 +2086,7 @@
     <script>
         if (document.querySelector('[data-island]')) {
             var s = document.createElement('script');
-            s.src = 'js/islands.js';
+            s.src = '/js/islands.js';
             s.defer = true;
             document.head.appendChild(s);
         }

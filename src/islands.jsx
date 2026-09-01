@@ -17,10 +17,16 @@ import DotField from './islands/DotField.jsx';
 import ReefStory from './islands/ReefStory.jsx';
 import TeamRoster from './islands/TeamRoster.jsx';
 
-// Every component that may be mounted from markup
+// Every component that may be mounted from markup.
+//
+// StoryScroll is ReefStory under a neutral name. The component is not
+// reef-specific — it takes items and renders a sticky media column against a
+// scrolling text column — and reusing it for Eco-Leaders keeps one verified
+// scroll implementation on the Programmes page instead of two competing ones.
 const REGISTRY = {
   DotField,
   ReefStory,
+  StoryScroll: ReefStory,
   TeamRoster
 };
 

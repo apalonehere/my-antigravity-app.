@@ -175,22 +175,22 @@ const VIDEO_REELS_DATA = {
         category: '🚌 Field Trip',
         title: 'Eco-Ride Bus Trip',
         desc: '',
-        videoSrc: 'images/video1.mp4',
-        poster: 'images/eco-leaders.jpg'
+        videoSrc: '/images/video1.mp4',
+        poster: '/images/eco-leaders.jpg'
     },
     video2: {
         category: '🐟 Conference',
         title: 'Aqua-Producers Conference',
         desc: '',
-        videoSrc: 'images/video2.mp4',
-        poster: 'images/eco-leaders.jpg'
+        videoSrc: '/images/video2.mp4',
+        poster: '/images/eco-leaders.jpg'
     },
     video3: {
         category: '🌱 Workshop',
         title: 'Eco-Leaders Workshop',
         desc: '',
-        videoSrc: 'images/video3.mp4',
-        poster: 'images/eco-leaders.jpg'
+        videoSrc: '/images/video3.mp4',
+        poster: '/images/eco-leaders.jpg'
     }
 };
 
@@ -289,7 +289,7 @@ function openVideoModal(type = 'video1') {
             videoTag.style.display = 'none';
             if (posterEl) {
                 posterEl.style.display = 'block';
-                posterEl.src = data.poster || 'images/eco-leaders.jpg';
+                posterEl.src = data.poster || '/images/eco-leaders.jpg';
             }
             if (overlayControls) overlayControls.style.display = 'flex';
         });
@@ -297,7 +297,7 @@ function openVideoModal(type = 'video1') {
         if (videoTag) videoTag.style.display = 'none';
         if (posterEl) {
             posterEl.style.display = 'block';
-            posterEl.src = data.poster || 'images/eco-leaders.jpg';
+            posterEl.src = data.poster || '/images/eco-leaders.jpg';
         }
         if (overlayControls) overlayControls.style.display = 'flex';
     }

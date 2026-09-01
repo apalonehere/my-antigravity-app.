@@ -7147,7 +7147,7 @@ body .mb-20 { margin-bottom: 20px; }
    and text keeps a readable measure beside it.
    ============================================================ */
 
-.reef-intro { max-width: 62ch; margin: 0 0 26px; }
+.reef-intro, .story-intro { max-width: 62ch; margin: 0 0 26px; }
 
 .reef-eyebrow {
     display: inline-block;
@@ -7242,7 +7242,7 @@ body .mb-20 { margin-bottom: 20px; }
 /* --- full-bleed break-out ---
    The section sits inside .container (max-width 1540px, 36px padding).
    This escapes it, for this section only. */
-.reef-fullbleed {
+.reef-fullbleed, .story-fullbleed {
     /* --sbw is the measured scrollbar width, published by js/reef.js. Without
        subtracting it, a 100vw element overhangs the visible area by the
        scrollbar width and sits half of it off each edge. */
@@ -7461,37 +7461,37 @@ body .mb-20 { margin-bottom: 20px; }
 .reef-compare-tag--right { right: 14px; }
 
 /* --- facts + partners --- */
-.reef-facts {
+.reef-facts, .story-facts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 18px;
     margin: 56px 0 34px;
 }
 
-.reef-fact {
+.reef-fact, .story-fact {
     padding-left: 14px;
     border-left: 2px solid rgba(5, 150, 105, 0.32);
 }
 
-[data-theme="dark"] .reef-fact {
+[data-theme="dark"] .reef-fact, [data-theme="dark"] .story-fact {
     border-left-color: rgba(16, 185, 129, 0.4);
 }
 
-.reef-fact h3 {
+.reef-fact h3, .story-fact h3 {
     margin: 0 0 5px;
     font-family: var(--font-heading);
     font-size: 1rem;
     color: var(--color-text-bright);
 }
 
-.reef-fact p {
+.reef-fact p, .story-fact p {
     margin: 0;
     font-size: 0.94rem;
     line-height: 1.55;
     color: var(--color-text-muted);
 }
 
-.reef-partners-label {
+.reef-partners-label, .story-partners-label {
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -7500,7 +7500,7 @@ body .mb-20 { margin-bottom: 20px; }
     margin: 0 0 10px;
 }
 
-.reef-partners-list {
+.reef-partners-list, .story-partners-list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -7509,7 +7509,7 @@ body .mb-20 { margin-bottom: 20px; }
     gap: 8px;
 }
 
-.reef-partners-list li {
+.reef-partners-list li, .story-partners-list li {
     font-size: 0.86rem;
     font-weight: 600;
     color: var(--color-text-muted);
@@ -7519,7 +7519,7 @@ body .mb-20 { margin-bottom: 20px; }
     padding: 6px 14px;
 }
 
-[data-theme="dark"] .reef-partners-list li {
+[data-theme="dark"] .reef-partners-list, [data-theme="dark"] .story-partners-list li {
     background: rgba(16, 185, 129, 0.12);
     border-color: rgba(16, 185, 129, 0.24);
 }
@@ -8426,3 +8426,98 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 }
 
 .section-intro-row .section-intro { margin: 0; }
+
+/* ============================================================
+   ECO-LEADERS WORKSHOP — recap film
+   The reef film is landscape and runs the full column width.
+   This recap is a 9:16 vertical reel, so the frame is capped
+   and centred instead; letting a portrait video fill the
+   column would push everything below it off the first screen.
+   ============================================================ */
+.eco-film {
+    margin: 0 0 44px;
+    display: flex;
+    justify-content: center;
+}
+
+.eco-film-trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-lg, 16px);
+    overflow: hidden;
+    cursor: pointer;
+    background: #05100d;
+    line-height: 0;
+}
+
+.eco-film-trigger img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.eco-film-trigger:focus-visible {
+    outline: 3px solid var(--color-primary-text);
+    outline-offset: 3px;
+}
+
+.eco-film-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #0b231e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.eco-film-meta {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+    background: rgba(6, 20, 18, 0.72);
+    border-radius: 100px;
+    padding: 7px 14px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .eco-film-trigger:hover img { transform: scale(1.03); }
+    .eco-film-trigger:hover .eco-film-play { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .eco-film-trigger img,
+    .eco-film-play { transition: none; }
+    .eco-film-trigger:hover img { transform: none; }
+}
+
+/* ============================================================
+   STORY SPINE — reduced motion
+   The split layout is a sticky media column that crossfades as
+   you scroll. Asked for reduced motion, it degrades to the
+   stacked variant, which is the same photos and the same
+   captions as a plain, static gallery. Applies to Tomorrow's
+   Reef and Eco-Leaders alike — they share the component.
+   !important because the split layout is turned on inside a
+   min-width query that would otherwise win on source order.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .reef-story-split { display: none !important; }
+    .reef-story-stacked { display: block !important; }
+}

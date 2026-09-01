@@ -52,8 +52,8 @@ function openReefFilm() {
         category: '🪸 Tomorrow’s Reef',
         title: 'Designing a reef',
         desc: '',
-        videoSrc: 'images/reef/reef-film.mp4',
-        poster: 'images/reef/reef-film-poster.jpg'
+        videoSrc: '/images/reef/reef-film.mp4',
+        poster: '/images/reef/reef-film-poster.jpg'
     };
 
     // 'reefFilm' is not in REEL_ORDER, so the modal hides its counter and
