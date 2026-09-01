@@ -1,0 +1,23 @@
+{
+  "target": 300,
+  "targetLabel": "2026 target · 300",
+  "metrics": {
+    "youth": 242,
+    "water": 85210,
+    "jobs": 32
+  },
+  "trend": [
+    { "period": "Sep 2025", "value": 0 },
+    { "period": "Oct 2025", "value": 24 },
+    { "period": "Nov 2025", "value": 51 },
+    { "period": "Dec 2025", "value": 68 },
+    { "period": "Jan 2026", "value": 96 },
+    { "period": "Feb 2026", "value": 124 },
+    { "period": "Mar 2026", "value": 147 },
+    { "period": "Apr 2026", "value": 172 },
+    { "period": "May 2026", "value": 196 },
+    { "period": "Jun 2026", "value": 214 },
+    { "period": "Jul 2026", "value": 231 },
+    { "period": "Aug 2026", "value": 242 }
+  ]
+}

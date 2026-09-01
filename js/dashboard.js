@@ -9,17 +9,20 @@ const DEFAULT_METRICS = {
     jobs: 32
 };
 
+// Published content wins. The old localStorage copy is gone as a source of
+// truth: it only ever changed what one browser saw, which is the opposite of
+// what an admin edit is supposed to do.
 function getImpactMetrics() {
-    if (typeof localStorage === 'undefined') return Object.assign({}, DEFAULT_METRICS);
-    const stored = localStorage.getItem('green_rising_impact_metrics');
-    if (stored) {
-        try {
-            return Object.assign({}, DEFAULT_METRICS, JSON.parse(stored));
-        } catch (e) {
-            console.error('Failed to parse impact metrics from localStorage', e);
-        }
+    const published = window.GR_CONTENT && window.GR_CONTENT.impact;
+    if (published && published.metrics) {
+        return Object.assign({}, DEFAULT_METRICS, published.metrics);
     }
     return Object.assign({}, DEFAULT_METRICS);
+}
+
+function getImpactTarget() {
+    const published = window.GR_CONTENT && window.GR_CONTENT.impact;
+    return (published && Number(published.target)) || 300;
 }
 
 function applyMetricsToUI(newMetrics, animate = false) {
@@ -51,7 +54,7 @@ function applyMetricsToUI(newMetrics, animate = false) {
     });
 
     // 2. 2026 Progress Ring Sync
-    const targetPct = Math.min(Math.round((m.youth / 300) * 100), 100);
+    const targetPct = Math.min(Math.round((m.youth / getImpactTarget()) * 100), 100);
     const ringValEl = document.getElementById('dash-ring-val');
     const ringFillEl = document.getElementById('dash-ring-fill');
     if (ringValEl) ringValEl.innerText = `${targetPct}%`;
@@ -92,7 +95,9 @@ function handleAdminMetricsSubmit(event) {
         jobs: jobsVal
     };
 
-    localStorage.setItem('green_rising_impact_metrics', JSON.stringify(updated));
+    // Deliberately not persisted. Impact figures are published from
+    // content/impact.json via the CMS at /admin; writing them to localStorage
+    // here would only change this one browser while looking like a save.
     applyMetricsToUI(updated, true);
 
     const successMsg = document.getElementById('admin-metrics-success-msg');

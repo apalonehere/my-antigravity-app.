@@ -47,18 +47,22 @@ const DEFAULT_SENSOR_LOGS = [
 ];
 
 // --- GETTERS & SETTERS (STORAGE WITH GUARDRAILS) ---
+// Published content wins, then the shipped defaults. The old localStorage
+// branch is gone: it changed what one browser saw and nothing else, which is
+// not what "publish a milestone" should mean. Milestones are edited in the CMS
+// at /admin, which commits content/milestones.json.
 function getMilestones() {
-    if (typeof localStorage === 'undefined') return DEFAULT_MILESTONES;
-    const stored = localStorage.getItem('green_rising_milestones');
-    if (stored) {
-        try {
-            const parsed = JSON.parse(stored);
-            if (Array.isArray(parsed)) return parsed;
-        } catch (e) {
-            console.error('Failed to parse milestones from localStorage', e);
-        }
+    const published = window.GR_CONTENT && window.GR_CONTENT.milestones;
+    if (published && Array.isArray(published.milestones)) {
+        return published.milestones.map((m, i) => Object.assign({ id: 'ms-' + (i + 1) }, m));
     }
     return DEFAULT_MILESTONES;
+}
+
+// Called by js/content.js once milestones.json has loaded.
+function renderMilestonesFromContent() {
+    if (typeof renderPublicMilestones === 'function') renderPublicMilestones();
+    if (typeof renderAdminMilestonesTable === 'function') renderAdminMilestonesTable();
 }
 
 function saveMilestones(arr) {
@@ -436,3 +440,5 @@ function initAdminTabsModules() {
 document.addEventListener('DOMContentLoaded', () => {
     initAdminTabsModules();
 });
+
+window.renderMilestonesFromContent = renderMilestonesFromContent;

@@ -31,8 +31,9 @@
 (function () {
     'use strict';
 
-    const TARGET = 300;
-    const TARGET_LABEL = '2026 target · 300';
+    const TARGET_FALLBACK = 300;
+    const target = () => (window.GR_CONTENT && window.GR_CONTENT.impact && Number(window.GR_CONTENT.impact.target)) || TARGET_FALLBACK;
+    const targetLabel = () => (window.GR_CONTENT && window.GR_CONTENT.impact && window.GR_CONTENT.impact.targetLabel) || '2026 target · 300';
 
     const MONTHLY_YOUTH = {
         label: 'Youth trained (cumulative)',
@@ -66,7 +67,13 @@
     }
 
     function livePoints() {
-        const pts = MONTHLY_YOUTH.points.map(p => Object.assign({}, p));
+        // Published series wins; the array below is the fallback shipped with
+        // the page so the chart draws before the fetch lands.
+        const published = window.GR_CONTENT && window.GR_CONTENT.impact;
+        const source = (published && Array.isArray(published.trend) && published.trend.length)
+            ? published.trend
+            : MONTHLY_YOUTH.points;
+        const pts = source.map(p => Object.assign({}, p));
         // Keep the last point honest against whatever the tiles are showing.
         if (typeof getImpactMetrics === 'function') {
             const live = Number(getImpactMetrics().youth);
@@ -76,7 +83,7 @@
     }
 
     function scales(points) {
-        const maxVal = Math.max(TARGET, ...points.map(p => p.value));
+        const maxVal = Math.max(target(), ...points.map(p => p.value));
         const yMax = Math.ceil(maxVal / 50) * 50;
         const plotW = VB.w - PAD.left - PAD.right;
         const plotH = VB.h - PAD.top - PAD.bottom;
@@ -104,7 +111,7 @@
             role: 'img',
             'aria-label': `${MONTHLY_YOUTH.label}. From ${points[0].value} in ${points[0].period} to ` +
                 `${points[points.length - 1].value} in ${points[points.length - 1].period}, ` +
-                `against a target of ${TARGET}.`
+                `against a target of ${target()}.`
         });
 
         // --- gradient for the area fill -------------------------------------
@@ -129,11 +136,11 @@
         svg.appendChild(gridG);
 
         // --- target reference line (not a series: dashed, labelled) ---------
-        const ty = s.y(TARGET);
+        const ty = s.y(target());
         const targetG = el('g', { class: 'impact-target' });
         targetG.appendChild(el('line', { x1: PAD.left, y1: ty, x2: VB.w - PAD.right, y2: ty }));
         const tLabel = el('text', { x: VB.w - PAD.right, y: ty - 8, 'text-anchor': 'end', class: 'impact-target-text' });
-        tLabel.textContent = TARGET_LABEL;
+        tLabel.textContent = targetLabel();
         targetG.appendChild(tLabel);
         svg.appendChild(targetG);
 

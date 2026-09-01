@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Green Rising — Content Admin</title>
+    <link rel="icon" href="/images/logo.png">
+    <style>
+        /* Shown only while the CMS bundle is loading, or if it never does. */
+        .boot {
+            font-family: 'Inter', system-ui, sans-serif;
+            max-width: 46rem;
+            margin: 12vh auto;
+            padding: 0 1.5rem;
+            color: #0f172a;
+            line-height: 1.6;
+        }
+
+        .boot h1 {
+            font-family: 'Outfit', system-ui, sans-serif;
+            font-size: 1.6rem;
+            margin: 0 0 .5rem;
+        }
+
+        .boot code {
+            font-family: ui-monospace, monospace;
+            font-size: .88em;
+            background: #f1f5f9;
+            padding: .15em .4em;
+            border-radius: 3px;
+        }
+
+        .boot .muted { color: #475569; }
+    </style>
+</head>
+
+<body>
+    <div class="boot" id="boot">
+        <h1>Green Rising content admin</h1>
+        <p class="muted">Loading the editor…</p>
+        <p class="muted">If this message stays put, the CMS bundle did not load. Check your connection, then see
+            <code>docs/admin-setup.md</code> in the repository for the one-time GitHub setup this page needs.</p>
+    </div>
+
+    <!--
+        Sveltia CMS: a drop-in, actively maintained replacement for Decap/Netlify
+        CMS. It talks to the GitHub API directly, so the only server-side piece
+        is the OAuth handshake in /api (needed because a client-side page must
+        never hold a GitHub client secret).
+
+        Pinned to an exact version deliberately — an unpinned CMS bundle can
+        change the editing UI under the team without warning.
+    -->
+    <script src="https://unpkg.com/@sveltia/cms@0.99.0/dist/sveltia-cms.js" type="module"></script>
+
+    <script>
+        // Clear the fallback once the editor has actually rendered.
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (document.querySelector('#nc-root, #app, [class*="sveltia"]')) {
+                    const boot = document.getElementById('boot');
+                    if (boot) boot.remove();
+                }
+            }, 1200);
+        });
+    </script>
+</body>
+
+</html>

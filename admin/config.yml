@@ -1,0 +1,83 @@
+# Sveltia CMS — Green Rising Barbados
+#
+# Edits here become commits to content/*.json on the branch named below.
+# Vercel sees the commit and redeploys, so a change is live in about a minute
+# and is fully version-controlled: every edit has an author, a timestamp and a
+# revert button, which is the main reason this beats a database for a site
+# that changes occasionally.
+
+backend:
+  name: github
+  repo: apalonehere/my-antigravity-app
+  branch: Update
+  # Vercel serverless OAuth handshake — see api/auth.js and api/callback.js
+  base_url: https://green-rising.vercel.app
+  auth_endpoint: api/auth
+
+# Photos dropped into the CMS land here and are referenced from the site root
+media_folder: images/uploads
+public_folder: /images/uploads
+
+# The editor previews against the live site rather than a mock
+site_url: https://green-rising.vercel.app
+
+collections:
+  - name: impact
+    label: Impact figures
+    files:
+      - name: impact
+        label: Impact Hub numbers
+        file: content/impact.json
+        description: >
+          The headline figures on the Impact Hub and the homepage strip. The
+          youth figure also sets the progress ring and the last point of the
+          trend chart, so those can never disagree with each other.
+        fields:
+          - name: target
+            label: 2026 youth target
+            widget: number
+            value_type: int
+            min: 1
+            hint: The number the progress ring counts towards.
+          - name: targetLabel
+            label: Target line caption
+            widget: string
+            hint: Printed on the dashed line in the trend chart.
+          - name: metrics
+            label: Headline figures
+            widget: object
+            fields:
+              - { name: youth, label: Youth trained, widget: number, value_type: int, min: 0 }
+              - { name: water, label: Gallons of water conserved, widget: number, value_type: int, min: 0 }
+              - { name: jobs,  label: Green-blue jobs placed, widget: number, value_type: int, min: 0 }
+          - name: trend
+            label: Youth trained over time
+            widget: list
+            summary: '{{fields.period}} — {{fields.value}}'
+            hint: >
+              Cumulative running total, one row per month. The final row is
+              overwritten on the page by the Youth trained figure above.
+            fields:
+              - { name: period, label: Month, widget: string, hint: 'e.g. Sep 2026' }
+              - { name: value,  label: Cumulative total, widget: number, value_type: int, min: 0 }
+
+  - name: milestones
+    label: Milestones
+    files:
+      - name: milestones
+        label: Milestones timeline
+        file: content/milestones.json
+        description: The verified milestones shown on the Impact Hub.
+        fields:
+          - name: milestones
+            label: Milestones
+            widget: list
+            summary: '{{fields.date}} — {{fields.title}}'
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: date, label: Date, widget: string, hint: 'e.g. June 2026' }
+              - name: initiative
+                label: Initiative
+                widget: select
+                options: ['Water Conservation', 'Tomorrow''s Reef', 'Eco-Leaders', 'General']
+              - { name: description, label: Description, widget: text }

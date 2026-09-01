@@ -26,6 +26,10 @@ function boot(label, fn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Published content first: the figures on the page are refreshed in place
+    // once content/*.json lands. Non-blocking — the markup already carries the
+    // last published numbers.
+    boot('published content', typeof loadPublishedContent === 'function' ? loadPublishedContent : null);
     boot('theme', typeof initTheme === 'function' ? initTheme : null);
     boot('navigation', typeof initNavigation === 'function' ? initNavigation : null);
     boot('mobile menu', typeof initMobileMenu === 'function' ? initMobileMenu : null);

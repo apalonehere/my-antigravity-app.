@@ -1699,90 +1699,14 @@
 
                 <!-- TAB 1: Milestones Management -->
                 <div id="admin-tab-milestones" class="admin-tab-pane active">
-                    <div class="grid-2col gap-30">
-                        <!-- Milestone Form -->
-                        <div class="glass p-30" style="border-radius: var(--radius-md);">
-                            <h3 id="milestone-form-heading" class="mb-15">Publish New Milestone</h3>
-                            <form id="admin-milestone-form" onsubmit="handleMilestoneSubmit(event)">
-                                <input type="hidden" id="milestone-id-input">
-
-                                <div class="form-group mb-15">
-                                    <label for="milestone-title-input"
-                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Milestone
-                                        Title</label>
-                                    <input type="text" id="milestone-title-input" class="form-control" required
-                                        placeholder="e.g. 5 Parish Rainwater Systems Online">
-                                </div>
-
-                                <div class="form-row mb-15 flex-between gap-15">
-                                    <div class="form-group w-50">
-                                        <label for="milestone-date-input"
-                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Target
-                                            Date / Period</label>
-                                        <input type="text" id="milestone-date-input" class="form-control"
-                                            placeholder="e.g. July 2026">
-                                    </div>
-                                    <div class="form-group w-50">
-                                        <label for="milestone-initiative-input"
-                                            style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Initiative
-                                            Focus</label>
-                                        <select id="milestone-initiative-input" class="form-control">
-                                            <option value="General">General</option>
-                                            <option value="Water Conservation">Water Conservation</option>
-                                            <option value="Oceana">Oceana Hub</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-20">
-                                    <label for="milestone-desc-input"
-                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Description
-                                        & Summary</label>
-                                    <textarea id="milestone-desc-input" class="form-control" rows="3"
-                                        placeholder="Provide milestone details for the public community feed..."></textarea>
-                                </div>
-
-                                <div class="flex-center gap-10">
-                                    <button type="submit" id="milestone-submit-btn"
-                                        class="btn btn-primary w-100">Publish Milestone</button>
-                                    <button type="button" class="btn btn-secondary"
-                                        onclick="resetMilestoneForm()">Reset</button>
-                                </div>
-                            </form>
-
-                            <div id="admin-milestone-success-msg" class="sim-status-alert hidden mt-15"
-                                style="display:none; color: var(--color-primary); font-weight:600; text-align:center;">
-                                ✅ Milestone saved successfully!
-                            </div>
-                        </div>
-
-                        <!-- Milestones List Table -->
-                        <div class="glass p-30" style="border-radius: var(--radius-md);">
-                            <h3 class="mb-15">Published Milestones</h3>
-                            <div style="overflow-x: auto;">
-                                <table style="width: 100%; border-collapse: collapse;">
-                                    <thead>
-                                        <tr style="border-bottom: 2px solid rgba(5,150,105,0.2); text-align: left;">
-                                            <th
-                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
-                                                Date</th>
-                                            <th
-                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
-                                                Title & Summary</th>
-                                            <th
-                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted);">
-                                                Initiative</th>
-                                            <th
-                                                style="padding: 10px 8px; font-size: 0.85rem; color: var(--color-text-muted); text-align: right;">
-                                                Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="admin-milestones-table-body">
-                                        <!-- Rendered dynamically by js/admin-tabs.js -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="glass p-30 max-width-700 margin-auto" style="border-radius: var(--radius-md);">
+                        <h3 class="mb-10">Milestones have moved</h3>
+                        <p class="small text-muted mb-25">Milestones are published from
+                            <code>content/milestones.json</code> and edited in the content admin. Saving there
+                            commits the change to the repository and redeploys the site, so every visitor sees it —
+                            and every edit keeps an author, a timestamp and a revert button.</p>
+                        <a href="/admin" class="btn btn-primary" target="_blank" rel="noopener">Open content admin
+                            &rarr;</a>
                     </div>
                 </div>
 
@@ -1970,42 +1894,13 @@
                 <!-- TAB 4: Impact Hub Metrics Sync -->
                 <div id="admin-tab-metrics" class="admin-tab-pane" style="display: none;">
                     <div class="glass p-30 max-width-700 margin-auto" style="border-radius: var(--radius-md);">
-                        <h3 class="mb-10">Live Impact Metrics Sync</h3>
-                        <p class="small text-muted mb-25">Update key metrics across the entire platform. These numbers
-                            sync instantly across the Homepage and Impact Hub indicators.</p>
-
-                        <form id="admin-metrics-form" onsubmit="handleAdminMetricsSubmit(event)">
-                            <div class="grid-2col gap-20 mb-20">
-                                <div class="form-group">
-                                    <label for="metric-input-youth"
-                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Youth
-                                        Trained & Empowered</label>
-                                    <input type="number" id="metric-input-youth" class="form-control text-center"
-                                        value="242">
-                                </div>
-                                <div class="form-group">
-                                    <label for="metric-input-water"
-                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Gallons
-                                        of Water Saved</label>
-                                    <input type="number" id="metric-input-water" class="form-control text-center"
-                                        value="85210">
-                                </div>
-                                <div class="form-group">
-                                    <label for="metric-input-jobs"
-                                        style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Jobs
-                                        Created & Placements</label>
-                                    <input type="number" id="metric-input-jobs" class="form-control text-center"
-                                        value="32">
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100">Push Live Impact Updates</button>
-                        </form>
-
-                        <div id="admin-metrics-success-msg" class="sim-status-alert hidden mt-15"
-                            style="display:none; color: var(--color-primary); font-weight:600; text-align:center;">
-                            ✅ Metrics synced live across all homepage and Impact Hub indicators!
-                        </div>
+                        <h3 class="mb-10">Impact figures have moved</h3>
+                        <p class="small text-muted mb-25">These numbers are published from
+                            <code>content/impact.json</code> and edited in the content admin, which commits the
+                            change and redeploys the site. The form that used to live here only ever changed what
+                            this one browser showed, so it has been removed rather than left looking like it saved.</p>
+                        <a href="/admin" class="btn btn-primary" target="_blank" rel="noopener">Open content admin
+                            &rarr;</a>
                     </div>
                 </div>
 
@@ -2099,6 +1994,7 @@
     <script src="/js/theme.js"></script>
     <script src="/js/router.js"></script>
     <script src="/js/calculator.js"></script>
+    <script src="/js/content.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/impact-chart.js"></script>
     <script src="/js/quiz.js"></script>
