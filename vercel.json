@@ -2,7 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
-      "comment": "The site uses HTML5 path routing (initHTML5Router in js/router.js), so /programmes, /apply, /team and the rest are client-side routes with no file behind them. Without this, opening or refreshing one of those URLs returns 404. The negative lookahead keeps real files (.css, .js, .jpg, .mp4) serving normally.",
       "source": "/((?!.*\\.).*)",
       "destination": "/index.html"
     }
