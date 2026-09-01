@@ -55,11 +55,46 @@ Redeploy once so the functions pick them up.
 three places: `base_url` and `site_url` in `admin/config.yml`, and the two URLs
 in the GitHub OAuth app.
 
-## Giving someone access
+## Who can change the site
 
-Anyone with **write access to the repository** can sign in and edit. Add them as
-a collaborator on GitHub; there is no separate password to manage, and removing
-their repo access removes their editing access.
+There are two layers, and the first one is the one that matters.
+
+**1. GitHub repository write access — this is the real gate.**
+
+The editor commits using the signed-in person's own GitHub token. Someone
+without write access to `apalonehere/my-antigravity-app` is refused by GitHub
+the moment they try to save. This is enforced on GitHub's servers, not in our
+code, so it cannot be bypassed by fiddling with the browser.
+
+Manage it under **Settings > Collaborators** on the repository. Adding someone
+there gives them editing access; removing them takes it away. There is no
+separate password to issue or revoke.
+
+Note that this cuts both ways: anyone with write access can also commit with
+plain `git` and skip the editor entirely. Repo write access *is* permission to
+change the site.
+
+**2. `CMS_ALLOWED_USERS` — an optional narrower list for the editor.**
+
+Set this Vercel environment variable to a comma-separated list of GitHub
+usernames to restrict who can use `/admin` specifically:
+
+```
+CMS_ALLOWED_USERS = apalonehere, some-colleague
+```
+
+Anyone signing in who is not on the list is refused at sign-in with a clear
+message, instead of being handed an editor that looks usable and then fails on
+first save. Leave the variable unset to allow anyone with repo write access.
+
+This is defence in depth, not the gate. It controls the editor; repo
+permissions control the site.
+
+**What signing in actually grants.** The OAuth app requests the `public_repo`
+scope — access to the signer-in's public repositories only. It deliberately does
+not request `repo`, which would have handed the token access to every private
+repository they own. If this repository is ever switched to private, the scope
+in `api/auth.js` must change to `repo` or the editor will stop finding it.
 
 ---
 

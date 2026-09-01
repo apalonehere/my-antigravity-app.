@@ -45,10 +45,52 @@ module.exports = async (req, res) => {
         return;
     }
 
-    const ok = !payload.error && payload.access_token;
+    let ok = !payload.error && payload.access_token;
+    let failure = payload.error_description || 'Authorization failed';
+
+    // Optional allowlist, defence in depth.
+    //
+    // The real gate is GitHub: the CMS commits with the signed-in user's own
+    // token, so someone without write access to the repo is refused by GitHub
+    // when they try to save. This check simply turns that into an honest "you
+    // are not on the list" at sign-in, instead of an editor that looks usable
+    // and then 403s on the first save.
+    //
+    // It is NOT a substitute for repo permissions: anyone with write access can
+    // still commit with plain git and bypass the CMS entirely. Manage who can
+    // change the site under Settings > Collaborators; manage who can use this
+    // editor here.
+    //
+    // Set CMS_ALLOWED_USERS to a comma-separated list of GitHub usernames.
+    // Leave it unset to allow anyone with repo write access.
+    const allowlist = (process.env.CMS_ALLOWED_USERS || '')
+        .split(',').map(u => u.trim().toLowerCase()).filter(Boolean);
+
+    if (ok && allowlist.length) {
+        try {
+            const who = await fetch('https://api.github.com/user', {
+                headers: {
+                    Authorization: `Bearer ${payload.access_token}`,
+                    Accept: 'application/vnd.github+json',
+                    'User-Agent': 'green-rising-cms'
+                }
+            });
+            const user = await who.json();
+            const login = (user.login || '').toLowerCase();
+
+            if (!login || !allowlist.includes(login)) {
+                ok = false;
+                failure = `The GitHub account ${user.login || '(unknown)'} is not on the editor allowlist.`;
+            }
+        } catch (err) {
+            ok = false;
+            failure = 'Could not confirm the GitHub account against the allowlist.';
+        }
+    }
+
     const message = ok
         ? `authorization:github:success:${JSON.stringify({ token: payload.access_token, provider: 'github' })}`
-        : `authorization:github:error:${JSON.stringify({ message: payload.error_description || 'Authorization failed' })}`;
+        : `authorization:github:error:${JSON.stringify({ message: failure })}`;
 
     // postMessage back to the opener. Origin is pinned to this deployment so
     // the token is not broadcast to any other page listening.

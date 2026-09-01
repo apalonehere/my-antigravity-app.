@@ -47,8 +47,12 @@ module.exports = (req, res) => {
     const url = new URL('https://github.com/login/oauth/authorize');
     url.searchParams.set('client_id', clientId);
     url.searchParams.set('redirect_uri', `${proto}://${host}/api/callback`);
-    // `repo` is the narrowest scope that still allows committing to a repo.
-    url.searchParams.set('scope', 'repo,user');
+    // public_repo, not repo. `repo` would hand this token access to every
+    // private repository the signer-in owns, which is far more than a content
+    // editor needs. apalonehere/my-antigravity-app is public, so public_repo is
+    // enough to commit to it. If the repo is ever made private, this has to
+    // become `repo` — the CMS will 404 on the repo until it does.
+    url.searchParams.set('scope', 'public_repo');
     url.searchParams.set('state', state);
 
     res.writeHead(302, { Location: url.toString() });
