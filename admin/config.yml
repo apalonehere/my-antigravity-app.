@@ -11,7 +11,7 @@ backend:
   repo: apalonehere/my-antigravity-app
   branch: Update
   # Vercel serverless OAuth handshake — see api/auth.js and api/callback.js
-  base_url: https://green-rising.vercel.app
+  base_url: https://my-antigravity-app-delta.vercel.app
   auth_endpoint: api/auth
 
 # Photos dropped into the CMS land here and are referenced from the site root
@@ -19,7 +19,7 @@ media_folder: images/uploads
 public_folder: /images/uploads
 
 # The editor previews against the live site rather than a mock
-site_url: https://green-rising.vercel.app
+site_url: https://my-antigravity-app-delta.vercel.app
 
 collections:
   - name: impact

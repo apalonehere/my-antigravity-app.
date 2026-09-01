@@ -28,8 +28,8 @@ Vercel accounts, which is yours to do.**
 1. Go to **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
 2. Fill in:
    - **Application name:** `Green Rising Content Admin`
-   - **Homepage URL:** `https://green-rising.vercel.app`
-   - **Authorization callback URL:** `https://green-rising.vercel.app/api/callback`
+   - **Homepage URL:** `https://my-antigravity-app-delta.vercel.app`
+   - **Authorization callback URL:** `https://my-antigravity-app-delta.vercel.app/api/callback`
 3. Click **Register application**
 4. Copy the **Client ID**
 5. Click **Generate a new client secret** and copy it — GitHub shows it once
@@ -51,7 +51,7 @@ Redeploy once so the functions pick them up.
 ## Check the domain
 
 `admin/config.yml` and the OAuth app both assume the site is at
-`https://green-rising.vercel.app`. If the real domain is different, change it in
+`https://my-antigravity-app-delta.vercel.app`. If the real domain is different, change it in
 three places: `base_url` and `site_url` in `admin/config.yml`, and the two URLs
 in the GitHub OAuth app.
 
