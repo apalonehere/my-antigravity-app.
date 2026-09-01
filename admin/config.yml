@@ -9,7 +9,15 @@
 backend:
   name: github
   repo: apalonehere/my-antigravity-app
-  branch: Update
+  # The editor commits here, never straight to the live branch. `Update` is
+  # protected and only accepts pull requests, so nothing reaches the site
+  # without someone merging it.
+  #
+  # Deliberately not publish_mode: editorial_workflow — I could not confirm it
+  # is implemented in the pinned Sveltia build, and a review gate that depends
+  # on an unverified feature is worse than no gate. A separate branch works
+  # whatever the CMS supports.
+  branch: content
   # Vercel serverless OAuth handshake — see api/auth.js and api/callback.js
   base_url: https://my-antigravity-app-delta.vercel.app
   auth_endpoint: api/auth

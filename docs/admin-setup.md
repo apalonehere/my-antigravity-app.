@@ -8,10 +8,21 @@ files in this repository:
 | `content/impact.json` | Youth trained, water conserved, jobs placed, the 2026 target, and the trend chart series |
 | `content/milestones.json` | The milestones timeline on the Impact Hub |
 
-Saving in the editor makes a **commit** to the `Update` branch. Vercel sees the
-commit and redeploys, so the change is live in about a minute. Every edit keeps
-an author, a timestamp and a revert button — that is the main reason this
-approach beats a database for a site that changes occasionally.
+Saving in the editor makes a **commit to the `content` branch** — never straight
+to the live site. Publishing is a second, deliberate step:
+
+1. Someone edits at `/admin` and saves. That commits to `content`.
+2. Vercel builds a **preview deployment** of `content`, so the change can be
+   looked at on a real page before anyone sees it.
+3. Someone opens a pull request from `content` into `Update` and merges it.
+4. Vercel redeploys `Update` and the change is live.
+
+Every edit keeps an author, a timestamp and a revert button, and now nothing
+reaches the public site without a second pair of eyes.
+
+**This costs you a step.** Saving is no longer publishing. If that turns out to
+be friction you do not want, point `branch:` in `admin/config.yml` back at
+`Update` and drop the protection rule — but then any save goes live immediately.
 
 ---
 
@@ -47,6 +58,24 @@ Production (and Preview if you want the editor on preview URLs):
 Redeploy once so the functions pick them up.
 
 ---
+
+## Protecting the live branch
+
+The review gate only exists once `Update` refuses direct pushes. **This needs
+repo admin and has to be done by hand:**
+
+1. Repository **Settings > Branches > Add branch ruleset** (or *Add rule* on
+   older repos)
+2. Target the **`Update`** branch
+3. Enable **Require a pull request before merging**
+4. Optionally set **Required approvals** to 1 — with a single maintainer, leave
+   it at 0 or you will not be able to merge your own PRs
+5. Leave **Do not allow bypassing** unticked unless you want the rule to apply
+   to admins too
+
+Order matters: create the `content` branch and deploy the updated
+`admin/config.yml` **before** turning the rule on. If `Update` is protected
+while the CMS still commits to it, every save fails.
 
 ## Check the domain
 
