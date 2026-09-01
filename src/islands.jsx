@@ -6,14 +6,13 @@
 // vanilla page directly.
 //
 // Usage in index.html:
-//   <div data-island="DotField" data-props='{"speed":0.4}'></div>
+//   <div data-island="StoryScroll" data-props='{"items":[...]}'></div>
 //
 // Register the component below, run `npm run build:islands`, done.
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import DotField from './islands/DotField.jsx';
 import ReefStory from './islands/ReefStory.jsx';
 import TeamRoster from './islands/TeamRoster.jsx';
 
@@ -24,7 +23,6 @@ import TeamRoster from './islands/TeamRoster.jsx';
 // scrolling text column — and reusing it for Eco-Leaders keeps one verified
 // scroll implementation on the Programmes page instead of two competing ones.
 const REGISTRY = {
-  DotField,
   ReefStory,
   StoryScroll: ReefStory,
   TeamRoster

@@ -172,21 +172,21 @@ window.toggleGreenRisingInfo = toggleGreenRisingInfo;
 // content of each reel is confirmed.
 const VIDEO_REELS_DATA = {
     video1: {
-        category: '🚌 Field Trip',
+        category: 'Field Trip',
         title: 'Eco-Ride Bus Trip',
         desc: '',
         videoSrc: '/images/video1.mp4',
         poster: '/images/eco-leaders.jpg'
     },
     video2: {
-        category: '🐟 Conference',
+        category: 'Conference',
         title: 'Aqua-Producers Conference',
         desc: '',
         videoSrc: '/images/video2.mp4',
         poster: '/images/eco-leaders.jpg'
     },
     video3: {
-        category: '🌱 Workshop',
+        category: 'Workshop',
         title: 'Eco-Leaders Workshop',
         desc: '',
         videoSrc: '/images/video3.mp4',

@@ -17,6 +17,13 @@
     --color-primary-light: rgba(5, 150, 105, 0.10);
     /* Primary as small body text: #059669 is only 3.77:1 on white, below WCAG AA */
     --color-primary-text: #047857;
+    /* Filled controls. White on #059669 is 3.77:1 — also below AA — so filled
+       greens use a deeper fill in light mode. In dark mode the fill stays
+       bright and the label goes dark instead, which is both legible (7.5:1)
+       and keeps the control visible against the dark surface. */
+    --color-fill: #047857;
+    --color-fill-ink: #ffffff;
+    --color-fill-hover: #036348;
 
     --color-teal: #0d9488;
     --color-teal-light: rgba(13, 148, 136, 0.10);
@@ -99,6 +106,10 @@
    DARK MODE OVERRIDES (WCAG AAA Contrast Compliant)
    ============================================================ */
 [data-theme="dark"] {
+    --color-fill: #10b981;
+    --color-fill-ink: #071310;
+    --color-fill-hover: #34d399;
+
     --color-bg-dark: #091512;
     --color-bg-mid: #0e1e1a;
     --color-bg-card: #122621;
@@ -498,7 +509,7 @@ h1 {
 }
 
 a {
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     text-decoration: none;
     transition: var(--transition);
 }
@@ -744,8 +755,8 @@ p {
 }
 
 .btn-primary {
-    background: var(--grad-primary);
-    color: #ffffff;
+    background: var(--color-fill);
+    color: var(--color-fill-ink);
     box-shadow: var(--shadow-sm);
     border-radius: var(--radius-md);
 }
@@ -1662,7 +1673,7 @@ p {
 
 .skills-icon {
     background: rgba(5, 150, 105, 0.16);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
 }
 
 .village-icon {
@@ -1694,7 +1705,7 @@ p {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 0.98rem;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -1798,7 +1809,7 @@ p {
 .sub-tab-btn:hover,
 .sub-tab-btn.active {
     background: var(--color-primary-light);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border-color: var(--color-primary);
     transform: scale(1.04);
 }
@@ -1993,7 +2004,7 @@ p {
 }
 
 .matrix-item h4 {
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     margin-bottom: 8px;
     font-size: 1.12rem;
 }
@@ -2028,7 +2039,7 @@ p {
 .accordion-header.active {
     border-color: var(--color-primary);
     background: var(--color-primary-light);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
 }
 
 .accordion-content {
@@ -2138,7 +2149,7 @@ p {
     border-radius: 50%;
     background: var(--color-bg-mid);
     border: 2px solid var(--color-primary);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2158,7 +2169,7 @@ p {
 
 .cohort-badge.open {
     background: rgba(5, 150, 105, 0.14);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border: 1px solid rgba(5, 150, 105, 0.35);
 }
 
@@ -2203,7 +2214,7 @@ p {
 .theme-toggle-btn {
     background: rgba(5, 150, 105, 0.12);
     border: 1.5px solid rgba(5, 150, 105, 0.28);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -2281,7 +2292,7 @@ p {
 .dash-tab-btn:hover,
 .dash-tab-btn.active {
     background: var(--color-primary-light);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border-color: var(--color-primary);
     transform: scale(1.04);
 }
@@ -2325,7 +2336,7 @@ p {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     background: var(--color-primary-light);
     border: 1px solid rgba(5, 150, 105, 0.3);
     margin-bottom: 12px;
@@ -2420,7 +2431,7 @@ p {
     font-family: var(--font-display);
     font-size: 1.9rem;
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     line-height: 1;
 }
 
@@ -2468,7 +2479,7 @@ p {
 
 .dash-trend-badge.positive {
     background: rgba(5, 150, 105, 0.12);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border: 1px solid rgba(5, 150, 105, 0.3);
 }
 
@@ -2616,7 +2627,7 @@ p {
 }
 
 .apply-success-alert h4 {
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     margin-bottom: 12px;
 }
 
@@ -2713,7 +2724,7 @@ p {
 }
 
 .footer-links a:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-text);
 }
 
 .footer-bottom {
@@ -2772,7 +2783,7 @@ p {
 .resource-count-badge {
     font-size: 0.88rem;
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     background: var(--color-primary-light);
     border: 1px solid rgba(5, 150, 105, 0.3);
     padding: 8px 16px;
@@ -2824,7 +2835,7 @@ p {
 .resource-econ-btn:hover,
 .resource-econ-btn.active {
     background: var(--color-primary-light);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border-color: var(--color-primary);
     transform: scale(1.04);
 }
@@ -3136,7 +3147,9 @@ p {
     margin-top: 3px;
     font-size: 0.87rem;
     line-height: 1.45;
-    color: var(--color-text-dim);
+    /* -dim drops to 4.22:1 once the selected card tints its background green;
+       -muted holds AA on both the plain and the tinted ground. */
+    color: var(--color-text-muted);
 }
 
 /* --- steps & footer --- */
@@ -3157,8 +3170,8 @@ p {
     font: inherit;
     font-size: 0.94rem;
     font-weight: 700;
-    color: #ffffff;
-    background: var(--color-primary);
+    color: var(--color-fill-ink);
+    background: var(--color-fill);
     border: 0;
     border-radius: var(--radius-full);
     /* comfortably over the 44px minimum target */
@@ -3167,7 +3180,7 @@ p {
     transition: background-color 180ms ease;
 }
 
-.quiz-primary-btn:hover { background: var(--color-primary-hover); }
+.quiz-primary-btn:hover { background: var(--color-fill-hover); }
 .quiz-primary-btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
 
 .quiz-back-btn,
@@ -3472,7 +3485,7 @@ body.on-admin-view #floating-apply {
 
 .summary-badge {
     background: rgba(5, 150, 105, 0.12);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border: 1px solid rgba(5, 150, 105, 0.3);
     padding: 4px 12px;
     border-radius: 50px;
@@ -3573,7 +3586,7 @@ details[open] .chevron-icon {
 
 .bento-icon-badge.green {
     background: rgba(5, 150, 105, 0.14);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
 }
 
 .bento-icon-badge.blue {
@@ -3593,7 +3606,7 @@ details[open] .chevron-icon {
 
 .bento-pill-tag.green {
     background: rgba(5, 150, 105, 0.12);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border: 1px solid rgba(5, 150, 105, 0.3);
 }
 
@@ -3628,7 +3641,7 @@ details[open] .chevron-icon {
     padding: 4px 12px;
     border-radius: 50px;
     background: rgba(5, 150, 105, 0.08);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border: 1px solid rgba(5, 150, 105, 0.2);
     white-space: nowrap;
 }
@@ -3712,7 +3725,7 @@ details[open] .chevron-icon {
     font-family: var(--font-heading);
     font-size: 0.85rem;
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     background: rgba(5, 150, 105, 0.12);
     padding: 4px 10px;
     border-radius: 50px;
@@ -3772,7 +3785,7 @@ details[open] .chevron-icon {
     padding: 3px 9px;
     border-radius: 50px;
     background: rgba(5, 150, 105, 0.08);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     border: 1px solid rgba(5, 150, 105, 0.2);
     white-space: nowrap;
 }
@@ -4237,15 +4250,15 @@ details[open] .chevron-icon {
 }
 
 .badge-blue {
-    background: #0284c7 !important;
+    background: #0369a1 !important;
 }
 
 .badge-green {
-    background: #059669 !important;
+    background: #047857 !important;
 }
 
 .badge-orange-tag {
-    background: #ea580c !important;
+    background: #c2410c !important;
 }
 
 /* Orange Economy Tag Styling */
@@ -4394,7 +4407,7 @@ details[open] .chevron-icon {
     background: rgba(16, 185, 129, 0.12);
     border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 9999px;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.03em;
@@ -4448,7 +4461,7 @@ details[open] .chevron-icon {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     margin-bottom: 8px;
 }
 
@@ -4527,7 +4540,7 @@ details[open] .chevron-icon {
     height: 38px;
     border-radius: 10px;
     background: rgba(16, 185, 129, 0.15);
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     flex-shrink: 0;
 }
 
@@ -7998,7 +8011,8 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
     background: var(--color-primary-light);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-full);
-    padding: 8px 16px;
+    /* 13px vertical clears the 44px minimum target */
+    padding: 13px 18px;
     cursor: pointer;
     transition: background-color 180ms ease;
 }
@@ -8010,7 +8024,7 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
     position: relative;
     /* currentColor drives the series fill and stroke, so one declaration
        here themes the whole plot in both modes. */
-    color: var(--color-primary);
+    color: var(--color-primary-text);
 }
 
 .impact-svg { display: block; width: 100%; height: auto; }
@@ -8521,3 +8535,65 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
     .reef-story-split { display: none !important; }
     .reef-story-stacked { display: block !important; }
 }
+
+/* ============================================================
+   SKIP LINK
+   Off-screen until focused, then pinned top-left above the
+   sticky header. Never display:none — that removes it from the
+   tab order, which defeats the point.
+   ============================================================ */
+.skip-link {
+    /* fixed, not absolute: a skip link that scrolls away with the page is
+       useless to anyone who tabs into a document already scrolled */
+    position: fixed;
+    left: 12px;
+    top: -80px;
+    white-space: nowrap;
+    z-index: 1000;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-text);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: top 160ms ease;
+}
+
+.skip-link:focus {
+    top: 12px;
+    outline: 3px solid var(--color-text-bright);
+    outline-offset: 2px;
+}
+
+#main-content:focus { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .skip-link { transition: none; }
+}
+
+/* ============================================================
+   INLINE LABEL ICONS
+   Replaced the emoji that used to stand in for icons. These
+   inherit currentColor, so they theme with their label instead
+   of staying whatever colour the platform's emoji font picked.
+   ============================================================ */
+.opt-icon,
+.theme-icon {
+    display: inline-block;
+    vertical-align: -0.15em;
+    flex-shrink: 0;
+    margin-right: 2px;
+}
+
+.login-lock {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    color: var(--color-primary-text);
+}
+
+/* The pathway buttons sit outside the intro's reading measure — five
+   labelled controls need the full column, not 62ch. */
+.pathway-selector-wrap { width: 100%; }
+.pathway-selector-wrap .pathway-selector-grid { display: flex; justify-content: flex-start; }

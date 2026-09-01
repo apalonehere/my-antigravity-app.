@@ -170,6 +170,8 @@ export default function ReefStory({ items = [], compare }) {
               key={`m_${i}`}
               src={item.media}
               alt={item.alt}
+              loading="lazy"
+              decoding="async"
               style={{ objectPosition: item.focus || 'center' }}
               initial={{ opacity: i === 0 ? 1 : 0 }}
               animate={{ opacity: active === i ? 1 : 0 }}
