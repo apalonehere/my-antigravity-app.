@@ -164,10 +164,13 @@
                     <p class="text-lg text-neutral-200 max-w-xl mb-8">
                         Restore reefs. Cut water waste. Launch climate businesses. Become a part of Green Rising.
                     </p>
-                    <button
-                        class="pointer-events-auto cursor-pointer px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
+                    <!-- A link, not a button: it navigates. The router
+                         delegates on internal hrefs, so this updates the URL
+                         and still supports middle-click and open-in-new-tab. -->
+                    <a href="/quiz"
+                        class="pointer-events-auto cursor-pointer inline-block no-underline px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
                         Find your pathway
-                    </button>
+                    </a>
                 </div>
             </section>
 
@@ -1082,160 +1085,167 @@
         </section>
 
         <!-- 4. ELIGIBILITY MATCH QUIZ VIEW -->
-        <section id="view-quiz" class="app-view quiz-section-container">
-            <div class="quiz-bg-overlay"></div>
-            <div class="container max-width-700 quiz-inner-wrap">
-                <!-- Header Content -->
-                <div class="quiz-header-block text-center">
-                    <div class="quiz-sub-badge-wrap">
-                        <span class="quiz-logo-tagline">PROGRAMME MATCHER</span>
-                        <span class="quiz-sub-badge">FIND YOUR PATHWAY</span>
-                    </div>
-                    <h1 class="quiz-main-title">Which Green Rising programme is right for you?</h1>
-                    <p class="quiz-subtitle">
-                        Three questions. We'll match you to the pathway that fits.
-                    </p>
-                </div>
+        <!-- ============================================================
+             MATCH QUIZ.
+             Was a photo-backed hero with a green wash, two competing
+             badges and a heavy floating card. It now uses the same
+             editorial grammar as the team roster and the Impact Hub —
+             eyebrow, headline, standfirst, plain surface — so the answer
+             card is the only thing asking for attention.
 
-                <!-- Floating Quiz Card Container -->
-                <div class="quiz-floating-card" id="quiz-card">
-                    <!-- Progress Bar & Counter Header -->
-                    <div class="quiz-card-header" id="quiz-card-header">
-                        <div class="quiz-counter-text" id="quiz-counter-text">QUESTION 1 OF 3</div>
-                        <div class="quiz-progress-bar">
-                            <div class="quiz-progress-step active" id="prog-step-1"></div>
-                            <div class="quiz-progress-step" id="prog-step-2"></div>
-                            <div class="quiz-progress-step" id="prog-step-3"></div>
+             Each step is a <fieldset> with the question as its <legend>,
+             so the radios are announced as one group rather than three
+             loose controls.
+             ============================================================ -->
+        <section id="view-quiz" class="app-view">
+            <div class="container quiz-shell">
+                <header class="quiz-intro">
+                    <span class="quiz-eyebrow">Programme Matcher</span>
+                    <h2 class="quiz-headline">Which programme is right for you?</h2>
+                    <p class="quiz-standfirst">Three questions, about a minute. We'll point you at the pathway
+                        that fits and you can apply straight from the answer.</p>
+                </header>
+
+                <div class="quiz-card" id="quiz-card">
+                    <div class="quiz-card-header">
+                        <p class="quiz-counter" id="quiz-counter-text" aria-live="polite">Question 1 of 3</p>
+                        <div class="quiz-progress" role="presentation">
+                            <span class="quiz-progress-step active" id="prog-step-1"></span>
+                            <span class="quiz-progress-step" id="prog-step-2"></span>
+                            <span class="quiz-progress-step" id="prog-step-3"></span>
                         </div>
                     </div>
 
-                    <!-- Quiz Step 1 -->
+                    <!-- Step 1 -->
                     <div class="quiz-step-pane active" id="q-step-1">
-                        <h2 class="quiz-question-title">What is your age group?</h2>
-                        <div class="quiz-options-list">
-                            <label class="quiz-option-card selected" onclick="selectQuizOption(this)">
-                                <input type="radio" name="age-group" value="kids" checked>
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Ages 10 – 13</span>
-                                    <span class="quiz-opt-subtitle">Junior Rising · discovery &amp; eco-clubs</span>
-                                </div>
-                            </label>
+                        <fieldset class="quiz-fieldset">
+                            <legend class="quiz-question">How old are you?</legend>
+                            <div class="quiz-options-list">
+                                <label class="quiz-option-card selected">
+                                    <input type="radio" name="age-group" value="kids" checked>
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">10 – 13</span>
+                                        <span class="quiz-opt-subtitle">Junior Rising &middot; discovery &amp;
+                                            eco-clubs</span>
+                                    </span>
+                                </label>
 
-                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
-                                <input type="radio" name="age-group" value="teens">
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Ages 14 – 17</span>
-                                    <span class="quiz-opt-subtitle">Teen Rising · skills &amp; mentorship</span>
-                                </div>
-                            </label>
+                                <label class="quiz-option-card">
+                                    <input type="radio" name="age-group" value="teens">
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">14 – 17</span>
+                                        <span class="quiz-opt-subtitle">Teen Rising &middot; skills &amp;
+                                            mentorship</span>
+                                    </span>
+                                </label>
 
-                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
-                                <input type="radio" name="age-group" value="youth">
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Ages 18 – 29</span>
-                                    <span class="quiz-opt-subtitle">GreenPath · training &amp; job placement</span>
-                                </div>
-                            </label>
-                        </div>
-
-                        <!-- Footer Controls -->
-                        <div class="quiz-footer-controls">
-                            <a href="#programmes" class="quiz-skip-btn" onclick="switchView('programmes')">Skip for
-                                now</a>
-                            <button class="btn quiz-primary-btn" onclick="quizNext(2)">Next Question &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- Quiz Step 2 -->
-                    <div class="quiz-step-pane hidden" id="q-step-2">
-                        <h2 class="quiz-question-title">What is your primary goal or area of interest?</h2>
-                        <div class="quiz-options-list">
-                            <label class="quiz-option-card selected" onclick="selectQuizOption(this)">
-                                <input type="radio" name="interest" value="water" checked>
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Water Resource Preservation</span>
-                                    <span class="quiz-opt-subtitle">Water Conservation · community leak checks &amp;
-                                        rainwater harvesting</span>
-                                </div>
-                            </label>
-
-                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
-                                <input type="radio" name="interest" value="marine">
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Maritime &amp; Marine Heritage</span>
-                                    <span class="quiz-opt-subtitle">Tomorrow's Reef · underwater ocean heritage &amp;
-                                        reef restoration</span>
-                                </div>
-                            </label>
-                        </div>
-
-                        <!-- Footer Controls -->
-                        <div class="quiz-footer-controls">
-                            <button class="btn btn-secondary quiz-back-btn" onclick="quizNext(1)">&larr; Back</button>
-                            <button class="btn quiz-primary-btn" onclick="quizNext(3)">Next Question &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- Quiz Step 3 -->
-                    <div class="quiz-step-pane hidden" id="q-step-3">
-                        <h2 class="quiz-question-title">What is your current education or employment status?</h2>
-                        <div class="quiz-options-list">
-                            <label class="quiz-option-card selected" onclick="selectQuizOption(this)">
-                                <input type="radio" name="status" value="school" checked>
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Enrolled in Primary / Secondary School</span>
-                                    <span class="quiz-opt-subtitle">Eco-Explorers &amp; Youth Clubs</span>
-                                </div>
-                            </label>
-
-                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
-                                <input type="radio" name="status" value="sjpi">
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Technical / Vocational Student (SJPI)</span>
-                                    <span class="quiz-opt-subtitle">Hands-on technical craft &amp; marine
-                                        engineering</span>
-                                </div>
-                            </label>
-
-                            <label class="quiz-option-card" onclick="selectQuizOption(this)">
-                                <input type="radio" name="status" value="neet">
-                                <div class="custom-radio-indicator"></div>
-                                <div class="quiz-opt-content">
-                                    <span class="quiz-opt-title">Seeking Employment / Out of School (NEET)</span>
-                                    <span class="quiz-opt-subtitle">Green economy job placement &amp;
-                                        micro-grants</span>
-                                </div>
-                            </label>
-                        </div>
-
-                        <!-- Footer Controls -->
-                        <div class="quiz-footer-controls">
-                            <button class="btn btn-secondary quiz-back-btn" onclick="quizNext(2)">&larr; Back</button>
-                            <button class="btn quiz-primary-btn" onclick="processQuizResults()">Find My Match
-                                &rarr;</button>
-                        </div>
-                    </div>
-
-                    <!-- Quiz Results -->
-                    <div class="quiz-result-pane hidden" id="q-result">
-                        <div class="matched-header-badge text-center mb-15">YOUR RECOMMENDED PATHWAY</div>
-                        <div class="matched-box glass text-center p-25">
-                            <div class="matched-title text-accent" id="matched-title">Tomorrow's Reef: Marine Heritage
+                                <label class="quiz-option-card">
+                                    <input type="radio" name="age-group" value="youth">
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">18 – 29</span>
+                                        <span class="quiz-opt-subtitle">GreenPath &middot; training &amp; job
+                                            placement</span>
+                                    </span>
+                                </label>
                             </div>
-                            <p class="mt-15" id="matched-description">Based on your interests, you qualify for our ocean
-                                heritage and reef conservation initiatives.</p>
+                        </fieldset>
+
+                        <div class="quiz-footer-controls">
+                            <a href="/programmes" class="quiz-skip-btn">Skip for now</a>
+                            <button type="button" class="quiz-primary-btn" onclick="quizNext(2)">Next</button>
                         </div>
-                        <div class="text-center mt-25 flex-center gap-15">
-                            <button class="btn btn-secondary" onclick="resetQuiz()">Retake Quiz</button>
-                            <button class="btn quiz-primary-btn" id="quiz-cta"
-                                onclick="openApplyForm('tomorrowsreef')">Apply to this Programme</button>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="quiz-step-pane hidden" id="q-step-2">
+                        <fieldset class="quiz-fieldset">
+                            <legend class="quiz-question">What do you want to work on?</legend>
+                            <div class="quiz-options-list">
+                                <label class="quiz-option-card selected">
+                                    <input type="radio" name="interest" value="water" checked>
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">Water resources</span>
+                                        <span class="quiz-opt-subtitle">Community leak checks &amp; rainwater
+                                            harvesting</span>
+                                    </span>
+                                </label>
+
+                                <label class="quiz-option-card">
+                                    <input type="radio" name="interest" value="marine">
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">The sea</span>
+                                        <span class="quiz-opt-subtitle">Tomorrow's Reef &middot; ocean heritage &amp;
+                                            reef restoration</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <div class="quiz-footer-controls">
+                            <button type="button" class="quiz-back-btn" onclick="quizNext(1)">Back</button>
+                            <button type="button" class="quiz-primary-btn" onclick="quizNext(3)">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="quiz-step-pane hidden" id="q-step-3">
+                        <fieldset class="quiz-fieldset">
+                            <legend class="quiz-question">Where are you right now?</legend>
+                            <div class="quiz-options-list">
+                                <label class="quiz-option-card selected">
+                                    <input type="radio" name="status" value="school" checked>
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">At primary or secondary school</span>
+                                        <span class="quiz-opt-subtitle">Eco-Explorers &amp; youth clubs</span>
+                                    </span>
+                                </label>
+
+                                <label class="quiz-option-card">
+                                    <input type="radio" name="status" value="sjpi">
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">Technical or vocational student</span>
+                                        <span class="quiz-opt-subtitle">Hands-on craft &amp; marine
+                                            engineering</span>
+                                    </span>
+                                </label>
+
+                                <label class="quiz-option-card">
+                                    <input type="radio" name="status" value="neet">
+                                    <span class="custom-radio-indicator" aria-hidden="true"></span>
+                                    <span class="quiz-opt-content">
+                                        <span class="quiz-opt-title">Out of school, looking for work</span>
+                                        <span class="quiz-opt-subtitle">Job placement &amp; micro-grants</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <div class="quiz-footer-controls">
+                            <button type="button" class="quiz-back-btn" onclick="quizNext(2)">Back</button>
+                            <button type="button" class="quiz-primary-btn"
+                                onclick="processQuizResults()">See my match</button>
+                        </div>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="quiz-result-pane hidden" id="q-result">
+                        <span class="quiz-result-eyebrow">Your recommended pathway</span>
+                        <h3 class="quiz-result-title" id="matched-title">Tomorrow's Reef: Marine Heritage &amp;
+                            Conservation</h3>
+                        <p class="quiz-result-body" id="matched-description">Based on your interests, you qualify for
+                            our ocean heritage and reef conservation initiatives.</p>
+
+                        <div class="quiz-footer-controls quiz-result-actions">
+                            <button type="button" class="quiz-back-btn" onclick="resetQuiz()">Start over</button>
+                            <button type="button" class="quiz-primary-btn" id="quiz-cta"
+                                onclick="openApplyForm('tomorrowsreef')">Apply to this programme</button>
                         </div>
                     </div>
                 </div>

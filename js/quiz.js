@@ -32,25 +32,42 @@ const quizQuestions = [
     }
 ];
 
+// Selection used to be an onclick on each <label>. Clicking worked, but
+// arrow keys — the native way to move between radios in a group — change
+// `checked` without ever firing that click, so the .selected highlight
+// stayed on the previous option while the answer had already moved. The
+// visible state and the real answer disagreed.
+//
+// Listening for `change` on the radios themselves covers every route in:
+// click, tap, arrow keys, and programmatic changes.
+function syncQuizSelection(radio) {
+    if (!radio) return;
+    const card = radio.closest('.quiz-option-card');
+    const list = radio.closest('.quiz-options-list');
+    if (!list || !card) return;
+    list.querySelectorAll('.quiz-option-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+}
+
+function initQuizOptions() {
+    document.querySelectorAll('.quiz-options-list input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => syncQuizSelection(radio));
+    });
+    // Reflect whatever is checked in the markup on first paint.
+    document.querySelectorAll('.quiz-options-list input[type="radio"]:checked')
+        .forEach(syncQuizSelection);
+}
+
+// Kept for any inline handler still calling it.
 function selectQuizOption(labelEl) {
     if (!labelEl) return;
-    const parentContainer = labelEl.closest('.quiz-options-list');
-    if (parentContainer) {
-        parentContainer.querySelectorAll('.quiz-option-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-    }
-    labelEl.classList.add('selected');
-    const radioInput = labelEl.querySelector('input[type="radio"]');
-    if (radioInput) {
-        radioInput.checked = true;
-    }
+    syncQuizSelection(labelEl.querySelector('input[type="radio"]'));
 }
 
 function quizNext(step) {
     const counterEl = document.getElementById('quiz-counter-text');
     if (counterEl) {
-        counterEl.innerText = `QUESTION ${step} OF 3`;
+        counterEl.innerText = `Question ${step} of 3`;
     }
 
     // Update Segmented Progress Bar
@@ -91,7 +108,7 @@ function processQuizResults() {
 
     const counterEl = document.getElementById('quiz-counter-text');
     if (counterEl) {
-        counterEl.innerText = 'MATCH COMPLETE';
+        counterEl.innerText = 'Match complete';
     }
 
     // Activate all 3 progress bar segments
@@ -141,11 +158,20 @@ function processQuizResults() {
     }
 }
 
+// "Start over" has to actually start over. This used to rewind to question 1
+// while leaving the previous answers selected, so the button's label was a
+// lie — you were resuming, not restarting. defaultChecked is whatever the
+// markup declared, which keeps the HTML the single source of truth.
 function resetQuiz() {
+    document.querySelectorAll('.quiz-options-list input[type="radio"]').forEach(radio => {
+        radio.checked = radio.defaultChecked;
+        if (radio.checked) syncQuizSelection(radio);
+    });
     quizNext(1);
 }
 
 window.selectQuizOption = selectQuizOption;
+window.initQuizOptions = initQuizOptions;
 window.quizNext = quizNext;
 window.processQuizResults = processQuizResults;
 window.resetQuiz = resetQuiz;

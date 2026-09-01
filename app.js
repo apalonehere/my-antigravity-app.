@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     boot('navigation', typeof initNavigation === 'function' ? initNavigation : null);
     boot('mobile menu', typeof initMobileMenu === 'function' ? initMobileMenu : null);
     boot('programme sub-tabs', typeof initProgrammeSubTabs === 'function' ? initProgrammeSubTabs : null);
+    boot('quiz options', typeof initQuizOptions === 'function' ? initQuizOptions : null);
     boot('resources hub', typeof initResourcesHub === 'function' ? initResourcesHub : null);
     boot('impact metrics', typeof initImpactMetrics === 'function' ? initImpactMetrics : null);
     boot('schedules', typeof initSchedulesModule === 'function' ? initSchedulesModule : null);
