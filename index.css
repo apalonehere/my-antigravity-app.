@@ -6737,6 +6737,19 @@ body {
     box-sizing: border-box;
 }
 
+/* A non-visible overflow on <body> makes body a scroll container that never
+   actually scrolls, so `position: sticky` descendants resolve against it and
+   never stick — that is what stopped the reef story's media column.
+   Freed only from 900px up, which is exactly where the sticky split is active.
+   Below that the mobile nav drawer sits off-canvas at translateX(100%) and
+   body must keep clipping it, but the split is display:none there and no
+   sticky is in play. The two never need the same thing at the same width. */
+@media (min-width: 900px) {
+    body {
+        overflow-x: visible !important;
+    }
+}
+
 *,
 *::before,
 *::after {
@@ -9020,18 +9033,16 @@ body {
 }
 
 /* Content must sit above the canvas. The app views and header already
-   establish their own stacking; this guarantees it. */
+   establish their own stacking; this guarantees it.
+   .floating-apply-btn and .reel-modal-overlay are deliberately NOT listed:
+   both are already position: fixed with their own z-index, and forcing
+   position: relative here dropped the Apply button out of its fixed corner
+   and into the top of the document flow. */
 body > header,
 body > main,
-body > footer,
-.floating-apply-btn,
-.reel-modal-overlay {
+body > footer {
     position: relative;
     z-index: 1;
-}
-
-.reel-modal-overlay {
-    z-index: 9999;
 }
 
 /* ============================================================
@@ -9053,3 +9064,404 @@ body .mt-40 { margin-top: 40px; }
 body .mb-5 { margin-bottom: 5px; }
 body .mb-10 { margin-bottom: 10px; }
 body .mb-20 { margin-bottom: 20px; }
+
+/* ============================================================
+   TOMORROW'S REEF - full-bleed split story
+   Replaces the earlier pinned-sequence layout, which boxed the
+   two portrait photos (1280x1920) into a landscape frame: only
+   507px of a 1258px frame was image, the other 751px letterbox.
+   Media now fills a tall column that runs to the screen edge,
+   and text keeps a readable measure beside it.
+   ============================================================ */
+
+.reef-intro { max-width: 62ch; margin: 0 0 26px; }
+
+.reef-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary-text);
+    margin-bottom: 10px;
+}
+
+.reef-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    color: var(--color-text-bright);
+    text-wrap: balance;
+}
+
+.reef-standfirst {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* --- film --- */
+.reef-film { margin: 0 0 44px; }
+
+.reef-film-trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-lg, 16px);
+    overflow: hidden;
+    cursor: pointer;
+    background: #05100d;
+    line-height: 0;
+}
+
+.reef-film-trigger img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (hover: hover) {
+    .reef-film-trigger:hover img { transform: scale(1.03); }
+}
+
+.reef-film-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #0b231e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.reef-film-meta {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    padding: 6px 12px;
+    border-radius: 100px;
+    line-height: 1.4;
+}
+
+.reef-film-trigger:focus-visible {
+    outline: 3px solid var(--color-primary-text);
+    outline-offset: 3px;
+}
+
+/* --- full-bleed break-out ---
+   The section sits inside .container (max-width 1540px, 36px padding).
+   This escapes it, for this section only. */
+.reef-fullbleed {
+    /* --sbw is the measured scrollbar width, published by js/reef.js. Without
+       subtracting it, a 100vw element overhangs the visible area by the
+       scrollbar width and sits half of it off each edge. */
+    width: calc(100vw - var(--sbw, 0px));
+    margin-left: calc(50% - 50vw + var(--sbw, 0px) / 2);
+    margin-right: calc(50% - 50vw + var(--sbw, 0px) / 2);
+    overflow-x: clip;
+}
+
+/* --- split: sticky media + scrolling text --- */
+.reef-story-stacked { display: block; }
+.reef-story-split { display: none; }
+
+@media (min-width: 900px) {
+    .reef-story-stacked { display: none; }
+
+    .reef-story-split {
+        display: grid;
+        grid-template-columns: 52fr 48fr;
+        align-items: start;
+        gap: 0;
+    }
+}
+
+.reef-story-media {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    background: #05100d;
+}
+
+.reef-story-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: opacity;
+}
+
+.reef-story-counter {
+    position: absolute;
+    left: 26px;
+    bottom: 24px;
+    z-index: 2;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(6px);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-variant-numeric: tabular-nums;
+}
+
+.reef-story-text {
+    padding: 42vh clamp(28px, 5vw, 76px) 42vh;
+}
+
+.reef-beat {
+    max-width: 46ch;
+    margin: 0 0 34vh;
+}
+
+.reef-beat:last-child { margin-bottom: 0; }
+
+.reef-beat-step {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--color-primary-text);
+    margin-bottom: 10px;
+}
+
+.reef-beat-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 2.4vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+    color: var(--color-text-bright);
+    text-wrap: balance;
+}
+
+/* Direct selectors, never inherited: a bare `p { color: ... }` rule in this
+   stylesheet outranks any colour inherited from an ancestor. That is what made
+   the previous captions dark navy on a dark scrim. */
+.reef-beat-body,
+.reef-beat-note {
+    font-size: 1.02rem;
+    line-height: 1.62;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.reef-beat-note {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+}
+
+.reef-beat--stacked {
+    max-width: none;
+    margin: 0 0 44px;
+    padding: 0 clamp(16px, 5vw, 36px);
+}
+
+.reef-beat--stacked img {
+    width: 100%;
+    height: min(68vh, 460px);
+    object-fit: cover;
+    border-radius: var(--radius-lg, 16px);
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* --- interactive blocks --- */
+.reef-interactive {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px clamp(16px, 5vw, 36px) 0;
+}
+
+.reef-interactive-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    margin: 0 0 4px;
+    color: var(--color-text-bright);
+}
+
+.reef-interactive-hint {
+    margin: 0 0 16px;
+    font-size: 0.86rem;
+    color: var(--color-text-dim);
+}
+
+.reef-compare {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-lg, 16px);
+    overflow: hidden;
+    touch-action: pan-y;
+    cursor: ew-resize;
+    background: #05100d;
+    user-select: none;
+}
+
+.reef-compare-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.reef-compare-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(-50%);
+    z-index: 3;
+    cursor: ew-resize;
+}
+
+.reef-compare-grip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    color: #0b231e;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.reef-compare-handle:focus-visible {
+    outline: 3px solid var(--color-primary-text);
+    outline-offset: 4px;
+}
+
+.reef-compare-tag {
+    position: absolute;
+    bottom: 14px;
+    z-index: 2;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    padding: 5px 11px;
+    border-radius: 100px;
+}
+
+.reef-compare-tag--left { left: 14px; }
+.reef-compare-tag--right { right: 14px; }
+
+/* --- facts + partners --- */
+.reef-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin: 56px 0 34px;
+}
+
+.reef-fact {
+    padding-left: 14px;
+    border-left: 2px solid rgba(5, 150, 105, 0.32);
+}
+
+[data-theme="dark"] .reef-fact {
+    border-left-color: rgba(16, 185, 129, 0.4);
+}
+
+.reef-fact h3 {
+    margin: 0 0 5px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-text-bright);
+}
+
+.reef-fact p {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+}
+
+.reef-partners-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    margin: 0 0 10px;
+}
+
+.reef-partners-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.reef-partners-list li {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: rgba(5, 150, 105, 0.08);
+    border: 1px solid rgba(5, 150, 105, 0.18);
+    border-radius: 100px;
+    padding: 6px 14px;
+}
+
+[data-theme="dark"] .reef-partners-list li {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.24);
+}
+
+@media (max-width: 640px) {
+    .reef-film-play { width: 58px; height: 58px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reef-film-trigger img {
+        transition: none;
+    }
+
+    .reef-film-trigger:hover img {
+        transform: none;
+    }
+
+    .reef-story-media {
+        position: static;
+        height: auto;
+        min-height: 60vh;
+    }
+}

@@ -742,327 +742,150 @@
 
                 <!-- SUB-VIEW: Tomorrow's Reef -->
                 <div id="prog-tomorrowsreef" class="prog-detail-pane active">
-                    <!-- Full-Page Fixed Artwork Background Overlay Layer -->
-                    <div class="reef-fullpage-bg-layer"></div>
 
-                    <!-- Main Content Wrapper Layer -->
-                    <div class="reef-main-content-wrapper">
-                        <!-- Fluid Top Banner Header Section -->
-                        <div class="tomorrows-reef-header">
-                            <div class="header-content-layer">
-                                <span class="reef-badge-pill">Focus Area 1 · Marine Heritage & Blue Economy</span>
-                                <h2>Tomorrow's Reef</h2>
-                                <p class="lead">Barbados' First Youth-Designed Underwater Heritage Reef & Founding
-                                    Installation of the Oceana Innovation Hub Underwater Museum.</p>
+                    <!-- ============================================================
+                         TOMORROW'S REEF — full-bleed visual story.
+                         The previous layout boxed portrait photos into a landscape
+                         frame (60% letterbox) and stopped at the 1540px container,
+                         leaving the sides of wide screens empty. Media now runs to
+                         the screen edge; text keeps a readable measure beside it.
+                         ============================================================ -->
 
-                                <!-- Campaign Theme Quote Badge -->
-                                <div class="reef-campaign-pill">
-                                    <span class="reef-campaign-badge">Campaign Theme</span>
-                                    <strong class="reef-campaign-quote">"Designed by Barbados. Growing for
-                                        Tomorrow."</strong>
-                                </div>
+                    <header class="reef-intro">
+                        <span class="reef-eyebrow">Tomorrow's Reef</span>
+                        <h2 class="reef-headline">They designed a reef before they built one.</h2>
+                        <p class="reef-standfirst">
+                            Barbados marks 60 years of Independence with a permanent underwater monument —
+                            sculpted by young Barbadians, sunk off Carlisle Bay, and left for the coral to
+                            finish.
+                        </p>
+                    </header>
 
-                                <!-- HIGH-IMPACT HORIZONTAL KEY INFO BAR / STATS ROW -->
-                                <div class="reef-key-info-bar glass">
-                                    <div class="info-bar-item">
-                                        <div class="info-icon-wrapper green">📅</div>
-                                        <div class="info-text-group">
-                                            <span class="info-label">Proposed Unveiling Date</span>
-                                            <strong class="info-value">Friday, Nov 27, 2026</strong>
-                                            <span class="info-sub">60th Independence & 5th Republic Year</span>
-                                        </div>
-                                    </div>
+                    <figure class="reef-film">
+                        <button type="button" class="reef-film-trigger" onclick="openReefFilm()"
+                            aria-label="Play the Tomorrow's Reef film, 2 minutes 6 seconds">
+                            <img src="images/reef/reef-film-poster.jpg"
+                                alt="Clay reef maquettes lined up on a workbench at the Tomorrow's Reef workshop"
+                                loading="lazy" decoding="async">
+                            <span class="reef-film-play" aria-hidden="true">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                                </svg>
+                            </span>
+                            <span class="reef-film-meta" aria-hidden="true">Watch the film · 2:06</span>
+                        </button>
+                    </figure>
 
-                                    <div class="info-bar-divider"></div>
-
-                                    <div class="info-bar-item">
-                                        <div class="info-icon-wrapper blue">📍</div>
-                                        <div class="info-text-group">
-                                            <span class="info-label">Location & Waters</span>
-                                            <strong class="info-value">Carlisle Bay Marine Reserve</strong>
-                                            <span class="info-sub">Oceana Innovation Hub Waters</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-bar-divider"></div>
-
-                                    <div class="info-bar-item">
-                                        <div class="info-icon-wrapper teal">🪸</div>
-                                        <div class="info-text-group">
-                                            <span class="info-label">Target Reach & Impact</span>
-                                            <strong class="info-value">300+ Youth & Divers</strong>
-                                            <span class="info-sub">50–100 Blue Ambassadors & BCC Artists</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="info-bar-divider"></div>
-
-                                    <div class="info-bar-item">
-                                        <div class="info-icon-wrapper orange">🎨</div>
-                                        <div class="info-text-group">
-                                            <span class="info-label">Lead Design Partner</span>
-                                            <strong class="info-value">BCC Fine Arts Programme</strong>
-                                            <span class="info-sub">Student & Faculty Sculptors</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- OVERVIEW & LANDMARK VISION (Collapsible Progressive Disclosure Accordion) -->
-                        <div class="reef-overview-section mt-25">
-                            <details class="reef-accordion glass" open>
-                                <summary class="reef-accordion-header">
-                                    <div class="summary-title-group">
-                                        <span class="summary-badge">Landmark Vision</span>
-                                        <h3>Overview & Landmark Independence Vision</h3>
-                                    </div>
-                                    <div class="summary-toggle-icon">
-                                        <span class="toggle-text">Toggle Details</span>
-                                        <svg class="chevron-icon" viewBox="0 0 24 24" width="20" height="20">
-                                            <path fill="currentColor"
-                                                d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
-                                        </svg>
-                                    </div>
-                                </summary>
-                                <div class="reef-accordion-content">
-                                    <div class="grid-2col gap-24 align-center">
-                                        <div>
-                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">
-                                                Barbados turns <strong>60</strong> in 2026 — and marks 5 years a
-                                                Republic. <strong>Tomorrow’s Reef</strong> marks it too: a permanent
-                                                underwater monument, built by youth.</p>
-                                        </div>
-                                        <div>
-                                            <p style="margin: 0; line-height: 1.65; color: var(--color-text-bright);">
-                                                <strong>Barbados Community College (BCC) Fine Arts</strong> students and
-                                                faculty are building it. It goes down off the coast in pH-neutral
-                                                marine concrete. Corals move in. Public art becomes a living reef.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </details>
-                        </div>
-
-                        <!-- 4 KEY PILLARS (Responsive Bento Grid) -->
-                        <div class="reef-bento-section mt-30">
-                            <div class="section-header-inline flex-between align-center mb-20 flex-wrap gap-10">
-                                <div>
-                                    <span class="category-tag">Strategic Foundation</span>
-                                    <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Key Pillars & Impact Dimensions
-                                    </h3>
-                                </div>
-                                <span class="small text-muted">Visual Bento Layout</span>
-                            </div>
-
-                            <div class="reef-bento-grid">
-                                <!-- Bento Card 1: Hero Primary Ecological Pillar -->
-                                <div class="bento-card bento-hero bento-span-7 glass">
-                                    <div class="bento-header flex-between align-center mb-15">
-                                        <div class="bento-icon-badge green">🪸</div>
-                                        <span class="bento-pill-tag green">Primary Ecological Goal</span>
-                                    </div>
-                                    <h4>Environmental Restoration & Habitat Recovery</h4>
-                                    <p>Restores degraded marine habitats, accelerates coral recruitment, and creates an
-                                        active subsea monitoring site for marine scientists and the Coastal Zone
-                                        Management Unit (CZMU).</p>
-                                    <div class="bento-chips-footer mt-15">
-                                        <span class="bento-chip">🪸 Coral Recruitment</span>
-                                        <span class="bento-chip">🔬 Subsea Telemetry</span>
-                                        <span class="bento-chip">🏗️ Marine Concrete</span>
-                                    </div>
-                                </div>
-
-                                <!-- Bento Card 2: Youth Empowerment -->
-                                <div class="bento-card bento-span-5 glass">
-                                    <div class="bento-header flex-between align-center mb-15">
-                                        <div class="bento-icon-badge blue">🎨</div>
-                                        <span class="bento-pill-tag blue">Youth Leadership</span>
-                                    </div>
-                                    <h4>Youth Empowerment & Artistry</h4>
-                                    <p>Places young Barbadians at the center of the blue economy as designers,
-                                        sculptors, environmental ambassadors, and ocean storytellers.</p>
-                                    <div class="bento-chips-footer mt-15">
-                                        <span class="bento-chip">🎨 BCC Fine Arts Residency</span>
-                                        <span class="bento-chip">🌊 50–100 Ambassadors</span>
-                                    </div>
-                                </div>
-
-                                <!-- Bento Card 3: Cultural Legacy -->
-                                <div class="bento-card bento-span-5 glass">
-                                    <div class="bento-header flex-between align-center mb-15">
-                                        <div class="bento-icon-badge gold">🇧🇧</div>
-                                        <span class="bento-pill-tag gold">60th Independence</span>
-                                    </div>
-                                    <h4>Cultural Legacy & Heritage</h4>
-                                    <p>Celebrates 60 years of Independence with motifs honoring Barbadian
-                                        identity—featuring the Broken Trident, coral stone architecture, and indigenous
-                                        marine fauna.</p>
-                                    <div class="bento-chips-footer mt-15">
-                                        <span class="bento-chip">🔱 Broken Trident</span>
-                                        <span class="bento-chip">🏛️ Coral Architecture</span>
-                                    </div>
-                                </div>
-
-                                <!-- Bento Card 4: Sustainable Tourism -->
-                                <div class="bento-card bento-teal bento-span-7 glass">
-                                    <div class="bento-header flex-between align-center mb-15">
-                                        <div class="bento-icon-badge teal">🌊</div>
-                                        <span class="bento-pill-tag teal">Eco-Tourism Destination</span>
-                                    </div>
-                                    <h4>Sustainable Tourism & Underwater Museum</h4>
-                                    <p>Establishes the founding installation of the Oceana Innovation Hub Underwater
-                                        Museum, creating a premier eco-tourism landmark for international divers and
-                                        marine researchers.</p>
-                                    <div class="bento-chips-footer mt-15">
-                                        <span class="bento-chip">🤿 Underwater Museum</span>
-                                        <span class="bento-chip">🎟️ Eco-Tourism</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PROJECT COMPONENTS (Horizontal Interactive Stepper / Timeline) -->
-                        <div class="reef-stepper-section mt-35">
-                            <div class="section-header-inline mb-20">
-                                <span class="category-tag">Implementation Roadmap</span>
-                                <h3 class="mt-5 mb-0" style="font-size: 1.6rem;">Phased Project Component Timeline</h3>
-                            </div>
-
-                            <div class="reef-stepper-container glass p-30">
-                                <div class="stepper-track-line"></div>
-                                <div class="stepper-grid">
-                                    <!-- Step 1 -->
-                                    <div class="stepper-card">
-                                        <div class="step-badge">
-                                            <span class="step-num">01</span>
-                                            <span class="step-dot"></span>
-                                        </div>
-                                        <div class="step-time">June – August 2026</div>
-                                        <h4>BCC Design & Sculpture Residency</h4>
-                                        <p>Fine Arts students & faculty collaborate with sculptors and marine engineers
-                                            to produce drawings, scale models, and reef-safe sculptures.</p>
-                                        <div class="step-tags mt-10">
-                                            <span class="step-chip">🎨 Scale Modeling</span>
-                                            <span class="step-chip">🔨 Sculptural Craft</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Step 2 -->
-                                    <div class="stepper-card">
-                                        <div class="step-badge">
-                                            <span class="step-num">02</span>
-                                            <span class="step-dot"></span>
-                                        </div>
-                                        <div class="step-time">August – Sept 2026</div>
-                                        <h4>Fabrication & Coral Out-Planting</h4>
-                                        <p>Marine concrete fabrication engineered for wave resilience. Subsea deployment
-                                            followed by targeted coral out-planting with CZMU.</p>
-                                        <div class="step-tags mt-10">
-                                            <span class="step-chip">🏗️ Concrete Casting</span>
-                                            <span class="step-chip">🪸 Coral Planting</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Step 3 -->
-                                    <div class="stepper-card">
-                                        <div class="step-badge">
-                                            <span class="step-num">03</span>
-                                            <span class="step-dot"></span>
-                                        </div>
-                                        <div class="step-time">July – Nov 2026</div>
-                                        <h4>Youth Blue Ambassadors Programme</h4>
-                                        <p>Training 50–100 young leaders in marine conservation, reef telemetry
-                                            monitoring, and climate advocacy via Oceana Blue Curriculum.</p>
-                                        <div class="step-tags mt-10">
-                                            <span class="step-chip">🌊 50–100 Ambassadors</span>
-                                            <span class="step-chip">📊 Reef Literacy</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Step 4 -->
-                                    <div class="stepper-card active-step">
-                                        <div class="step-badge highlight">
-                                            <span class="step-num">04</span>
-                                            <span class="step-dot"></span>
-                                        </div>
-                                        <div class="step-time gold">November 27, 2026</div>
-                                        <h4>National Unveiling & Exhibition</h4>
-                                        <p>Official launch featuring Prime Minister Mottley, UNICEF, international
-                                            development partners, and cultural leaders.</p>
-                                        <div class="step-tags mt-10">
-                                            <span class="step-chip gold">👑 Prime Minister Launch</span>
-                                            <span class="step-chip gold">🇧🇧 60th Independence</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- STRATEGIC PARTNERS (Monochrome Logo Grid) -->
-                        <div class="reef-partners-section mt-35">
-                            <div class="glass p-30">
-                                <div class="flex-between align-center mb-20 wrap-gap">
-                                    <div>
-                                        <span class="category-tag">Collaborators</span>
-                                        <h3 class="mt-5 mb-0" style="font-size: 1.4rem;">Strategic & Media Partners</h3>
-                                    </div>
-                                    <span class="small text-muted">Cross-Sector Institutional Alliance</span>
-                                </div>
-
-                                <div class="reef-partner-logo-grid">
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">🏛️</span>
-                                        <span class="tile-name">Government of Barbados</span>
-                                    </div>
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">🇺🇳</span>
-                                        <span class="tile-name">UNICEF</span>
-                                    </div>
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">🌊</span>
-                                        <span class="tile-name">Oceana Innovation Hub</span>
-                                    </div>
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">🎓</span>
-                                        <span class="tile-name">Barbados Community College</span>
-                                    </div>
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">🏝️</span>
-                                        <span class="tile-name">Coastal Zone Management Unit</span>
-                                    </div>
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">🌿</span>
-                                        <span class="tile-name">National Conservation Commission</span>
-                                    </div>
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">🏫</span>
-                                        <span class="tile-name">UWI Cave Hill Campus</span>
-                                    </div>
-                                    <div class="partner-logo-tile">
-                                        <span class="tile-icon">📡</span>
-                                        <span class="tile-name">CBC & Barbados GIS</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- TOMORROW'S REEF CTA BANNER -->
-                        <div class="eco-village-cta-banner glass mt-30">
-                            <div class="cta-content">
-                                <h3>Join the Youth Blue Ambassadors & Sculptural Legacy</h3>
-                                <p>Apply to become one of the 50–100 Youth Blue Ambassadors or collaborate on Tomorrow's
-                                    Reef today.</p>
-                            </div>
-                            <div class="cta-actions">
-                                <button class="btn btn-primary" onclick="openApplyForm('tomorrowsreef')">Apply / Get
-                                    Involved &rarr;</button>
-                            </div>
+                    <!-- The story. Mounted as a React island (21st.dev Scroll 01,
+                         adapted). The markup below it is the no-JS fallback: if the
+                         bundle never loads, every photo and every caption is still
+                         on the page and readable. -->
+                    <div class="reef-fullbleed">
+                        <div data-island="ReefStory" data-props='{
+                                "items": [
+                                    {
+                                        "title": "It starts with a question about the water",
+                                        "body": "The first session opens on a slide: what human activity in the area affects marine ecosystems? Golf courses. Runoff. The answers come from the room, not the front of it.",
+                                        "media": "images/reef/reef-01-learn.jpg",
+                                        "alt": "A facilitator presenting to seated participants beneath a slide asking what human activity affects marine ecosystems",
+                                        "focus": "center 40%"
+                                    },
+                                    {
+                                        "title": "Then they argue about the answer",
+                                        "body": "Sketchpads out, markers uncapped. Before anyone touches clay the group has to agree what a reef built by Barbadians should even look like.",
+                                        "media": "images/reef/reef-02-discuss.jpg",
+                                        "alt": "Participants at a long desk talking over open sketchpads and markers",
+                                        "focus": "center 35%"
+                                    },
+                                    {
+                                        "title": "Everyone starts from the same lump",
+                                        "body": "Same clay, same tools, same hour. What comes out of it is where people stop being alike.",
+                                        "media": "images/reef/reef-10-pair.jpg",
+                                        "alt": "Two participants sitting side by side at a window, each shaping a small clay figure",
+                                        "focus": "center 42%"
+                                    },
+                                    {
+                                        "title": "Then it has to hold its own weight",
+                                        "body": "Clay is less forgiving than paper. A shape that worked as a drawing has to stand up, take a base, and survive being moved.",
+                                        "media": "images/reef/reef-04-shape.jpg",
+                                        "alt": "A young woman in an apron and headphones shaping a piece of clay in her hands",
+                                        "focus": "center 40%"
+                                    },
+                                    {
+                                        "title": "Not all of it is coral",
+                                        "body": "Faces turned up alongside the reef forms. A monument for sixty years of Independence was always going to be about people as much as habitat.",
+                                        "media": "images/reef/reef-09-face.jpg",
+                                        "alt": "Hands finishing the features on a small clay head, a second head resting behind it on the board",
+                                        "focus": "center 45%"
+                                    },
+                                    {
+                                        "title": "Some of it outgrew the table",
+                                        "body": "Pieces stopped being palm-sized. Figures started climbing structures that needed both hands and a plan.",
+                                        "media": "images/reef/reef-11-scale.jpg",
+                                        "alt": "A participant smiling as she places a small clay figure onto a much larger clay structure",
+                                        "focus": "center 35%"
+                                    },
+                                    {
+                                        "title": "Every table, a different reef",
+                                        "body": "No two came out the same. The final sculpture draws on the room, not on one person.",
+                                        "media": "images/reef/reef-05-room.jpg",
+                                        "alt": "Wide view of the workshop room with participants modelling clay at every table",
+                                        "focus": "center 45%"
+                                    },
+                                    {
+                                        "title": "This one goes in the sea",
+                                        "body": "The maquette becomes the plan. Barbados Community College Fine Arts students and faculty scale it up in pH-neutral marine concrete, and it goes down off Carlisle Bay.",
+                                        "media": "images/reef/reef-06-maquette.jpg",
+                                        "alt": "A finished clay maquette built from coiled strands, resembling a branching coral",
+                                        "focus": "center 50%"
+                                    }
+                                ],
+                                "compare": {
+                                    "title": "Drawing to object",
+                                    "before": "images/reef/reef-03-sketch.jpg",
+                                    "after": "images/reef/reef-08-structure.jpg",
+                                    "beforeAlt": "Pencil sketches of coral forms across an open sketchbook",
+                                    "afterAlt": "A built clay structure of arches and platforms, the sketchbook still open beside it",
+                                    "beforeLabel": "Drawn",
+                                    "afterLabel": "Built"
+                                }
+                            }'>
+                            <!-- Fallback: visible without JavaScript -->
+                            <noscript>
+                                <p class="reef-standfirst">Photographs from the Tomorrow's Reef design workshop.</p>
+                            </noscript>
                         </div>
                     </div>
-                </div>
 
+                    <section class="reef-facts" aria-label="About the project">
+                        <div class="reef-fact">
+                            <h3>The landmark</h3>
+                            <p>Sixty years of Independence, marked underwater rather than on a plinth.</p>
+                        </div>
+                        <div class="reef-fact">
+                            <h3>The heritage</h3>
+                            <p>Motifs drawn from Barbadian identity — the Broken Trident, coral stone
+                                architecture, native marine life.</p>
+                        </div>
+                        <div class="reef-fact">
+                            <h3>Where it lands</h3>
+                            <p>Carlisle Bay Marine Reserve, in the waters off the Oceana Innovation Hub.</p>
+                        </div>
+                    </section>
+
+                    <section class="reef-partners" aria-label="Partners">
+                        <h3 class="reef-partners-label">Partners</h3>
+                        <ul class="reef-partners-list">
+                            <li>Government of Barbados</li>
+                            <li>UNICEF</li>
+                            <li>Oceana Innovation Hub</li>
+                            <li>Barbados Community College</li>
+                            <li>Coastal Zone Management Unit</li>
+                            <li>National Conservation Commission</li>
+                        </ul>
+                    </section>
+
+                </div>
                 <!-- SUB-VIEW: Climate Dash x Climate Ninja Throwdown & Eco-Village -->
                 <div id="prog-ecovillage" class="prog-detail-pane">
                     <!-- Fixed Full-Bleed Backdrop Overlay Layer -->
@@ -2669,6 +2492,8 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
     <script src="js/motion.js" defer></script>
     <script src="js/background.js" defer></script>
+    <!-- After GSAP (needs ScrollTrigger) and after app.js (reuses the reel modal) -->
+    <script src="js/reef.js" defer></script>
 
     <!-- React islands (js/islands.js, built from src/ by `npm run build:islands`).
          The bundle is ~475KB gzipped because it carries React + Three + R3F, so

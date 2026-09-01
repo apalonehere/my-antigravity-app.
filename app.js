@@ -179,15 +179,27 @@ const REEL_ORDER = ['video1', 'video2', 'video3'];
 
 function updateReelCounter() {
     const el = document.getElementById('modal-reel-count');
+    const nav = document.querySelector('.reel-nav');
     if (!el) return;
+
     const i = REEL_ORDER.indexOf(currentReelKey);
-    el.textContent = `${(i < 0 ? 0 : i) + 1} / ${REEL_ORDER.length}`;
+
+    // Other videos open in this same modal (the Tomorrow's Reef film, for one).
+    // They are not part of the reel run, so hide the counter and the arrows
+    // rather than showing a misleading "1 / 3" and stepping into the reels.
+    if (i < 0) {
+        if (nav) nav.style.display = 'none';
+        return;
+    }
+    if (nav) nav.style.display = '';
+    el.textContent = `${i + 1} / ${REEL_ORDER.length}`;
 }
 
 // Move between reels without closing the modal — wraps at both ends
 function stepVideoModal(delta) {
     const i = REEL_ORDER.indexOf(currentReelKey);
-    const next = REEL_ORDER[(((i < 0 ? 0 : i) + delta) % REEL_ORDER.length + REEL_ORDER.length) % REEL_ORDER.length];
+    if (i < 0) return; // not in the reel run; nothing to step through
+    const next = REEL_ORDER[((i + delta) % REEL_ORDER.length + REEL_ORDER.length) % REEL_ORDER.length];
     openVideoModal(next);
 }
 window.stepVideoModal = stepVideoModal;

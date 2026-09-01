@@ -49,8 +49,12 @@
 
     function resize() {
         dpr = Math.min(window.devicePixelRatio || 1, 2);
-        w = window.innerWidth;
-        h = window.innerHeight;
+        // clientWidth, not innerWidth: innerWidth includes the scrollbar gutter
+        // and diverges from the visible area under zoom or device emulation.
+        // Sizing the canvas from it made the canvas wider than the page and
+        // introduced horizontal scroll.
+        w = document.documentElement.clientWidth;
+        h = document.documentElement.clientHeight;
         canvas.width = Math.floor(w * dpr);
         canvas.height = Math.floor(h * dpr);
         canvas.style.width = w + 'px';

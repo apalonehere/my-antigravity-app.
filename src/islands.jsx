@@ -14,10 +14,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import DotField from './islands/DotField.jsx';
+import ReefStory from './islands/ReefStory.jsx';
 
 // Every component that may be mounted from markup
 const REGISTRY = {
-  DotField
+  DotField,
+  ReefStory
 };
 
 function mountAll() {
