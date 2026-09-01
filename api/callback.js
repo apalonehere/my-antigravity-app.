@@ -5,8 +5,8 @@
 // opened this one. The token never touches a query string or a log line.
 
 module.exports = async (req, res) => {
-    const clientId = process.env.GITHUB_CLIENT_ID;
-    const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+    const clientId = (process.env.GITHUB_CLIENT_ID || '').trim();
+    const clientSecret = (process.env.GITHUB_CLIENT_SECRET || '').trim();
 
     if (!clientId || !clientSecret) {
         res.status(500).send('GitHub OAuth is not configured on this deployment. See docs/admin-setup.md.');

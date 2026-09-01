@@ -14,9 +14,25 @@
 const crypto = require('crypto');
 
 module.exports = (req, res) => {
-    const clientId = process.env.GITHUB_CLIENT_ID;
+    const clientId = (process.env.GITHUB_CLIENT_ID || '').trim();
+
     if (!clientId) {
         res.status(500).send('GITHUB_CLIENT_ID is not set on this deployment. See docs/admin-setup.md.');
+        return;
+    }
+
+    // A real GitHub client ID has no spaces — newer ones look like Ov23li...,
+    // older ones are 20 hex characters. Without this check, placeholder text
+    // pasted into the env var sails through to GitHub, which answers with a
+    // bare 404 that says nothing about the cause. Fail here, legibly, instead.
+    if (/\s/.test(clientId) || clientId.length < 10) {
+        res.status(500).send(
+            'GITHUB_CLIENT_ID does not look like a GitHub client ID. It is currently ' +
+            JSON.stringify(clientId) + ' — which is placeholder text, not an ID. ' +
+            'Set it to the Client ID shown on your OAuth app page ' +
+            '(GitHub > Settings > Developer settings > OAuth Apps), then redeploy. ' +
+            'See docs/admin-setup.md.'
+        );
         return;
     }
 
