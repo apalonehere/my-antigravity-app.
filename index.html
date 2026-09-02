@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Green Rising Barbados - Future Barbados Youth Climate Engine. Empowering youth through Tomorrow's Reef underwater museum and hands-on marine restoration.">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
     <title>Green Rising Barbados | Future Barbados Youth Climate Engine</title>
     <!-- Google Fonts: Outfit (Headings) and Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,8 +34,12 @@
         <div class="header-container">
             <!-- Logo -->
             <a href="/" class="logo-lockup" id="nav-logo" onclick="navigateTo('/', true)">
-                <img src="/images/logo.png" alt="Green Rising Barbados" class="header-logo-img"
-                    onerror="this.style.display='none';" width="1024" height="1024">
+                <!-- The mark only. images/logo.png is the full lockup — it carries its
+                     own "GREEN RISING BARBADOS" wordmark, which duplicated the text
+                     beside it and was illegible at 54px, and it is a JPEG behind a
+                     .png name so it had no transparency and rendered as a dark tile. -->
+                <img src="/images/logo-mark.png" alt="Green Rising Barbados" class="header-logo-img"
+                    onerror="this.style.display='none';" width="256" height="279">
                 <div class="brand-text-block">
                     <span class="brand-name">GREEN RISING</span>
                     <span class="brand-subtitle-header">Youth Climate Engine</span>

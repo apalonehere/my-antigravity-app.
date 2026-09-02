@@ -1034,11 +1034,12 @@ p {
 }
 
 .header-logo-img {
-    height: 54px;
+    height: 44px;
     width: auto;
     object-fit: contain;
-    border-radius: 12px;
-    filter: drop-shadow(0 3px 10px rgba(5, 150, 105, 0.25));
+    /* No border-radius and no drop-shadow. Both existed to make an opaque
+       JPEG square read as a deliberate tile; the mark is transparent now, so
+       rounding clipped its corners and the glow haloed empty space. */
     transition: var(--transition);
 }
 
