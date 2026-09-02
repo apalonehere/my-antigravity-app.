@@ -5218,35 +5218,6 @@ body {
     box-shadow: 0 0 30px rgba(6, 182, 212, 0.9);
 }
 
-.reel-duration-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    padding: 3px 10px;
-    border-radius: 50px;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(8px);
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
-.reel-views-tag {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 3px 10px;
-    border-radius: 50px;
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(8px);
-    color: #e2e8f0;
-    font-size: 0.72rem;
-    font-weight: 600;
-}
-
 .reel-info-body {
     padding: 18px 20px;
 }
@@ -8624,49 +8595,29 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 
 /* ============================================================
    REEL THUMBNAILS
-   The reels are phone-shot 9:16. They were being contained inside
-   a 16:9 box, so about two thirds of every thumbnail was black
-   bar. Cropping to fill would have solved that but cut the
-   lower-third captions off the bottom of the frame.
+   The reels are phone-shot 9:16 and the box was 16:9, so a
+   contained frame left about two thirds of every thumbnail as
+   black bar. A blurred backdrop was tried first and was worse —
+   dark frame edges blurred into mush that still read as bars.
 
-   So the whole frame is kept, and the space around it is filled
-   with a blurred, enlarged copy of the same image — the standard
-   video-platform treatment. It is the same file, served from
-   cache, so it costs no extra request.
+   Cropping to fill turns out to cost nothing that matters. A 3/4
+   box keeps the middle 75% of a 9:16 frame, and the captions that
+   were the reason for avoiding a crop sit comfortably inside it —
+   checked against all three posters before committing to it.
    ============================================================ */
 .reel-thumbnail-wrap {
     position: relative;
     width: 100%;
-    /* Leaning portrait, because the source is 9:16. At 4:3 the poster held
-       only 42% of the width and the rest was filler; at 3:4 it holds about
-       three quarters and the blurred edge reads as a deliberate border. A
-       true 9:16 box would fit exactly but makes the cards ~730px tall. */
     aspect-ratio: 3 / 4;
     overflow: hidden;
     background: #0b1512;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.reel-thumb-backdrop {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* scaled past the edges so the blur has no soft border of its own */
-    transform: scale(1.25);
-    filter: blur(22px) saturate(1.3) brightness(0.72);
-    pointer-events: none;
 }
 
 .reel-thumb-video {
-    position: relative;
+    width: 100%;
     height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    display: block;
     pointer-events: none;
     transition: transform 400ms var(--ease-standard);
 }
