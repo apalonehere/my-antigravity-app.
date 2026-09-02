@@ -12,7 +12,6 @@ const resourcesData = [
         date: "June 2026",
         summary: "Ideas. Innovation. Action. Young people from across Barbados came together under UNICEF Eastern Caribbean to share their vision for a sustainable future through the Eco-Leaders: Ideas to Impact Workshop.",
         imageUrl: "/images/eco-leaders.jpg",
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/images/eco-leaders.jpg') center/cover no-repeat",
         link: "https://www.instagram.com/p/DZbEuNSD4ht/",
         actionLabel: "Watch on Instagram"
     },
@@ -26,7 +25,6 @@ const resourcesData = [
         date: "June 2025",
         summary: "$3M for Barbadian youth — funding and skills. From PM Mia Mottley, UNICEF and Generation Unlimited.",
         imageUrl: "/images/barbados-today-launch.jpg",
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/images/barbados-today-launch.jpg') center/cover no-repeat",
         link: "https://barbadostoday.bb/2025/06/21/green-rising-initiative-to-empower-12-000-youth-in-climate-action/",
         actionLabel: "Read on Barbados Today"
     },
@@ -40,7 +38,6 @@ const resourcesData = [
         date: "June 2025",
         summary: "Mornin' Barbados interview featuring Tamaisha Eytle-Harvey (Future Barbados) and Nadi Albino (UNICEF) detailing climate entrepreneurship, youth advocacy, and community action programs.",
         imageUrl: "/images/youtube-interview-thumb.jpg",
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/images/youtube-interview-thumb.jpg') center/cover no-repeat",
         link: "https://www.youtube.com/watch?v=KTyOGM3BBoU",
         actionLabel: "Watch on YouTube"
     },
@@ -53,8 +50,9 @@ const resourcesData = [
         readTime: "Official Feed • 21 Posts",
         date: "Live Feed",
         summary: "Follow the official Green Rising Barbados Instagram channel (@greenrisingbarbados) for live cohort updates, youth climate action stories, event announcements, and island-wide field highlights.",
-        imageUrl: "/images/logo.png",
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/images/logo.png') center/contain no-repeat",
+        imageUrl: "/images/brand/6-GR-Logo-White.svg",
+        fit: "contain",
+        thumbBg: "linear-gradient(135deg, #047857 0%, #0d9488 100%)",
         link: "https://www.instagram.com/greenrisingbarbados/",
         actionLabel: "Follow on Instagram"
     },
@@ -68,7 +66,6 @@ const resourcesData = [
         date: "June 2025",
         summary: "UNICEF's launch release. 5,000 Barbadian youth, green & blue business grants, environmental training. Announced by PM Mia Mottley.",
         imageUrl: "/images/Unicef green rising launch.png",
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/images/Unicef green rising launch.png') center/cover no-repeat",
         link: "https://www.unicef.org/easterncaribbean/press-releases/barbados-launches-national-green-rising-programme-lead-youth-driven-climate-action",
         actionLabel: "Read on UNICEF"
     },
@@ -82,7 +79,6 @@ const resourcesData = [
         date: "March 2026",
         summary: "GenU's flagship report. COP28 to COP30, 45 million young people, 40+ countries.",
         imageUrl: "/images/Green Rising History .png",
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/images/Green Rising History .png') center/cover no-repeat",
         link: "https://www.generationunlimited.org/green-rising-reflecting-results-reimagining-future",
         actionLabel: "Read GenU Report"
     },
@@ -96,7 +92,6 @@ const resourcesData = [
         date: "June 2026",
         summary: "Student leaders from across Barbados gathered for The Presidents' Caucus (@bnsc_official) to explore student voice, leadership in motion, and hands-on school community action.",
         imageUrl: "/images/Student Leadership.png",
-        imageBg: "linear-gradient(180deg, rgba(6, 20, 18, 0.25) 0%, rgba(6, 20, 18, 0.65) 100%), url('/images/Student Leadership.png') center/cover no-repeat",
         link: "https://www.instagram.com/p/DaA850VxKg6/",
         actionLabel: "Watch on Instagram"
     }
@@ -281,11 +276,27 @@ function renderResources() {
 
         const actionLabel = item.actionLabel || defaultLabel;
         const key = iconKeyFor(item);
-        const isPlayable = key === 'video' || key === 'instagram';
+        // Being on Instagram does not make it a video. The reel says "Watch";
+        // the channel says "Follow", and a play button over a profile link
+        // promises something the click does not deliver.
+        const cats = Array.isArray(item.category) ? item.category : [item.category];
+        const isPlayable = cats.includes('video') || /^watch/i.test(item.actionLabel || '');
 
+        // Photographs are cropped to fill and darkened so the badges stay
+        // legible over them. A logo is neither: `contain` keeps it whole, and
+        // the dark scrim is dropped because there is no busy image to subdue.
+        const fit = item.fit === 'contain' ? 'contain' : 'cover';
+        const ground = item.thumbBg || 'linear-gradient(135deg, #059669 0%, #0d9488 100%)';
+        const scrim = fit === 'cover'
+            ? 'linear-gradient(180deg, rgba(6, 20, 18, 0.35) 0%, rgba(6, 20, 18, 0.75) 100%), '
+            : '';
+
+        // content-box on the contained layer keeps the logo clear of the
+        // platform and economy badges; the ground still fills the whole thumb.
+        const box = fit === 'contain' ? ' content-box' : '';
         const thumbStyle = item.imageUrl
-            ? `background: linear-gradient(180deg, rgba(6, 20, 18, 0.35) 0%, rgba(6, 20, 18, 0.75) 100%), url('${item.imageUrl}') center/cover no-repeat;`
-            : `background: ${item.imageBg || 'linear-gradient(135deg, #059669 0%, #0d9488 100%)'};`;
+            ? `background: ${scrim}url('${item.imageUrl}') center/${fit} no-repeat${box}, ${ground} border-box;`
+            : `background: ${ground};`;
 
         // One link per card, stretched over the whole card by CSS. Keeps the
         // card a single tab stop and a single 44px+ target, instead of a
