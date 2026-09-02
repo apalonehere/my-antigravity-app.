@@ -5178,16 +5178,6 @@ body {
     border-color: rgba(6, 182, 212, 0.5);
 }
 
-.reel-thumbnail-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .reel-thumb-img {
     width: 100%;
@@ -5196,19 +5186,8 @@ body {
     transition: transform 450ms ease;
 }
 
-.reel-thumb-video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain !important;
-    background: #000;
-    pointer-events: none;
-    transition: transform 450ms ease;
-}
 
 .reel-card:hover .reel-thumb-img,
-.reel-card:hover .reel-thumb-video {
-    transform: scale(1.04);
-}
 
 .reel-overlay-gradient {
     position: absolute;
@@ -6041,24 +6020,8 @@ body {
     border-color: rgba(6, 182, 212, 0.4);
 }
 
-.reel-thumbnail-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #0f172a;
-    overflow: hidden;
-}
 
-.reel-thumb-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 400ms var(--ease-standard);
-}
 
-.reel-card:hover .reel-thumb-video {
-    transform: scale(1.08);
-}
 
 .reel-overlay-gradient {
     position: absolute;
@@ -8657,4 +8620,60 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
     .logo-lockup.logo-intro .logo-mark-arrow { animation: none; }
     .logo-mark-arrow { transition: none; }
     .logo-lockup:hover .logo-mark-arrow { transform: none; }
+}
+
+/* ============================================================
+   REEL THUMBNAILS
+   The reels are phone-shot 9:16. They were being contained inside
+   a 16:9 box, so about two thirds of every thumbnail was black
+   bar. Cropping to fill would have solved that but cut the
+   lower-third captions off the bottom of the frame.
+
+   So the whole frame is kept, and the space around it is filled
+   with a blurred, enlarged copy of the same image — the standard
+   video-platform treatment. It is the same file, served from
+   cache, so it costs no extra request.
+   ============================================================ */
+.reel-thumbnail-wrap {
+    position: relative;
+    width: 100%;
+    /* Leaning portrait, because the source is 9:16. At 4:3 the poster held
+       only 42% of the width and the rest was filler; at 3:4 it holds about
+       three quarters and the blurred edge reads as a deliberate border. A
+       true 9:16 box would fit exactly but makes the cards ~730px tall. */
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #0b1512;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reel-thumb-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* scaled past the edges so the blur has no soft border of its own */
+    transform: scale(1.25);
+    filter: blur(22px) saturate(1.3) brightness(0.72);
+    pointer-events: none;
+}
+
+.reel-thumb-video {
+    position: relative;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    transition: transform 400ms var(--ease-standard);
+}
+
+.reel-card:hover .reel-thumb-video { transform: scale(1.04); }
+
+@media (prefers-reduced-motion: reduce) {
+    .reel-thumb-video { transition: none; }
+    .reel-card:hover .reel-thumb-video { transform: none; }
 }
