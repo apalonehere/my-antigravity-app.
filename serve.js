@@ -2,6 +2,7 @@
 //
 //   node serve.js            -> http://localhost:8080
 //   node serve.js 3000       -> http://localhost:3000
+//   PORT=3000 node serve.js  -> http://localhost:3000
 //
 // Mirrors the vercel.json rewrite: any extensionless path that is not a real
 // file falls back to index.html, so the client-side router handles deep links
@@ -14,7 +15,12 @@ const fs = require('fs');
 const path = require('path');
 
 const root = __dirname;
-const port = Number(process.argv[2]) || 8080;
+
+// An explicit argument wins, then PORT, then the default. PORT is what lets a
+// tool start this server on a port it picked: with 8080 taken by a copy that
+// is already running, hardcoding the default meant the second instance died
+// on EADDRINUSE instead of moving over one.
+const port = Number(process.argv[2]) || Number(process.env.PORT) || 8080;
 
 const types = {
   '.html': 'text/html; charset=utf-8',
