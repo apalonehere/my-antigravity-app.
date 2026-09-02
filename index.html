@@ -72,7 +72,8 @@
                         <li><a href="/team" class="nav-link" data-tab="team">Team</a></li>
                         <li><a href="/dashboard" class="nav-link" data-tab="dashboard">Impact Hub</a></li>
                         <li><a href="/resources" class="nav-link" data-tab="resources">Resources</a></li>
-                        <li><a href="/quiz" class="nav-link" data-tab="quiz">Match Quiz</a></li>
+                        <li><a href="/quiz" class="nav-link" data-tab="quiz">Quiz</a></li>
+                        <li><a href="/play" class="nav-link" data-tab="play">Play</a></li>
                         <li class="admin-only" style="display: none;"><a href="/admin" class="nav-link nav-admin-link"
                                 data-tab="admin"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
                                     style="margin-right: 4px; vertical-align: text-bottom;">
@@ -92,6 +93,22 @@
                         <path fill="currentColor"
                             d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3Z" />
                     </svg><span class="theme-text">Dark Mode</span>
+                </button>
+
+                <!-- Sound On / Off. Icon only, because the header is already
+                     full at laptop widths, and because a speaker with a line
+                     through it is understood without a label. js/sound.js
+                     fills in the icon and the aria-label for the current
+                     state; it starts off. -->
+                <button class="sound-toggle-pill" id="header-sound-toggle" type="button"
+                    aria-pressed="false" aria-label="Sound off. Turn sound on" title="Sound off. Turn sound on">
+                    <svg class="sound-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M11 5 6 9H2v6h4l5 4V5Z"></path>
+                        <path d="m17 9 4 6"></path>
+                        <path d="m21 9-4 6"></path>
+                    </svg>
                 </button>
 
                 <!-- Mobile Hamburger Menu Toggle -->
@@ -1419,13 +1436,96 @@
                             <button type="button" class="quiz-back-btn" onclick="resetQuiz()">Start over</button>
                             <button type="button" class="quiz-primary-btn" id="quiz-cta"
                                 onclick="openApplyForm('tomorrowsreef')">Apply to this programme</button>
+                            <a href="/play" class="quiz-skip-btn">Or play the eco arcade</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. APPLICATION MODAL / SECTION -->
+        <!-- 5. ECO ARCADE (Trivia / Waste sorting / Memory match) -->
+        <!-- The stages below are filled by js/play.js. A game is nothing
+             without its script, so there is no static fallback board here,
+             only a line saying what is missing if the file fails to load. -->
+        <section id="view-play" class="app-view">
+            <div class="container play-shell">
+                <header class="play-intro">
+                    <span class="play-eyebrow">Eco Arcade</span>
+                    <h2 class="play-headline">Learn it, then play it.</h2>
+                    <p class="play-standfirst">Three short games built on the same material our programmes teach.
+                        Trivia is written for your age group. Everything you score is kept in this browser.</p>
+                </header>
+
+                <div class="play-scoreboard">
+                    <div class="play-score-figure">
+                        <span class="play-score-value" id="play-total-points">0</span>
+                        <span class="play-score-label">Eco points</span>
+                    </div>
+                    <div class="play-badge-block">
+                        <p class="play-badge-head">Badges <span id="play-badge-count">0 of 7</span></p>
+                        <div class="play-badges" id="play-badge-strip"></div>
+                    </div>
+                    <button type="button" class="play-reset-btn" id="play-reset-btn">Reset progress</button>
+                </div>
+
+                <div class="play-tabs" role="tablist" aria-label="Choose a game">
+                    <button type="button" class="play-tab active" role="tab" id="play-tab-trivia"
+                        aria-controls="play-panel-trivia" aria-selected="true" data-game="trivia">
+                        <span class="play-tab-title">Climate Trivia</span>
+                        <span class="play-tab-sub">Six questions, by age group</span>
+                    </button>
+                    <button type="button" class="play-tab" role="tab" id="play-tab-sort" tabindex="-1"
+                        aria-controls="play-panel-sort" aria-selected="false" data-game="sort">
+                        <span class="play-tab-title">Sort It</span>
+                        <span class="play-tab-sub">Beat the 60 second clock</span>
+                    </button>
+                    <button type="button" class="play-tab" role="tab" id="play-tab-memory" tabindex="-1"
+                        aria-controls="play-panel-memory" aria-selected="false" data-game="memory">
+                        <span class="play-tab-title">Reef Memory</span>
+                        <span class="play-tab-sub">Match the pairs, unlock the facts</span>
+                    </button>
+                </div>
+
+                <div class="play-panel active" id="play-panel-trivia" role="tabpanel" aria-labelledby="play-tab-trivia">
+                    <div class="play-card" id="trivia-stage">
+                        <p class="play-fallback">The trivia game needs JavaScript. Turn it on and reload to play.</p>
+                    </div>
+                </div>
+
+                <div class="play-panel" id="play-panel-sort" role="tabpanel" aria-labelledby="play-tab-sort" hidden>
+                    <div class="play-card" id="sort-stage">
+                        <p class="play-fallback">The sorting game needs JavaScript. Turn it on and reload to play.</p>
+                    </div>
+                </div>
+
+                <div class="play-panel" id="play-panel-memory" role="tabpanel" aria-labelledby="play-tab-memory" hidden>
+                    <div class="play-card" id="memory-stage">
+                        <p class="play-fallback">The memory game needs JavaScript. Turn it on and reload to play.</p>
+                    </div>
+                </div>
+
+                <!-- Leaderboard. js/leaderboard.js decides at load time
+                     whether this is the shared board or this browser's own,
+                     and says which in #play-lb-scope rather than leaving the
+                     visitor to guess. -->
+                <section class="play-leaderboard" id="play-leaderboard" aria-labelledby="play-lb-title">
+                    <header class="play-lb-header">
+                        <h3 class="play-lb-title" id="play-lb-title">Leaderboard</h3>
+                        <p class="play-lb-scope" id="play-lb-scope">Your own table, kept in this browser.</p>
+                    </header>
+                    <div class="play-lb-chips" id="play-lb-chips" role="group" aria-label="Choose a board"></div>
+                    <div id="play-lb-body" aria-live="polite">
+                        <p class="play-lb-empty">Play a round to start the board.</p>
+                    </div>
+                </section>
+
+                <p class="play-footnote">Ready for the real thing? The
+                    <a href="/quiz">match quiz</a> points you at a programme, and
+                    <a href="/apply">applications</a> are open.</p>
+            </div>
+        </section>
+
+        <!-- 6. APPLICATION MODAL / SECTION -->
         <section id="view-apply" class="app-view">
             <div class="container max-width-800">
                 <!-- Get Involved Pathways Selector -->
@@ -1537,7 +1637,7 @@
             </div>
         </section>
 
-        <!-- 6. MEET THE TEAM VIEW -->
+        <!-- 7. MEET THE TEAM VIEW -->
         <section id="view-team" class="app-view">
 
             <!-- ============================================================
@@ -1649,7 +1749,7 @@
             </div>
         </section>
 
-        <!-- 7. PASSKEY PIN LOGIN VIEW -->
+        <!-- 8. PASSKEY PIN LOGIN VIEW -->
         <section id="view-login" class="app-view">
             <div class="container max-width-600">
                 <div class="glass p-40 text-center"
@@ -1676,7 +1776,7 @@
             </div>
         </section>
 
-        <!-- 8. ADMIN PORTAL VIEW -->
+        <!-- 9. ADMIN PORTAL VIEW -->
         <section id="view-admin" class="app-view" style="display: none;">
             <div class="container max-width-1100" style="padding-top: 30px; padding-bottom: 60px;">
                 <!-- Header Banner -->
@@ -2020,6 +2120,10 @@
     <script src="/js/dashboard.js"></script>
     <script src="/js/impact-chart.js"></script>
     <script src="/js/quiz.js"></script>
+    <script src="/js/sound.js"></script>
+    <script src="/js/boards.js"></script>
+    <script src="/js/leaderboard.js"></script>
+    <script src="/js/play.js"></script>
     <script src="/js/apply.js"></script>
     <script src="/js/resources.js"></script>
     <script src="/js/admin-tabs.js"></script>

@@ -31,11 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // last published numbers.
     boot('published content', typeof loadPublishedContent === 'function' ? loadPublishedContent : null);
     boot('theme', typeof initTheme === 'function' ? initTheme : null);
+    boot('ui sound', typeof initSoundEffects === 'function' ? initSoundEffects : null);
     boot('logo intro', typeof initLogoIntro === 'function' ? initLogoIntro : null);
     boot('navigation', typeof initNavigation === 'function' ? initNavigation : null);
     boot('mobile menu', typeof initMobileMenu === 'function' ? initMobileMenu : null);
     boot('programme sub-tabs', typeof initProgrammeSubTabs === 'function' ? initProgrammeSubTabs : null);
     boot('quiz options', typeof initQuizOptions === 'function' ? initQuizOptions : null);
+    boot('eco arcade', typeof initEcoArcade === 'function' ? initEcoArcade : null);
     boot('resources hub', typeof initResourcesHub === 'function' ? initResourcesHub : null);
     boot('impact metrics', typeof initImpactMetrics === 'function' ? initImpactMetrics : null);
     boot('schedules', typeof initSchedulesModule === 'function' ? initSchedulesModule : null);

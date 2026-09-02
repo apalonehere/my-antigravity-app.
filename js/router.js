@@ -185,6 +185,9 @@ function navigateTo(path, pushState = true) {
         viewId = 'resources';
     } else if (cleanPath === '/quiz') {
         viewId = 'quiz';
+    } else if (cleanPath === '/play' || cleanPath === '/games' || cleanPath === '/arcade') {
+        viewId = 'play';
+        cleanPath = '/play';
     } else if (cleanPath === '/apply') {
         viewId = 'apply';
     } else if (cleanPath === '/admin') {
@@ -294,6 +297,11 @@ function switchView(viewId, updateState = true) {
     if (typeof initAdminTabsModules === 'function') initAdminTabsModules();
     if (typeof initImpactMetrics === 'function') initImpactMetrics();
     if (typeof renderPublicSchedulesGrid === 'function') renderPublicSchedulesGrid();
+
+    // The arcade's sorting game runs a countdown. Navigating away hides the
+    // board but would not stop the clock, so the run is retired here rather
+    // than left ticking down to a score nobody was playing for.
+    if (viewId !== 'play' && typeof pauseEcoArcade === 'function') pauseEcoArcade();
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
