@@ -1,4 +1,4 @@
-// Green Rising Barbados — Auth & Role-Based Access Control (RBAC) Module with Custom Environment Passkey
+// Green Rising Barbados - Auth & Role-Based Access Control (RBAC) Module with Custom Environment Passkey
 
 const AuthState = {
     user: null,
@@ -86,7 +86,7 @@ function setRole(newRole) {
         saveAuthState();
         syncAuthUI();
     } else {
-        // setRole('public') is equivalent to logout — use full logout flow
+        // setRole('public') is equivalent to logout - use full logout flow
         logout();
     }
 }
@@ -111,7 +111,7 @@ function syncAuthUI() {
         body.classList.remove('user-is-admin');
     }
 
-    // Toggle [data-admin-only] elements — visibility only, NEVER routing
+    // Toggle [data-admin-only] elements - visibility only, NEVER routing
     const adminOnlyElements = document.querySelectorAll('[data-admin-only]');
     adminOnlyElements.forEach(el => {
         if (isAdmin) {
@@ -129,7 +129,7 @@ function syncAuthUI() {
         link.style.display = isAdmin ? 'inline-flex' : 'none';
     });
 
-    // Re-render data lists that depend on auth state (read-only — no navigation side effects)
+    // Re-render data lists that depend on auth state (read-only - no navigation side effects)
     try {
         if (typeof renderAdminScheduleManager === 'function') renderAdminScheduleManager();
     } catch(e) { /* non-critical */ }

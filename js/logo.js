@@ -1,10 +1,10 @@
-// Green Rising Barbados — logo mark entrance.
+// Green Rising Barbados - logo mark entrance.
 //
 // Fires once per browser session, not on every page view and not on every
 // client-side route change. A header logo that replays its entrance every time
 // someone clicks a nav link stops being charming almost immediately.
 //
-// The animation itself is CSS (see "LOGO MARK — motion" in index.css); this
+// The animation itself is CSS (see "LOGO MARK - motion" in index.css); this
 // only decides whether to add the class. Under prefers-reduced-motion it does
 // nothing at all, and the CSS also refuses to animate, so the intent is stated
 // in both places rather than relying on either alone.
@@ -20,7 +20,7 @@ function initLogoIntro() {
         alreadyPlayed = sessionStorage.getItem('gr_logo_intro') === 'done';
     } catch (e) {
         // Private windows and blocked site data throw here. Treat it as
-        // "not played" — a second animation is a far smaller problem than
+        // "not played" - a second animation is a far smaller problem than
         // a crash in the boot sequence.
         alreadyPlayed = false;
     }

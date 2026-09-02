@@ -1,4 +1,4 @@
-# Sveltia CMS — Green Rising Barbados
+# Sveltia CMS - Green Rising Barbados
 #
 # Edits here become commits to content/*.json on the branch named below.
 # Vercel sees the commit and redeploys, so a change is live in about a minute
@@ -13,12 +13,12 @@ backend:
   # protected and only accepts pull requests, so nothing reaches the site
   # without someone merging it.
   #
-  # Deliberately not publish_mode: editorial_workflow — I could not confirm it
+  # Deliberately not publish_mode: editorial_workflow - I could not confirm it
   # is implemented in the pinned Sveltia build, and a review gate that depends
   # on an unverified feature is worse than no gate. A separate branch works
   # whatever the CMS supports.
   branch: content
-  # Vercel serverless OAuth handshake — see api/auth.js and api/callback.js
+  # Vercel serverless OAuth handshake - see api/auth.js and api/callback.js
   base_url: https://my-antigravity-app-delta.vercel.app
   auth_endpoint: api/auth
 
@@ -61,7 +61,7 @@ collections:
           - name: trend
             label: Youth trained over time
             widget: list
-            summary: '{{fields.period}} — {{fields.value}}'
+            summary: '{{fields.period}}: {{fields.value}}'
             hint: >
               Cumulative running total, one row per month. The final row is
               overwritten on the page by the Youth trained figure above.
@@ -80,7 +80,7 @@ collections:
           - name: milestones
             label: Milestones
             widget: list
-            summary: '{{fields.date}} — {{fields.title}}'
+            summary: '{{fields.date}}: {{fields.title}}'
             fields:
               - { name: title, label: Title, widget: string }
               - { name: date, label: Date, widget: string, hint: 'e.g. June 2026' }

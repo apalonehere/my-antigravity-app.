@@ -1,29 +1,29 @@
-// Green Rising Barbados — Impact Hub trend chart.
+// Green Rising Barbados - Impact Hub trend chart.
 //
 // Hand-rolled inline SVG. No chart library: one single-series area chart does
 // not justify shipping one, and inline SVG inherits the site's CSS variables
 // so light/dark works without a second palette.
 //
 // Built to the dataviz skill's procedure:
-//   1. Form      — change over time, one measure -> line + area.
-//   2. Color     — ONE hue. The palette validator fails green-vs-teal as a
+//   1. Form      - change over time, one measure -> line + area.
+//   2. Color     - ONE hue. The palette validator fails green-vs-teal as a
 //                  categorical pair (ΔE 4.9 normal vision, floor is 15), so a
 //                  second series on this plot would be unreadable. One series.
-//   3. Marks     — 2px line, 8px focused marker, recessive grid, no marker on
+//   3. Marks     - 2px line, 8px focused marker, recessive grid, no marker on
 //                  every point, target drawn as a reference line not a series.
-//   4. Hover     — crosshair + tooltip, shipped by default; the hit target is
+//   4. Hover     - crosshair + tooltip, shipped by default; the hit target is
 //                  a full-height column, far bigger than the mark.
-//   5. A11y      — keyboard arrows walk the points, the figure is labelled,
+//   5. A11y      - keyboard arrows walk the points, the figure is labelled,
 //                  and a table view carries the same numbers without colour.
 //
 // ---------------------------------------------------------------------------
-// DATA NOTE — READ BEFORE PUBLISHING
+// DATA NOTE - READ BEFORE PUBLISHING
 // ---------------------------------------------------------------------------
 // MONTHLY_YOUTH below is ILLUSTRATIVE shape, not verified programme data. The
 // only figure Green Rising has published is the current cumulative total, so
 // the intermediate months are interpolated to reach it. Replace `points` with
 // the real monthly intake before this goes in front of funders. The final
-// point is deliberately not stored — it is overwritten at render time with
+// point is deliberately not stored - it is overwritten at render time with
 // whatever the live `youth` metric says, so the chart can never contradict the
 // number in the tile beside it.
 // ---------------------------------------------------------------------------
@@ -169,7 +169,7 @@
         seriesG.appendChild(el('path', { d: line, class: 'impact-line' }));
         svg.appendChild(seriesG);
 
-        // Direct label on the final point — the one number worth stating on
+        // Direct label on the final point - the one number worth stating on
         // the plot itself. A number on every point is the anti-pattern.
         const lastI = points.length - 1;
         const endDot = el('circle', { cx: s.x(lastI), cy: s.y(points[lastI].value), r: 5, class: 'impact-end-dot' });
@@ -203,7 +203,7 @@
         host.innerHTML = '';
         host.appendChild(svg);
 
-        // Tooltip lives in HTML, not SVG — real text, real wrapping.
+        // Tooltip lives in HTML, not SVG - real text, real wrapping.
         const tip = document.createElement('div');
         tip.className = 'impact-tooltip';
         tip.setAttribute('role', 'status');

@@ -1,10 +1,10 @@
-// Meet the Team — the roster spine.
+// Meet the Team - the roster spine.
 //
 // Shares the editorial grammar of Tomorrow's Reef (eyebrow → headline →
 // standfirst, full-bleed rhythm, one readable text measure) but deliberately
 // NOT its mechanic. The reef story is scroll-driven: you fall through it and
 // the media changes under you. A five-person team has no media to fall
-// through — there are no portraits for these people, only monograms — so a
+// through - there are no portraits for these people, only monograms - so a
 // scroll spine would be five near-empty screens.
 //
 // Instead the roster is pointer/keyboard-driven: a list of names on the left,
@@ -14,7 +14,7 @@
 // Accessibility notes (ui-ux-pro-max, Priority 1 & 2):
 //   - Rows are real <button>s in a roving-tabindex listbox, so the whole
 //     roster is one tab stop and Up/Down/Home/End move within it.
-//   - Selection is driven by click/focus, never hover alone — hover has no
+//   - Selection is driven by click/focus, never hover alone - hover has no
 //     meaning on touch (UX rule "Hover vs Tap", severity High).
 //   - Under 900px the dossier collapses into the row itself, because a
 //     sticky side panel off-screen is not a panel.
@@ -44,7 +44,7 @@ function Dossier({ member, reduced }) {
       initial={{ opacity: 0, y: reduced ? 0 : 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: reduced ? 0 : -8 }}
-      /* Exit is faster than enter — the outgoing card should get out of the
+      /* Exit is faster than enter - the outgoing card should get out of the
          way rather than linger under the incoming one. */
       transition={{ duration, ease: [0.22, 0.61, 0.36, 1] }}
     >
@@ -129,7 +129,7 @@ export default function TeamRoster({ members = [] }) {
                 onClick={() => setIndex(i)}
                 onFocus={() => setIndex(i)}
                 /* Pointer hover selects too, but only on devices that
-                   genuinely hover — see the media query in index.css. */
+                   genuinely hover - see the media query in index.css. */
                 onMouseEnter={() => { if (!isNarrow) setIndex(i); }}
               >
                 <span className="roster-row-num" aria-hidden="true">

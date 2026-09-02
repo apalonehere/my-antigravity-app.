@@ -1,4 +1,4 @@
-// Green Rising Barbados — Resources Hub Module
+// Green Rising Barbados - Resources Hub Module
 
 // Curated live resources dataset
 const resourcesData = [
@@ -23,7 +23,7 @@ const resourcesData = [
         platform: "Barbados Today",
         readTime: "3 min read",
         date: "June 2025",
-        summary: "$3M for Barbadian youth — funding and skills. From PM Mia Mottley, UNICEF and Generation Unlimited.",
+        summary: "$3M for Barbadian youth: funding and skills. From PM Mia Mottley, UNICEF and Generation Unlimited.",
         imageUrl: "/images/barbados-today-launch.jpg",
         link: "https://barbadostoday.bb/2025/06/21/green-rising-initiative-to-empower-12-000-youth-in-climate-action/",
         actionLabel: "Read on Barbados Today"
@@ -106,7 +106,7 @@ let searchQuery = '';
    The dataset used to carry emoji (📸 📰 ▶️) as its platform marks.
    Emoji render differently on every platform, cannot be recoloured
    with the theme, and are announced as their unicode name by screen
-   readers — the ui-ux-pro-max Style Selection rules list "emoji as
+   readers - the ui-ux-pro-max Style Selection rules list "emoji as
    icons" as an anti-pattern outright. These are inline SVG instead:
    they inherit currentColor, so they theme for free, and they are
    aria-hidden because the platform name sits in text beside them.
@@ -197,12 +197,12 @@ function showResourceSkeletonThenRender() {
 }
 
 /* ---------------------------------------------------------------
-   Entrance stagger — ui-ux-pro-max "Stagger List / Standard":
+   Entrance stagger - ui-ux-pro-max "Stagger List / Standard":
    opacity 0 -> 1, scale 0.94 -> 1, y 16 -> 0, 420ms, back.out(1.4),
    0.06s per item with grid:'auto' so the wave runs diagonally across
    the CSS grid. Progressive enhancement: if GSAP never loads, or the
    visitor asks for reduced motion, the cards are simply already
-   there — nothing here sets a starting opacity in CSS.
+   there - nothing here sets a starting opacity in CSS.
    --------------------------------------------------------------- */
 function animateResourceCards() {
     if (typeof gsap === 'undefined') return;

@@ -18,7 +18,7 @@
     <!-- Tailwind, compiled ahead of time (npm run build:css) rather than the
          cdn.tailwindcss.com JIT script. The CDN warned against production use,
          cost ~100KB of JS plus a runtime compile, and injected its styles after
-         index.css — which is how Tailwind's mt-40 (160px) came to beat the
+         index.css - which is how Tailwind's mt-40 (160px) came to beat the
          site's own 40px. Loading it first means index.css wins by document
          order, the way it was written to. 3KB gzipped. -->
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -180,7 +180,7 @@
                 </button>
 
                 <!-- WCAG 2.2.2: the rotation already stops on hover, focus and a hidden
-                     tab, and never starts under prefers-reduced-motion — but none of
+                     tab, and never starts under prefers-reduced-motion - but none of
                      those is a control a touch user can reach. This is. -->
                 <button id="hero-pause"
                     class="absolute right-4 md:right-8 bottom-6 z-30 p-3 bg-black/30 hover:bg-black/50 text-white rounded-full backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white pointer-events-auto cursor-pointer"
@@ -221,7 +221,7 @@
 
                     // Clone the first slide onto the end. Advancing past the last slide
                     // moves onto the clone, then we snap back to the real first slide with
-                    // the transition off — so the loop never sweeps backwards across every
+                    // the transition off - so the loop never sweeps backwards across every
                     // slide, which was the visible lag when it wrapped around.
                     track.appendChild(track.children[0].cloneNode(true));
 
@@ -337,7 +337,7 @@
                     <div class="section-intro">
                         <span class="section-eyebrow">Spotlight Reels</span>
                         <h2 class="section-headline">Youth action in 60 seconds.</h2>
-                        <p class="section-standfirst">Tap any reel to watch Barbadian youth doing the work — field
+                        <p class="section-standfirst">Tap any reel to watch Barbadian youth doing the work: field
                             trips, conferences, workshops.</p>
                     </div>
                     <button class="btn btn-sm btn-outline-cyan" onclick="openVideoModal('reef')">
@@ -490,7 +490,7 @@
                                 <span>Global Green Rising movement</span>
                             </li>
                         </ul>
-                        <p class="snap-body">$3M behind the programme — US$1M from Generation Unlimited and $1M from
+                        <p class="snap-body">$3M behind the programme: US$1M from Generation Unlimited and $1M from
                             the Prime Minister's foundation.</p>
                     </article>
 
@@ -528,7 +528,7 @@
                                 <span>Arts &amp; eco-craft</span>
                             </li>
                         </ul>
-                        <p class="snap-body">Pick by where you want to work — the ocean, the land, or the culture.
+                        <p class="snap-body">Pick by where you want to work: the ocean, the land, or the culture.
                             The Match Quiz sorts it in three questions.</p>
                     </article>
 
@@ -540,7 +540,7 @@
                 <div class="section-intro">
                     <span class="section-eyebrow">Programmatic framework</span>
                     <h2 class="section-headline">Three fronts we work across.</h2>
-                    <p class="section-standfirst">Enterprise, advocacy and resilience — the shape of everything
+                    <p class="section-standfirst">Enterprise, advocacy and resilience: the shape of everything
                         Green Rising runs.</p>
                 </div>
 
@@ -705,7 +705,7 @@
                     <div class="section-intro">
                         <span class="section-eyebrow">Our people</span>
                         <h2 class="section-headline">The team behind it.</h2>
-                        <p class="section-standfirst">Governance, operations, evaluation and finance — five people
+                        <p class="section-standfirst">Governance, operations, evaluation and finance. Five people
                             running Barbados's climate engine.</p>
                     </div>
                     <a href="/team" class="btn btn-secondary">Meet the team &rarr;</a>
@@ -728,7 +728,7 @@
                 <div id="prog-tomorrowsreef" class="prog-detail-pane active">
 
                     <!-- ============================================================
-                         TOMORROW'S REEF — full-bleed visual story.
+                         TOMORROW'S REEF - full-bleed visual story.
                          The previous layout boxed portrait photos into a landscape
                          frame (60% letterbox) and stopped at the 1540px container,
                          leaving the sides of wide screens empty. Media now runs to
@@ -739,7 +739,7 @@
                         <span class="reef-eyebrow">Tomorrow's Reef</span>
                         <h2 class="reef-headline">They designed a reef before they built one.</h2>
                         <p class="reef-standfirst">
-                            Barbados marks 60 years of Independence with a permanent underwater monument —
+                            Barbados marks 60 years of Independence with a permanent underwater monument,
                             sculpted by young Barbadians, sunk off Carlisle Bay, and left for the coral to
                             finish.
                         </p>
@@ -848,7 +848,7 @@
                         </div>
                         <div class="reef-fact">
                             <h3>The heritage</h3>
-                            <p>Motifs drawn from Barbadian identity — the Broken Trident, coral stone
+                            <p>Motifs drawn from Barbadian identity: the Broken Trident, coral stone
                                 architecture, native marine life.</p>
                         </div>
                         <div class="reef-fact">
@@ -873,13 +873,13 @@
 
                 <!-- SUB-VIEW: Eco-Leaders Workshop -->
                 <!-- ============================================================
-                     ECO-LEADERS WORKSHOP — visual story.
+                     ECO-LEADERS WORKSHOP - visual story.
                      Same spine as Tomorrow's Reef and deliberately the same
                      component (StoryScroll = ReefStory under a neutral name):
                      one sticky-media scroll implementation on this page, not
                      two competing ones. No GSAP pin here either.
 
-                     The film is images/video3.mp4 — the same recap that already
+                     The film is images/video3.mp4 - the same recap that already
                      ships for the home-page reel, so nothing is duplicated.
                      ============================================================ -->
                 <div id="prog-ecoleaders" class="prog-detail-pane">
@@ -962,7 +962,7 @@
                                     },
                                     {
                                         "title": "Youth-led, or it does not count",
-                                        "body": "“We are making sure that these initiatives are youth led.” — Myrico Morris, Project Coordinator.",
+                                        "body": "Myrico Morris, Project Coordinator: “We are making sure that these initiatives are youth led.”",
                                         "media": "/images/eco/eco-08-payoff.jpg",
                                         "alt": "The whole workshop group on a boardwalk with their arms raised",
                                         "focus": "center 45%"
@@ -980,7 +980,7 @@
                     <section class="story-facts" aria-label="About the workshop">
                         <div class="story-fact">
                             <h3>Where</h3>
-                            <p>The Oceana Innovation Hub — hydroponics under grow lights and a wall built from
+                            <p>The Oceana Innovation Hub: hydroponics under grow lights and a wall built from
                                 salvaged bottle caps.</p>
                         </div>
                         <div class="story-fact">
@@ -1012,13 +1012,13 @@
         <!-- 3. IMPACT DASHBOARD VIEW -->
         <!-- ============================================================
              IMPACT HUB.
-             Two public tabs — Overview and Milestones. The Environmental
+             Two public tabs - Overview and Milestones. The Environmental
              Monitor tab was removed along with its sensor-log list; the
              vessels/boats metric went with the boatbuilding programme.
 
              Every chart here is deliberately SINGLE-SERIES. The palette
              validator (dataviz skill) fails green-vs-teal as a categorical
-             pair — ΔE 4.9 for normal vision, well under the floor of 15 —
+             pair - ΔE 4.9 for normal vision, well under the floor of 15 -
              so two series on one plot would be indistinguishable. One
              measure per chart, one hue, direct labels.
              ============================================================ -->
@@ -1262,8 +1262,8 @@
              MATCH QUIZ.
              Was a photo-backed hero with a green wash, two competing
              badges and a heavy floating card. It now uses the same
-             editorial grammar as the team roster and the Impact Hub —
-             eyebrow, headline, standfirst, plain surface — so the answer
+             editorial grammar as the team roster and the Impact Hub -
+             eyebrow, headline, standfirst, plain surface - so the answer
              card is the only thing asking for attention.
 
              Each step is a <fieldset> with the question as its <legend>,
@@ -1541,7 +1541,7 @@
         <section id="view-team" class="app-view">
 
             <!-- ============================================================
-                 MEET THE TEAM — editorial roster.
+                 MEET THE TEAM - editorial roster.
                  Same grammar as Tomorrow's Reef (eyebrow, headline,
                  standfirst, one readable measure) but a different mechanic:
                  the reef story is scroll-driven because it has photographs to
@@ -1550,7 +1550,7 @@
                  the left, dossier on the right.
 
                  Mounted as a React island (TeamRoster). The markup inside is
-                 the no-JS fallback — every name, role, bio and focus area is
+                 the no-JS fallback - every name, role, bio and focus area is
                  already on the page and readable if the bundle never loads.
                  ============================================================ -->
 
@@ -1559,7 +1559,7 @@
                     <span class="roster-eyebrow">Our People</span>
                     <h2 class="roster-headline">Five people, one island, a great deal to do.</h2>
                     <p class="roster-standfirst">
-                        Governance, operations, evaluation and finance — the working team behind Barbados's
+                        Governance, operations, evaluation and finance. The working team behind Barbados's
                         youth climate engine. Pick a name to read what they carry.
                     </p>
                 </header>
@@ -1724,7 +1724,7 @@
                         <h3 class="mb-10">Milestones have moved</h3>
                         <p class="small text-muted mb-25">Milestones are published from
                             <code>content/milestones.json</code> and edited in the content admin. Saving there
-                            commits the change to the repository and redeploys the site, so every visitor sees it —
+                            commits the change to the repository and redeploys the site, so every visitor sees it,
                             and every edit keeps an author, a timestamp and a revert button.</p>
                         <a href="/admin" class="btn btn-primary" target="_blank" rel="noopener">Open content admin
                             &rarr;</a>

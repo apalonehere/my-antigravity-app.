@@ -13,7 +13,7 @@ edited video.
 > for a youth audience. The media carries the meaning; the words support it.
 >
 > **First, audit.** List everything the section currently says and mark what is
-> genuinely load-bearing — a real figure, a place, a named partner. Assume most
+> genuinely load-bearing - a real figure, a place, a named partner. Assume most
 > prose is cut. Show me that list before you write anything, and flag any copy
 > you suspect was AI-generated rather than written by the organisation.
 >
@@ -49,12 +49,12 @@ edited video.
 >   the image flips.
 > - Video: `-c:v libx264 -crf 28 -preset slow -vf scale=1280:-2 -c:a aac
 >   -b:a 112k -movflags +faststart`. Click-to-play against a poster frame, never
->   autoplay — a 45 MB autoplaying video is what exhausted the hosting quota.
+>   autoplay - a 45 MB autoplaying video is what exhausted the hosting quota.
 > - Lowercase filenames, no spaces. `Hero 1.JPG` needed `%20` encoding and broke
 >   on case-sensitive hosts.
 >
 > **Verify before reporting done.**
-> - Zero console errors, checked in a *fresh tab* — console messages persist
+> - Zero console errors, checked in a *fresh tab* - console messages persist
 >   across navigations and have produced false results before.
 > - Strip every inline style and confirm all media still computes to opacity 1.
 > - No horizontal scroll at 390px.
@@ -72,8 +72,8 @@ edited video.
 |---|---|---|
 | Section markup | 323 lines | 147 lines |
 | Media on the page | none | 6-frame pinned sequence + film |
-| Photos | — | 100.7 MB → 1.94 MB |
-| Video | — | 45.49 MB → 12.49 MB |
+| Photos | - | 100.7 MB → 1.94 MB |
+| Video | - | 45.49 MB → 12.49 MB |
 
 Structure: intro + film → pinned scrub sequence (GSAP) → stacked cards
 (21st.dev Scroll Cards, CSS-sticky, mounted as a React island) → three facts →

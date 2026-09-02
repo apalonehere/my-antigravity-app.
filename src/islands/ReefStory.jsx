@@ -1,4 +1,4 @@
-// Tomorrow's Reef — the story spine.
+// Tomorrow's Reef - the story spine.
 //
 // Adapted from 21st.dev "Scroll 01" by @felipemenezes098
 // https://21st.dev/@felipemenezes098/components/scroll-01

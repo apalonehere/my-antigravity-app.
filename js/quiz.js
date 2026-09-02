@@ -33,7 +33,7 @@ const quizQuestions = [
 ];
 
 // Selection used to be an onclick on each <label>. Clicking worked, but
-// arrow keys — the native way to move between radios in a group — change
+// arrow keys - the native way to move between radios in a group - change
 // `checked` without ever firing that click, so the .selected highlight
 // stayed on the previous option while the answer had already moved. The
 // visible state and the real answer disagreed.
@@ -153,14 +153,14 @@ function processQuizResults() {
         if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('water')");
     } else {
         if (matchedTitle) matchedTitle.innerText = "Tomorrow's Reef: Marine Heritage & Conservation";
-        if (matchedDesc) matchedDesc.innerText = "Start with our ocean heritage programme — reef restoration, underwater museum fabrication, and coastal stewardship training.";
+        if (matchedDesc) matchedDesc.innerText = "Start with our ocean heritage programme: reef restoration, underwater museum fabrication, and coastal stewardship training.";
         if (quizCta) quizCta.setAttribute('onclick', "openApplyForm('tomorrowsreef')");
     }
 }
 
 // "Start over" has to actually start over. This used to rewind to question 1
 // while leaving the previous answers selected, so the button's label was a
-// lie — you were resuming, not restarting. defaultChecked is whatever the
+// lie - you were resuming, not restarting. defaultChecked is whatever the
 // markup declared, which keeps the HTML the single source of truth.
 function resetQuiz() {
     document.querySelectorAll('.quiz-options-list input[type="radio"]').forEach(radio => {

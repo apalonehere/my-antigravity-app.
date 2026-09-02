@@ -1,4 +1,4 @@
-// GitHub OAuth — step 2 of 2.
+// GitHub OAuth - step 2 of 2.
 //
 // GitHub redirects here with a short-lived code. We exchange it for a token
 // using the client secret, then post the result back to the CMS window that
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     );
 
     if (!code || !state || state !== cookies.gr_oauth_state) {
-        res.status(400).send('OAuth state mismatch — start again from /admin.');
+        res.status(400).send('OAuth state mismatch - start again from /admin.');
         return;
     }
 

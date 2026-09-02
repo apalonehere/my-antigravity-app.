@@ -1,10 +1,10 @@
-// Tomorrow's Reef — film opener.
+// Tomorrow's Reef - film opener.
 //
 // The pinned GSAP sequence that used to live here is gone. The section is now a
 // sticky split-screen story driven by the ReefStory island (src/islands/), which
 // uses CSS sticky plus Framer's scroll progress. Running one scroll system
-// instead of two removed a whole class of bug — GSAP's pin was changing layout
-// underneath Framer's scroll maths — and the split fixed the real problem, which
+// instead of two removed a whole class of bug - GSAP's pin was changing layout
+// underneath Framer's scroll maths - and the split fixed the real problem, which
 // was portrait photos losing 60% of their frame to letterbox.
 //
 // All that remains is opening the film, which reuses the existing reel modal
@@ -15,8 +15,8 @@
 // of it off each edge. Publish the real width so the CSS can subtract it.
 //
 // Measured with an off-screen probe, NOT `innerWidth - clientWidth`. Those two
-// diverge for reasons that have nothing to do with a scrollbar — browser zoom,
-// and viewport emulation — and the difference then gets subtracted from the
+// diverge for reasons that have nothing to do with a scrollbar - browser zoom,
+// and viewport emulation - and the difference then gets subtracted from the
 // element's width. That produced a --sbw of 320px in testing and collapsed the
 // full-bleed block to 70px.
 (function trackScrollbarWidth() {

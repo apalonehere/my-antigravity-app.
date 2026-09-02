@@ -1,11 +1,11 @@
 /* ============================================================
-   GREEN RISING BARBADOS — Organic/Fluid + Gradient Modern
+   GREEN RISING BARBADOS - Organic/Fluid + Gradient Modern
    BRIGHT REDESIGN: white / blue / green, larger readable type,
    same organic shapes, gradients, and motion as before
    ============================================================ */
 
 :root {
-    /* Color Palette — Light Mode (Clean Eco Theme with rich contrast) */
+    /* Color Palette - Light Mode (Clean Eco Theme with rich contrast) */
     --color-bg-dark: #ffffff;
     --color-bg-mid: #f8fafc;
     --color-bg-card: #ffffff;
@@ -17,7 +17,7 @@
     --color-primary-light: rgba(5, 150, 105, 0.10);
     /* Primary as small body text: #059669 is only 3.77:1 on white, below WCAG AA */
     --color-primary-text: #047857;
-    /* Filled controls. White on #059669 is 3.77:1 — also below AA — so filled
+    /* Filled controls. White on #059669 is 3.77:1 - also below AA - so filled
        greens use a deeper fill in light mode. In dark mode the fill stays
        bright and the label goes dark instead, which is both legible (7.5:1)
        and keeps the control visible against the dark surface. */
@@ -87,7 +87,7 @@
     --leading-snug: 1.35;
     --leading-normal: 1.5;
 
-    /* Elevation & Shadows — Subtle & Clean */
+    /* Elevation & Shadows - Subtle & Clean */
     --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
     --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
     --shadow-lg: 0 10px 24px rgba(15, 23, 42, 0.12);
@@ -918,7 +918,7 @@ p {
 }
 
 /* ============================================================
-   HERO ORBS — now BIG and VISIBLE
+   HERO ORBS - now BIG and VISIBLE
    ============================================================ */
 .hero-orb {
     position: absolute;
@@ -1327,7 +1327,7 @@ p {
 }
 
 /* ============================================================
-   HERO — BRIGHT FULL-BLEED GRADIENT
+   HERO - BRIGHT FULL-BLEED GRADIENT
    ============================================================ */
 .hero-section {
     position: relative;
@@ -1520,7 +1520,7 @@ p {
 }
 
 /* ============================================================
-   PROGRAMME GRID — SECTION BACKGROUND
+   PROGRAMME GRID - SECTION BACKGROUND
    ============================================================ */
 .home-programs {
     background: linear-gradient(180deg, #ffffff 0%, #f5fbfa 50%, #eaf6fc 100%);
@@ -1710,7 +1710,7 @@ p {
 }
 
 /* ============================================================
-   IMPACT STATS — DISTINCT GRADIENT SECTION
+   IMPACT STATS - DISTINCT GRADIENT SECTION
    ============================================================ */
 /* The impact strip is a plain container now; it used to sit in a wrapper
    whose only job was hosting a full-bleed gradient that has been removed. */
@@ -2065,7 +2065,7 @@ p {
 }
 
 /* ============================================================
-   PROGRAMME PANE — safe wrapping on narrow screens
+   PROGRAMME PANE - safe wrapping on narrow screens
    ============================================================ */
 .prog-detail-pane {
     box-sizing: border-box;
@@ -3341,7 +3341,7 @@ body.on-admin-view #floating-apply {
 }
 
 /* ============================================================
-   TOMORROW'S REEF — VISUAL-FIRST BENTO & STEPPER REDESIGN
+   TOMORROW'S REEF - VISUAL-FIRST BENTO & STEPPER REDESIGN
    ============================================================ */
 
 /* 1. Key Info Bar (Stats Row) */
@@ -4866,7 +4866,7 @@ details[open] .chevron-icon {
 }
 
 /* ============================================================
-   PHASE 3 — MOBILE USER EXPERIENCE PASS & USABILITY SYSTEM
+   PHASE 3 - MOBILE USER EXPERIENCE PASS & USABILITY SYSTEM
    Enforces 44–48px touch targets, >=8px spacing, thumb-zone CTAs,
    form input accessibility, and mobile layout stability.
    ============================================================ */
@@ -4881,7 +4881,7 @@ body {
 
 /* A non-visible overflow on <body> makes body a scroll container that never
    actually scrolls, so `position: sticky` descendants resolve against it and
-   never stick — that is what stopped the reef story's media column.
+   never stick - that is what stopped the reef story's media column.
    Freed only from 900px up, which is exactly where the sticky split is active.
    Below that the mobile nav drawer sits off-canvas at translateX(100%) and
    body must keep clipping it, but the split is display:none there and no
@@ -6602,7 +6602,7 @@ body {
 
 /* Narrow phones: the logo lockup (flex-shrink: 0) plus the full-width
    theme pill overflowed .header-container, pushing .mobile-toggle off
-   the right edge — the menu became untappable at 360-396px (iPhone SE,
+   the right edge - the menu became untappable at 360-396px (iPhone SE,
    13 mini, 14, 15 and most Android). Collapse the pill to icon-only and
    let the logo shrink so the toggle always stays on screen. */
 @media (max-width: 600px) {
@@ -6838,7 +6838,7 @@ body {
     color: var(--color-text-muted);
 }
 
-/* Card hover lift — Hover Micro-interaction / Standard preset.
+/* Card hover lift - Hover Micro-interaction / Standard preset.
    Kept in CSS rather than GSAP: quickTo tweens carry `overwrite` and were
    killing the entrance animation, stranding cards at opacity 0. Transform
    and box-shadow only, so this stays on the compositor. */
@@ -6874,7 +6874,7 @@ body {
 }
 
 /* ============================================================
-   VIDEO REEL MODAL — rebuilt
+   VIDEO REEL MODAL - rebuilt
    The reels are shot vertically. The old modal forced them into a
    wide box with object-fit: cover, which cropped the subject and
    left black bars, then padded a large empty slab underneath.
@@ -7061,7 +7061,7 @@ body > footer {
    SPACING UTILITY COLLISION FIX
    utils.css defines mt-5/10/20/40 and mb-5/10/20 as 5/10/20/40px,
    but it is not linked, and the Tailwind CDN injects its own scale
-   at runtime — after index.css — so Tailwind wins every tie and
+   at runtime - after index.css - so Tailwind wins every tie and
    these classes resolve 4x too large (mt-40 became 160px, not 40).
    That is where the large empty bands above section headings came
    from: 160px margin on top of the container's own 48px padding.
@@ -7246,7 +7246,7 @@ body .mb-20 { margin-bottom: 20px; }
 
 .reef-beat {
     /* Centred, not left-pinned. The column is ~48% of the viewport, so on a
-       wide screen a left-aligned 46ch block dumped all the slack on the right —
+       wide screen a left-aligned 46ch block dumped all the slack on the right -
        354px of dead space at 1985px wide. Centring splits it evenly, and the
        measure grows a little with the viewport while staying well inside the
        65-75ch readability ceiling. */
@@ -7484,7 +7484,7 @@ body .mb-20 { margin-bottom: 20px; }
 }
 
 /* ============================================================
-   MEET THE TEAM — editorial roster
+   MEET THE TEAM - editorial roster
    Shares the reef's editorial type scale; its own mechanic.
    ============================================================ */
 .roster-intro { max-width: 62ch; margin: 0 0 4px; }
@@ -7577,7 +7577,7 @@ body .mb-20 { margin-bottom: 20px; }
     color: var(--color-text-dim);
 }
 
-/* The travelling mark — the one thing that moves between rows */
+/* The travelling mark - the one thing that moves between rows */
 .roster-row-mark {
     width: 26px;
     height: 2px;
@@ -7759,7 +7759,7 @@ body .mb-20 { margin-bottom: 20px; }
     box-shadow: 0 8px 34px rgba(0, 0, 0, 0.34);
 }
 
-/* Hover only where hover genuinely exists — on touch, tap is the verb */
+/* Hover only where hover genuinely exists - on touch, tap is the verb */
 @media (hover: hover) and (pointer: fine) {
     .roster-row:hover .roster-row-name { color: var(--color-text-bright); }
     .roster-row:hover .roster-row-mark { background: var(--color-primary); }
@@ -7778,7 +7778,7 @@ body .mb-20 { margin-bottom: 20px; }
 }
 
 /* ============================================================
-   IMPACT HUB — editorial header, interactive tiles, trend chart
+   IMPACT HUB - editorial header, interactive tiles, trend chart
    ============================================================ */
 .impact-intro { max-width: 62ch; margin: 0 0 26px; }
 
@@ -7956,7 +7956,7 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 .impact-svg { display: block; width: 100%; height: auto; }
 .impact-svg:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 4px; border-radius: var(--radius-md); }
 
-/* Recessive grid — it orients, it does not compete */
+/* Recessive grid - it orients, it does not compete */
 .impact-grid line { stroke: var(--color-border); stroke-width: 1; }
 .impact-axis-text { fill: var(--color-text-dim); font-size: 11px; font-family: var(--font-body); }
 
@@ -8105,7 +8105,7 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 }
 
 /* ============================================================
-   RESOURCES HUB — hover-reveal grid
+   RESOURCES HUB - hover-reveal grid
    The grid dims its unfocused cards so the one you are reading
    comes forward. Driven by :hover AND :focus-within, so keyboard
    users get the same effect, and disabled entirely on touch
@@ -8307,7 +8307,7 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 
 /* ============================================================
    EDITORIAL SECTION HEADER
-   One definition for every section opener on the site — landing
+   One definition for every section opener on the site - landing
    page, team roster, Impact Hub, match quiz. These used to be
    three near-identical copies, which is how they drift apart.
    ============================================================ */
@@ -8368,7 +8368,7 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 .section-intro-row .section-intro { margin: 0; }
 
 /* ============================================================
-   ECO-LEADERS WORKSHOP — recap film
+   ECO-LEADERS WORKSHOP - recap film
    The reef film is landscape and runs the full column width.
    This recap is a 9:16 vertical reel, so the frame is capped
    and centred instead; letting a portrait video fill the
@@ -8448,12 +8448,12 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 }
 
 /* ============================================================
-   STORY SPINE — reduced motion
+   STORY SPINE - reduced motion
    The split layout is a sticky media column that crossfades as
    you scroll. Asked for reduced motion, it degrades to the
    stacked variant, which is the same photos and the same
    captions as a plain, static gallery. Applies to Tomorrow's
-   Reef and Eco-Leaders alike — they share the component.
+   Reef and Eco-Leaders alike - they share the component.
    !important because the split layout is turned on inside a
    min-width query that would otherwise win on source order.
    ============================================================ */
@@ -8465,7 +8465,7 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 /* ============================================================
    SKIP LINK
    Off-screen until focused, then pinned top-left above the
-   sticky header. Never display:none — that removes it from the
+   sticky header. Never display:none - that removes it from the
    tab order, which defeats the point.
    ============================================================ */
 .skip-link {
@@ -8519,16 +8519,16 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
     color: var(--color-primary-text);
 }
 
-/* The pathway buttons sit outside the intro's reading measure — five
+/* The pathway buttons sit outside the intro's reading measure - five
    labelled controls need the full column, not 62ch. */
 .pathway-selector-wrap { width: 100%; }
 .pathway-selector-wrap .pathway-selector-grid { display: flex; justify-content: flex-start; }
 
 /* ============================================================
-   LOGO MARK — motion
+   LOGO MARK - motion
    The mark is a real vector now, and its two shapes are separate
    paths, so the G and the arrow can move independently. The arrow
-   rises out of the G along its own diagonal — which is the one
+   rises out of the G along its own diagonal - which is the one
    animation this brand is actually asking for.
 
    Restraint is still the point: it runs once per browser session,
@@ -8597,12 +8597,12 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
    REEL THUMBNAILS
    The reels are phone-shot 9:16 and the box was 16:9, so a
    contained frame left about two thirds of every thumbnail as
-   black bar. A blurred backdrop was tried first and was worse —
+   black bar. A blurred backdrop was tried first and was worse -
    dark frame edges blurred into mush that still read as bars.
 
    Cropping to fill turns out to cost nothing that matters. A 3/4
    box keeps the middle 75% of a 9:16 frame, and the captions that
-   were the reason for avoiding a crop sit comfortably inside it —
+   were the reason for avoiding a crop sit comfortably inside it -
    checked against all three posters before committing to it.
    ============================================================ */
 .reel-thumbnail-wrap {

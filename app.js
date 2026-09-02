@@ -1,9 +1,9 @@
-// Green Rising Barbados — Main App Entry Point & Orchestrator
+// Green Rising Barbados - Main App Entry Point & Orchestrator
 
 // Boot sequence.
 //
 // Each step is isolated. This used to be a bare list of calls, and any one of
-// them throwing killed every step after it — the page still rendered, because
+// them throwing killed every step after it - the page still rendered, because
 // it is static HTML, but nothing initialised. That is not hypothetical: the
 // browser caches app.js and js/*.js separately, so after a deploy a visitor
 // can hold a stale app.js against a fresh module for as long as the
@@ -15,7 +15,7 @@
 // never "the rest of the page is dead".
 function boot(label, fn) {
     if (typeof fn !== 'function') {
-        console.warn(`[boot] ${label} unavailable — skipping`);
+        console.warn(`[boot] ${label} unavailable - skipping`);
         return;
     }
     try {
@@ -27,7 +27,7 @@ function boot(label, fn) {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Published content first: the figures on the page are refreshed in place
-    // once content/*.json lands. Non-blocking — the markup already carries the
+    // once content/*.json lands. Non-blocking - the markup already carries the
     // last published numbers.
     boot('published content', typeof loadPublishedContent === 'function' ? loadPublishedContent : null);
     boot('theme', typeof initTheme === 'function' ? initTheme : null);
@@ -173,7 +173,7 @@ window.toggleGreenRisingInfo = toggleGreenRisingInfo;
 // --- Video Spotlight Modal & Player Controller ---
 // `desc` is intentionally empty: the previous descriptions were written without
 // reference to the footage and did not describe what the videos actually show.
-// The modal hides the line while it is blank — fill one in once the real
+// The modal hides the line while it is blank - fill one in once the real
 // content of each reel is confirmed.
 const VIDEO_REELS_DATA = {
     video1: {
@@ -223,7 +223,7 @@ function updateReelCounter() {
     el.textContent = `${i + 1} / ${REEL_ORDER.length}`;
 }
 
-// Move between reels without closing the modal — wraps at both ends
+// Move between reels without closing the modal - wraps at both ends
 function stepVideoModal(delta) {
     const i = REEL_ORDER.indexOf(currentReelKey);
     if (i < 0) return; // not in the reel run; nothing to step through

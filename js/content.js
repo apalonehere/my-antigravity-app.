@@ -1,9 +1,9 @@
-// Green Rising Barbados — published content loader.
+// Green Rising Barbados - published content loader.
 //
 // Impact figures and milestones used to live in two places that disagreed:
 // hardcoded defaults in the JavaScript, and a localStorage copy written by the
 // in-site admin form. localStorage is per-browser, so an edit made on one
-// laptop changed what that one person saw and nothing else — the site every
+// laptop changed what that one person saw and nothing else - the site every
 // visitor loaded still showed the hardcoded numbers.
 //
 // They now live in content/*.json in the repo. The CMS at /admin commits to

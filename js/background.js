@@ -1,19 +1,19 @@
-// Green Rising Barbados — Ambient background
+// Green Rising Barbados - Ambient background
 //
 // A cursor-reactive dot grid drawn on a single fixed canvas behind the page.
 // Vanilla canvas rather than React Three Fiber: the site has no build step,
 // and a WebGL/R3F component would pull in React + Three (~150KB) for a purely
 // decorative layer. This is ~3KB and costs no extra requests.
 //
-// Concept follows 21st.dev's "Animated Fractal Dot Grid" — dots ripple in a
-// wave around the pointer — retuned to the brand greens and kept low contrast
+// Concept follows 21st.dev's "Animated Fractal Dot Grid" - dots ripple in a
+// wave around the pointer - retuned to the brand greens and kept low contrast
 // so it fills space without competing with content.
 //
 // Behaviour:
 //   - Skipped entirely under prefers-reduced-motion (static dots, no rAF loop)
 //   - Pauses when the tab is hidden or the canvas is scrolled out of view
 //   - Follows the light/dark theme
-//   - Pointer-events: none, aria-hidden — never intercepts a click or a
+//   - Pointer-events: none, aria-hidden - never intercepts a click or a
 //     screen reader
 
 (function () {
@@ -35,7 +35,7 @@
     // The mark, drawn by the dot grid itself rather than laid over it as a
     // watermark. The SVG is rasterised once to an offscreen canvas, its alpha
     // sampled into a lookup, and dots landing inside the shape are brightened
-    // and enlarged. Nothing new is painted — the existing grid just resolves
+    // and enlarged. Nothing new is painted - the existing grid just resolves
     // into the logo, and the pointer ripple still runs over the top of it.
     const MARK_SRC = '/images/brand/1-GR-Icon.svg';
     const MARK_ALPHA = 90;   // ignore near-transparent edge pixels

@@ -148,7 +148,7 @@ function initProgrammeSubTabs() {
                 openProgram(progKey, true);
             }
             // Keep the tablist's state in the accessibility tree, not just the
-            // class list — the bar is role="tablist" now that it is back.
+            // class list - the bar is role="tablist" now that it is back.
             subTabBtns.forEach(b => b.setAttribute('aria-selected', String(b === btn)));
         });
     });

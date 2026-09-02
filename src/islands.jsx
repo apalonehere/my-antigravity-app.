@@ -2,7 +2,7 @@
 //
 // The site is plain HTML and stays that way. This file lets a single React
 // component be dropped into it, which is what makes 21st.dev components usable
-// — they ship as TSX and need compiling, so they cannot be pasted into a
+// - they ship as TSX and need compiling, so they cannot be pasted into a
 // vanilla page directly.
 //
 // Usage in index.html:
@@ -19,8 +19,8 @@ import TeamRoster from './islands/TeamRoster.jsx';
 // Every component that may be mounted from markup.
 //
 // StoryScroll is ReefStory under a neutral name. The component is not
-// reef-specific — it takes items and renders a sticky media column against a
-// scrolling text column — and reusing it for Eco-Leaders keeps one verified
+// reef-specific - it takes items and renders a sticky media column against a
+// scrolling text column - and reusing it for Eco-Leaders keeps one verified
 // scroll implementation on the Programmes page instead of two competing ones.
 const REGISTRY = {
   ReefStory,

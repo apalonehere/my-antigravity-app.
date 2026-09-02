@@ -1,4 +1,4 @@
-// Green Rising Barbados — Event & Schedule CRUD Manager Module with Defensive Guards & Error Recovery
+// Green Rising Barbados - Event & Schedule CRUD Manager Module with Defensive Guards & Error Recovery
 
 const defaultEvents = [
     {

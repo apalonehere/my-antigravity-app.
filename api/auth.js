@@ -1,4 +1,4 @@
-// GitHub OAuth — step 1 of 2.
+// GitHub OAuth - step 1 of 2.
 //
 // The CMS at /admin runs entirely in the browser, so it cannot hold the GitHub
 // client secret; anyone could read it out of the page source. These two
@@ -21,14 +21,14 @@ module.exports = (req, res) => {
         return;
     }
 
-    // A real GitHub client ID has no spaces — newer ones look like Ov23li...,
+    // A real GitHub client ID has no spaces - newer ones look like Ov23li...,
     // older ones are 20 hex characters. Without this check, placeholder text
     // pasted into the env var sails through to GitHub, which answers with a
     // bare 404 that says nothing about the cause. Fail here, legibly, instead.
     if (/\s/.test(clientId) || clientId.length < 10) {
         res.status(500).send(
             'GITHUB_CLIENT_ID does not look like a GitHub client ID. It is currently ' +
-            JSON.stringify(clientId) + ' — which is placeholder text, not an ID. ' +
+            JSON.stringify(clientId) + ' - which is placeholder text, not an ID. ' +
             'Set it to the Client ID shown on your OAuth app page ' +
             '(GitHub > Settings > Developer settings > OAuth Apps), then redeploy. ' +
             'See docs/admin-setup.md.'
@@ -51,7 +51,7 @@ module.exports = (req, res) => {
     // private repository the signer-in owns, which is far more than a content
     // editor needs. apalonehere/my-antigravity-app is public, so public_repo is
     // enough to commit to it. If the repo is ever made private, this has to
-    // become `repo` — the CMS will 404 on the repo until it does.
+    // become `repo` - the CMS will 404 on the repo until it does.
     url.searchParams.set('scope', 'public_repo');
     url.searchParams.set('state', state);
 

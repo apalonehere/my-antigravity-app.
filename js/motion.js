@@ -1,4 +1,4 @@
-// Green Rising Barbados — Motion layer
+// Green Rising Barbados - Motion layer
 //
 // Progressive enhancement only. Every element touched here is already visible
 // and laid out without JavaScript; GSAP adds entrance and feedback motion on
@@ -6,9 +6,9 @@
 // returns early and the page renders exactly as it does now.
 //
 // Timings and easings follow the ui-ux-pro-max motion presets:
-//   Scroll Reveal / Subtle          — 300-400ms, power1.out, y 8-16px
-//   Stagger List / Standard         — 300-450ms, back.out(1.4), grid-aware
-//   Hover Micro-interaction / Std   — 200-300ms, power2.out, transform only
+//   Scroll Reveal / Subtle          - 300-400ms, power1.out, y 8-16px
+//   Stagger List / Standard         - 300-450ms, back.out(1.4), grid-aware
+//   Hover Micro-interaction / Std   - 200-300ms, power2.out, transform only
 
 (function () {
     'use strict';
@@ -22,7 +22,7 @@
     if (hasScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
     /* ---------------------------------------------------------------
-       1. Scroll reveal — Subtle preset
+       1. Scroll reveal - Subtle preset
        Small y offset so it reads as a fade rather than a slide.
        --------------------------------------------------------------- */
     function revealOnScroll(selector, opts) {
@@ -52,7 +52,7 @@
     }
 
     /* ---------------------------------------------------------------
-       2. Programme tab panes — Stagger List, Standard preset
+       2. Programme tab panes - Stagger List, Standard preset
        This is the section that felt static: switching a sub-tab swapped
        the content instantly with no sense of it arriving. grid:'auto'
        lets GSAP infer the bento rows and columns for a diagonal wave.
@@ -124,7 +124,7 @@
        --------------------------------------------------------------- */
 
     /* ---------------------------------------------------------------
-       4. Impact numbers — count up when they scroll into view
+       4. Impact numbers - count up when they scroll into view
        Reads the number already in the DOM, so the markup stays the
        source of truth and the final value is always what was authored.
        --------------------------------------------------------------- */
