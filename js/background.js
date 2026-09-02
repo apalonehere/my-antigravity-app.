@@ -32,6 +32,15 @@
     const RADIUS = 150;      // pointer influence radius
     const LIFT = 5;          // max displacement toward the pointer
 
+    // The mark, drawn by the dot grid itself rather than laid over it as a
+    // watermark. The SVG is rasterised once to an offscreen canvas, its alpha
+    // sampled into a lookup, and dots landing inside the shape are brightened
+    // and enlarged. Nothing new is painted — the existing grid just resolves
+    // into the logo, and the pointer ripple still runs over the top of it.
+    const MARK_SRC = '/images/brand/1-GR-Icon.svg';
+    const MARK_ALPHA = 90;   // ignore near-transparent edge pixels
+    let markMask = null;     // { data, mw, mh, ox, oy }
+
     let w = 0, h = 0, dpr = 1;
     let cols = 0, rows = 0;
     let pointer = { x: -9999, y: -9999 };
@@ -43,8 +52,10 @@
     function palette() {
         const dark = document.documentElement.getAttribute('data-theme') === 'dark';
         return dark
-            ? { dot: 'rgba(52, 211, 153, 0.20)', hot: 'rgba(94, 234, 212, 0.55)' }
-            : { dot: 'rgba(5, 150, 105, 0.16)', hot: 'rgba(13, 148, 136, 0.42)' };
+            ? { dot: 'rgba(52, 211, 153, 0.20)', hot: 'rgba(94, 234, 212, 0.55)',
+                mark: 'rgba(52, 211, 153, 0.46)' }
+            : { dot: 'rgba(5, 150, 105, 0.16)', hot: 'rgba(13, 148, 136, 0.42)',
+                mark: 'rgba(5, 150, 105, 0.38)' };
     }
 
     function resize() {
@@ -64,8 +75,59 @@
         rows = Math.ceil(h / SPACING) + 1;
     }
 
+    // Rasterise the mark at its on-screen size and keep only the alpha, so the
+    // per-dot test is an array index rather than a canvas read every frame.
+    function buildMask(img) {
+        if (!img || !img.complete || !img.naturalWidth) { markMask = null; return; }
+
+        // Sized generously on purpose: the grid is 34px, so a small mark gets
+        // only a handful of dots across and reads as noise rather than a
+        // shape. This gives it roughly sixteen dots across its width.
+        const size = Math.round(Math.min(h * 0.82, w * 0.58));
+        if (size < 80) { markMask = null; return; }   // too small to read as a logo
+
+        const ratio = img.naturalHeight / img.naturalWidth;
+        const mw = size;
+        const mh = Math.round(size * ratio);
+
+        const off = document.createElement('canvas');
+        off.width = mw;
+        off.height = mh;
+        const octx = off.getContext('2d', { willReadFrequently: false });
+        if (!octx) { markMask = null; return; }
+        octx.drawImage(img, 0, 0, mw, mh);
+
+        let px;
+        try {
+            px = octx.getImageData(0, 0, mw, mh).data;
+        } catch (err) {
+            // A tainted canvas would throw; the grid simply stays plain.
+            markMask = null;
+            return;
+        }
+
+        const alpha = new Uint8Array(mw * mh);
+        for (let i = 0, n = mw * mh; i < n; i++) alpha[i] = px[i * 4 + 3];
+
+        markMask = {
+            data: alpha,
+            mw: mw,
+            mh: mh,
+            ox: Math.round((w - mw) / 2),
+            oy: Math.round((h - mh) / 2)
+        };
+    }
+
+    function insideMark(x, y) {
+        if (!markMask) return false;
+        const mx = (x - markMask.ox) | 0;
+        const my = (y - markMask.oy) | 0;
+        if (mx < 0 || my < 0 || mx >= markMask.mw || my >= markMask.mh) return false;
+        return markMask.data[my * markMask.mw + mx] > MARK_ALPHA;
+    }
+
     function draw() {
-        const { dot, hot } = palette();
+        const { dot, hot, mark } = palette();
         ctx.clearRect(0, 0, w, h);
 
         for (let i = 0; i < cols; i++) {
@@ -78,6 +140,14 @@
                 const dist = Math.hypot(dx, dy);
 
                 let x = bx, y = by, r = DOT, colour = dot;
+
+                // Dots that land inside the mark read a little stronger. Kept
+                // deliberately close to the base value: this is a background,
+                // and the shape should be noticed rather than announced.
+                if (insideMark(bx, by)) {
+                    r = DOT + 0.7;
+                    colour = mark;
+                }
 
                 if (dist < RADIUS) {
                     // Ease the influence so the edge of the field is soft
@@ -123,7 +193,18 @@
     resize();
     draw(); // paint once so the grid exists even if the loop never runs
 
-    window.addEventListener('resize', () => { resize(); draw(); }, { passive: true });
+    // The grid is correct before the mark loads and simply resolves into it
+    // once the SVG arrives; a failed load leaves a plain grid, not an error.
+    const markImg = new Image();
+    markImg.onload = () => { buildMask(markImg); if (!running) draw(); };
+    markImg.onerror = () => { markMask = null; };
+    markImg.src = MARK_SRC;
+
+    window.addEventListener('resize', () => {
+        resize();
+        buildMask(markImg);
+        draw();
+    }, { passive: true });
 
     if (reduceMotion.matches) return; // static grid only
 
