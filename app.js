@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // last published numbers.
     boot('published content', typeof loadPublishedContent === 'function' ? loadPublishedContent : null);
     boot('theme', typeof initTheme === 'function' ? initTheme : null);
+    boot('logo intro', typeof initLogoIntro === 'function' ? initLogoIntro : null);
     boot('navigation', typeof initNavigation === 'function' ? initNavigation : null);
     boot('mobile menu', typeof initMobileMenu === 'function' ? initMobileMenu : null);
     boot('programme sub-tabs', typeof initProgrammeSubTabs === 'function' ? initProgrammeSubTabs : null);

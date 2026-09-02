@@ -38,8 +38,14 @@
                      own "GREEN RISING BARBADOS" wordmark, which duplicated the text
                      beside it and was illegible at 54px, and it is a JPEG behind a
                      .png name so it had no transparency and rendered as a dark tile. -->
-                <img src="/images/logo-mark.png" alt="Green Rising Barbados" class="header-logo-img"
-                    onerror="this.style.display='none';" width="256" height="279">
+                <!-- The wrapper carries the animation. Its ::after masks a light
+                     sweep with this same PNG's alpha, so the shine is cut to the
+                     exact shape of the brand mark — no tracing, no approximation.
+                     The <img> keeps the real colours underneath. -->
+                <span class="logo-mark-wrap">
+                    <img src="/images/logo-mark.png" alt="Green Rising Barbados" class="header-logo-img"
+                        onerror="this.style.display='none';" width="256" height="279">
+                </span>
                 <div class="brand-text-block">
                     <span class="brand-name">GREEN RISING</span>
                     <span class="brand-subtitle-header">Youth Climate Engine</span>
@@ -1996,6 +2002,7 @@
     </div>
 
     <!-- Modular JavaScript Services & Logic -->
+    <script src="/js/logo.js"></script>
     <script src="/js/theme.js"></script>
     <script src="/js/router.js"></script>
     <script src="/js/calculator.js"></script>

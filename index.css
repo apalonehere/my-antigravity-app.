@@ -8598,3 +8598,73 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
    labelled controls need the full column, not 62ch. */
 .pathway-selector-wrap { width: 100%; }
 .pathway-selector-wrap .pathway-selector-grid { display: flex; justify-content: flex-start; }
+
+/* ============================================================
+   LOGO MARK — motion
+   The mark is a raster, so there are no paths to draw. Instead the
+   PNG's own alpha channel masks a light sweep, which means the
+   animation is cut to the exact brand shape rather than a traced
+   approximation of it.
+
+   Restraint is the point. The entrance runs once per browser
+   session, not on every route change — a header logo that replays
+   on every navigation is irritating within a minute — and nothing
+   moves at all under prefers-reduced-motion.
+   ============================================================ */
+.logo-mark-wrap {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.logo-mark-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    -webkit-mask: url("/images/logo-mark.png") center / contain no-repeat;
+    mask: url("/images/logo-mark.png") center / contain no-repeat;
+    background: linear-gradient(105deg,
+            transparent 38%,
+            rgba(255, 255, 255, 0.9) 50%,
+            transparent 62%);
+    background-size: 260% 100%;
+    background-position: 165% 0;
+}
+
+/* Entrance: the mark rises into place, then the sweep crosses it. */
+.logo-lockup.logo-intro .header-logo-img {
+    animation: logo-rise 620ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.logo-lockup.logo-intro .logo-mark-wrap::after {
+    animation: logo-sweep 900ms ease-out 380ms both;
+}
+
+@keyframes logo-rise {
+    from { opacity: 0; transform: translateY(7px) scale(0.9); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes logo-sweep {
+    0%   { opacity: 0; background-position: 165% 0; }
+    18%  { opacity: 1; }
+    82%  { opacity: 1; }
+    100% { opacity: 0; background-position: -65% 0; }
+}
+
+/* Hover replays the sweep only — the lift belongs to the whole lockup */
+@media (hover: hover) and (pointer: fine) {
+    .logo-lockup:hover .logo-mark-wrap::after {
+        animation: logo-sweep 750ms ease-out both;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-lockup.logo-intro .header-logo-img,
+    .logo-lockup.logo-intro .logo-mark-wrap::after,
+    .logo-lockup:hover .logo-mark-wrap::after { animation: none; }
+    .logo-mark-wrap::after { opacity: 0; }
+}
