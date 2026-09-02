@@ -1033,15 +1033,6 @@ p {
     transform: scale(1.02);
 }
 
-.header-logo-img {
-    height: 44px;
-    width: auto;
-    object-fit: contain;
-    /* No border-radius and no drop-shadow. Both existed to make an opaque
-       JPEG square read as a deliberate tile; the mark is transparent now, so
-       rounding clipped its corners and the glow haloed empty space. */
-    transition: var(--transition);
-}
 
 .brand-text-block {
     display: flex;
@@ -1172,7 +1163,7 @@ p {
         padding: 8px 16px;
     }
 
-    .header-logo-img {
+    .logo-mark {
         height: 48px;
     }
 
@@ -1240,7 +1231,7 @@ p {
         gap: 8px;
     }
 
-    .header-logo-img {
+    .logo-mark {
         height: 40px;
     }
 
@@ -8601,15 +8592,14 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
 
 /* ============================================================
    LOGO MARK — motion
-   The mark is a raster, so there are no paths to draw. Instead the
-   PNG's own alpha channel masks a light sweep, which means the
-   animation is cut to the exact brand shape rather than a traced
-   approximation of it.
+   The mark is a real vector now, and its two shapes are separate
+   paths, so the G and the arrow can move independently. The arrow
+   rises out of the G along its own diagonal — which is the one
+   animation this brand is actually asking for.
 
-   Restraint is the point. The entrance runs once per browser
-   session, not on every route change — a header logo that replays
-   on every navigation is irritating within a minute — and nothing
-   moves at all under prefers-reduced-motion.
+   Restraint is still the point: it runs once per browser session,
+   not on every route change, and nothing moves at all under
+   prefers-reduced-motion.
    ============================================================ */
 .logo-mark-wrap {
     position: relative;
@@ -8618,53 +8608,53 @@ button.dash-metric-card[aria-expanded="true"] .dash-metric-toggle {
     line-height: 0;
 }
 
-.logo-mark-wrap::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    -webkit-mask: url("/images/logo-mark.png") center / contain no-repeat;
-    mask: url("/images/logo-mark.png") center / contain no-repeat;
-    background: linear-gradient(105deg,
-            transparent 38%,
-            rgba(255, 255, 255, 0.9) 50%,
-            transparent 62%);
-    background-size: 260% 100%;
-    background-position: 165% 0;
+.logo-mark {
+    display: block;
+    height: 44px;
+    width: auto;
+    overflow: visible;
 }
 
-/* Entrance: the mark rises into place, then the sweep crosses it. */
-.logo-lockup.logo-intro .header-logo-img {
-    animation: logo-rise 620ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+/* Both paths animate about their own box, not the SVG origin */
+.logo-mark-g,
+.logo-mark-arrow {
+    transform-box: fill-box;
+    transform-origin: center;
 }
 
-.logo-lockup.logo-intro .logo-mark-wrap::after {
-    animation: logo-sweep 900ms ease-out 380ms both;
+/* --- entrance --------------------------------------------------
+   The G arrives first and settles; the arrow then travels up its
+   own axis with a small overshoot, so it reads as launching rather
+   than sliding into position. */
+.logo-lockup.logo-intro .logo-mark-g {
+    animation: gr-g-in 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
-@keyframes logo-rise {
-    from { opacity: 0; transform: translateY(7px) scale(0.9); }
+.logo-lockup.logo-intro .logo-mark-arrow {
+    animation: gr-arrow-rise 720ms cubic-bezier(0.34, 1.4, 0.5, 1) 260ms both;
+}
+
+@keyframes gr-g-in {
+    from { opacity: 0; transform: scale(0.86); }
     to   { opacity: 1; transform: none; }
 }
 
-@keyframes logo-sweep {
-    0%   { opacity: 0; background-position: 165% 0; }
-    18%  { opacity: 1; }
-    82%  { opacity: 1; }
-    100% { opacity: 0; background-position: -65% 0; }
+@keyframes gr-arrow-rise {
+    /* down-left along the arrow's diagonal, then up into place */
+    from { opacity: 0; transform: translate(-9px, 9px) scale(0.9); }
+    60%  { opacity: 1; }
+    to   { opacity: 1; transform: none; }
 }
 
-/* Hover replays the sweep only — the lift belongs to the whole lockup */
+/* --- hover: the arrow nudges further up its axis ---------------- */
 @media (hover: hover) and (pointer: fine) {
-    .logo-lockup:hover .logo-mark-wrap::after {
-        animation: logo-sweep 750ms ease-out both;
-    }
+    .logo-mark-arrow { transition: transform 260ms cubic-bezier(0.34, 1.3, 0.5, 1); }
+    .logo-lockup:hover .logo-mark-arrow { transform: translate(2.5px, -2.5px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .logo-lockup.logo-intro .header-logo-img,
-    .logo-lockup.logo-intro .logo-mark-wrap::after,
-    .logo-lockup:hover .logo-mark-wrap::after { animation: none; }
-    .logo-mark-wrap::after { opacity: 0; }
+    .logo-lockup.logo-intro .logo-mark-g,
+    .logo-lockup.logo-intro .logo-mark-arrow { animation: none; }
+    .logo-mark-arrow { transition: none; }
+    .logo-lockup:hover .logo-mark-arrow { transform: none; }
 }
