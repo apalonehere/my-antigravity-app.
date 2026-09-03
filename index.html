@@ -2254,6 +2254,41 @@
         </div>
     </div>
 
+    <!-- Resources Hub embed player.
+         Separate from the reel modal above because that one drives a <video>
+         tag with its own progress bar and play button; a third-party iframe
+         brings its own controls and cannot be driven from this page. -->
+    <div id="resource-embed-modal" class="reel-modal-overlay resource-embed-overlay" aria-hidden="true"
+        role="dialog" aria-modal="true" aria-labelledby="resource-embed-title" data-shape="wide"
+        style="display: none;">
+        <div class="reel-modal-backdrop" onclick="closeResourceEmbed()"></div>
+        <div class="reel-modal-container glass resource-embed-container">
+            <button class="reel-modal-close-btn" onclick="closeResourceEmbed()" aria-label="Close player">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="resource-embed-frame-wrap">
+                <iframe id="resource-embed-frame" src="" title="Embedded media" frameborder="0"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            </div>
+
+            <div class="reel-modal-details resource-embed-details">
+                <div class="reel-modal-meta">
+                    <span class="reel-category-pill" id="resource-embed-platform">YouTube</span>
+                    <h3 id="resource-embed-title">Resource</h3>
+                </div>
+                <div class="reel-modal-actions">
+                    <a href="#" id="resource-embed-out" class="btn btn-secondary btn-sm" target="_blank"
+                        rel="noopener">Open on the source</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modular JavaScript Services & Logic -->
     <script src="/js/logo.js"></script>
     <script src="/js/theme.js"></script>

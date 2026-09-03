@@ -2956,7 +2956,9 @@ p {
 /* Dark Mode Overrides for Resources Hub */
 [data-theme="dark"] .resource-card {
     background: rgba(11, 35, 30, 0.94) !important;
-    border-color: rgba(16, 185, 129, 0.28) !important;
+    /* Brand cyan, same outline the "What it is" cards carry. The token
+       already lifts itself on dark, so this is one value in both themes. */
+    border-color: var(--brand-teal-line) !important;
 }
 
 [data-theme="dark"] .platform-badge {
@@ -10258,5 +10260,141 @@ table.play-lb-table tbody tr.is-you td {
 
     .home-film-card.is-lead .home-film-caption {
         padding: 16px 18px;
+    }
+}
+
+/* ------------------------------------------------------------
+   RESOURCES HUB CARDS
+   Same treatment as the "What it is" cards: a brand cyan outline
+   and a green to cyan rail across the top, so the two grids read
+   as one system.
+
+   The rail sits over the top edge of the thumbnail rather than
+   above it. These cards open with a 176px image, so there is no
+   padding to put a rail in; overflow is already hidden and the
+   radius clips it to the corners. z-index clears .resource-link's
+   stretched ::after overlay, which sits at 2.
+   ------------------------------------------------------------ */
+.resource-card {
+    border: 1.5px solid var(--brand-teal-line);
+}
+
+.resource-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    z-index: 3;
+    background: var(--grad-brand);
+    pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .resource-card:hover {
+        border-color: var(--brand-teal);
+        box-shadow: 0 18px 44px rgba(0, 204, 189, 0.20);
+    }
+}
+
+[data-theme="dark"] .resource-card:hover {
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+}
+
+/* ------------------------------------------------------------
+   RESOURCES HUB - embed player
+   Reuses the reel modal's overlay, backdrop and close button so
+   the two players look like one thing. Only the media box is
+   different: a third-party iframe, sized by what it holds.
+
+   YouTube is 16:9. An Instagram post embed is portrait plus its
+   own header and caption bar, and it does not scale to an
+   arbitrary box, so it gets a fixed readable width and a tall
+   frame instead of a ratio.
+   ------------------------------------------------------------ */
+.resource-embed-container {
+    width: min(94vw, 960px);
+    display: flex;
+    flex-direction: column;
+    /* A strip for the close button to live in. Overlaid on the frame it
+       landed on YouTube's share control and squarely on Instagram's "View
+       profile" button: our chrome must not cover theirs. */
+    padding-top: 46px;
+}
+
+/* That strip was dead space. It now carries the same green to cyan the
+   cards are railed with, so the player reads as part of the set rather
+   than a generic lightbox that happens to have opened. The container
+   already clips to a 24px radius, so the bar takes the rounded top
+   corners for free. */
+.resource-embed-container::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 46px;
+    background: var(--grad-brand);
+    z-index: 1;
+}
+
+/* Brand slate, not the translucent black the reel player uses: over lime
+   that reads as olive. Fixed rather than tokenised because this chrome is
+   dark in both themes, so a token that inverts would invert it wrongly. */
+.resource-embed-overlay .reel-modal-close-btn {
+    top: 6px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    background: #354144;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    color: #ffffff;
+}
+
+.resource-embed-overlay .reel-modal-close-btn:hover {
+    background: #1c2b00;
+}
+
+.resource-embed-overlay[data-shape="tall"] .resource-embed-container {
+    width: min(94vw, 420px);
+}
+
+.resource-embed-frame-wrap {
+    width: 100%;
+    background: #000;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
+/* An Instagram post embed renders at its own intrinsic height and does not
+   stretch, so a ratio would just add a white band under the caption. This
+   is sized to the post itself; the frame scrolls if a caption runs long. */
+.resource-embed-overlay[data-shape="tall"] .resource-embed-frame-wrap {
+    aspect-ratio: auto;
+    height: min(62vh, 520px);
+    background: var(--color-surface);
+}
+
+.resource-embed-frame-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.resource-embed-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 560px) {
+    .resource-embed-overlay[data-shape="tall"] .resource-embed-frame-wrap {
+        height: min(58vh, 460px);
+    }
+
+    .resource-embed-details {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
     }
 }

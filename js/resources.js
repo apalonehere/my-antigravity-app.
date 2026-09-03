@@ -143,7 +143,145 @@ function iconKeyFor(item) {
     return 'report';
 }
 
+/* ---------------------------------------------------------------
+   In-page embeds.
+
+   Whether a resource can open on this site is decided by the remote
+   server, not by us. Checked against the live headers:
+
+     YouTube          no framing restriction on youtube-nocookie  -> embeds
+     Instagram posts  /p/<code>/embed/ is a supported endpoint    -> embeds
+     Barbados Today   X-Frame-Options: SAMEORIGIN                 -> cannot
+     UNICEF           X-Frame-Options: SAMEORIGIN                 -> cannot
+     Gen Unlimited    X-Frame-Options: SAMEORIGIN                 -> cannot
+
+   An iframe pointed at any of the bottom three renders an empty box
+   and a console error, so the articles keep leaving for the source.
+   The Instagram *profile* is excluded too: there is no embed for a
+   feed, only for a single post.
+
+   youtube-nocookie rather than youtube.com: it does not write the
+   tracking cookie until playback starts, which is the better default
+   for a site aimed at children.
+   --------------------------------------------------------------- */
+const YOUTUBE_ID_RE = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/;
+const INSTAGRAM_POST_RE = /instagram\.com\/(p|reel|tv)\/([A-Za-z0-9_-]+)/;
+
+/* Titles are authored data, not user input, but they carry apostrophes and
+   ampersands and they are about to sit inside a double-quoted attribute. */
+function escapeAttr(s) {
+    return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+function embedFor(item) {
+    const link = item.link || '';
+
+    const yt = link.match(YOUTUBE_ID_RE);
+    if (yt) {
+        return {
+            url: `https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&autoplay=1`,
+            shape: 'wide',
+            platform: 'YouTube'
+        };
+    }
+
+    const ig = link.match(INSTAGRAM_POST_RE);
+    if (ig) {
+        return {
+            url: `https://www.instagram.com/${ig[1]}/${ig[2]}/embed/`,
+            shape: 'tall',
+            platform: 'Instagram'
+        };
+    }
+
+    return null;
+}
+
+function openResourceEmbed(data) {
+    const modal = document.getElementById('resource-embed-modal');
+    const frame = document.getElementById('resource-embed-frame');
+    if (!modal || !frame) return;
+
+    const titleEl = document.getElementById('resource-embed-title');
+    const platformEl = document.getElementById('resource-embed-platform');
+    const outLink = document.getElementById('resource-embed-out');
+
+    if (titleEl) titleEl.innerText = data.embedTitle || '';
+    if (platformEl) platformEl.innerText = data.embedPlatform || '';
+    if (outLink) {
+        outLink.href = data.embedHref || '#';
+        outLink.innerText = `Open on ${data.embedPlatform || 'the source'}`;
+    }
+
+    modal.setAttribute('data-shape', data.embedShape || 'wide');
+    frame.setAttribute('title', data.embedTitle || 'Embedded media');
+    frame.src = data.embedUrl;
+
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    const closeBtn = modal.querySelector('.reel-modal-close-btn');
+    if (closeBtn) closeBtn.focus();
+}
+
+function closeResourceEmbed() {
+    const modal = document.getElementById('resource-embed-modal');
+    const frame = document.getElementById('resource-embed-frame');
+    if (!modal) return;
+
+    // Blanking the src is what actually stops playback. Hiding the modal
+    // leaves a YouTube player running audio behind the page.
+    if (frame) frame.src = '';
+
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    if (lastEmbedTrigger && document.contains(lastEmbedTrigger)) {
+        lastEmbedTrigger.focus();
+    }
+    lastEmbedTrigger = null;
+}
+
+let lastEmbedTrigger = null;
+
+function initResourceEmbeds() {
+    // Delegated, because the cards are re-rendered on every filter change.
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('.resource-link[data-embed-url]');
+        if (!link) return;
+
+        // A modified click is a request for the real page. Leave every route
+        // that opens a new tab or window alone: ctrl/cmd click, shift click,
+        // middle click and "open in new tab" from the context menu all still
+        // reach YouTube or Instagram itself.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+        e.preventDefault();
+        lastEmbedTrigger = link;
+        openResourceEmbed(link.dataset);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('resource-embed-modal');
+        if (!modal || modal.getAttribute('aria-hidden') !== 'false') return;
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            closeResourceEmbed();
+        }
+    });
+}
+
+window.openResourceEmbed = openResourceEmbed;
+window.closeResourceEmbed = closeResourceEmbed;
+
 function initResourcesHub() {
+    initResourceEmbeds();
     const categoryButtons = document.querySelectorAll('.resource-cat-btn');
     const economyButtons = document.querySelectorAll('.resource-econ-btn');
     const searchInput = document.getElementById('resource-search-input');
@@ -265,9 +403,20 @@ function renderResources() {
         const econLabel = item.economy === 'blue' ? 'Blue Economy' : item.economy === 'green' ? 'Green Economy' : 'Orange Economy';
 
         const isExternal = item.link && item.link.startsWith('http');
-        const linkAttrs = isExternal
+        // The href stays the real destination even when the card opens an
+        // embed. The handler only intercepts a plain left click, so the link
+        // still works with JavaScript off, and still opens the source for
+        // anyone who middle-clicks or picks "open in new tab".
+        const embed = isExternal ? embedFor(item) : null;
+        const embedAttrs = embed
+            ? ` data-embed-url="${embed.url}" data-embed-shape="${embed.shape}"`
+            + ` data-embed-platform="${embed.platform}"`
+            + ` data-embed-title="${escapeAttr(item.title)}"`
+            + ` data-embed-href="${item.link}"`
+            : '';
+        const linkAttrs = (isExternal
             ? 'target="_blank" rel="noopener"'
-            : `onclick="switchView('${item.link.replace('#', '')}')"`;
+            : `onclick="switchView('${item.link.replace('#', '')}')"`) + embedAttrs;
 
         const defaultLabel = item.category === 'video' ? 'Watch Video'
             : item.category === 'workshop' ? 'Explore Workshop'
