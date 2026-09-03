@@ -2137,10 +2137,18 @@ p {
 }
 
 /* Dark Mode Green/Emerald Theme Overrides for Tomorrow's Reef */
+/* The reef pane used to be a card, and kept the card's dark fill after the
+   section became a full-bleed story. #081710 against the page's #091512 is
+   not the same colour, and the pane is narrower than the page, so it drew a
+   rectangle with a hard edge behind the intro - visible only in dark mode,
+   and only on this one sub-tab: the Eco-Leaders pane beside it is
+   transparent, as is this pane in light mode.
+
+   The border-color went with it because border-width is 0 here, so it was
+   painting nothing, and the shadow because a card that is not a card casts
+   no shadow. The pane now sits on the page background like every other. */
 [data-theme="dark"] #prog-tomorrowsreef {
-    background-color: #081710 !important;
-    border-color: rgba(16, 185, 129, 0.25) !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+    background-color: transparent;
 }
 
 .timeline-step {
