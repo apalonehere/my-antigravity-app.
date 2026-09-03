@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Green Rising Barbados - Future Barbados Youth Climate Engine. Empowering youth through Tomorrow's Reef underwater museum and hands-on marine restoration.">
+        content="Green Rising Barbados - FutureBARBADOS Youth Climate Engine. Empowering youth through Tomorrow's Reef underwater museum and hands-on marine restoration.">
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
     <link rel="alternate icon" type="image/png" href="/images/favicon.png">
-    <title>Green Rising Barbados | Future Barbados Youth Climate Engine</title>
+    <title>Green Rising Barbados | FutureBARBADOS Youth Climate Engine</title>
     <!-- Google Fonts: Outfit (Headings) and Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,7 +136,10 @@
         <section id="view-home" class="app-view active">
             <!-- Hero Video & Visual Action Banner -->
             <!-- Hero Section Slider -->
-            <section class="relative w-full h-screen min-h-[600px] overflow-hidden bg-neutral-900 font-sans">
+            <!-- DRAFT: was `h-screen min-h-[600px]`. A full viewport of slogan
+                 meant the next section never showed above the fold, so nobody
+                 had a reason to scroll. Height now lives in .home-hero. -->
+            <section class="home-hero relative w-full overflow-hidden bg-neutral-900 font-sans">
 
                 <!-- Media Track -->
                 <div id="hero-track"
@@ -348,6 +351,146 @@
                 </svg>
             </div>
 
+
+            <!-- ============================================================
+                 DRAFT - SECTION 1: PARTICIPANT FILMS
+                 The second screen. Three young Barbadians, each with the piece
+                 they made at the Tomorrow's Reef workshop, each one tap from
+                 playing. This is the thing the Programmes tab does well, moved
+                 up to where a first-time visitor actually reaches it.
+
+                 Cards are plain buttons with real posters, so the section is
+                 fully visible and legible before any JavaScript runs; the
+                 script only opens the modal. Swap the film behind a card by
+                 changing its entry in js/films.js.
+                 ============================================================ -->
+            <section class="container mt-30" id="home-films-section">
+                <div class="section-intro-row">
+                    <div class="section-intro">
+                        <span class="section-eyebrow">Meet the makers</span>
+                        <h2 class="section-headline">They designed a reef before they built one.</h2>
+                        <p class="section-standfirst">Barbados marks 60 years of Independence with a permanent
+                            underwater monument, sculpted by young Barbadians. Here are three of them, with the
+                            pieces they made.</p>
+                    </div>
+                    <a href="/programmes" class="btn btn-secondary">See the programme &rarr;</a>
+                </div>
+
+                <div class="home-film-grid">
+
+                    <button type="button" class="home-film-card is-lead" data-film="feature-3"
+                        onclick="openFeatureFilm('feature-3')"
+                        aria-label="Play film: a workshop participant on the tower she built from one lump of clay, 1 minute 20 seconds">
+                        <img src="/images/films/feature-3-poster.jpg"
+                            alt="A smiling young woman in an orange top at the Tomorrow's Reef clay workshop, tables of participants behind her"
+                            width="1280" height="720" loading="lazy" decoding="async">
+                        <span class="home-film-scrim" aria-hidden="true"></span>
+                        <span class="home-film-dur" aria-hidden="true">1:20</span>
+                        <span class="home-film-play" aria-hidden="true">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                            </svg>
+                        </span>
+                        <span class="home-film-caption">
+                            <span class="home-film-role">Workshop participant</span>
+                            <span class="home-film-title">The tower she built from one lump of clay</span>
+                        </span>
+                    </button>
+
+                    <button type="button" class="home-film-card" data-film="feature-4"
+                        onclick="openFeatureFilm('feature-4')"
+                        aria-label="Play film: a workshop participant on his crowd of standing figures, 1 minute 55 seconds">
+                        <img src="/images/films/feature-4-poster.jpg"
+                            alt="A young man in a blue Green Rising shirt talking to camera at the clay workshop"
+                            width="1280" height="720" loading="lazy" decoding="async">
+                        <span class="home-film-scrim" aria-hidden="true"></span>
+                        <span class="home-film-dur" aria-hidden="true">1:55</span>
+                        <span class="home-film-play" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                            </svg>
+                        </span>
+                        <span class="home-film-caption">
+                            <span class="home-film-role">Workshop participant</span>
+                            <span class="home-film-title">A crowd of figures, standing together</span>
+                        </span>
+                    </button>
+
+                    <button type="button" class="home-film-card" data-film="feature-5"
+                        onclick="openFeatureFilm('feature-5')"
+                        aria-label="Play film: a workshop participant on figures that had to hold their own weight, 2 minutes 10 seconds">
+                        <img src="/images/films/feature-5-poster.jpg"
+                            alt="A young woman in a pink sweatshirt standing behind her finished clay sculpture of linked figures"
+                            width="1280" height="720" loading="lazy" decoding="async">
+                        <span class="home-film-scrim" aria-hidden="true"></span>
+                        <span class="home-film-dur" aria-hidden="true">2:10</span>
+                        <span class="home-film-play" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                            </svg>
+                        </span>
+                        <span class="home-film-caption">
+                            <span class="home-film-role">Workshop participant</span>
+                            <span class="home-film-title">Figures that had to hold their own weight</span>
+                        </span>
+                    </button>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 DRAFT - SECTION 2: START TILES
+                 Third screen: question one of the match quiz, lifted onto the
+                 home page.
+
+                 This used to be Blue / Green / Orange pathway tiles. They were
+                 wrong twice over: the quiz has no arts pathway to send Orange
+                 to, and for anyone under 18 the quiz ignores the interest
+                 answer entirely and decides on age alone (js/quiz.js). So the
+                 tiles offered a child a choice the programme could not honour.
+
+                 Age is what the quiz actually branches on, and it is the one
+                 thing a ten-year-old can answer instantly and cannot get
+                 wrong. Each tile carries its answer into /quiz/<age>, which
+                 checks that option and opens on question two.
+
+                 The colours are decoration here, not meaning - which is the
+                 honest use for them.
+                 ============================================================ -->
+            <section class="container mt-40" id="home-start-section">
+                <div class="section-intro">
+                    <span class="section-eyebrow">Start here</span>
+                    <h2 class="section-headline">How old are you?</h2>
+                    <p class="section-standfirst">That is the first question, and it decides most of the answer.
+                        Pick yours and the quiz picks up from there.</p>
+                </div>
+
+                <div class="start-tiles">
+
+                    <a class="start-tile start-tile-green" href="/quiz/kids">
+                        <span class="start-tile-age">10 &ndash; 13</span>
+                        <span class="start-tile-name">Junior Rising</span>
+                        <span class="start-tile-desc">Discovery, eco-clubs and getting your hands dirty.</span>
+                        <span class="start-tile-go">That&rsquo;s me &rarr;</span>
+                    </a>
+
+                    <a class="start-tile start-tile-teal" href="/quiz/teens">
+                        <span class="start-tile-age">14 &ndash; 17</span>
+                        <span class="start-tile-name">Teen Rising</span>
+                        <span class="start-tile-desc">Real skills, a mentor, and projects that leave the classroom.</span>
+                        <span class="start-tile-go">That&rsquo;s me &rarr;</span>
+                    </a>
+
+                    <a class="start-tile start-tile-slate" href="/quiz/youth">
+                        <span class="start-tile-age">18 &ndash; 29</span>
+                        <span class="start-tile-name">GreenPath</span>
+                        <span class="start-tile-desc">Training, micro-grants and a route into paid work.</span>
+                        <span class="start-tile-go">That&rsquo;s me &rarr;</span>
+                    </a>
+
+                </div>
+            </section>
+
             <!-- SECTION 1: YOUTH ACTION REELS ("Action > Words") -->
             <section class="container mt-30" id="youth-reels-section">
                 <div class="section-intro-row">
@@ -516,11 +659,11 @@
                         <span class="snap-eyebrow">Anchored by</span>
                         <ul class="snap-list">
                             <li>
-                                <strong>Future Barbados</strong>
+                                <strong>FutureBARBADOS</strong>
                                 <span>Youth innovation engine</span>
                             </li>
                             <li>
-                                <strong>Ministry of Industry &amp; Science</strong>
+                                <strong>Ministry of Innovation, Industry, Science and Technology (MIST)</strong>
                                 <span>Government anchor</span>
                             </li>
                         </ul>
@@ -1018,7 +1161,7 @@
                             <li>Green Rising Barbados</li>
                             <li>UNICEF Eastern Caribbean</li>
                             <li>Oceana Innovation Hub</li>
-                            <li>Future Barbados</li>
+                            <li>FutureBARBADOS</li>
                         </ul>
                     </section>
 
@@ -1671,7 +1814,7 @@
                             {
                                 "name": "Dr. Crystal Drakes",
                                 "role": "Chairperson",
-                                "bio": "Leads strategic governance, policy frameworks and island-wide climate resilience direction for Future Barbados and Green Rising.",
+                                "bio": "Leads strategic governance, policy frameworks and island-wide climate resilience direction for FutureBARBADOS and Green Rising.",
                                 "focus": ["Governance", "Policy", "Climate strategy"]
                             },
                             {
@@ -1706,7 +1849,7 @@
                             <h3>Dr. Crystal Drakes</h3>
                             <p class="roster-fallback-role">Chairperson</p>
                             <p>Leads strategic governance, policy frameworks and island-wide climate resilience
-                                direction for Future Barbados and Green Rising.</p>
+                                direction for FutureBARBADOS and Green Rising.</p>
                         </li>
                         <li>
                             <h3>Myrico Morris</h3>
@@ -1740,7 +1883,7 @@
                 <section class="roster-partners" aria-label="Who the team answers to">
                     <h3 class="roster-partners-label">Convened by</h3>
                     <ul class="roster-partners-list">
-                        <li>Future Barbados</li>
+                        <li>FutureBARBADOS</li>
                         <li>UNICEF Eastern Caribbean</li>
                         <li>Government of Barbados</li>
                         <li>Generation Unlimited</li>
@@ -2040,9 +2183,9 @@
             <div class="footer-links">
                 <ul>
                     <li><strong>Collaborators</strong></li>
-                    <li><a href="https://futurebarbados.bb/" target="_blank" rel="noopener">Future Barbados</a></li>
+                    <li><a href="https://futurebarbados.bb/" target="_blank" rel="noopener">FutureBARBADOS</a></li>
                     <li><a href="https://www.gov.bb/Ministries/innovation-science-smart-technology" target="_blank"
-                            rel="noopener">Ministry of Industry & Science</a></li>
+                            rel="noopener">Ministry of Innovation, Industry, Science and Technology (MIST)</a></li>
                     <li class="admin-only" style="display: none;"><a href="#admin" onclick="switchView('admin')"><svg
                                 viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"
                                 style="margin-right: 4px; vertical-align: text-bottom;">
@@ -2139,6 +2282,7 @@
     <!-- After GSAP (needs ScrollTrigger) and after app.js (reuses the reel modal) -->
     <script src="/js/reef.js" defer></script>
     <script src="/js/eco.js" defer></script>
+    <script src="/js/films.js" defer></script>
 
     <!-- React islands (js/islands.js, built from src/ by `npm run build:islands`).
          The bundle is ~475KB gzipped because it carries React + Three + R3F, so

@@ -20,7 +20,7 @@ const DEFAULT_SCHEDULES = [
         date: '2026-08-22',
         startTime: '10:00',
         endTime: '14:00',
-        location: 'Future Barbados Innovation Hub',
+        location: 'FutureBARBADOS Innovation Hub',
         description: 'Community soil bio-remediation testing using organic compost extracts.'
     }
 ];
@@ -237,7 +237,7 @@ function editScheduleEvent(eventId) {
 
     const knownVenues = [
         'Bridgetown Port & Maritime Center',
-        'Future Barbados Innovation Hub',
+        'FutureBARBADOS Innovation Hub',
         'UWI Cave Hill Campus'
     ];
 

@@ -30,13 +30,13 @@ const resourcesData = [
     },
     {
         id: 3,
-        title: "Green Rising: Future Barbados & UNICEF on Youth Climate Action",
+        title: "Green Rising: FutureBARBADOS & UNICEF on Youth Climate Action",
         category: "video",
         economy: "cross",
         platform: "YouTube",
         readTime: "Feature Interview",
         date: "June 2025",
-        summary: "Mornin' Barbados interview featuring Tamaisha Eytle-Harvey (Future Barbados) and Nadi Albino (UNICEF) detailing climate entrepreneurship, youth advocacy, and community action programs.",
+        summary: "Mornin' Barbados interview featuring Tamaisha Eytle-Harvey (FutureBARBADOS) and Nadi Albino (UNICEF) detailing climate entrepreneurship, youth advocacy, and community action programs.",
         imageUrl: "/images/youtube-interview-thumb.jpg",
         link: "https://www.youtube.com/watch?v=KTyOGM3BBoU",
         actionLabel: "Watch on YouTube"

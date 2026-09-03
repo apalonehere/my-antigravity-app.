@@ -170,8 +170,30 @@ function resetQuiz() {
     quizNext(1);
 }
 
+// The home page asks question one on its own tiles, so arriving from one of
+// those already answers it. Rather than making a child answer their own age
+// twice, /quiz/<age> checks that option and opens on question two.
+//
+// The value has to be one the markup actually offers - anything else is a
+// hand-typed or stale URL, and the quiz starts from the top instead of
+// silently answering on the visitor's behalf.
+const QUIZ_AGE_VALUES = ['kids', 'teens', 'youth'];
+
+function startQuizAtAge(age) {
+    if (!QUIZ_AGE_VALUES.includes(age)) return false;
+
+    const radio = document.querySelector(`input[name="age-group"][value="${age}"]`);
+    if (!radio) return false;
+
+    radio.checked = true;
+    syncQuizSelection(radio);
+    quizNext(2);
+    return true;
+}
+
 window.selectQuizOption = selectQuizOption;
 window.initQuizOptions = initQuizOptions;
 window.quizNext = quizNext;
+window.startQuizAtAge = startQuizAtAge;
 window.processQuizResults = processQuizResults;
 window.resetQuiz = resetQuiz;

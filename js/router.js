@@ -166,6 +166,7 @@ function navigateTo(path, pushState = true) {
     
     let viewId = 'home';
     let subTab = null;
+    let quizAge = null;
 
     if (cleanPath === '/' || cleanPath === '/home') {
         viewId = 'home';
@@ -183,8 +184,19 @@ function navigateTo(path, pushState = true) {
         cleanPath = '/dashboard';
     } else if (cleanPath === '/resources') {
         viewId = 'resources';
-    } else if (cleanPath === '/quiz') {
+    } else if (cleanPath === '/quiz' || cleanPath.startsWith('/quiz/')) {
+        // /quiz/<age> carries the answer to question one in from the home
+        // page tiles, the same way /programmes/<subtab> carries a sub-tab.
         viewId = 'quiz';
+        const parts = cleanPath.split('/').filter(Boolean);
+        if (parts.length > 1) {
+            quizAge = parts[1];
+        }
+        // The age stays in the URL rather than being normalised away, so a
+        // refresh or a shared link reproduces the same starting point. An
+        // unrecognised value is ignored downstream and the quiz opens at
+        // question one.
+        cleanPath = '/quiz' + (quizAge ? '/' + quizAge : '');
     } else if (cleanPath === '/play' || cleanPath === '/games' || cleanPath === '/arcade') {
         viewId = 'play';
         cleanPath = '/play';
@@ -212,6 +224,10 @@ function navigateTo(path, pushState = true) {
 
     if (viewId === 'programmes' && subTab) {
         openProgram(subTab, false);
+    }
+
+    if (viewId === 'quiz' && quizAge && typeof startQuizAtAge === 'function') {
+        startQuizAtAge(quizAge);
     }
 
     if (viewId === 'apply' && typeof resetApplyForm === 'function') {
